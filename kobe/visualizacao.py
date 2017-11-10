@@ -77,7 +77,7 @@ def draw_court(ax=None, color='black', lw=2, outer_lines=False):
 
 df = pd.read_csv('../input/data.csv')
 list(df)  # check output
-
+print("total de arremessos = %d" % len(df))
 # Court visualization of misses and shots
 court_scale = 7
 alpha = 0.05
@@ -86,6 +86,7 @@ plt.figure(figsize=(2 * court_scale, court_scale * (42.0 / 50.0)))
 # shots hit
 plt.subplot(121)
 h = df.loc[df.shot_made_flag == 1]
+print("total de acertos = %d" % len(h))
 plt.scatter(h.loc_x, h.loc_y, color='green', alpha=alpha)
 plt.title('Shots made')
 draw_court(outer_lines=True)
@@ -93,6 +94,7 @@ draw_court(outer_lines=True)
 # shots miss
 plt.subplot(122)
 h = df.loc[df.shot_made_flag == 0]
+print("total de erros = %d" % len(h))
 plt.scatter(h.loc_x, h.loc_y, color='red', alpha=alpha)
 plt.title('Shots missed')
 draw_court(outer_lines=True)
