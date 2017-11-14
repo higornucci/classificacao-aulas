@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn.cross_validation import KFold, cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
 
 dados = pd.read_csv('../input/data.csv')
 
@@ -80,15 +80,15 @@ teste_dados = X[-tamanho_de_teste:]
 teste_marcacoes = Y[-tamanho_de_treino:]
 
 seed = 7
-processors = 1
 num_folds = 3
 num_instances = len(X)
-scoring = 'log_loss'
-kfold = KFold(n=num_instances, n_folds=num_folds, random_state=seed)
+scoring = 'neg_log_loss'
+kfold = KFold(n_splits=num_folds, random_state=seed)
 
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=5)
 
-resultado = cross_val_score(knn, X, Y, cv=kfold, scoring=scoring, n_jobs=processors)
+resultado = cross_val_score(knn, X, Y, scoring=scoring, cv=kfold, n_jobs=1)
+print(resultado.keys())
 print("K-NN: ({0:.3f}) +/- ({1:.3f})".format(resultado.mean(), resultado.std()))
