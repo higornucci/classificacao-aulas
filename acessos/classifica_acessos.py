@@ -1,7 +1,7 @@
 import numpy as np
 
 # separar 90% para treino e 10% para teste
-from dados import carregar_acessos
+from acessos.dados import carregar_acessos
 
 X, Y = carregar_acessos()
 
