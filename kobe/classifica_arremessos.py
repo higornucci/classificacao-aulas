@@ -112,19 +112,17 @@ scoring = 'neg_log_loss'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando algusn modelos
-modelos = [('LR', SVC(kernel='rbf', random_state=0, gamma=100.0, C=1.0)),
-           ('K-NN', KNeighborsClassifier(n_neighbors=5)),
+modelos = [('SVM', SVC(kernel='rbf', probability=True, random_state=0, gamma=100.0, C=1.0)),
+           ('K-NN', KNeighborsClassifier(n_neighbors=5))
            # ('CART', DecisionTreeClassifier()),
            # ('NB', GaussianNB())
            ]
 
 # Validar cada um dos módulos
-resultados = []
 nomes = []
 
 for nome, modelo in modelos:
     cv_resultados = cross_val_score(modelo, X, Y, scoring=scoring, cv=kfold, n_jobs=1)
-    resultados.append(cv_resultados)
     nomes.append(nome)
     print("{0}: ({1:.3f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
 
