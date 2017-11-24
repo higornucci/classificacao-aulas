@@ -1,5 +1,23 @@
+import warnings
+import numpy as np
 import pandas as pd
+import seaborn as sns
+
 from sklearn.model_selection import KFold, cross_val_score
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+warnings.filterwarnings('ignore')
+sns.set_style('whitegrid')
+pd.set_option('display.max_columns', None)
+
+
+def detect_outliers(series, whis=1.5):
+    q75, q25 = np.percentile(series, [75, 25])
+    iqr = q75 - q25
+    return ~((series - series.median()).abs() <= (whis * iqr))
+
 
 dados = pd.read_csv('../input/data.csv')
 
@@ -19,6 +37,7 @@ dados["team_id"] = dados["team_id"].astype('category')
 resultado_desconhecido = dados['shot_made_flag'].isnull()
 dados_copia = dados.copy()
 Y_copia = dados_copia['shot_made_flag'].copy()
+
 # removendo colunas irrelevantes
 dados_copia.drop('team_id', axis=1, inplace=True)  # sempre igual
 dados_copia.drop('lat', axis=1, inplace=True)  # mesma que loc_x
@@ -26,7 +45,7 @@ dados_copia.drop('lon', axis=1, inplace=True)  # mesma que loc_y
 dados_copia.drop('game_id', axis=1, inplace=True)  # não relevante
 dados_copia.drop('game_event_id', axis=1, inplace=True)  # não relevante
 dados_copia.drop('team_name', axis=1, inplace=True)  # sempre o mesmo
-dados_copia.drop('shot_made_flag', axis=1, inplace=True)
+dados_copia.drop('shot_made_flag', axis=1, inplace=True)  # coluna Y
 
 # transformando so dados
 # tempo restante
@@ -66,6 +85,8 @@ for cc in colunas_categoricas:
     dados_copia.drop(cc, axis=1, inplace=True)
     dados_copia = dados_copia.join(dummies)
 
+dados_envio = dados_copia[resultado_desconhecido]
+
 X = dados_copia[~resultado_desconhecido]
 Y = Y_copia[~resultado_desconhecido]
 
@@ -79,16 +100,39 @@ tamanho_de_teste = len(Y) - tamanho_de_treino
 teste_dados = X[-tamanho_de_teste:]
 teste_marcacoes = Y[-tamanho_de_treino:]
 
+print('Clean dataset shape: {}'.format(dados_copia.shape))
+print('Subbmitable dataset shape: {}'.format(dados_envio.shape))
+print('Train features shape: {}'.format(X.shape))
+print('Target label shape: {}'.format(Y.shape))
+
 seed = 7
 num_folds = 3
-num_instances = len(X)
+processors = 1
 scoring = 'neg_log_loss'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
-from sklearn.neighbors import KNeighborsClassifier
+# preparando algusn modelos
+modelos = [('LR', SVC(kernel='rbf', random_state=0, gamma=100.0, C=1.0)),
+           ('K-NN', KNeighborsClassifier(n_neighbors=5)),
+           # ('CART', DecisionTreeClassifier()),
+           # ('NB', GaussianNB())
+           ]
 
-knn = KNeighborsClassifier(n_neighbors=5)
+# Validar cada um dos módulos
+resultados = []
+nomes = []
 
-resultado = cross_val_score(knn, X, Y, scoring=scoring, cv=kfold, n_jobs=1)
-print(resultado.keys())
-print("K-NN: ({0:.3f}) +/- ({1:.3f})".format(resultado.mean(), resultado.std()))
+for nome, modelo in modelos:
+    cv_resultados = cross_val_score(modelo, X, Y, scoring=scoring, cv=kfold, n_jobs=1)
+    resultados.append(cv_resultados)
+    nomes.append(nome)
+    print("{0}: ({1:.3f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
+
+    modelo.fit(X, Y)
+    preds = modelo.predict_proba(dados_envio)
+
+    submission = pd.DataFrame()
+    submission["shot_id"] = dados_envio.index
+    submission["shot_made_flag"] = preds[:, 0]
+
+    submission.to_csv("sub_" + nome + ".csv", index=False)

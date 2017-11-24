@@ -32,6 +32,7 @@ validacao_marcacoes = Y[tamanho_de_treino:]
 def fit_and_predict(nome, modelo, treino_dados, treino_marcacoes):
     kfold = 4
     scores = cross_val_score(modelo, treino_dados, treino_marcacoes, cv=kfold)
+    print(scores)
     taxa_de_acerto = np.mean(scores)
     msg = "Taxa de acerto do algoritmo {0}: {1}".format(nome, taxa_de_acerto)
     print(msg)
