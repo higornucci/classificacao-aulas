@@ -92,14 +92,7 @@ Y = Y_copia[~resultado_desconhecido]
 
 porcentagem_de_treino = 0.9
 
-tamanho_de_treino = int(porcentagem_de_treino * len(Y))
-treino_dados = X[:tamanho_de_treino]
-treino_marcacoes = Y[:tamanho_de_treino]
-
-tamanho_de_teste = len(Y) - tamanho_de_treino
-teste_dados = X[-tamanho_de_teste:]
-teste_marcacoes = Y[-tamanho_de_treino:]
-
+# mostrando o tamanho dos conjuntos
 print('Clean dataset shape: {}'.format(dados_copia.shape))
 print('Subbmitable dataset shape: {}'.format(dados_envio.shape))
 print('Train features shape: {}'.format(X.shape))
