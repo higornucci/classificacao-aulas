@@ -99,31 +99,25 @@ print('Train features shape: {}'.format(X.shape))
 print('Target label shape: {}'.format(Y.shape))
 
 seed = 7
-num_folds = 3
+num_folds = 6
 processors = 1
-scoring = 'neg_log_loss'
+scoring = 'roc_auc'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando algusn modelos
-modelos = [('SVM', SVC(kernel='rbf', probability=True, random_state=0, gamma=100.0, C=1.0)),
-           ('K-NN', KNeighborsClassifier(n_neighbors=5))
+modelos = [  # ('SVM', SVC(kernel='rbf', probability=True, random_state=0, gamma=100.0, C=1.0)),
+           ('K-NN', KNeighborsClassifier(n_neighbors=6))
            # ('CART', DecisionTreeClassifier()),
            # ('NB', GaussianNB())
            ]
 
-# Validar cada um dos módulos
-nomes = []
-
+# Validar cada um dos modelos
 for nome, modelo in modelos:
     cv_resultados = cross_val_score(modelo, X, Y, scoring=scoring, cv=kfold, n_jobs=1)
-    nomes.append(nome)
     print("{0}: ({1:.3f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
-
     modelo.fit(X, Y)
-    preds = modelo.predict_proba(dados_envio)
-
+    preds = modelo.predict(dados_envio)
     submission = pd.DataFrame()
     submission["shot_id"] = dados_envio.index
-    submission["shot_made_flag"] = preds[:, 0]
-
+    submission["shot_made_flag"] = preds
     submission.to_csv("sub_" + nome + ".csv", index=False)
