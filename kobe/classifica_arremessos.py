@@ -1,3 +1,4 @@
+# coding=utf-8
 import warnings
 import numpy as np
 import pandas as pd
@@ -6,8 +7,8 @@ import seaborn as sns
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB, MultinomialNB
+from sklearn.svm import SVC, LinearSVC
 warnings.filterwarnings('ignore')
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)
@@ -99,16 +100,16 @@ print('Train features shape: {}'.format(X.shape))
 print('Target label shape: {}'.format(Y.shape))
 
 seed = 7
-num_folds = 6
+num_folds = 10
 processors = 1
 scoring = 'roc_auc'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando algusn modelos
-modelos = [  # ('SVM', SVC(kernel='rbf', probability=True, random_state=0, gamma=100.0, C=1.0)),
-           ('K-NN', KNeighborsClassifier(n_neighbors=6))
+modelos = [('SVM', LinearSVC(C=1.0)),
+           ('K-NN', KNeighborsClassifier(n_neighbors=10)),
            # ('CART', DecisionTreeClassifier()),
-           # ('NB', GaussianNB())
+           ('NB', MultinomialNB())
            ]
 
 # Validar cada um dos modelos
