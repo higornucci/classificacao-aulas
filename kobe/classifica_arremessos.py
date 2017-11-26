@@ -100,7 +100,7 @@ print('Train features shape: {}'.format(X.shape))
 print('Target label shape: {}'.format(Y.shape))
 
 seed = 7
-num_folds = 10
+num_folds = 7
 processors = 1
 scoring = 'roc_auc'
 kfold = KFold(n_splits=num_folds, random_state=seed)
