@@ -1,11 +1,14 @@
 # coding=utf-8
 import warnings
+from random import randint
+
 import numpy as np
 import pandas as pd
 import seaborn as sns
 
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neural_network import MLPClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
 from sklearn.svm import SVC, LinearSVC
@@ -91,13 +94,11 @@ dados_envio = dados_copia[resultado_desconhecido]
 X = dados_copia[~resultado_desconhecido]
 Y = Y_copia[~resultado_desconhecido]
 
-porcentagem_de_treino = 0.9
-
 # mostrando o tamanho dos conjuntos
-print('Clean dataset shape: {}'.format(dados_copia.shape))
-print('Subbmitable dataset shape: {}'.format(dados_envio.shape))
-print('Train features shape: {}'.format(X.shape))
-print('Target label shape: {}'.format(Y.shape))
+print('Dataset limpo: {}'.format(dados_copia.shape))
+print('Dataset para submissão: {}'.format(dados_envio.shape))
+print('Dataset de treino: {}'.format(X.shape))
+print('Dataset das classes: {}'.format(Y.shape))
 
 seed = 7
 num_folds = 7
@@ -108,9 +109,9 @@ kfold = KFold(n_splits=num_folds, random_state=seed)
 # preparando algusn modelos
 modelos = [('SVM', LinearSVC(C=1.0)),
            ('K-NN', KNeighborsClassifier(n_neighbors=10)),
-           # ('CART', DecisionTreeClassifier()),
-           ('NB', MultinomialNB())
-           ]
+           ('DTC', DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)),
+           ('NB', MultinomialNB()),
+           ('RNA', MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1))]
 
 # Validar cada um dos modelos
 for nome, modelo in modelos:
