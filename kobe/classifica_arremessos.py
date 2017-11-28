@@ -1,17 +1,15 @@
 # coding=utf-8
 import warnings
-from random import randint
-
 import numpy as np
 import pandas as pd
 import seaborn as sns
-
 from sklearn.model_selection import KFold, cross_val_score
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
+from sklearn.svm import LinearSVC
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB, MultinomialNB
-from sklearn.svm import SVC, LinearSVC
+
 warnings.filterwarnings('ignore')
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)
@@ -108,7 +106,7 @@ kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando algusn modelos
 modelos = [('SVM', LinearSVC(C=1.0)),
-           ('K-NN', KNeighborsClassifier(n_neighbors=10)),
+           ('K-NN', KNeighborsClassifier(n_neighbors=20)),
            ('DTC', DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)),
            ('NB', MultinomialNB()),
            ('RNA', MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5, 2), random_state=1))]
