@@ -104,7 +104,7 @@ processors = 1
 scoring = 'roc_auc'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
-# preparando algusn modelos
+# preparando alguns modelos
 modelos = [('SVM', LinearSVC(C=1.0)),
            ('K-NN', KNeighborsClassifier(n_neighbors=20)),
            ('DTC', DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)),
@@ -114,7 +114,7 @@ modelos = [('SVM', LinearSVC(C=1.0)),
 # Validar cada um dos modelos
 for nome, modelo in modelos:
     cv_resultados = cross_val_score(modelo, X, Y, scoring=scoring, cv=kfold, n_jobs=1)
-    print("{0}: ({1:.3f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
+    print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     modelo.fit(X, Y)
     preds = modelo.predict(dados_envio)
     submission = pd.DataFrame()
