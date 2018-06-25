@@ -7,7 +7,7 @@ import seaborn as sns
 from sklearn.model_selection import KFold, cross_val_score
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import LinearSVC
+from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 warnings.filterwarnings('ignore')
@@ -71,7 +71,7 @@ scoring = 'roc_auc'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando alguns modelos
-modelos = [('SVM', LinearSVC(C=1.0)),
+modelos = [('SVM', SVC(decision_function_shape='ovo')),
            ('K-NN', KNeighborsClassifier(n_neighbors=5)),
            ('DTC', DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=0)),
            ('NB', MultinomialNB())]
