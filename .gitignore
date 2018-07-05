@@ -3,3 +3,4 @@ __pycache__/
 venv/
 input/ClassificacaoAnimal.csv
 input/DadosProcessoProdutivo.csv
+input/PerguntasClassificam.csv
