@@ -24,7 +24,7 @@ novos_nomes_colunas = {'A área do estabelecimento rural é destinada na sua tot
                        'O Estabelecimento rural está envolvido com alguma organização que utiliza-se de mecanismos similares a aliança mercadológica para a comercialização do seu produto?': 'envolvido_em_organizacao'}
 dados_perguntas_classificam_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
 
-dados_perguntas_classificam_resumido.fillna('Não', inplace=True)
+dados_perguntas_classificam_resumido.fillna('NÃO', inplace=True)
 
 dados_perguntas_classificam_resumido.to_csv('../input/PerguntasClassificam.csv', sep='\t')
 
@@ -53,9 +53,73 @@ novos_nomes_colunas = {'CONFINAMENTO - ALTO CONCENTRADO': 'confinamento_alto_con
 
 dados_perguntas_nao_classificam_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
 
-dados_perguntas_nao_classificam_resumido.fillna('Não', inplace=True)
+dados_perguntas_nao_classificam_resumido.fillna('NÃO', inplace=True)
 
 dados_perguntas_nao_classificam_resumido.to_csv('../input/PerguntasNaoClassificam.csv', sep='\t')
 
-print(dados_perguntas_nao_classificam_resumido.head(100))
+# Dados pratica recuperação de pastagem
+dados_pratica_recuperacao_pastagem = dados_processo_produtivo.filter(['EstabelecimentoIdentificador', 'QuestionarioPraticaRecuperacaoPastagem', 'PraticaRecuperacaoPastagemDescricao'], axis=1)
+dados_pratica_recuperacao_pastagem['PraticaRecuperacaoPastagemDescricao'].fillna('Nenhum', inplace=True)
+dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem.drop_duplicates(subset=['EstabelecimentoIdentificador', 'QuestionarioPraticaRecuperacaoPastagem', 'PraticaRecuperacaoPastagemDescricao'])
+dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.pivot(index='EstabelecimentoIdentificador', columns='PraticaRecuperacaoPastagemDescricao', values='QuestionarioPraticaRecuperacaoPastagem')
+
+dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
+novos_nomes_colunas = {'Fertirrigação': 'fertirrigacao',
+                       'IFP - Integração Pecuária-Floresta': 'ifp',
+                       'ILP - Integração Lavoura-Pecuária': 'ilp',
+                       'ILPF - Integração Lavoura-Pecuária-Floresta': 'ilpf',
+                       'Nenhum': 'nenhum'}
+
+dados_pratica_recuperacao_pastagem_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+
+dados_pratica_recuperacao_pastagem_resumido.fillna('NÃO', inplace=True)
+
+dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', sep='\t')
+
+# Dados de cadastro do estabelecimento
+dados_cadastro_estabelecimento = dados_processo_produtivo.drop(['QuestionarioPraticaRecuperacaoPastagem', 'PraticaRecuperacaoPastagemDescricao', 'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao', 'TipoAlimentacaoDescricao', 'PerguntaQuestionario', 'Resposta'], axis=1)
+dados_cadastro_estabelecimento.fillna('Nenhum', inplace=True)
+dados_cadastro_estabelecimento_resumido = dados_cadastro_estabelecimento.drop_duplicates(subset=['EstabelecimentoIdentificador', 'EstabelecimentoMunicipio'])
+
+dados_cadastro_estabelecimento_resumido.set_index('EstabelecimentoIdentificador')
+novos_nomes_colunas = {'EstabelecimentoMunicipio': 'estabelecimento_municipio',
+                       'EstabelecimentoIdentificador': 'estabelecimento_identificador',
+                       'EstabelecimentoUF': 'estabelecimento_uf',
+                       'IncentivoProdutorIdentificador': 'incentivo_produtor_identificador',
+                       'QuestionarioIdentificador': 'questionario_identificador',
+                       'QuestionarioPossuiOutrosIncentivos': 'ṕossui_outros_incentivos',
+                       'IncentivoProdutorSituacao': 'produtor_situacao',
+                       'QuestionarioFabricaRacao': 'fabrica_racao',
+                       'QuestionarioClassificacaoEstabelecimentoRural': 'questionario_classificacao_estabelecimento_rural'}
+
+dados_cadastro_estabelecimento_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+
+dados_cadastro_estabelecimento_resumido.to_csv('../input/CadastroEstabelecimento.csv', sep='\t')
+
+# Dados de abate
+dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='ISO-8859-1', delimiter='\t')
+dados_abate.set_index('EstabelecimentoIdentificador')
+dados_abate_resumido = dados_abate.drop(['EmpresaClassificadoraIdentificador', 'Classificador2', 'EstabelecimentoMunicipio', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'Rispoa', 'IncentivoProdutorSituacao'], axis=1)
+
+dados_abate_resumido.set_index('EstabelecimentoIdentificador')
+novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
+                       'IdentificadorLote': 'identificador_lote',
+                       'IdentificadorLoteSituacaoLote': 'identificador_lote_situacao_lote',
+                       'IdentificadorLoteNumeroAnimal': 'identificador_lote_numero_animal',
+                       'EhNovilhoPrecoce': 'eh_novilho_precoce',
+                       'Classificador1': 'classificador',
+                       'Tipificacao': 'tipificacao',
+                       'Maturidade': 'maturidade',
+                       'Acabamento': 'acabamento',
+                       'Peso': 'peso',
+                       'AprovacaoCarcacaSif': 'aprovacao_carcaca_sif',
+                       'DataAbate': 'data_abate'}
+
+dados_abate_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+
+dados_abate_resumido.to_csv('../input/DadosAbate.csv', sep='\t')
+
+print(dados_cadastro_estabelecimento_resumido.head(100))
+ids = dados_cadastro_estabelecimento_resumido.index
+print(dados_cadastro_estabelecimento_resumido[ids.isin(ids[ids.duplicated()])].sort_values)
 
