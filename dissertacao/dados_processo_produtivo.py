@@ -101,7 +101,6 @@ dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='ISO-8859
 dados_abate.set_index('EstabelecimentoIdentificador')
 dados_abate_resumido = dados_abate.drop(['EmpresaClassificadoraIdentificador', 'Classificador2', 'EstabelecimentoMunicipio', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'Rispoa', 'IncentivoProdutorSituacao'], axis=1)
 
-dados_abate_resumido.set_index('EstabelecimentoIdentificador')
 novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
                        'IdentificadorLote': 'identificador_lote',
                        'IdentificadorLoteSituacaoLote': 'identificador_lote_situacao_lote',
@@ -116,10 +115,18 @@ novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identifi
                        'DataAbate': 'data_abate'}
 
 dados_abate_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+dados_abate_resumido.set_index('estabelecimento_identificador')
 
 dados_abate_resumido.to_csv('../input/DadosAbate.csv', sep='\t')
 
-print(dados_cadastro_estabelecimento_resumido.head(100))
-ids = dados_cadastro_estabelecimento_resumido.index
-print(dados_cadastro_estabelecimento_resumido[ids.isin(ids[ids.duplicated()])].sort_values)
+data_frames = [dados_abate_resumido, dados_perguntas_classificam_resumido, dados_perguntas_nao_classificam_resumido, dados_pratica_recuperacao_pastagem_resumido, dados_cadastro_estabelecimento_resumido]
+
+dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_abate_resumido.index])
+
+dados_completo.to_csv('../input/DadosCompleto.csv', sep='\t')
+
+print(dados_completo.head(100))
+print(dados_completo.describe())
+# ids = dados_abate_resumido.index
+# print(dados_abate_resumido[ids.isin(ids[ids.duplicated()])].sort_values)
 
