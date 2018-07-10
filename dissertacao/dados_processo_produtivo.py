@@ -22,7 +22,7 @@ novos_nomes_colunas = {'A área do estabelecimento rural é destinada na sua tot
                        'Faz parte da Lista Trace?': 'lita_trace',
                        'O Estabelecimento rural apresenta atestado de Programas de Controle de Qualidade (Boas Práticas Agropecuárias - BPA/BOVINOS ou qualquer outro programa com exigências similares ou superiores ao BPA)?': 'apresenta_atestado_programas_controle_qualidade',
                        'O Estabelecimento rural está envolvido com alguma organização que utiliza-se de mecanismos similares a aliança mercadológica para a comercialização do seu produto?': 'envolvido_em_organizacao'}
-dados_perguntas_classificam_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+dados_perguntas_classificam_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
 dados_perguntas_classificam_resumido.fillna('NÃO', inplace=True)
 
@@ -51,7 +51,7 @@ novos_nomes_colunas = {'CONFINAMENTO - ALTO CONCENTRADO': 'confinamento_alto_con
                        'SUPLEMENTAÇÃO A CAMPO - SAL MINERAL': 'suplementacao_a_campo_sal_mineral',
                        'SUPLEMENTAÇÃO A CAMPO - SAL MINERAL + URÉIA': 'suplementacao_a_campo_sal_mineral_ureia'}
 
-dados_perguntas_nao_classificam_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+dados_perguntas_nao_classificam_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
 dados_perguntas_nao_classificam_resumido.fillna('NÃO', inplace=True)
 
@@ -70,7 +70,7 @@ novos_nomes_colunas = {'Fertirrigação': 'fertirrigacao',
                        'ILPF - Integração Lavoura-Pecuária-Floresta': 'ilpf',
                        'Nenhum': 'nenhum'}
 
-dados_pratica_recuperacao_pastagem_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
 dados_pratica_recuperacao_pastagem_resumido.fillna('NÃO', inplace=True)
 
@@ -81,7 +81,6 @@ dados_cadastro_estabelecimento = dados_processo_produtivo.drop(['QuestionarioPra
 dados_cadastro_estabelecimento.fillna('Nenhum', inplace=True)
 dados_cadastro_estabelecimento_resumido = dados_cadastro_estabelecimento.drop_duplicates(subset=['EstabelecimentoIdentificador', 'EstabelecimentoMunicipio'])
 
-dados_cadastro_estabelecimento_resumido.set_index('EstabelecimentoIdentificador')
 novos_nomes_colunas = {'EstabelecimentoMunicipio': 'estabelecimento_municipio',
                        'EstabelecimentoIdentificador': 'estabelecimento_identificador',
                        'EstabelecimentoUF': 'estabelecimento_uf',
@@ -92,13 +91,16 @@ novos_nomes_colunas = {'EstabelecimentoMunicipio': 'estabelecimento_municipio',
                        'QuestionarioFabricaRacao': 'fabrica_racao',
                        'QuestionarioClassificacaoEstabelecimentoRural': 'questionario_classificacao_estabelecimento_rural'}
 
-dados_cadastro_estabelecimento_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
+dados_cadastro_estabelecimento_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
+dados_cadastro_estabelecimento_resumido.set_index('estabelecimento_identificador', inplace=True)
+dados_cadastro_estabelecimento_resumido.sort_index(inplace=True)
 
 dados_cadastro_estabelecimento_resumido.to_csv('../input/CadastroEstabelecimento.csv', sep='\t')
 
 # Dados de abate
 dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='ISO-8859-1', delimiter='\t')
-dados_abate.set_index('EstabelecimentoIdentificador')
+# Remover os ids vazios
+dados_abate = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
 dados_abate_resumido = dados_abate.drop(['EmpresaClassificadoraIdentificador', 'Classificador2', 'EstabelecimentoMunicipio', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'Rispoa', 'IncentivoProdutorSituacao'], axis=1)
 
 novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
@@ -114,19 +116,29 @@ novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identifi
                        'AprovacaoCarcacaSif': 'aprovacao_carcaca_sif',
                        'DataAbate': 'data_abate'}
 
-dados_abate_resumido.rename(index=str, columns=novos_nomes_colunas, inplace=True)
-dados_abate_resumido.set_index('estabelecimento_identificador')
+dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
+# Remover pois não tem estabelecimento com esses ids na lista de estabelecimentos
+dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin([26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566, 4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
+dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin([26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566, 4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
+dados_abate_resumido['estabelecimento_identificador'] = dados_abate_resumido['estabelecimento_identificador'].astype('int64')
+dados_abate_resumido.set_index('estabelecimento_identificador', inplace=True)
+dados_abate_resumido.sort_index(inplace=True)
 
 dados_abate_resumido.to_csv('../input/DadosAbate.csv', sep='\t')
 
-data_frames = [dados_abate_resumido, dados_perguntas_classificam_resumido, dados_perguntas_nao_classificam_resumido, dados_pratica_recuperacao_pastagem_resumido, dados_cadastro_estabelecimento_resumido]
+data_frames_perguntas = [dados_perguntas_classificam_resumido, dados_perguntas_nao_classificam_resumido, dados_pratica_recuperacao_pastagem_resumido]
+dados_completo_perguntas = pd.concat(data_frames_perguntas, axis=1, join_axes=[dados_perguntas_classificam_resumido.index])
 
-dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_abate_resumido.index])
+data_frames_abate = [dados_abate_resumido, dados_cadastro_estabelecimento_resumido]
+dados_completo_abates = pd.concat(data_frames_abate, axis=1, join_axes=[dados_abate_resumido.index])
+
+data_frames = [dados_completo_abates, dados_completo_perguntas]
+
+dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_completo_abates.index])
 
 dados_completo.to_csv('../input/DadosCompleto.csv', sep='\t')
 
-print(dados_completo.head(100))
-print(dados_completo.describe())
+print(dados_completo.count())
+# print(dados_abate_resumido.describe())
 # ids = dados_abate_resumido.index
 # print(dados_abate_resumido[ids.isin(ids[ids.duplicated()])].sort_values)
-
