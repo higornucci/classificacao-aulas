@@ -138,7 +138,7 @@ dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_completo_abates
 
 dados_completo.to_csv('../input/DadosCompleto.csv', sep='\t')
 
-print(dados_completo.count())
-# print(dados_abate_resumido.describe())
+print(dados_completo.head(200))
+print(dados_abate_resumido.describe())
 # ids = dados_abate_resumido.index
 # print(dados_abate_resumido[ids.isin(ids[ids.duplicated()])].sort_values)
