@@ -9,4 +9,5 @@ input/PerguntasNaoClassificam.csv
 input/PraticaRecuperacaoPastagem.csv
 input/CadastroEstabelecimento.csv
 input/DadosCompleto.csv
+input/DadosCompletoTransformado.csv
 input/DadosAbate.csv
