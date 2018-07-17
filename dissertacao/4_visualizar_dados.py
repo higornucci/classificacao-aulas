@@ -74,8 +74,7 @@ dados_completo['nenhum'] = dados_completo['nenhum'].astype('int32')
 dados_completo['data_abate'] = pd.to_datetime(dados_completo['data_abate'], dayfirst=True)
 
 tipificacao_label_encoder = LabelEncoder()
-tipificacao_labels = tipificacao_label_encoder.fit(dados_completo['tipificacao'])
-print(tipificacao_labels)
+tipificacao_labels = tipificacao_label_encoder.fit_transform(dados_completo['tipificacao'])
 dados_completo['tipificacao'] = tipificacao_labels
 
 print(dados_completo.shape)
@@ -123,13 +122,12 @@ dados_completo.hist(bins=50, figsize=(25, 25))
 plt.savefig('hitograma.svg')
 plt.show()
 
-dados_completo.hist(bins=50, figsize=(25, 25))
-plt.savefig('hitograma.svg')
-plt.show()
-
-dados_completo.plot(kind='scatter', x='maturidade', y='tipificacao', alpha=0.3, s=dados_completo['peso']/100,
-                    label='peso', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True)
+dados_completo.plot(kind='scatter', x='peso', y='tipificacao', alpha=0.3, s=dados_completo['maturidade'],
+                    label='maturidade', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True, sharex=False,
+                    figsize=(10, 7))
 plt.savefig('scatter.svg')
 plt.legend()
 
-print(dados_completo.shape)
+# procurando por correlações
+matriz_correlacao = dados_completo.corr()
+print(matriz_correlacao['acabamento'].sort_values(ascending=False))
