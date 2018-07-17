@@ -103,7 +103,8 @@ plt.show()
 # axarr[2, 1].set_title('Área total destinada a confinamento?')
 # axarr[3, 0].set_title('Área manejada possui 80% de boa cobertura vegetal')
 
-plt.tight_layout()
-plt.show()
+# plt.tight_layout()
+# plt.savefig('filename2.svg')
+# plt.show()
 
 print(dados_completo.shape)
