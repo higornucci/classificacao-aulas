@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
+from pandas.plotting import scatter_matrix
 
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -13,7 +14,7 @@ dados_completo.set_index('estabelecimento_identificador', inplace=True)
 dados_completo['identificador_lote_situacao_lote'] = dados_completo['identificador_lote_situacao_lote'].astype(
     'category')
 dados_completo['eh_novilho_precoce'] = dados_completo['eh_novilho_precoce'].astype('int32')
-dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('category')
+dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('int32')
 dados_completo['maturidade'] = dados_completo['maturidade'].astype('int32')
 dados_completo['acabamento'] = dados_completo['acabamento'].astype('int32')
 dados_completo['aprovacao_carcaca_sif'] = dados_completo['aprovacao_carcaca_sif'].astype('int32')
@@ -24,8 +25,6 @@ dados_completo['produtor_situacao'] = dados_completo['produtor_situacao'].astype
 dados_completo['pratica_recuperacao_pastagem_outra_pratica'] = dados_completo[
     'pratica_recuperacao_pastagem_outra_pratica'].astype('category')
 dados_completo['fabrica_racao'] = dados_completo['fabrica_racao'].astype('int32')
-dados_completo['organizacao_estabelecimento_pertence'] = dados_completo['organizacao_estabelecimento_pertence'].astype(
-    'category')
 dados_completo['area_total_destinada_confinamento'] = dados_completo['area_total_destinada_confinamento'].astype(
     'int32')
 dados_completo['area_manejada_80_boa_cobertura_vegetal'] = dados_completo[
@@ -120,8 +119,12 @@ plt.show()
 dados_completo.plot(kind='scatter', x='tipificacao', y='peso', alpha=0.3, s=dados_completo['maturidade'],
                     label='maturidade', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True, sharex=False,
                     figsize=(10, 7))
-plt.savefig('scatter.svg')
+plt.savefig('scatter.png')
 plt.legend()
+
+atributos = ['acabamento', 'peso', 'tipificacao', 'maturidade']
+scatter_matrix(dados_completo[atributos], figsize=(12, 8))
+plt.savefig('scatter_atributos.png')
 
 # procurando por correlações
 matriz_correlacao = dados_completo.corr()
