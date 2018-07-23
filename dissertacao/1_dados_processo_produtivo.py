@@ -45,6 +45,7 @@ novos_nomes_colunas = {'CONFINAMENTO - ALTO CONCENTRADO': 'confinamento_alto_con
                        'CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'confinamento_racao_consumo_inferior_0_8_porcento_peso_vivo',
                        'SEMI-CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO': 'semi_confinamento_racao_consumo_igual_superior_0_8_porcento_peso_vivo',
                        'SEMI-CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'semi_confinamento_racao_consumo_inferior_0_8_porcento_peso_vivo',
+                       'SUPLEMENTAÇÃO A CAMPO - FORNECIMENTO ESTRATÉGICO DE SILAGEM OU FENO': 'suplementacao_a_campo_silagem_ou_feno',
                        'SUPLEMENTAÇÃO A CAMPO - CREEP-FEEDING': 'suplementacao_a_campo_creep_feeding',
                        'SUPLEMENTAÇÃO A CAMPO - PROTEICO': 'suplementacao_a_campo_proteico',
                        'SUPLEMENTAÇÃO A CAMPO - PROTEICO ENERGÉTICO': 'suplementacao_a_campo_proteico_energetico',
@@ -81,7 +82,9 @@ dados_cadastro_estabelecimento = dados_processo_produtivo.drop(['QuestionarioPra
 dados_cadastro_estabelecimento.fillna('Nenhum', inplace=True)
 dados_cadastro_estabelecimento_resumido = dados_cadastro_estabelecimento.drop_duplicates(subset=['EstabelecimentoIdentificador', 'EstabelecimentoMunicipio'])
 
-novos_nomes_colunas = {'EstabelecimentoMunicipio': 'estabelecimento_municipio',
+novos_nomes_colunas = {'PerguntaQuestionarioOutros': 'pergunta_questionario_outros',
+                       'PraticaRecuperacaoPastagemDescricaoOutraPratica': 'pratica_recuperacao_pastagem_outra_pratica',
+                       'EstabelecimentoMunicipio': 'estabelecimento_municipio',
                        'EstabelecimentoIdentificador': 'estabelecimento_identificador',
                        'EstabelecimentoUF': 'estabelecimento_uf',
                        'IncentivoProdutorIdentificador': 'incentivo_produtor_identificador',
@@ -100,23 +103,33 @@ dados_cadastro_estabelecimento_resumido.to_csv('../input/CadastroEstabelecimento
 # Dados de abate
 dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='ISO-8859-1', delimiter='\t')
 # Remover os ids vazios
-dados_abate = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
-dados_abate_resumido = dados_abate.drop(['EmpresaClassificadoraIdentificador', 'Classificador2', 'EstabelecimentoMunicipio', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'Rispoa', 'IncentivoProdutorSituacao'], axis=1)
+dados_abate_resumido = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
+dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio',
+                                                  'EstabelecimentoUF', 'IncentivoProdutorIdentificador'], axis=1)
 
 novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
+                       'EmpresaClassificadoraIdentificador': 'empresa_classificadora_identificador',
                        'IdentificadorLote': 'identificador_lote',
                        'IdentificadorLoteSituacaoLote': 'identificador_lote_situacao_lote',
                        'IdentificadorLoteNumeroAnimal': 'identificador_lote_numero_animal',
+                       'IncentivoProdutorSituacao': 'incentivo_produtor_situacao',
                        'EhNovilhoPrecoce': 'eh_novilho_precoce',
-                       'Classificador1': 'classificador',
+                       'Classificador1': 'classificador1',
+                       'Classificador2': 'classificador2',
                        'Tipificacao': 'tipificacao',
                        'Maturidade': 'maturidade',
                        'Acabamento': 'acabamento',
                        'Peso': 'peso',
                        'AprovacaoCarcacaSif': 'aprovacao_carcaca_sif',
+                       'Rispoa': 'rispoa',
                        'DataAbate': 'data_abate'}
 
 dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
+
+dados_abate_resumido['rispoa'].fillna('Nenhum', inplace=True)
+dados_abate_resumido['classificador2'].fillna(0, inplace=True)
+dados_abate_resumido['empresa_classificadora_identificador'].fillna(0, inplace=True)
+
 # Remover pois não tem estabelecimento com esses ids na lista de estabelecimentos
 dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin([26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566, 4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
 dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin([26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566, 4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]

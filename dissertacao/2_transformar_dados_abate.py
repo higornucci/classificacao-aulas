@@ -1,22 +1,11 @@
 import warnings
 import pandas as pd
+from sklearn.preprocessing import LabelEncoder
 
 warnings.filterwarnings('ignore')
 
 dados_completo = pd.read_csv('../input/DadosCompleto.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('estabelecimento_identificador', inplace=True)
-
-# Renomeando colunas para nomes mais curtos
-novos_nomes_colunas = {'PraticaRecuperacaoPastagemDescricaoOutraPratica': 'pratica_recuperacao_pastagem_outra_pratica',
-                       'PerguntaQuestionarioOutros': 'organizacao_estabelecimento_pertence',
-                       'SUPLEMENTAÇÃO A CAMPO - FORNECIMENTO ESTRATÉGICO DE SILAGEM OU FENO': 'suplementacao_a_campo_silagem_ou_feno',
-                       'Dispõe de um sistema de identificação individual de bovinos associado a um controle zootécnico e sanitário?': 'dispoe_de_identificacao_individual',
-                       'Executa o rastreamento SISBOV?': 'rastreamento_sisbov',
-                       'Faz controle de pastejo que atende aos limites mínimos de altura para cada uma das forrageiras ou cultivares exploradas, tendo como parâmetro a régua de manejo instituída pela Empresa Brasileira de Pesquisa Agropecuária (Embrapa)?': 'faz_controle_pastejo_regua_de_manejo_embrapa',
-                       'Faz parte da Lista Trace?': 'lita_trace',
-                       'O Estabelecimento rural apresenta atestado de Programas de Controle de Qualidade (Boas Práticas Agropecuárias - BPA/BOVINOS ou qualquer outro programa com exigências similares ou superiores ao BPA)?': 'apresenta_atestado_programas_controle_qualidade',
-                       'O Estabelecimento rural está envolvido com alguma organização que utiliza-se de mecanismos similares a aliança mercadológica para a comercialização do seu produto?': 'envolvido_em_organizacao'}
-dados_completo.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
 # Substituindo os valores do acabamento
 dados_completo['acabamento'].replace(['Gordura Escassa - 1 a 3 mm de espessura'], '2', inplace=True)
@@ -32,6 +21,20 @@ dados_completo['tipificacao'].replace(['Macho CASTRADO'], 'C', inplace=True)
 dados_completo['maturidade'].replace(['Dente de leite'], '0', inplace=True)
 dados_completo['maturidade'].replace(['Dois dentes'], '2', inplace=True)
 dados_completo['maturidade'].replace(['Quatro dentes'], '4', inplace=True)
+
+# Substituindo os valores da rispoa
+rispoa_label_encoder = LabelEncoder()
+rispoa_labels = rispoa_label_encoder.fit_transform(dados_completo['rispoa'])
+dados_completo['rispoa'] = rispoa_labels
+rispoa_mapeamento = {index: label for index, label in enumerate(rispoa_label_encoder.classes_)}
+print(rispoa_mapeamento)
+
+# Substituindo os valores da tipificacao
+tipificacao_label_encoder = LabelEncoder()
+tipificacao_labels = tipificacao_label_encoder.fit_transform(dados_completo['tipificacao'])
+dados_completo['tipificacao'] = tipificacao_labels
+tipificacao_mapeamento = {index: label for index, label in enumerate(tipificacao_label_encoder.classes_)}
+print(tipificacao_mapeamento)
 
 # Substituindo os valores 'Não' por 0
 dados_completo = dados_completo.applymap(lambda x: 0 if "Não" in str(x) else x)

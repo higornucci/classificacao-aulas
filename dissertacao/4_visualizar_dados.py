@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
 
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -72,12 +71,6 @@ dados_completo['ilp'] = dados_completo['ilp'].astype('int32')
 dados_completo['ilpf'] = dados_completo['ilpf'].astype('int32')
 dados_completo['nenhum'] = dados_completo['nenhum'].astype('int32')
 dados_completo['data_abate'] = pd.to_datetime(dados_completo['data_abate'], dayfirst=True)
-
-tipificacao_label_encoder = LabelEncoder()
-tipificacao_labels = tipificacao_label_encoder.fit_transform(dados_completo['tipificacao'])
-dados_completo['tipificacao'] = tipificacao_labels
-tipificacao_mapeamento = {index: label for index, label in enumerate(tipificacao_label_encoder.classes_)}
-print(tipificacao_mapeamento)
 
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
