@@ -76,6 +76,8 @@ dados_completo['data_abate'] = pd.to_datetime(dados_completo['data_abate'], dayf
 tipificacao_label_encoder = LabelEncoder()
 tipificacao_labels = tipificacao_label_encoder.fit_transform(dados_completo['tipificacao'])
 dados_completo['tipificacao'] = tipificacao_labels
+tipificacao_mapeamento = {index: label for index, label in enumerate(tipificacao_label_encoder.classes_)}
+print(tipificacao_mapeamento)
 
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
@@ -122,7 +124,7 @@ dados_completo.hist(bins=50, figsize=(25, 25))
 plt.savefig('hitograma.svg')
 plt.show()
 
-dados_completo.plot(kind='scatter', x='peso', y='tipificacao', alpha=0.3, s=dados_completo['maturidade'],
+dados_completo.plot(kind='scatter', x='tipificacao', y='peso', alpha=0.3, s=dados_completo['maturidade'],
                     label='maturidade', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True, sharex=False,
                     figsize=(10, 7))
 plt.savefig('scatter.svg')
