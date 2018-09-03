@@ -9,6 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 from six.moves import urllib
+from sklearn.preprocessing import Imputer
 from pandas.plotting import scatter_matrix
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -120,14 +121,32 @@ housing = strat_train_set.copy()
 corr_matrix = housing.corr()
 print(corr_matrix["median_house_value"].sort_values(ascending=False))
 
-attributes = ["median_house_value", "median_income", "total_rooms",
-              "housing_median_age"]
-scatter_matrix(housing[attributes], figsize=(12, 8))
-save_fig("scatter_matrix_plot")
+# attributes = ["median_house_value", "median_income", "total_rooms",
+#               "housing_median_age"]
+# scatter_matrix(housing[attributes], figsize=(12, 8))
+# save_fig("scatter_matrix_plot")
 
-housing["rooms_per_household"] = housing["total_rooms"]/housing["households"]
-housing["bedrooms_per_room"] = housing["total_bedrooms"]/housing["total_rooms"]
-housing["population_per_household"]=housing["population"]/housing["households"]
+housing["rooms_per_household"] = housing["total_rooms"] / housing["households"]
+housing["bedrooms_per_room"] = housing["total_bedrooms"] / housing["total_rooms"]
+housing["population_per_household"] = housing["population"] / housing["households"]
 
 corr_matrix = housing.corr()
 corr_matrix["median_house_value"].sort_values(ascending=False)
+
+
+# preparando para machine learning
+housing = strat_train_set.drop("median_house_value", axis=1)
+housing_labels = strat_train_set["median_house_value"].copy()
+
+housing.dropna(subset=["total_bedrooms"])  # remove as linhas que contêm valores nulos
+housing.drop("total_bedrooms", axis=1)  # remove a coluna inteira
+median = housing["total_bedrooms"].median()
+housing["total_bedrooms"].fillna(median)  # substitui os valores nulos pela mediana
+
+imputer = Imputer(strategy="median")
+housing_num = housing.drop("ocean_proximity", axis=1)  # remover atributos não numéricos
+imputer.fit(housing_num)  # usar sklearn para completar os valores nulos com a mediana
+print(imputer.statistics_)
+
+X = imputer.transform(housing_num)
+housing_tr = pd.DataFrame(X, columns=housing_num.columns)
