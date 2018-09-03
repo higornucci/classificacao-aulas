@@ -11,6 +11,7 @@ import matplotlib.image as mpimg
 from six.moves import urllib
 from sklearn.preprocessing import Imputer
 from pandas.plotting import scatter_matrix
+from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import StratifiedShuffleSplit
 
@@ -150,3 +151,8 @@ print(imputer.statistics_)
 
 X = imputer.transform(housing_num)
 housing_tr = pd.DataFrame(X, columns=housing_num.columns)
+
+encoder = LabelEncoder()
+housing_cat = housing["ocean_proximity"]
+housing_cat_encoded = encoder.fit_transform(housing_cat)
+print(housing_cat_encoded)
