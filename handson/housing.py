@@ -4,16 +4,16 @@ import os
 import tarfile
 import warnings
 
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 from six.moves import urllib
-from sklearn.preprocessing import Imputer
-from pandas.plotting import scatter_matrix
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import StratifiedShuffleSplit
+from future_encoders import ColumnTransformer, OneHotEncoder
+from sklearn.linear_model import LinearRegression
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
+from sklearn.pipeline import FeatureUnion, Pipeline
+from sklearn.preprocessing import LabelEncoder, LabelBinarizer, StandardScaler, Imputer
 
 warnings.filterwarnings(action="ignore", message="^internal gelsd")
 
@@ -25,6 +25,38 @@ np.random.seed(42)
 plt.rcParams['axes.labelsize'] = 14
 plt.rcParams['xtick.labelsize'] = 12
 plt.rcParams['ytick.labelsize'] = 12
+
+rooms_ix, bedrooms_ix, population_ix, household_ix = 3, 4, 5, 6
+
+
+class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
+    def __init__(self, add_bedrooms_per_room=True):  # no *args or **kargs
+        self.add_bedrooms_per_room = add_bedrooms_per_room
+
+    def fit(self, X, y=None):
+        return self  # nothing else to do
+
+    def transform(self, X, y=None):
+        rooms_per_household = X[:, rooms_ix] / X[:, household_ix]
+        population_per_household = X[:, population_ix] / X[:, household_ix]
+        if self.add_bedrooms_per_room:
+            bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
+            return np.c_[X, rooms_per_household, population_per_household,
+                         bedrooms_per_room]
+        else:
+            return np.c_[X, rooms_per_household, population_per_household]
+
+
+# class DataFrameSelector(BaseEstimator, TransformerMixin):
+#     def __init__(self, attribute_names):
+#         self.attribute_names = attribute_names
+#
+#     def fit(self, X, y=None):
+#         return self
+#
+#     def transform(self, X):
+#         return X[self.attribute_names].values
+
 
 PROJECT_ROOT_DIR = "."
 CHAPTER_ID = "end_to_end_project"
@@ -134,7 +166,6 @@ housing["population_per_household"] = housing["population"] / housing["household
 corr_matrix = housing.corr()
 corr_matrix["median_house_value"].sort_values(ascending=False)
 
-
 # preparando para machine learning
 housing = strat_train_set.drop("median_house_value", axis=1)
 housing_labels = strat_train_set["median_house_value"].copy()
@@ -152,7 +183,51 @@ print(imputer.statistics_)
 X = imputer.transform(housing_num)
 housing_tr = pd.DataFrame(X, columns=housing_num.columns)
 
-encoder = LabelEncoder()
+encoder = LabelEncoder()  # pŕoblema que os algoritmos de ml acham que categorias mais próximas são similares
 housing_cat = housing["ocean_proximity"]
 housing_cat_encoded = encoder.fit_transform(housing_cat)
 print(housing_cat_encoded)
+
+encoder = OneHotEncoder()
+housing_cat_1hot = encoder.fit_transform(housing_cat_encoded.reshape(-1, 1))
+print(housing_cat_1hot)
+
+encoder = LabelBinarizer()
+housing_cat_1hot = encoder.fit_transform(housing_cat)
+print(housing_cat_1hot)
+
+attr_adder = CombinedAttributesAdder(add_bedrooms_per_room=False)
+housing_extra_attribs = attr_adder.transform(housing.values)
+
+housing_extra_attribs = pd.DataFrame(
+    housing_extra_attribs,
+    columns=list(housing.columns)+["rooms_per_household", "population_per_household"])
+print(housing_extra_attribs.head())
+
+num_attribs = list(housing_num)
+cat_attribs = ["ocean_proximity"]
+
+num_pipeline = Pipeline([
+        # ('selector', DataFrameSelector(num_attribs)),
+        ('imputer', Imputer(strategy="median")),
+        ('attribs_adder', CombinedAttributesAdder()),
+        ('std_scaler', StandardScaler()),
+    ])
+
+# cat_pipeline = Pipeline([
+#         ('selector', DataFrameSelector(cat_attribs)),
+#         ('cat_encoder', OneHotEncoder()),
+#     ])
+
+full_pipeline = ColumnTransformer([
+        ("num", num_pipeline, num_attribs),
+        ("cat", OneHotEncoder(), cat_attribs),
+    ])
+
+housing_prepared = full_pipeline.fit_transform(housing)
+print(housing_prepared)
+print(housing_prepared.shape)
+
+# Trainando o modelo
+lin_reg = LinearRegression()
+lin_reg.fit(housing_prepared, housing_labels)
