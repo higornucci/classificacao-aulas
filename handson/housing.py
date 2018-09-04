@@ -10,6 +10,7 @@ import pandas as pd
 from six.moves import urllib
 from future_encoders import ColumnTransformer, OneHotEncoder
 from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.model_selection import StratifiedShuffleSplit, train_test_split
 from sklearn.pipeline import FeatureUnion, Pipeline
@@ -231,3 +232,14 @@ print(housing_prepared.shape)
 # Trainando o modelo
 lin_reg = LinearRegression()
 lin_reg.fit(housing_prepared, housing_labels)
+
+some_data = housing.iloc[:5]
+some_labels = housing_labels.iloc[:5]
+some_data_prepared = full_pipeline.transform(some_data)
+print("Predictions:\t", lin_reg.predict(some_data_prepared))
+print("Labels:\t\t", list(some_labels))
+
+housing_predictions = lin_reg.predict(housing_prepared)
+lin_mse = mean_squared_error(housing_labels, housing_predictions)
+lin_rmse = np.sqrt(lin_mse)
+print(lin_rmse)
