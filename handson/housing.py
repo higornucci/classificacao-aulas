@@ -273,7 +273,7 @@ rmse_scores = np.sqrt(-scores)
 display_scores(rmse_scores)
 
 param_grid = [
-    {'n_estimators': [3, 10, 30], 'max_features': [2, 4, 6, 8]},
+    {'n_estimators': [3, 10, 30, 40, 50], 'max_features': [2, 4, 5, 6, 7, 8]},
     {'bootstrap': [False], 'n_estimators': [3, 10], 'max_features': [2, 3, 4]}
 ]
 
@@ -286,3 +286,10 @@ print(grid_search.best_estimator_)
 cvres = grid_search.cv_results_
 for mean_score, params in zip(cvres['mean_test_score'], cvres['params']):
     print(np.sqrt(-mean_score), params)
+
+feature_importances = grid_search.best_estimator_.feature_importances_
+print(feature_importances)
+extra_attribs = ['rooms_per_hhold', 'pop_per_hhold', 'bedrooms_per_rooms']
+cat_one_hot_attribs = list(encoder.classes_)
+attributes = num_attribs + extra_attribs + cat_one_hot_attribs
+sorted(zip(feature_importances))
