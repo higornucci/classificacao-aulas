@@ -293,3 +293,15 @@ extra_attribs = ['rooms_per_hhold', 'pop_per_hhold', 'bedrooms_per_rooms']
 cat_one_hot_attribs = list(encoder.classes_)
 attributes = num_attribs + extra_attribs + cat_one_hot_attribs
 sorted(zip(feature_importances))
+
+final_model = grid_search.best_estimator_
+
+X_test = strat_test_set.drop("median_house_value", axis=1)
+Y_test = strat_test_set["median_house_value"].copy()
+
+X_test_prepared = full_pipeline.transform(X_test)
+
+final_predictions = final_model.predict(X_test_prepared)
+final_mse = mean_squared_error(Y_test, final_predictions)
+final_rmse = np.sqrt(final_mse)
+display_scores(final_rmse)
