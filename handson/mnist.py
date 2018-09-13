@@ -11,6 +11,8 @@ from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict
 from sklearn.base import BaseEstimator
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import StandardScaler
 
 # to make this notebook's output stable across runs
 np.random.seed(42)
@@ -79,3 +81,20 @@ print(confusion_matrix(y_train_5, y_train_pred))
 print(precision_score(y_train_5, y_train_pred))
 print(recall_score(y_train_5, y_train_pred))
 print(f1_score(y_train_5, y_train_pred))
+
+# classificação multiclasse
+sgd_clf.fit(X_train, y_train)
+print(sgd_clf.predict([some_digit]))
+print(sgd_clf.classes_)
+print(sgd_clf.classes_[5])
+
+forest_clf = RandomForestClassifier(random_state=42)
+forest_clf.fit(X_train, y_train)
+print(forest_clf.predict([some_digit]))
+print(forest_clf.predict_proba([some_digit]))
+
+print(cross_val_score(sgd_clf, X_train, y_train, cv=3, scoring='accuracy'))
+
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train.astype(np.float64))
+print(cross_val_score(sgd_clf, X_train_scaled, y_train, cv=3, scoring='accuracy'))
