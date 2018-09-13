@@ -4,13 +4,13 @@ from __future__ import division, print_function, unicode_literals
 # Common imports
 import numpy as np
 import os
+import matplotlib
+import matplotlib.pyplot as plt
 from sklearn.datasets import fetch_mldata
+from sklearn.linear_model import SGDClassifier
 
 # to make this notebook's output stable across runs
 np.random.seed(42)
-
-# To plot pretty figures
-import matplotlib.pyplot as plt
 
 plt.rcParams['axes.labelsize'] = 14
 plt.rcParams['xtick.labelsize'] = 12
@@ -39,3 +39,21 @@ print(y.shape)
 X_train, X_test, y_train, y_test = X[:60000], X[60000:], y[:60000], y[60000:]
 shuffle_index = np.random.permutation(60000)
 X_train, y_train = X_train[shuffle_index], y_train[shuffle_index]
+
+some_digit = X[36000]
+some_digit_image = some_digit.reshape(28, 28)
+
+# plt.imshow(some_digit_image, cmap=matplotlib.cm.binary, interpolation='nearest')
+# plt.axis('off')
+# plt.show()
+
+print(y[36000])
+
+y_train_5 = (y_train == 5)
+y_test_5 = (y_test == 5)
+
+sgd_clf = SGDClassifier(random_state=42)
+sgd_clf.fit(X_train, y_train_5)
+print(sgd_clf.predict([some_digit]))
+
+
