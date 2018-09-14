@@ -6,7 +6,10 @@ warnings.filterwarnings('ignore')
 
 def ler_dados_processo_produtivo_base():
     csv = pd.read_csv('../input/DadosProcessoProdutivo.csv', encoding='utf-8', delimiter='\t')
-    csv.set_index('EstabelecimentoIdentificador')
+    # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
+    csv.drop(['IncentivoProdutorIdentificador', 'QuestionarioIdentificador'], axis=1, inplace=True)
+    # drop de colunas com o mesmo valor para todas as linhas
+    csv.drop(['EstabelecimentoUF', 'IncentivoProdutorSituacao', 'PraticaRecuperacaoPastagemDescricaoOutraPratica', 'PerguntaQuestionarioOutros'], axis=1, inplace=True)
     return csv
 
 
@@ -57,24 +60,13 @@ def gerar_arquivo_dados_perguntas_nao_classificam(dados_processo_produtivo):
         values='QuestionarioConfinamentoFazConfinamento')
 
     dados_perguntas_nao_classificam_resumido.index.name = 'estabelecimento_identificador'
-    novos_nomes_colunas = {'CONFINAMENTO - ALTO CONCENTRADO': 'confinamento_alto_concentrado',
-                           'CONFINAMENTO - ALTO CONCENTRADO + VOLUMOSO': 'confinamento_alto_concentrado_volumoso',
-                           'CONFINAMENTO - CONCENTRADO + VOLUMOSO': 'confinamento_concentrado_volumoso',
-                           'CONFINAMENTO - GRÃO INTEIRO': 'confinamento_grao_inteiro',
-                           'CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO': 'confinamento_racao_consumo_igual_superior_0_8_porcento_peso_vivo',
-                           'CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'confinamento_racao_consumo_inferior_0_8_porcento_peso_vivo',
-                           'SEMI-CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO': 'semi_confinamento_racao_consumo_igual_superior_0_8_porcento_peso_vivo',
-                           'SEMI-CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'semi_confinamento_racao_consumo_inferior_0_8_porcento_peso_vivo',
-                           'SUPLEMENTAÇÃO A CAMPO - FORNECIMENTO ESTRATÉGICO DE SILAGEM OU FENO': 'suplementacao_a_campo_silagem_ou_feno',
-                           'SUPLEMENTAÇÃO A CAMPO - CREEP-FEEDING': 'suplementacao_a_campo_creep_feeding',
-                           'SUPLEMENTAÇÃO A CAMPO - PROTEICO': 'suplementacao_a_campo_proteico',
-                           'SUPLEMENTAÇÃO A CAMPO - PROTEICO ENERGÉTICO': 'suplementacao_a_campo_proteico_energetico',
-                           'SUPLEMENTAÇÃO A CAMPO - SAL MINERAL': 'suplementacao_a_campo_sal_mineral',
-                           'SUPLEMENTAÇÃO A CAMPO - SAL MINERAL + URÉIA': 'suplementacao_a_campo_sal_mineral_ureia'}
+    novos_nomes_colunas = {'CONFINAMENTO - ALTO CONCENTRADO, ALTO CONCENTRADO + VOLUMOSO, CONCENTRADO + VOLUMOSO, GRÃO INTEIRO, RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO, RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'confinamento',
+                           'SEMI-CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO, RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'semi_confinamento',
+                           'SUPLEMENTAÇÃO A CAMPO - CREEP-FEEDING, FORNECIMENTO ESTRATÉGICO DE SILAGEM OU FENO, PROTEICO, PROTEICO ENERGÉTICO, SAL MINERAL, SAL MINERAL + URÉIA': 'suplementacao'}
 
     dados_perguntas_nao_classificam_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
-    dados_perguntas_nao_classificam_resumido.fillna('NÃO', inplace=True)
+    dados_perguntas_nao_classificam_resumido.fillna('Não', inplace=True)
 
     dados_perguntas_nao_classificam_resumido.to_csv('../input/PerguntasNaoClassificam.csv', encoding='utf-8', sep='\t')
     return dados_perguntas_nao_classificam_resumido
@@ -101,8 +93,8 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
                            'Nenhum': 'nenhum'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-
-    dados_pratica_recuperacao_pastagem_resumido.fillna('NÃO', inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8', sep='\t')
     return dados_pratica_recuperacao_pastagem_resumido
@@ -117,15 +109,9 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
     dados_cadastro_estabelecimento_resumido = dados_cadastro_estabelecimento.drop_duplicates(
         subset=['EstabelecimentoIdentificador', 'EstabelecimentoMunicipio'])
 
-    novos_nomes_colunas = {'PerguntaQuestionarioOutros': 'pergunta_questionario_outros',
-                           'PraticaRecuperacaoPastagemDescricaoOutraPratica': 'pratica_recuperacao_pastagem_outra_pratica',
-                           'EstabelecimentoMunicipio': 'estabelecimento_municipio',
+    novos_nomes_colunas = {'EstabelecimentoMunicipio': 'estabelecimento_municipio',
                            'EstabelecimentoIdentificador': 'estabelecimento_identificador',
-                           'EstabelecimentoUF': 'estabelecimento_uf',
-                           'IncentivoProdutorIdentificador': 'incentivo_produtor_identificador',
-                           'QuestionarioIdentificador': 'questionario_identificador',
                            'QuestionarioPossuiOutrosIncentivos': 'ṕossui_outros_incentivos',
-                           'IncentivoProdutorSituacao': 'produtor_situacao',
                            'QuestionarioFabricaRacao': 'fabrica_racao',
                            'QuestionarioClassificacaoEstabelecimentoRural': 'questionario_classificacao_estabelecimento_rural'}
 
@@ -139,20 +125,17 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
 
 def gerar_arquivo_dados_abate():
     dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='utf-8', delimiter='\t')
+    # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
+    dados_abate.drop(['IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador', 'Classificador1', 'Classificador2'], axis=1, inplace=True)
+    # drop de colunas com o mesmo valor para todas as linhas
+    dados_abate.drop(['MotivoDesclassificacao'], axis=1, inplace=True)
     # Remover os ids vazios
     dados_abate_resumido = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
-    dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio',
-                                                      'EstabelecimentoUF', 'IncentivoProdutorIdentificador'], axis=1)
+    dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio'], axis=1)
 
     novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
-                           'EmpresaClassificadoraIdentificador': 'empresa_classificadora_identificador',
-                           'IdentificadorLote': 'identificador_lote',
                            'IdentificadorLoteSituacaoLote': 'identificador_lote_situacao_lote',
-                           'IdentificadorLoteNumeroAnimal': 'identificador_lote_numero_animal',
-                           'IncentivoProdutorSituacao': 'incentivo_produtor_situacao',
                            'EhNovilhoPrecoce': 'eh_novilho_precoce',
-                           'Classificador1': 'classificador1',
-                           'Classificador2': 'classificador2',
                            'Tipificacao': 'tipificacao',
                            'Maturidade': 'maturidade',
                            'Acabamento': 'acabamento',
@@ -164,8 +147,6 @@ def gerar_arquivo_dados_abate():
     dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
     dados_abate_resumido['rispoa'].fillna('Nenhum', inplace=True)
-    dados_abate_resumido['classificador2'].fillna(0, inplace=True)
-    dados_abate_resumido['empresa_classificadora_identificador'].fillna(0, inplace=True)
 
     # Remover pois não tem estabelecimento com esses ids na lista de estabelecimentos
     dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin(
