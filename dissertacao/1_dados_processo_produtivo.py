@@ -126,7 +126,9 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
 def gerar_arquivo_dados_abate():
     dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='utf-8', delimiter='\t')
     # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
-    dados_abate.drop(['IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador', 'Classificador1', 'Classificador2'], axis=1, inplace=True)
+    dados_abate.drop(['EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'IncentivoProdutorSituacao',
+                      'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
+                      'Classificador1', 'Classificador2'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
     dados_abate.drop(['MotivoDesclassificacao'], axis=1, inplace=True)
     # Remover os ids vazios
@@ -149,12 +151,12 @@ def gerar_arquivo_dados_abate():
     dados_abate_resumido['rispoa'].fillna('Nenhum', inplace=True)
 
     # Remover pois não tem estabelecimento com esses ids na lista de estabelecimentos
-    dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin(
-        [26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566,
-         4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
-    dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin(
-        [26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566,
-         4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
+    # dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin(
+    #     [26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566,
+    #      4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
+    # dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin(
+    #     [26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566,
+    #      4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
     dados_abate_resumido['estabelecimento_identificador'] = dados_abate_resumido['estabelecimento_identificador'].astype(
         'int64')
     dados_abate_resumido.set_index('estabelecimento_identificador', inplace=True)
