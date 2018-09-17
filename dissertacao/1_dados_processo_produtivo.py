@@ -121,7 +121,8 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
 
     dados_cadastro_estabelecimento_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
     dados_cadastro_estabelecimento_resumido.set_index('estabelecimento_identificador', inplace=True)
-    dados_cadastro_estabelecimento_resumido['estabelecimento_municipio'] = dados_cadastro_estabelecimento_resumido['estabelecimento_municipio'].str.lower()
+    dados_cadastro_estabelecimento_resumido['estabelecimento_municipio'] = dados_cadastro_estabelecimento_resumido[
+        'estabelecimento_municipio'].str.lower()
     dados_cadastro_estabelecimento_resumido['questionario_classificacao_estabelecimento_rural'] = \
         dados_cadastro_estabelecimento_resumido['questionario_classificacao_estabelecimento_rural'].astype('int64')
     dados_cadastro_estabelecimento_resumido.sort_index(inplace=True)
@@ -215,8 +216,12 @@ def gerar_arquivo_dados_abate():
 
 
 def ler_municipios_ms():
-    csv = pd.read_csv('../input/Municipios_Brasileiros_MS.csv', encoding='utf-8', delimiter=',')
+    csv = pd.read_csv('../input/Municipios_Brasileiros_MS.csv', encoding='utf-8')
     csv['Nome do Município'] = csv['Nome do Município'].str.lower()
+    csv['Nome do Município'] = csv['Nome do Município'] \
+        .str.normalize('NFKD') \
+        .str.encode('ascii', errors='ignore') \
+        .str.decode('utf-8')
     return csv
 
 
@@ -234,9 +239,6 @@ def gerar_dados_completo():
 
     dados_abate_resumido = gerar_arquivo_dados_abate()
     dados_cadastro_estabelecimento_resumido = gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo)
-    dados_municipios_ms = ler_municipios_ms()
-    # dados_cadastro_estabelecimento_resumido = pd.merge(dados_cadastro_estabelecimento_resumido, dados_municipios_ms,
-    #                                                    how='left', left_on='estabelecimento_municipio', right_on='Nome do Município')
 
     data_frames_abate = [dados_abate_resumido, dados_cadastro_estabelecimento_resumido]
     dados_completo_abates = pd.concat(data_frames_abate, axis=1, join_axes=[dados_abate_resumido.index])
@@ -244,6 +246,11 @@ def gerar_dados_completo():
     data_frames = [dados_completo_abates, dados_completo_perguntas]
 
     dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_completo_abates.index])
+    dados_municipios_ms = ler_municipios_ms()
+    dados_completo = pd.merge(dados_completo, dados_municipios_ms,
+                              how='left', left_on='estabelecimento_municipio',
+                              right_on='Nome do Município')
+    dados_completo.drop(['Nome do Município', 'estabelecimento_municipio'], axis=1, inplace=True)
 
     dados_completo.to_csv('../input/DadosCompleto.csv', encoding='utf-8', sep='\t')
 
