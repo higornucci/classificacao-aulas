@@ -251,6 +251,7 @@ def gerar_dados_completo():
                               how='left', left_on='estabelecimento_municipio',
                               right_on='Nome do Município')
     dados_completo.drop(['Nome do Município', 'estabelecimento_municipio'], axis=1, inplace=True)
+    dados_completo.index.name = 'index'
 
     dados_completo.to_csv('../input/DadosCompleto.csv', encoding='utf-8', sep='\t')
 

@@ -85,6 +85,8 @@ dados_completo['data_abate'] = pd.to_datetime(dados_completo['data_abate'], dayf
 #     test_set.drop(cc, axis=1, inplace=True)
 #     test_set = test_set.join(dummies)
 
-dados_completo.to_csv('../input/DadosCompletoTransformadoDummies.csv', sep='\t')
+
+
+dados_completo.to_csv('../input/DadosCompletoTransformadoML.csv', sep='\t')
 
 print(dados_completo.info())
