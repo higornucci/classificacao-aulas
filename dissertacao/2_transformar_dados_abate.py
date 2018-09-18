@@ -5,12 +5,14 @@ from sklearn.preprocessing import LabelEncoder
 warnings.filterwarnings('ignore')
 
 dados_completo = pd.read_csv('../input/DadosCompleto.csv', encoding='utf-8', delimiter='\t')
-dados_completo.set_index('estabelecimento_identificador', inplace=True)
+dados_completo.set_index('index', inplace=True)
 
 # Substituindo os valores do acabamento
+dados_completo['acabamento'].replace(['Magra - Gordura ausente'], '1', inplace=True)
 dados_completo['acabamento'].replace(['Gordura Escassa - 1 a 3 mm de espessura'], '2', inplace=True)
 dados_completo['acabamento'].replace(['Gordura Mediana - acima de 3 a até 6 mm de espessura'], '3', inplace=True)
 dados_completo['acabamento'].replace(['Gordura Uniforme - acima de 6 e até 10 mm de espessura'], '4', inplace=True)
+dados_completo['acabamento'].replace(['Gordura Excessiva - acima de 10 mm de espessura'], '5', inplace=True)
 
 # Substituindo os valores da tipificação
 dados_completo['tipificacao'].replace(['Macho INTEIRO'], 'M', inplace=True)
@@ -21,6 +23,8 @@ dados_completo['tipificacao'].replace(['Macho CASTRADO'], 'C', inplace=True)
 dados_completo['maturidade'].replace(['Dente de leite'], '0', inplace=True)
 dados_completo['maturidade'].replace(['Dois dentes'], '2', inplace=True)
 dados_completo['maturidade'].replace(['Quatro dentes'], '4', inplace=True)
+dados_completo['maturidade'].replace(['Seis dentes'], '6', inplace=True)
+dados_completo['maturidade'].replace(['Oito dentes'], '8', inplace=True)
 
 # Substituindo os valores da rispoa
 rispoa_label_encoder = LabelEncoder()
@@ -44,8 +48,4 @@ dados_completo = dados_completo.applymap(lambda x: 0 if "NÃO" in str(x) else x)
 dados_completo = dados_completo.applymap(lambda x: 1 if "Sim" in str(x) else x)
 dados_completo = dados_completo.applymap(lambda x: 1 if "SIM" in str(x) else x)
 
-# Substituindo os valores da situação do produtor
-dados_completo['produtor_situacao'].replace(['APROVADO'], '1', inplace=True)
-
 dados_completo.to_csv('../input/DadosCompletoTransformado.csv', sep='\t')
-
