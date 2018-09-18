@@ -34,11 +34,11 @@ rispoa_mapeamento = {index: label for index, label in enumerate(rispoa_label_enc
 print(rispoa_mapeamento)
 
 # Substituindo os valores da tipificacao
-tipificacao_label_encoder = LabelEncoder()
-tipificacao_labels = tipificacao_label_encoder.fit_transform(dados_completo['tipificacao'])
-dados_completo['tipificacao'] = tipificacao_labels
-tipificacao_mapeamento = {index: label for index, label in enumerate(tipificacao_label_encoder.classes_)}
-print(tipificacao_mapeamento)
+# tipificacao_label_encoder = LabelEncoder()
+# tipificacao_labels = tipificacao_label_encoder.fit_transform(dados_completo['tipificacao'])
+# dados_completo['tipificacao'] = tipificacao_labels
+# tipificacao_mapeamento = {index: label for index, label in enumerate(tipificacao_label_encoder.classes_)}
+# print(tipificacao_mapeamento)
 
 # Substituindo os valores 'Não' por 0
 dados_completo = dados_completo.applymap(lambda x: 0 if "Não" in str(x) else x)

@@ -138,7 +138,7 @@ def gerar_arquivo_dados_abate():
                       'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
                       'Classificador1', 'Classificador2'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
-    dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce'], axis=1, inplace=True)
+    dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce', 'DataAbate'], axis=1, inplace=True)
     # Remover os ids vazios
     dados_abate_resumido = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
     dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio'], axis=1)
@@ -150,8 +150,7 @@ def gerar_arquivo_dados_abate():
                            'Acabamento': 'acabamento',
                            'Peso': 'peso',
                            'AprovacaoCarcacaSif': 'aprovacao_carcaca_sif',
-                           'Rispoa': 'rispoa',
-                           'DataAbate': 'data_abate'}
+                           'Rispoa': 'rispoa'}
 
     dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
