@@ -102,6 +102,7 @@ def display_scores(scores):
     print("Mean:", scores.mean())
     print("Standard deviation:", scores.std())
 
+
 housing = load_housing_data()
 
 print(housing.head(30))

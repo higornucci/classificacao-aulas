@@ -50,7 +50,8 @@ dados_completo['longitude'] = dados_completo['longitude'].astype('float64')
 colunas_categoricas = [
     'identificador_lote_situacao_lote', 'tipificacao']
 dados_categoricos = dados_completo[colunas_categoricas]
-dados_numericos = dados_completo.drop(colunas_categoricas, axis=1)  # remover atributos não numéricos
+dados_alvo = dados_completo['acabamento']
+dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)  # remover atributos não numéricos
 
 dados_numericos = MinMaxScaler().fit_transform(dados_numericos)
 dados_numericos = pd.DataFrame(dados_numericos)
@@ -61,7 +62,7 @@ for cc in colunas_categoricas:
     dados_categoricos.drop(cc, axis=1, inplace=True)
     dados_categoricos = dados_categoricos.join(dummies)
 
-dados_completo = dados_categoricos.join(dados_numericos)
+dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
 
 # train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 # print(len(train_set), "train +", len(test_set), "test")
