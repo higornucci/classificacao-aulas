@@ -1,5 +1,5 @@
 import warnings
-
+import time
 import pandas as pd
 from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn.naive_bayes import MultinomialNB
@@ -35,11 +35,14 @@ modelos = [('SVM', SVC(decision_function_shape='ovo')),
 
 # Validar cada um dos modelos
 for nome, modelo in modelos:
+    inicio = time.time()
     cv_resultados = cross_val_score(modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     modelo.fit(X_treino, Y_treino)
     preds = modelo.predict(X_teste)
+    final = time.time()
     resultado = pd.DataFrame()
     resultado["id"] = X_teste.index
     resultado["item.acabamento"] = preds
     resultado.to_csv("resultado_" + nome + ".csv", encoding='utf-8', index=False)
+    print('Tempo de execução do ' + nome + ':', final - inicio)
