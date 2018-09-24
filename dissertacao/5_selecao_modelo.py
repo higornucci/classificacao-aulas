@@ -13,8 +13,8 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.set_index('index', inplace=True)
 
 conjunto_treinamento, conjunto_teste = train_test_split(dados_completo, test_size=0.2, random_state=42)
-conjunto_treinamento = conjunto_treinamento[:160000]
-conjunto_teste = conjunto_teste[-40000:]
+conjunto_treinamento = conjunto_treinamento[:48000]
+conjunto_teste = conjunto_teste[-12000:]
 
 X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
     'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
@@ -41,7 +41,7 @@ def rodar_algoritmos():
     global inicio, preds, final, grid_search
     inicio = time.time()
     grid_search = GridSearchCV(modelo, escolher_parametros(), cv=kfold, scoring=scoring, n_jobs=-1)
-    grid_search.fit(X_treino, X_teste)
+    grid_search.fit(X_treino, Y_treino)
     cv_resultados = cross_val_score(grid_search.best_estimator_, X_treino, Y_treino, cv=kfold, scoring=scoring)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     modelo.fit(X_treino, Y_treino)
