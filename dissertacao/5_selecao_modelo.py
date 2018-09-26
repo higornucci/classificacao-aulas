@@ -31,10 +31,10 @@ scoring = 'accuracy'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando alguns modelos
-modelos_base = [('SVM', SVC()),
-                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+modelos_base = [('NB', MultinomialNB()),
                 ('DTC', DecisionTreeClassifier()),
-                ('NB', MultinomialNB())]
+                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                ('SVM', SVC())]
 
 
 def rodar_algoritmos():
@@ -43,6 +43,7 @@ def rodar_algoritmos():
     grid_search = GridSearchCV(modelo, escolher_parametros(), cv=kfold, scoring=scoring, n_jobs=-1)
     grid_search.fit(X_treino, Y_treino)
     cv_resultados = cross_val_score(grid_search.best_estimator_, X_treino, Y_treino, cv=kfold, scoring=scoring)
+    print('Melhores parametros ' + nome + ' :', grid_search.best_estimator_)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     modelo.fit(X_treino, Y_treino)
     preds = modelo.predict(X_teste)
