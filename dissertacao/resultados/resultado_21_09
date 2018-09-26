@@ -1,0 +1,51 @@
+Teste com x=48000 e y=12000
+1 processor
+3 fold
+
+SVM: (0.6150) +/- (0.004)
+Tempo de execução do SVM: 699.8610999584198
+K-NN: (0.6441) +/- (0.003)
+Tempo de execução do K-NN: 65.42966413497925
+DTC: (0.5910) +/- (0.003)
+Tempo de execução do DTC: 0.2344672679901123
+NB: (0.5888) +/- (0.003)
+Tempo de execução do NB: 0.11399245262145996
+
+Teste com x=48000 e y=12000
+3 processor
+3 fold
+
+SVM: (0.6150) +/- (0.004)
+Tempo de execução do SVM: {0:.4f} segundos 699.5147640705109
+K-NN: (0.6441) +/- (0.003)
+Tempo de execução do K-NN: {0:.4f} segundos 62.54365158081055
+DTC: (0.5910) +/- (0.003)
+Tempo de execução do DTC: {0:.4f} segundos 0.22354340553283691
+NB: (0.5888) +/- (0.003)
+Tempo de execução do NB: {0:.4f} segundos 0.07612109184265137
+
+Teste com x=48000 e y=12000
+3 processor
+5 fold
+
+SVM: (0.6164) +/- (0.004)
+Tempo de execução do SVM: {0:.4f} segundos 1168.869104385376
+K-NN: (0.6446) +/- (0.005)
+Tempo de execução do K-NN: {0:.4f} segundos 74.60549068450928
+DTC: (0.5922) +/- (0.005)
+Tempo de execução do DTC: {0:.4f} segundos 0.3590712547302246
+NB: (0.5893) +/- (0.004)
+Tempo de execução do NB: {0:.4f} segundos 0.13344907760620117
+
+Teste com x=80000 e y=20000
+3 processor
+5 fold
+
+SVM: (0.6195) +/- (0.003)
+Tempo de execução do SVM: {0:.4f} segundos 3405.782895088196
+K-NN: (0.6523) +/- (0.004)
+Tempo de execução do K-NN: {0:.4f} segundos 196.76693892478943
+DTC: (0.5888) +/- (0.005)
+Tempo de execução do DTC: {0:.4f} segundos 0.6127510070800781
+NB: (0.5910) +/- (0.003)
+Tempo de execução do NB: {0:.4f} segundos 0.19198298454284668
