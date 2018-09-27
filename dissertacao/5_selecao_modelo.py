@@ -9,7 +9,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 warnings.filterwarnings('ignore')
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8')
 dados_completo.set_index('index', inplace=True)
 
 conjunto_treinamento, conjunto_teste = train_test_split(dados_completo, test_size=0.2, random_state=42)
@@ -64,13 +64,14 @@ def escolher_parametros():
         ]
     elif nome == 'DTC':
         return [
-            {'max_features': [1, 5, 10, 20, 40],
+            {'max_features': [0, 1, 5, 10, 20, 31],
              'max_depth': [1, 5, 10, 15, 30],
-             'class_weight': [None, 'balanced']}
+             'class_weight': [None, 'balanced']
+             }
         ]
     elif nome == 'NB':
         return [
-            {'alpha': [0, .0001, .001, .01, .1, .5, 1, 2, 10]}
+            {'alpha': [0, .0001, .001, .01, .1, .5, 1, 2, 10, 20]}
         ]
     return None
 
@@ -81,8 +82,6 @@ def imprimir_resultados():
     resultado["item.acabamento"] = preds
     resultado.to_csv("resultado_" + nome + ".csv", encoding='utf-8', index=False)
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
-    feature_importances = grid_search.best_estimator_.feature_importances_
-    print('Importância das características:', feature_importances)
 
 
 # Validar cada um dos modelos
