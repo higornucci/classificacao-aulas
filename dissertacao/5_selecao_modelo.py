@@ -64,14 +64,14 @@ def escolher_parametros():
         ]
     elif nome == 'DTC':
         return [
-            {'max_features': [0, 1, 5, 10, 20, 31],
-             'max_depth': [1, 5, 10, 15, 30],
+            {'max_features': [1, 5, 8, 9, 10, 12, 20],
+             'max_depth': [1, 5, 10, 11, 12, 13, 14],
              'class_weight': [None, 'balanced']
              }
         ]
     elif nome == 'NB':
         return [
-            {'alpha': [0, .0001, .001, .01, .1, .5, 1, 2, 10, 20]}
+            {'alpha': [0, .0001, .001, .01, .1, .5, 1, 5, 9, 10, 11, 15]}
         ]
     return None
 
