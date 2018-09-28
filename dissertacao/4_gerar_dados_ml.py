@@ -48,13 +48,16 @@ dados_completo['latitude'] = dados_completo['latitude'].astype('float64')
 dados_completo['longitude'] = dados_completo['longitude'].astype('float64')
 
 colunas_categoricas = [
-    'identificador_lote_situacao_lote', 'tipificacao']
+    'identificador_lote_situacao_lote', 'tipificacao', 'maturidade', 'rispoa']
 dados_categoricos = dados_completo[colunas_categoricas]
 dados_alvo = dados_completo['acabamento']
 dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)  # remover atributos não numéricos
+dados_numericos_labels = dados_numericos.columns.values.tolist()
+print('nomes colunas:', dados_numericos_labels)
 
 dados_numericos = MinMaxScaler().fit_transform(dados_numericos)
 dados_numericos = pd.DataFrame(dados_numericos)
+dados_numericos.columns = dados_numericos_labels
 
 for cc in colunas_categoricas:
     prefix = '{}#'.format(cc)
@@ -63,6 +66,7 @@ for cc in colunas_categoricas:
     dados_categoricos = dados_categoricos.join(dummies)
 
 dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
+dados_completo.drop('peso', axis=1, inplace=True)
 
 # train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 # print(len(train_set), "train +", len(test_set), "test")

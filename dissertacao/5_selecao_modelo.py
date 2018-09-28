@@ -13,15 +13,26 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.set_index('index', inplace=True)
 
 
-def buscar_quantidades_iguais(quantidade, valor):
-    classe = dados_completo.loc[dados_completo['acabamento'] == valor]
+def mostrar_quantidade_por_classe(classe):
+    print(dados_completo.loc[dados_completo['acabamento'] == classe].info())
+
+
+# mostrar_quantidade_por_classe(1)
+# mostrar_quantidade_por_classe(2)
+# mostrar_quantidade_por_classe(3)
+# mostrar_quantidade_por_classe(4)
+# mostrar_quantidade_por_classe(5)
+
+
+def buscar_quantidades_iguais(quantidade, classe):
+    classe = dados_completo.loc[dados_completo['acabamento'] == classe]
     return classe.sample(quantidade, random_state=42)
 
 
-classe_1 = buscar_quantidades_iguais(199, 1)
-classe_2 = buscar_quantidades_iguais(199, 2)
-classe_3 = buscar_quantidades_iguais(199, 3)
-classe_4 = buscar_quantidades_iguais(199, 4)
+classe_1 = buscar_quantidades_iguais(2947, 1)
+classe_2 = buscar_quantidades_iguais(2947, 2)
+classe_3 = buscar_quantidades_iguais(2947, 3)
+classe_4 = buscar_quantidades_iguais(2947, 4)
 classe_5 = buscar_quantidades_iguais(198, 5)
 dados_qtde_iguais = classe_1.append(classe_2).append(classe_3).append(classe_4).append(classe_5)
 
@@ -33,9 +44,9 @@ X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', a
     'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
 # print('X Treino:', X_treino.head(10))
 # print('X Treino:', X_treino.info())
-#print('Y Treino:', Y_treino.head(10))
-#print('X Teste:', X_teste.head(10))
-#print('Y Teste:', Y_teste.head(10))
+# print('Y Treino:', Y_treino.head(10))
+# print('X Teste:', X_teste.head(10))
+# print('Y Teste:', Y_teste.head(10))
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.acabamento"] = Y_teste.values
@@ -70,14 +81,19 @@ def rodar_algoritmos():
 def escolher_parametros():
     if nome == 'K-NN':
         return [
-            {'n_neighbors': [1, 5, 10, 20, 50],
+            {'n_neighbors': [1, 5, 10, 15, 20],
              'weights': ['uniform', 'distance']}
         ]
     elif nome == 'SVM':
         return [
-            {'C': [.01, .1, 1, 10, 100],
-             'gamma': [.0001, .001, .01, .1],
-             'kernel': ['rbf', 'poly']}
+            {'kernel': ['rbf'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
+             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+             },
+            {'kernel': ['sigmoid'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
+             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+             },
+            {'kernel': ['linear'], 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+             }
         ]
     elif nome == 'DTC':
         return [

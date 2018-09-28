@@ -20,18 +20,18 @@ dados_completo['tipificacao'].replace(['Fêmea'], 'F', inplace=True)
 dados_completo['tipificacao'].replace(['Macho CASTRADO'], 'C', inplace=True)
 
 # Substituindo os valores da maturidade
-dados_completo['maturidade'].replace(['Dente de leite'], '0', inplace=True)
-dados_completo['maturidade'].replace(['Dois dentes'], '2', inplace=True)
-dados_completo['maturidade'].replace(['Quatro dentes'], '4', inplace=True)
-dados_completo['maturidade'].replace(['Seis dentes'], '6', inplace=True)
-dados_completo['maturidade'].replace(['Oito dentes'], '8', inplace=True)
+# dados_completo['maturidade'].replace(['Dente de leite'], '0', inplace=True)
+# dados_completo['maturidade'].replace(['Dois dentes'], '2', inplace=True)
+# dados_completo['maturidade'].replace(['Quatro dentes'], '4', inplace=True)
+# dados_completo['maturidade'].replace(['Seis dentes'], '6', inplace=True)
+# dados_completo['maturidade'].replace(['Oito dentes'], '8', inplace=True)
 
 # Substituindo os valores da rispoa
-rispoa_label_encoder = LabelEncoder()
-rispoa_labels = rispoa_label_encoder.fit_transform(dados_completo['rispoa'])
-dados_completo['rispoa'] = rispoa_labels
-rispoa_mapeamento = {index: label for index, label in enumerate(rispoa_label_encoder.classes_)}
-print(rispoa_mapeamento)
+# rispoa_label_encoder = LabelEncoder()
+# rispoa_labels = rispoa_label_encoder.fit_transform(dados_completo['rispoa'])
+# dados_completo['rispoa'] = rispoa_labels
+# rispoa_mapeamento = {index: label for index, label in enumerate(rispoa_label_encoder.classes_)}
+# print(rispoa_mapeamento)
 
 # Substituindo os valores da tipificacao
 # tipificacao_label_encoder = LabelEncoder()
