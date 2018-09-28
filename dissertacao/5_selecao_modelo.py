@@ -12,20 +12,34 @@ warnings.filterwarnings('ignore')
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8')
 dados_completo.set_index('index', inplace=True)
 
-conjunto_treinamento, conjunto_teste = train_test_split(dados_completo, test_size=0.2, random_state=42)
-conjunto_treinamento = conjunto_treinamento[:48000]
-conjunto_teste = conjunto_teste[-12000:]
+
+def buscar_quantidades_iguais(quantidade, valor):
+    classe = dados_completo.loc[dados_completo['acabamento'] == valor]
+    return classe.sample(quantidade, random_state=42)
+
+
+classe_1 = buscar_quantidades_iguais(199, 1)
+classe_2 = buscar_quantidades_iguais(199, 2)
+classe_3 = buscar_quantidades_iguais(199, 3)
+classe_4 = buscar_quantidades_iguais(199, 4)
+classe_5 = buscar_quantidades_iguais(198, 5)
+dados_qtde_iguais = classe_1.append(classe_2).append(classe_3).append(classe_4).append(classe_5)
+
+conjunto_treinamento, conjunto_teste = train_test_split(dados_qtde_iguais, test_size=0.2, random_state=42)
+# conjunto_treinamento = conjunto_treinamento[:48000]
+# conjunto_teste = conjunto_teste[-12000:]
 
 X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
     'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
-print('X Treino:', X_treino.head(10))
-print('Y Treino:', Y_treino.head(10))
-print('X Teste:', X_teste.head(10))
-print('Y Teste:', Y_teste.head(10))
+# print('X Treino:', X_treino.head(10))
+# print('X Treino:', X_treino.info())
+#print('Y Treino:', Y_treino.head(10))
+#print('X Teste:', X_teste.head(10))
+#print('Y Teste:', Y_teste.head(10))
 Y_teste.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 seed = 7
-num_folds = 5
+num_folds = 10
 processors = 3
 scoring = 'accuracy'
 kfold = KFold(n_splits=num_folds, random_state=seed)

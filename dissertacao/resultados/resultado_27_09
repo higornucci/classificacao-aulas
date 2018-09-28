@@ -1,0 +1,53 @@
+Teste com x=48000 e y=12000
+3 processor
+5 fold
+Usando GridSearchCV
+
+Melhores parametros NB : MultinomialNB(alpha=10, class_prior=None, fit_prior=True)
+NB: (0.5896) +/- (0.004)
+Tempo de execução do NB: 1.7626 segundos
+
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=13,
+            max_features=12, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+DTC: (0.6391) +/- (0.007)
+Tempo de execução do DTC: 16.5054 segundos
+
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=20, p=2,
+           weights='uniform')
+K-NN: (0.6566) +/- (0.005)
+Tempo de execução do K-NN: 1013.5929 segundos
+
+Teste com x=796 e y=199
+3 processor
+10 fold
+Usando GridSearchCV
+
+Melhores parametros NB : MultinomialNB(alpha=15, class_prior=None, fit_prior=True)
+NB: (0.5044) +/- (0.056)
+Tempo de execução do NB: 0.4361 segundos
+Melhores parametros DTC : DecisionTreeClassifier(class_weight='balanced', criterion='gini',
+            max_depth=10, max_features=9, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+DTC: (0.5825) +/- (0.055)
+Tempo de execução do DTC: 2.1780 segundos
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=10, p=2,
+           weights='distance')
+K-NN: (0.5988) +/- (0.045)
+Tempo de execução do K-NN: 2.3423 segundos
+
+
+Melhores parametros SVM : SVC(C=10, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma=0.1, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+SVM: (0.6253) +/- (0.045)
+Tempo de execução do SVM: 15.0793 segundos
