@@ -14,9 +14,9 @@ dados_completo.set_index('index', inplace=True)
 dados_completo['identificador_lote_situacao_lote'] = dados_completo['identificador_lote_situacao_lote'].astype(
     'category')
 dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('category')
-dados_completo['maturidade'] = dados_completo['maturidade'].astype('int32')
+dados_completo['maturidade'] = dados_completo['maturidade'].astype('category')
 dados_completo['acabamento'] = dados_completo['acabamento'].astype('int32')
-dados_completo['rispoa'] = dados_completo['rispoa'].astype('int32')
+dados_completo['rispoa'] = dados_completo['rispoa'].astype('category')
 dados_completo['peso'] = dados_completo['peso'].astype('float32')
 dados_completo['aprovacao_carcaca_sif'] = dados_completo['aprovacao_carcaca_sif'].astype('int32')
 dados_completo['questionario_classificacao_estabelecimento_rural'] = dados_completo[
