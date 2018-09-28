@@ -36,7 +36,10 @@ X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', a
 #print('Y Treino:', Y_treino.head(10))
 #print('X Teste:', X_teste.head(10))
 #print('Y Teste:', Y_teste.head(10))
-Y_teste.to_csv("y_teste.csv", encoding='utf-8', index=False)
+resultado = pd.DataFrame()
+resultado["id"] = Y_teste.index
+resultado["item.acabamento"] = Y_teste
+resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 seed = 7
 num_folds = 10
