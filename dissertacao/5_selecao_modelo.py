@@ -9,7 +9,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 warnings.filterwarnings('ignore')
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8')
+dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
 
 
