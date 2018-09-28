@@ -96,7 +96,7 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
                            'Nenhum': 'nenhum'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
+    # dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
     dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8',

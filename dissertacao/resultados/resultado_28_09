@@ -149,7 +149,9 @@ Melhores parametros SVM : SVC(C=150, cache_size=200, class_weight=None, coef0=0.
 SVM: (0.6704) +/- (0.016)
 Tempo de execução do SVM: 1560.2537 segundos
 
-Seleção com os dados de rispoa e maturidade em dummy e sem peso
+Seleção com os dados de 'rispoa' e 'maturidade' em dummy
+Removido 'peso'
+Colunas nehum adicionados
 
 classe_1 = buscar_quantidades_iguais(2947, 1)
 classe_2 = buscar_quantidades_iguais(2947, 2)
@@ -157,3 +159,4 @@ classe_3 = buscar_quantidades_iguais(2947, 3)
 classe_4 = buscar_quantidades_iguais(2947, 4)
 classe_5 = buscar_quantidades_iguais(198, 5)
 folds 10
+
