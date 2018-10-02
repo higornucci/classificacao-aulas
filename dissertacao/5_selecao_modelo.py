@@ -36,10 +36,10 @@ def mostrar_correlacao(dados, classe):
 
 mostrar_correlacao(dados_completo, 'acabamento')
 
-classe_1 = buscar_quantidades_iguais(2947, 1)
-classe_2 = buscar_quantidades_iguais(5407, 2)
-classe_3 = buscar_quantidades_iguais(5407, 3)
-classe_4 = buscar_quantidades_iguais(5407, 4)
+classe_1 = buscar_quantidades_iguais(2931, 1)
+classe_2 = buscar_quantidades_iguais(4000, 2)
+classe_3 = buscar_quantidades_iguais(5000, 3)
+classe_4 = buscar_quantidades_iguais(3200, 4)
 classe_5 = buscar_quantidades_iguais(198, 5)
 dados_qtde_iguais = classe_2.append(classe_3).append(classe_4).append(classe_1).append(classe_5)
 
@@ -63,12 +63,13 @@ X_treino, Y_treino = dados_qtde_iguais.drop('acabamento', axis=1), dados_qtde_ig
 seed = 7
 num_folds = 5
 processors = 3
-scoring = 'accuracy'
+# scoring = 'accuracy'
+scoring = 'precision_macro'
 kfold = KFold(n_splits=num_folds, random_state=seed)
 
 # preparando alguns modelos
 modelos_base = [# ('NB', MultinomialNB()),
-                # ('DTC', DecisionTreeClassifier()),
+                 ('DTC', DecisionTreeClassifier()),
                 # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 ('SVM', SVC())]
 
@@ -80,6 +81,7 @@ def rodar_algoritmos():
     grid_search.fit(X_treino, Y_treino)
     cv_resultados = cross_val_score(grid_search.best_estimator_, X_treino, Y_treino, cv=kfold, scoring=scoring)
     print('Melhores parametros ' + nome + ' :', grid_search.best_estimator_)
+    print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     modelo.fit(X_treino, Y_treino)
     # preds = modelo.predict(X_teste)
