@@ -37,7 +37,7 @@ classe_4 = buscar_quantidades_iguais(45407, 4)
 dados_qtde_iguais = classe_2.append(classe_3).append(classe_4)  # .append(classe_5).append(classe_1)
 
 conjunto_treinamento, conjunto_teste = train_test_split(dados_qtde_iguais, test_size=0.2, random_state=42)
-# conjunto_treinamento = conjunto_treinamento[:48000]
+# conjunt54hio_treinamento = conjunto_treinamento[:48000]
 # conjunto_teste = conjunto_teste[-12000:]
 
 X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
