@@ -96,7 +96,7 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
                            'Nenhum': 'nenhum'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    # dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
     dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8',
@@ -136,25 +136,24 @@ def gerar_arquivo_dados_abate():
     # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
     dados_abate.drop(['EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'IncentivoProdutorSituacao',
                       'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
-                      'Classificador1', 'Classificador2'], axis=1, inplace=True)
+                      'Classificador1', 'Classificador2', 'IdentificadorLoteSituacaoLote'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
-    dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce', 'DataAbate'], axis=1, inplace=True)
+    dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce', 'DataAbate', 'AprovacaoCarcacaSif'], axis=1, inplace=True)
     # Remover os ids vazios
     dados_abate_resumido = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
     dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio'], axis=1)
 
     novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
-                           'IdentificadorLoteSituacaoLote': 'identificador_lote_situacao_lote',
                            'Tipificacao': 'tipificacao',
                            'Maturidade': 'maturidade',
                            'Acabamento': 'acabamento',
-                           'Peso': 'peso',
-                           'AprovacaoCarcacaSif': 'aprovacao_carcaca_sif',
+                           'Peso': 'peso_carcaca',
                            'Rispoa': 'rispoa'}
 
     dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
     dados_abate_resumido['rispoa'].fillna('Nenhum', inplace=True)
+    dados_abate_resumido.drop('rispoa', axis=1, inplace=True)
 
     # Remover pois não tem estabelecimento com esses ids na lista de estabelecimentos
     # dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin(
@@ -204,6 +203,8 @@ def gerar_arquivo_dados_abate():
          7643, 7646, 7660, 7662, 7665, 7668, 7670, 7673,
          7674, 7686, 7695, 7696, 7708, 7711, 7713, 7719,
          7722, 7727, 7729, 7739])]
+
+    dados_abate_resumido = dados_abate_resumido[dados_abate_resumido['peso_carcaca'].between(150, 450, inclusive=True)]
     dados_abate_resumido['estabelecimento_identificador'] = dados_abate_resumido[
         'estabelecimento_identificador'].astype(
         'int64')

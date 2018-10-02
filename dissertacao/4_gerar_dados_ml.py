@@ -11,14 +11,10 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding=
 dados_completo.set_index('index', inplace=True)
 
 # Transformando tipos de dados de colunas numéricas
-dados_completo['identificador_lote_situacao_lote'] = dados_completo['identificador_lote_situacao_lote'].astype(
-    'category')
 dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('category')
-dados_completo['maturidade'] = dados_completo['maturidade'].astype('category')
+dados_completo['maturidade'] = dados_completo['maturidade'].astype('int32')
 dados_completo['acabamento'] = dados_completo['acabamento'].astype('int32')
-dados_completo['rispoa'] = dados_completo['rispoa'].astype('category')
-dados_completo['peso'] = dados_completo['peso'].astype('float32')
-dados_completo['aprovacao_carcaca_sif'] = dados_completo['aprovacao_carcaca_sif'].astype('int32')
+dados_completo['peso_carcaca'] = dados_completo['peso_carcaca'].astype('float32')
 dados_completo['questionario_classificacao_estabelecimento_rural'] = dados_completo[
     'questionario_classificacao_estabelecimento_rural'].astype('int32')
 dados_completo['possui_outros_incentivos'] = dados_completo['possui_outros_incentivos'].astype('int32')
@@ -48,7 +44,7 @@ dados_completo['latitude'] = dados_completo['latitude'].astype('float64')
 dados_completo['longitude'] = dados_completo['longitude'].astype('float64')
 
 colunas_categoricas = [
-    'identificador_lote_situacao_lote', 'tipificacao', 'maturidade', 'rispoa']
+    'tipificacao']
 dados_categoricos = dados_completo[colunas_categoricas]
 dados_alvo = dados_completo['acabamento']
 dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)  # remover atributos não numéricos
@@ -66,7 +62,6 @@ for cc in colunas_categoricas:
     dados_categoricos = dados_categoricos.join(dummies)
 
 dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
-dados_completo.drop('peso', axis=1, inplace=True)
 
 # train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 # print(len(train_set), "train +", len(test_set), "test")
