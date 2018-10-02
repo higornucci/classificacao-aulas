@@ -29,12 +29,12 @@ def buscar_quantidades_iguais(quantidade, classe):
     return classe.sample(quantidade, random_state=42)
 
 
-classe_1 = buscar_quantidades_iguais(2947, 1)
-classe_2 = buscar_quantidades_iguais(2947, 2)
-classe_3 = buscar_quantidades_iguais(2947, 3)
-classe_4 = buscar_quantidades_iguais(2947, 4)
-classe_5 = buscar_quantidades_iguais(198, 5)
-dados_qtde_iguais = classe_1.append(classe_2).append(classe_3).append(classe_4).append(classe_5)
+# classe_1 = buscar_quantidades_iguais(2947, 1)
+classe_2 = buscar_quantidades_iguais(45407, 2)
+classe_3 = buscar_quantidades_iguais(45407, 3)
+classe_4 = buscar_quantidades_iguais(45407, 4)
+# classe_4 = buscar_quantidades_iguais(198, 5)
+dados_qtde_iguais = classe_2.append(classe_3).append(classe_4)  # .append(classe_5).append(classe_1)
 
 conjunto_treinamento, conjunto_teste = train_test_split(dados_qtde_iguais, test_size=0.2, random_state=42)
 # conjunto_treinamento = conjunto_treinamento[:48000]
@@ -81,7 +81,7 @@ def rodar_algoritmos():
 def escolher_parametros():
     if nome == 'K-NN':
         return [
-            {'n_neighbors': [1, 5, 10, 15, 20],
+            {'n_neighbors': [1, 4, 5, 10, 15],
              'weights': ['uniform', 'distance']}
         ]
     elif nome == 'SVM':
