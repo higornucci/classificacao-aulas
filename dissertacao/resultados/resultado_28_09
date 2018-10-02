@@ -160,3 +160,26 @@ classe_4 = buscar_quantidades_iguais(2947, 4)
 classe_5 = buscar_quantidades_iguais(198, 5)
 folds 10
 
+Melhores parametros NB : MultinomialNB(alpha=0, class_prior=None, fit_prior=True)
+NB: (0.5170) +/- (0.017)
+Tempo de execução do NB: 0.8815 segundos
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=14,
+            max_features=20, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+DTC: (0.6452) +/- (0.017)
+Tempo de execução do DTC: 6.3602 segundos
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=1, n_neighbors=15, p=2,
+           weights='distance')
+K-NN: (0.6500) +/- (0.013)
+Tempo de execução do K-NN: 141.8647 segundos
+Melhores parametros SVM : SVC(C=1000, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma=0.01, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)
+SVM: (0.6218) +/- (0.016)
+Tempo de execução do SVM: 11506.3287 segundos
+
