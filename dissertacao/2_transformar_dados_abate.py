@@ -20,11 +20,11 @@ dados_completo['tipificacao'].replace(['Fêmea'], 'F', inplace=True)
 dados_completo['tipificacao'].replace(['Macho CASTRADO'], 'C', inplace=True)
 
 # Substituindo os valores da maturidade
-# dados_completo['maturidade'].replace(['Dente de leite'], '0', inplace=True)
-# dados_completo['maturidade'].replace(['Dois dentes'], '2', inplace=True)
-# dados_completo['maturidade'].replace(['Quatro dentes'], '4', inplace=True)
-# dados_completo['maturidade'].replace(['Seis dentes'], '6', inplace=True)
-# dados_completo['maturidade'].replace(['Oito dentes'], '8', inplace=True)
+dados_completo['maturidade'].replace(['Dente de leite'], '0', inplace=True)
+dados_completo['maturidade'].replace(['Dois dentes'], '2', inplace=True)
+dados_completo['maturidade'].replace(['Quatro dentes'], '4', inplace=True)
+dados_completo['maturidade'].replace(['Seis dentes'], '6', inplace=True)
+dados_completo['maturidade'].replace(['Oito dentes'], '8', inplace=True)
 
 # Substituindo os valores da rispoa
 # rispoa_label_encoder = LabelEncoder()
