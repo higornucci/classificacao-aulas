@@ -5,6 +5,7 @@ import graphviz
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score, KFold, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
@@ -55,7 +56,7 @@ mostrar_correlacao(dados_completo, 'acabamento')
 # conjunto_treinamento, conjunto_teste = train_test_split(dados_completo, test_size=0.2, random_state=7)
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.8, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -132,12 +133,12 @@ def rodar_svm():
          'C': [500, 1000, 1500]
          }]
     inicio = time.time()
-#    grid_search = GridSearchCV(SVC(), params, cv=kfold, n_jobs=-1, scoring=scoring)
-#    grid_search.fit(X_treino, Y_treino)
-#    melhor_modelo = grid_search.best_estimator_
-    melhor_modelo = SVC(kernel='rbf', gamma=0.1, C=500)
+    #    grid_search = GridSearchCV(SVC(), params, cv=kfold, n_jobs=-1, scoring=scoring)
+    #    grid_search.fit(X_treino, Y_treino)
+    #    melhor_modelo = grid_search.best_estimator_
+    melhor_modelo = SVC(kernel='rbf', gamma=0.1, C=1000)
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
-#    print('Melhores parametros SVM :', grid_search.best_estimator_)
+    #    print('Melhores parametros SVM :', grid_search.best_estimator_)
     print('Validação cruzada SVM :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('SVM', cv_resultados.mean(), cv_resultados.std()))
     melhor_modelo.fit(X_treino, Y_treino)
@@ -165,23 +166,26 @@ def rodar_svm():
 
 def rodar_dtc():
     params = [
-             {'max_features': [1, 5, 10, 11, 12, 13],
-              'max_depth': [1, 5, 10, 11, 12, 13, 14],
-              'class_weight': [None, 'balanced']
-              }
-         ]
+        {'max_features': [1, 5, 10, 11, 12, 13],
+         'max_depth': [1, 5, 10, 14, 15],
+         'class_weight': [None, 'balanced']
+         }
+    ]
     inicio = time.time()
     grid_search = GridSearchCV(tree.DecisionTreeClassifier(), params, cv=kfold, n_jobs=-1, scoring=scoring)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
-    print('Melhores parametros DTC :', grid_search.best_estimator_)
+    print('Melhores parametros DTC :', melhor_modelo)
+    print('Melhor score DTC :', grid_search.best_score_)
     print('Validação cruzada DTC :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('DTC', cv_resultados.mean(), cv_resultados.std()))
-    melhor_modelo.fit(X_treino, Y_treino)
+    # melhor_modelo.fit(X_treino, Y_treino)
     # preds = modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do DTC: {0:.4f} segundos'.format(final - inicio))
+
+
 #    dot_data = StringIO()
 #    export_graphviz(melhor_modelo, out_file=dot_data,
 #                    filled=True, rounded=True,
@@ -201,18 +205,18 @@ def rodar_dtc():
 
 
 def rodar_nb():
-    params = [
-             {'alpha': [.0001, .001, .01, .1, .5, 1, 5, 9, 10, 11, 15]}
-         ]
+    alphas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+    params = {'alpha': alphas, 'fit_prior': [True, False], 'class_prior': [None, [.1, .9], [.2, .8]]}
     inicio = time.time()
-    grid_search = GridSearchCV(MultinomialNB(), params, cv=kfold, n_jobs=-1, scoring=scoring)
+    grid_search = GridSearchCV(MultinomialNB(), params, cv=kfold, n_jobs=-1)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
-    print('Melhores parametros NB :', grid_search.best_estimator_)
+    print('Melhores parametros NB :', melhor_modelo)
+    print('Melhor score NB :', grid_search.best_score_)
     print('Validação cruzada NB :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('NB', cv_resultados.mean(), cv_resultados.std()))
-    melhor_modelo.fit(X_treino, Y_treino)
+    # melhor_modelo.fit(X_treino, Y_treino)
     # preds = modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do NB: {0:.4f} segundos'.format(final - inicio))
@@ -220,21 +224,51 @@ def rodar_nb():
 
 def rodar_knn():
     params = [
-             {'n_neighbors': [1, 4, 5, 10, 15],
-              'weights': ['uniform', 'distance']}
-         ]
+        {'n_neighbors': [1, 4, 5, 10, 15],
+         'weights': ['uniform', 'distance']}
+    ]
     inicio = time.time()
     grid_search = GridSearchCV(KNeighborsClassifier(), params, cv=kfold, n_jobs=-1, scoring=scoring)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
-    print('Melhores parametros K-NN :', grid_search.best_estimator_)
+    print('Melhores parametros K-NN :', melhor_modelo)
+    print('Melhor score K-NN :', grid_search.best_score_)
     print('Validação cruzada K-NN :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('K-NN', cv_resultados.mean(), cv_resultados.std()))
-    melhor_modelo.fit(X_treino, Y_treino)
+    # melhor_modelo.fit(X_treino, Y_treino)
     # preds = modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do K-NN: {0:.4f} segundos'.format(final - inicio))
+
+
+def rodar_rf():
+    params = [
+        {'n_estimators': [10, 50, 70], 'max_features': [10, 20, 26, 27]},
+        # {'bootstrap': [False], 'n_estimators': [10, 50, 70], 'max_features': [10, 20, 27]}
+    ]
+    inicio = time.time()
+    grid_search = GridSearchCV(RandomForestClassifier(random_state=seed), params, cv=kfold, n_jobs=-1, scoring=scoring)
+    grid_search.fit(X_treino, Y_treino)
+    melhor_modelo = grid_search.best_estimator_
+    cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
+    print('Melhores parametros RF :', melhor_modelo)
+    print('Melhor score RF :', grid_search.best_score_)
+    print('Características mais importantes RF :')
+    feature_importances = pd.DataFrame(melhor_modelo.feature_importances_,
+                                       index=X_treino.columns,
+                                       columns=(['importance']).sort_values('importance', ascending=False))
+    print(feature_importances)
+    # feature_importances = grid_search.best_estimator_.feature_importances_
+    # indices = np.argsort(feature_importances)[::-1]
+    # for f in range(X_treino.shape[1]):
+    #     print('%d. feature %d (%f)' % (f + 1, indices[f], feature_importances[indices[f]]))
+    print('Validação cruzada RF :', cv_resultados)
+    print("{0}: ({1:.4f}) +/- ({2:.3f})".format('RF', cv_resultados.mean(), cv_resultados.std()))
+    # melhor_modelo.fit(X_treino, Y_treino)
+    # preds = modelo.predict(X_teste)
+    final = time.time()
+    print('Tempo de execução do RF: {0:.4f} segundos'.format(final - inicio))
 
 
 # def rodar_algoritmos():
@@ -291,6 +325,7 @@ def rodar_knn():
 
 rodar_nb()
 rodar_dtc()
+rodar_rf()
 rodar_knn()
 rodar_svm()
 # Validar cada um dos modelos
