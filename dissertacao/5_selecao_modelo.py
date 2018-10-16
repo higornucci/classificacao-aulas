@@ -5,7 +5,7 @@ import graphviz
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import train_test_split, cross_val_score, KFold, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
@@ -129,14 +129,14 @@ def plot_contours(ax, clf, xx, yy, **params):
 def rodar_svm():
     params = [
         {'kernel': ['rbf'],
-         'gamma': [0.01, 0.1, 1],
-         'C': [500, 1000, 1500]
+         'gamma': [0.01, 0.1, 1, 5],
+         'C': [1, 15, 250]
          }]
     inicio = time.time()
     #    grid_search = GridSearchCV(SVC(), params, cv=kfold, n_jobs=-1, scoring=scoring)
     #    grid_search.fit(X_treino, Y_treino)
     #    melhor_modelo = grid_search.best_estimator_
-    melhor_modelo = SVC(kernel='rbf', gamma=0.1, C=1000)
+    melhor_modelo = BaggingClassifier(SVC(kernel='rbf', gamma=5, C=1000), max_samples=1/num_folds)
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
     #    print('Melhores parametros SVM :', grid_search.best_estimator_)
     print('Validação cruzada SVM :', cv_resultados)
@@ -166,8 +166,10 @@ def rodar_svm():
 
 def rodar_dtc():
     params = [
-        {'max_features': [1, 5, 10, 11, 12, 13],
-         'max_depth': [1, 5, 10, 14, 15],
+        {'max_features': [1, 10, 13, 20, 27],
+         'max_depth': [1, 10, 15, 16, 17],
+         'min_samples_split': range(10, 100, 5),
+         'min_samples_leaf': range(1, 30, 2),
          'class_weight': [None, 'balanced']
          }
     ]
@@ -175,6 +177,7 @@ def rodar_dtc():
     grid_search = GridSearchCV(tree.DecisionTreeClassifier(), params, cv=kfold, n_jobs=-1, scoring=scoring)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
+    # melhor_modelo = tree.DecisionTreeClassifier(max_features=, max_depth=, class_weight=)
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
     print('Melhores parametros DTC :', melhor_modelo)
     print('Melhor score DTC :', grid_search.best_score_)
@@ -205,15 +208,16 @@ def rodar_dtc():
 
 
 def rodar_nb():
-    alphas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-    params = {'alpha': alphas, 'fit_prior': [True, False], 'class_prior': [None, [.1, .9], [.2, .8]]}
+    # alphas = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 10, 11, 12]
+    # params = {'alpha': alphas, 'fit_prior': [True, False], 'class_prior': [None, [1, 2, 3, 4, 5]]}
     inicio = time.time()
-    grid_search = GridSearchCV(MultinomialNB(), params, cv=kfold, n_jobs=-1)
-    grid_search.fit(X_treino, Y_treino)
-    melhor_modelo = grid_search.best_estimator_
+    # grid_search = GridSearchCV(MultinomialNB(), params, cv=kfold, n_jobs=-1)
+    # grid_search.fit(X_treino, Y_treino)
+    # melhor_modelo = grid_search.best_estimator_
+    melhor_modelo = MultinomialNB(alpha=11)
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
     print('Melhores parametros NB :', melhor_modelo)
-    print('Melhor score NB :', grid_search.best_score_)
+    # print('Melhor score NB :', grid_search.best_score_)
     print('Validação cruzada NB :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('NB', cv_resultados.mean(), cv_resultados.std()))
     # melhor_modelo.fit(X_treino, Y_treino)
@@ -326,8 +330,8 @@ def rodar_rf():
 rodar_nb()
 rodar_dtc()
 rodar_rf()
-rodar_knn()
 rodar_svm()
+rodar_knn()
 # Validar cada um dos modelos
 # for nome, modelo in modelos_base:
 # rodar_algoritmos()

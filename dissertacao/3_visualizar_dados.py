@@ -10,43 +10,6 @@ pd.set_option('display.max_columns', None)  # display all columns
 dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
 
-# Transformando tipos de dados de colunas numéricas
-dados_completo['identificador_lote_situacao_lote'] = dados_completo['identificador_lote_situacao_lote'].astype(
-    'category')
-dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('category')
-dados_completo['maturidade'] = dados_completo['maturidade'].astype('int32')
-dados_completo['acabamento'] = dados_completo['acabamento'].astype('int32')
-dados_completo['rispoa'] = dados_completo['rispoa'].astype('int32')
-dados_completo['peso'] = dados_completo['peso'].astype('float32')
-dados_completo['aprovacao_carcaca_sif'] = dados_completo['aprovacao_carcaca_sif'].astype('int32')
-dados_completo['questionario_classificacao_estabelecimento_rural'] = dados_completo[
-    'questionario_classificacao_estabelecimento_rural'].astype('int32')
-dados_completo['possui_outros_incentivos'] = dados_completo['possui_outros_incentivos'].astype('int32')
-dados_completo['fabrica_racao'] = dados_completo['fabrica_racao'].astype('int32')
-dados_completo['area_total_destinada_confinamento'] = dados_completo['area_total_destinada_confinamento'].astype(
-    'int32')
-dados_completo['area_manejada_80_boa_cobertura_vegetal'] = dados_completo[
-    'area_manejada_80_boa_cobertura_vegetal'].astype('int32')
-dados_completo['area_manejada_20_erosao'] = dados_completo['area_manejada_20_erosao'].astype('int32')
-dados_completo['dispoe_de_identificacao_individual'] = dados_completo['dispoe_de_identificacao_individual'].astype(
-    'int32')
-dados_completo['rastreamento_sisbov'] = dados_completo['rastreamento_sisbov'].astype('int32')
-dados_completo['faz_controle_pastejo_regua_de_manejo_embrapa'] = dados_completo[
-    'faz_controle_pastejo_regua_de_manejo_embrapa'].astype('int32')
-dados_completo['lita_trace'] = dados_completo['lita_trace'].astype('int32')
-dados_completo['apresenta_atestado_programas_controle_qualidade'] = dados_completo[
-    'apresenta_atestado_programas_controle_qualidade'].astype('int32')
-dados_completo['envolvido_em_organizacao'] = dados_completo['envolvido_em_organizacao'].astype('int32')
-dados_completo['confinamento'] = dados_completo['confinamento'].astype('int32')
-dados_completo['semi_confinamento'] = dados_completo['semi_confinamento'].astype('int32')
-dados_completo['suplementacao'] = dados_completo['suplementacao'].astype('int32')
-dados_completo['fertirrigacao'] = dados_completo['fertirrigacao'].astype('int32')
-dados_completo['ifp'] = dados_completo['ifp'].astype('int32')
-dados_completo['ilp'] = dados_completo['ilp'].astype('int32')
-dados_completo['ilpf'] = dados_completo['ilpf'].astype('int32')
-dados_completo['latitude'] = dados_completo['latitude'].astype('float64')
-dados_completo['longitude'] = dados_completo['longitude'].astype('float64')
-
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
 print(dados_completo.describe(include=['object', 'category']))
@@ -66,7 +29,7 @@ sns.boxplot(x='maturidade', y='acabamento', data=dados_completo, showmeans=True,
 sns.boxplot(x='rastreamento_sisbov', y='acabamento', data=dados_completo, showmeans=True, ax=axarr[0, 1])
 sns.boxplot(x='questionario_classificacao_estabelecimento_rural', y='acabamento', data=dados_completo, showmeans=True,
             ax=axarr[1, 0])
-sns.boxplot(x='ṕossui_outros_incentivos', y='acabamento', data=dados_completo, showmeans=True, ax=axarr[1, 1])
+sns.boxplot(x='possui_outros_incentivos', y='acabamento', data=dados_completo, showmeans=True, ax=axarr[1, 1])
 sns.boxplot(x='fabrica_racao', y='acabamento', showmeans=True, data=dados_completo, ax=axarr[2, 0])
 sns.boxplot(x='area_total_destinada_confinamento', y='acabamento', showmeans=True, data=dados_completo, ax=axarr[2, 1])
 sns.boxplot(x='area_manejada_80_boa_cobertura_vegetal', y='acabamento', data=dados_completo, showmeans=True,
@@ -91,16 +54,17 @@ dados_completo.hist(bins=50, figsize=(25, 25))
 plt.savefig('hitograma.svg')
 plt.show()
 
-dados_completo.plot(kind='scatter', x='tipificacao', y='peso', alpha=0.3, s=dados_completo['maturidade'],
-                    label='maturidade', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True, sharex=False,
+dados_completo.plot(kind='scatter', x='latitude', y='longitude', alpha=0.3, s=dados_completo['acabamento'],
+                    label='Scatter', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True, sharex=False,
                     figsize=(10, 7))
 plt.savefig('scatter.png')
 plt.legend()
 
-atributos = ['acabamento', 'peso', 'tipificacao', 'maturidade']
+atributos = ['acabamento', 'peso_carcaca', 'tipificacao', 'maturidade']
 scatter_matrix(dados_completo[atributos], figsize=(12, 8))
 plt.savefig('scatter_atributos.png')
 
 # procurando por correlações
 matriz_correlacao = dados_completo.corr()
+print('Correlação de Pearson:')
 print(matriz_correlacao['acabamento'].sort_values(ascending=False))
