@@ -9,6 +9,7 @@ warnings.filterwarnings('ignore')
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
+print(dados_completo.info())
 
 # Transformando tipos de dados de colunas numéricas
 dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('category')
