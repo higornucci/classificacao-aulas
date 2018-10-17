@@ -29,30 +29,35 @@ def mostrar_correlacao(dados, classe):
     matriz_correlacao = dados.corr()
     print('Correlaçao com ' + classe + '\n', matriz_correlacao[classe].sort_values(ascending=False))
 
-    colunas = ['tipificacao#_C', 'tipificacao#_F', 'tipificacao#_M', 'maturidade', 'peso_carcaca',
-               'questionario_classificacao_estabelecimento_rural', 'possui_outros_incentivos', 'fabrica_racao',
-               'area_total_destinada_confinamento', 'area_manejada_80_boa_cobertura_vegetal', 'area_manejada_20_erosao',
-               'dispoe_de_identificacao_individual', 'rastreamento_sisbov',
-               'faz_controle_pastejo_regua_de_manejo_embrapa', 'lita_trace',
-               'apresenta_atestado_programas_controle_qualidade', 'envolvido_em_organizacao', 'confinamento',
-               'semi_confinamento', 'suplementacao', 'fertirrigacao', 'ifp', 'ilp', 'ilpf', 'latitude', 'longitude']
+    colunas = ['C', 'F', 'M', 'mat', 'peso', '% class', 'out_inc', 'fab_rac', 'area_conf', 'area_man_80_cob',
+               'area_man_20_er', 'id_ind', 'sisbov', 'cont_past', 'lita_trace', 'atest_prog_quali', 'envolvido_org',
+               'confi', 'semi_confi', 'suple', 'ferti', 'ifp', 'ilp', 'ilpf', 'lat', 'lon', 'prec', 'acab']
     fig = plt.figure()
     ax = fig.add_subplot(111)
     cax = ax.matshow(matriz_correlacao, vmin=-1, vmax=1)
     fig.colorbar(cax)
-    ticks = numpy.arange(0, 9, 1)
+    ticks = numpy.arange(0, 28, 1)
     ax.set_xticks(ticks)
     ax.set_yticks(ticks)
     ax.set_xticklabels(colunas)
     ax.set_yticklabels(colunas)
+    plt.xticks(rotation=90)
+    plt.savefig('corr.svg')
     plt.show()
 
 
 mostrar_correlacao(dados_completo, 'acabamento')
 
+
+def fazer_selecao_features():
+    pass
+
+
+fazer_selecao_features()
+
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
