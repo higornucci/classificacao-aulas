@@ -12,7 +12,7 @@ dados_completo.set_index('index', inplace=True)
 print(dados_completo.info())
 
 # Transformando tipos de dados de colunas numéricas
-dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('category')
+dados_completo['tipificacao'] = dados_completo['tipificacao'].astype('int32')
 dados_completo['maturidade'] = dados_completo['maturidade'].astype('int32')
 dados_completo['acabamento'] = dados_completo['acabamento'].astype('int32')
 dados_completo['peso_carcaca'] = dados_completo['peso_carcaca'].astype('float32')
@@ -44,11 +44,12 @@ dados_completo['ilpf'] = dados_completo['ilpf'].astype('int32')
 dados_completo['latitude'] = dados_completo['latitude'].astype('float64')
 dados_completo['longitude'] = dados_completo['longitude'].astype('float64')
 
-colunas_categoricas = [
-    'tipificacao']
-dados_categoricos = dados_completo[colunas_categoricas]
+# colunas_categoricas = [
+#     'tipificacao']
+# dados_categoricos = dados_completo[colunas_categoricas]
 dados_alvo = dados_completo['acabamento']
-dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)  # remover atributos não numéricos
+# dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)  # remover atributos não numéricos
+dados_numericos = dados_completo.drop('acabamento', axis=1)
 dados_numericos_labels = dados_numericos.columns.values.tolist()
 print('nomes colunas:', dados_numericos_labels)
 
@@ -56,13 +57,14 @@ dados_numericos = MinMaxScaler().fit_transform(dados_numericos)
 dados_numericos = pd.DataFrame(dados_numericos)
 dados_numericos.columns = dados_numericos_labels
 
-for cc in colunas_categoricas:
-    prefix = '{}#'.format(cc)
-    dummies = pd.get_dummies(dados_categoricos[cc], prefix=prefix).astype(np.int8)
-    dados_categoricos.drop(cc, axis=1, inplace=True)
-    dados_categoricos = dados_categoricos.join(dummies)
-
-dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
+# for cc in colunas_categoricas:
+#     prefix = '{}#'.format(cc)
+#     dummies = pd.get_dummies(dados_categoricos[cc], prefix=prefix).astype(np.int8)
+#     dados_categoricos.drop(cc, axis=1, inplace=True)
+#     dados_categoricos = dados_categoricos.join(dummies)
+#
+# dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
+dados_completo = dados_numericos.join(dados_alvo)
 
 # train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 # print(len(train_set), "train +", len(test_set), "test")
