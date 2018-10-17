@@ -1,6 +1,8 @@
 import warnings
 import time
+import numpy
 import pandas as pd
+import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_score, GridSearchCV, StratifiedKFold, StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
@@ -26,6 +28,24 @@ def buscar_quantidades_iguais(quantidade, classe):
 def mostrar_correlacao(dados, classe):
     matriz_correlacao = dados.corr()
     print('Correlaçao com ' + classe + '\n', matriz_correlacao[classe].sort_values(ascending=False))
+
+    colunas = ['tipificacao#_C', 'tipificacao#_F', 'tipificacao#_M', 'maturidade', 'peso_carcaca',
+               'questionario_classificacao_estabelecimento_rural', 'possui_outros_incentivos', 'fabrica_racao',
+               'area_total_destinada_confinamento', 'area_manejada_80_boa_cobertura_vegetal', 'area_manejada_20_erosao',
+               'dispoe_de_identificacao_individual', 'rastreamento_sisbov',
+               'faz_controle_pastejo_regua_de_manejo_embrapa', 'lita_trace',
+               'apresenta_atestado_programas_controle_qualidade', 'envolvido_em_organizacao', 'confinamento',
+               'semi_confinamento', 'suplementacao', 'fertirrigacao', 'ifp', 'ilp', 'ilpf', 'latitude', 'longitude']
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    cax = ax.matshow(matriz_correlacao, vmin=-1, vmax=1)
+    fig.colorbar(cax)
+    ticks = numpy.arange(0, 9, 1)
+    ax.set_xticks(ticks)
+    ax.set_yticks(ticks)
+    ax.set_xticklabels(colunas)
+    ax.set_yticklabels(colunas)
+    plt.show()
 
 
 mostrar_correlacao(dados_completo, 'acabamento')
@@ -95,9 +115,9 @@ def mostrar_features_mais_importantes(melhor_modelo):
 def escolher_parametros():
     if nome == 'K-NN':
         return [
-        {'n_neighbors': [1, 4, 5, 10, 15],
-         'weights': ['uniform', 'distance']}
-    ]
+            {'n_neighbors': [1, 4, 5, 10, 15],
+             'weights': ['uniform', 'distance']}
+        ]
     elif nome == 'SVM':
         return [
             {'kernel': ['rbf'],
@@ -112,13 +132,13 @@ def escolher_parametros():
         ]
     elif nome == 'DTC':
         return [
-        {'max_features': [1, 10, 13, 20, 27],
-         'max_depth': [1, 10, 15, 16, 17],
-         'min_samples_split': range(10, 100, 5),
-         'min_samples_leaf': range(1, 30, 2),
-         'class_weight': [None, 'balanced']
-         }
-    ]
+            {'max_features': [1, 10, 13, 20, 27],
+             'max_depth': [1, 10, 15, 16, 17],
+             'min_samples_split': range(10, 100, 5),
+             'min_samples_leaf': range(1, 30, 2),
+             'class_weight': [None, 'balanced']
+             }
+        ]
     elif nome == 'NB':
         return [
             {'alpha': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 10, 11, 12],
