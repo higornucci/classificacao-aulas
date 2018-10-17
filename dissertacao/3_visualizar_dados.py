@@ -14,7 +14,7 @@ dados_completo.set_index('index', inplace=True)
 
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
-print(dados_completo.describe(include=['object', 'category']))
+
 
 train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 print(len(train_set), "train +", len(test_set), "test")

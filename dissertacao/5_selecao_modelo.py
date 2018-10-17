@@ -4,7 +4,7 @@ import time
 # import graphviz
 import pandas as pd
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import train_test_split, cross_val_score, KFold, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
@@ -56,7 +56,7 @@ mostrar_correlacao(dados_completo, 'acabamento')
 # conjunto_treinamento, conjunto_teste = train_test_split(dados_completo, test_size=0.2, random_state=7)
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.95, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -136,30 +136,30 @@ def rodar_svm():
     #    grid_search = GridSearchCV(SVC(), params, cv=kfold, n_jobs=-1, scoring=scoring)
     #    grid_search.fit(X_treino, Y_treino)
     #    melhor_modelo = grid_search.best_estimator_
-    melhor_modelo = BaggingClassifier(SVC(kernel='rbf', gamma=5, C=1000), max_samples=1/num_folds)
+    melhor_modelo = BaggingClassifier(SVC(kernel='rbf', gamma=5, C=1000))
     cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring)
     #    print('Melhores parametros SVM :', grid_search.best_estimator_)
     print('Validação cruzada SVM :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('SVM', cv_resultados.mean(), cv_resultados.std()))
-    # melhor_modelo.fit(X_treino, Y_treino)
+    melhor_modelo.fit(X_treino, Y_treino)
     # preds = modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do SVM: {0:.4f} segundos'.format(final - inicio))
-    # fig, sub = plt.subplots(1, 1)
-    # plt.subplots_adjust(wspace=0.4, hspace=0.4)
-    # x0, x1 = X_treino['maturidade'], X_treino['peso_carcaca']
-    # xx, yy = make_meshgrid(x0, x1)
+    fig, sub = plt.subplots(1, 1)
+    plt.subplots_adjust(wspace=0.4, hspace=0.4)
+    x0, x1 = X_treino['maturidade'], X_treino['peso_carcaca']
+    xx, yy = make_meshgrid(x0, x1)
 
-    # plot_contours(sub.flatten(), melhor_modelo, xx, yy,
-    #               cmap=plt.cm.coolwarm, alpha=0.8)
-    # sub.flatten().scatter(x0, x1, c=Y_treino, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
-    # sub.flatten().set_xlim(xx.min(), xx.max())
-    # sub.flatten().set_ylim(yy.min(), yy.max())
-    # sub.flatten().set_xlabel('Maturidade')
-    # sub.flatten().set_ylabel('Peso da carcaça')
-    # sub.flatten().set_xticks(())
-    # sub.flatten().set_yticks(())
-    # sub.flatten().set_title('SVM')
+    plot_contours(sub.flatten(), melhor_modelo, xx, yy,
+                  cmap=plt.cm.coolwarm, alpha=0.8)
+    sub.flatten().scatter(x0, x1, c=Y_treino, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
+    sub.flatten().set_xlim(xx.min(), xx.max())
+    sub.flatten().set_ylim(yy.min(), yy.max())
+    sub.flatten().set_xlabel('Maturidade')
+    sub.flatten().set_ylabel('Peso da carcaça')
+    sub.flatten().set_xticks(())
+    sub.flatten().set_yticks(())
+    sub.flatten().set_title('SVM')
 
     # plt.show()
 
@@ -327,12 +327,12 @@ def rodar_rf():
 # resultado["item.acabamento"] = preds
 # resultado.to_csv("resultado_" + nome + ".csv", encoding='utf-8', index=False)
 
-rodar_nb()
-rodar_dtc()
-rodar_rf()
+# rodar_nb()
+# rodar_dtc()
+# rodar_rf()
 
 rodar_svm()
-rodar_knn()
+# rodar_knn()
 # Validar cada um dos modelos
 # for nome, modelo in modelos_base:
 # rodar_algoritmos()
