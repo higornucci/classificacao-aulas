@@ -130,7 +130,7 @@ def rodar_svm():
     params = [
         {'kernel': ['rbf'],
          'gamma': [0.01, 0.1, 1, 5],
-         'C': [1, 15, 250]
+         'C': [1, 500, 1000]
          }]
     inicio = time.time()
     #    grid_search = GridSearchCV(SVC(), params, cv=kfold, n_jobs=-1, scoring=scoring)
@@ -141,27 +141,27 @@ def rodar_svm():
     #    print('Melhores parametros SVM :', grid_search.best_estimator_)
     print('Validação cruzada SVM :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format('SVM', cv_resultados.mean(), cv_resultados.std()))
-    melhor_modelo.fit(X_treino, Y_treino)
+    # melhor_modelo.fit(X_treino, Y_treino)
     # preds = modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do SVM: {0:.4f} segundos'.format(final - inicio))
-    fig, sub = plt.subplots(1, 1)
+    # fig, sub = plt.subplots(1, 1)
     # plt.subplots_adjust(wspace=0.4, hspace=0.4)
-    x0, x1 = X_treino['maturidade'], X_treino['peso_carcaca']
-    xx, yy = make_meshgrid(x0, x1)
+    # x0, x1 = X_treino['maturidade'], X_treino['peso_carcaca']
+    # xx, yy = make_meshgrid(x0, x1)
 
-    plot_contours(sub.flatten(), melhor_modelo, xx, yy,
-                  cmap=plt.cm.coolwarm, alpha=0.8)
-    sub.flatten().scatter(x0, x1, c=Y_treino, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
-    sub.flatten().set_xlim(xx.min(), xx.max())
-    sub.flatten().set_ylim(yy.min(), yy.max())
-    sub.flatten().set_xlabel('Maturidade')
-    sub.flatten().set_ylabel('Peso da carcaça')
-    sub.flatten().set_xticks(())
-    sub.flatten().set_yticks(())
-    sub.flatten().set_title('SVM')
+    # plot_contours(sub.flatten(), melhor_modelo, xx, yy,
+    #               cmap=plt.cm.coolwarm, alpha=0.8)
+    # sub.flatten().scatter(x0, x1, c=Y_treino, cmap=plt.cm.coolwarm, s=20, edgecolors='k')
+    # sub.flatten().set_xlim(xx.min(), xx.max())
+    # sub.flatten().set_ylim(yy.min(), yy.max())
+    # sub.flatten().set_xlabel('Maturidade')
+    # sub.flatten().set_ylabel('Peso da carcaça')
+    # sub.flatten().set_xticks(())
+    # sub.flatten().set_yticks(())
+    # sub.flatten().set_title('SVM')
 
-    plt.show()
+    # plt.show()
 
 
 def rodar_dtc():
