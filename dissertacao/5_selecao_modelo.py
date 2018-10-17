@@ -78,7 +78,7 @@ def rodar_algoritmos():
     print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     melhor_modelo.fit(X_treino, Y_treino)
-    preds = modelo.predict(X_teste)
+    preds = melhor_modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
 
