@@ -1,0 +1,47 @@
+classe_1 293
+classe_2 26922
+classe_3 36834
+classe_4 4537
+classe_5 20
+10% Treino 90% teste
+
+10 fold
+Usando GridSearchCV
+
+Features mais importantes:  ['tipificacao#_C' 'tipificacao#_F' 'tipificacao#_M' 'peso_carcaca'
+ 'questionario_classificacao_estabelecimento_rural'
+ 'possui_outros_incentivos' 'area_total_destinada_confinamento'
+ 'area_manejada_80_boa_cobertura_vegetal' 'area_manejada_20_erosao'
+ 'dispoe_de_identificacao_individual' 'rastreamento_sisbov'
+ 'apresenta_atestado_programas_controle_qualidade' 'confinamento'
+ 'suplementacao' 'fertirrigacao' 'ilp' 'ilpf' 'latitude' 'longitude'
+ 'eh_precoce']
+Matriz de Confusão
+[[    0   167   126     0     0]
+ [    0 14502 12420     0     0]
+ [    0 10779 26055     0     0]
+ [    0   445  4092     0     0]
+ [    0     1    19     0     0]]
+Precision:  0.547285374620816
+Recall:  0.5911582077369326
+Melhores parametros NB : MultinomialNB(alpha=10, class_prior=None, fit_prior=True)
+Validação cruzada NB : [0.59360198 0.59243606 0.58647329 0.59402332 0.59049493]
+NB: (0.5914) +/- (0.003)
+Tempo de execução do NB: 9.2349 segundos
+Matriz de Confusão
+[[   21   200    71     1     0]
+ [   25 16108 10634   155     0]
+ [    3  9417 26354  1060     0]
+ [    0   399  2637  1501     0]
+ [    0     0     7    13     0]]
+Precision:  0.6365296740189555
+Recall:  0.641110106987727
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=15,
+            max_features=20, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=19, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Validação cruzada DTC : [0.65889383 0.66312031 0.65738649 0.66392128 0.66061666]
+DTC: (0.6608) +/- (0.002)
+Tempo de execução do DTC: 85.7686 segundos
