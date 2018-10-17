@@ -60,7 +60,7 @@ ms_mapa = mpimg.imread('mato-grosso-so-sul.png')
 ax = dados_completo.plot(kind='scatter', x='longitude', y='latitude', alpha=0.4, s=dados_completo['peso_carcaca'],
                          label='Peso da Carcaça', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=False,
                          figsize=(10, 7))
-plt.imshow(ms_mapa, extent=[-57.88, -51.09, -25.97, -18.57], alpha=0.5, cmap=plt.get_cmap('jet'))
+plt.imshow(ms_mapa, extent=[-57.88, -51.09, -24.97, -17.57], alpha=0.5, cmap=plt.get_cmap('jet'))
 plt.ylabel('Latitude', fontsize=14)
 plt.xlabel('Longitude', fontsize=14)
 acabamentos = dados_completo['acabamento']
