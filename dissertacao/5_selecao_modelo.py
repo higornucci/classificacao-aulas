@@ -1,10 +1,10 @@
 import warnings
 import time
-import pydotplus
-import graphviz
+# import pydotplus
+# import graphviz
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import train_test_split, cross_val_score, KFold, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
@@ -12,9 +12,9 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn import tree
-from sklearn.externals.six import StringIO
-from IPython.display import Image
-from sklearn.tree import export_graphviz
+# from sklearn.externals.six import StringIO
+# from IPython.display import Image
+# from sklearn.tree import export_graphviz
 
 warnings.filterwarnings('ignore')
 
