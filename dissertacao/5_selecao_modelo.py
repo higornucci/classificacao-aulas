@@ -330,6 +330,7 @@ def rodar_rf():
 rodar_nb()
 rodar_dtc()
 rodar_rf()
+
 rodar_svm()
 rodar_knn()
 # Validar cada um dos modelos
