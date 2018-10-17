@@ -4,9 +4,10 @@ import numpy
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
-from sklearn.model_selection import cross_val_score, GridSearchCV, StratifiedKFold, StratifiedShuffleSplit
+from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, precision_score, recall_score
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
@@ -74,14 +75,14 @@ resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 
 def fazer_selecao_features():
-    # create a base classifier used to evaluate a subset of attributes
-    model = RandomForestClassifier()
-    # create the RFE model and select 3 attributes
-    rfe = RFE(model, 3)
+    rfe = RFE(LogisticRegression(), 20)
     rfe = rfe.fit(X_treino, Y_treino)
-    # summarize the selection of the attributes
-    print('Suporte: ', rfe.support_)
-    print('Ranking: ', rfe.ranking_)
+    feature_rfe_scoring = pd.DataFrame({
+        'feature': X_treino.columns,
+        'score': rfe.ranking_
+    })
+    feat_rfe_20 = feature_rfe_scoring[feature_rfe_scoring['score'] == 1]['feature'].values
+    print('Features mais importantes: ', feat_rfe_20)
 
 
 fazer_selecao_features()
@@ -99,6 +100,18 @@ modelos_base = [('NB', MultinomialNB()),
                 ('SVM', SVC())]
 
 
+def gerar_matriz_confusao(modelo):
+    average = 'weighted'
+    y_train_pred = cross_val_predict(modelo, X_treino, Y_treino, cv=kfold)
+    matriz_confusao = confusion_matrix(Y_treino, y_train_pred)
+    print('Matriz de Confusão')
+    print(matriz_confusao)
+    precision = precision_score(Y_treino, y_train_pred, average=average)
+    print('Precision: ', precision)
+    recall = recall_score(Y_treino, y_train_pred, average=average)
+    print('Recall: ', recall)
+
+
 def rodar_algoritmos():
     global preds
     inicio = time.time()
@@ -108,6 +121,7 @@ def rodar_algoritmos():
     cv_resultados = cross_val_score(BaggingClassifier(melhor_modelo), X_treino, Y_treino, cv=kfold, scoring=scoring)
 
     mostrar_features_mais_importantes(melhor_modelo)
+    gerar_matriz_confusao(melhor_modelo)
 
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
@@ -153,10 +167,10 @@ def escolher_parametros():
              #'min_samples_leaf': range(1, 30, 2),
              #'class_weight': [None, 'balanced']
              #}
-            {'max_features': [20],
-             'max_depth': [15]
-             #'min_samples_split': range(10, 100, 5),
-             #'min_samples_leaf': 2,
+            {'max_features': [20, 25],
+             'max_depth': [14, 15],
+             'min_samples_split': range(2, 20, 5),
+             'min_samples_leaf': range(1, 20, 3),
              #'class_weight': [None, 'balanced']
              }
         ]
@@ -168,7 +182,7 @@ def escolher_parametros():
         ]
     elif nome == 'RF':
         return [
-            {'n_estimators': [10, 50, 70], 'max_features': [10, 20, 26, 27]},
+            {'n_estimators': [10, 50], 'max_features': [10, 20, 27]},
             # {'bootstrap': [False], 'n_estimators': [10, 50, 70], 'max_features': [10, 20, 27]}
         ]
     return None
