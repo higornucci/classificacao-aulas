@@ -15,9 +15,9 @@ dados_completo['acabamento'].replace(['Gordura Uniforme - acima de 6 e até 10 m
 dados_completo['acabamento'].replace(['Gordura Excessiva - acima de 10 mm de espessura'], 5, inplace=True)
 
 # Substituindo os valores da tipificação
-dados_completo['tipificacao'].replace(['Macho INTEIRO'], 0, inplace=True)  # M
-dados_completo['tipificacao'].replace(['Fêmea'], 1, inplace=True)  # F
-dados_completo['tipificacao'].replace(['Macho CASTRADO'], 2, inplace=True)  # C
+dados_completo['tipificacao'].replace(['Macho INTEIRO'], 'M', inplace=True)  # M
+dados_completo['tipificacao'].replace(['Fêmea'], 'F', inplace=True)  # F
+dados_completo['tipificacao'].replace(['Macho CASTRADO'], 'C', inplace=True)  # C
 
 # Substituindo os valores da maturidade
 dados_completo['maturidade'].replace(['Dente de leite'], 0, inplace=True)
@@ -32,7 +32,7 @@ def eh_precoce(linha):
         return 1
     if linha['maturidade'] == 2:
         return 1
-    if linha['maturidade'] == 4 and linha['tipificacao'] != 0:
+    if linha['maturidade'] == 4 and linha['tipificacao'] != 'M':
         return 1
     return 0
 
