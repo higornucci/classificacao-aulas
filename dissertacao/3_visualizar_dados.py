@@ -1,5 +1,7 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from pandas.plotting import scatter_matrix
@@ -54,11 +56,21 @@ dados_completo.hist(bins=50, figsize=(25, 25))
 plt.savefig('hitograma.svg')
 plt.show()
 
-dados_completo.plot(kind='scatter', x='latitude', y='longitude', alpha=0.3, s=dados_completo['acabamento'],
-                    label='Scatter', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=True, sharex=False,
-                    figsize=(10, 7))
+ms_mapa = mpimg.imread('mato-grosso-so-sul.png')
+ax = dados_completo.plot(kind='scatter', x='longitude', y='latitude', alpha=0.4, s=dados_completo['peso_carcaca'],
+                         label='Peso da Carcaça', c='acabamento', cmap=plt.get_cmap('jet'), colorbar=False,
+                         figsize=(10, 7))
+plt.imshow(ms_mapa, extent=[-57.88, -51.09, -25.97, -18.57], alpha=0.5, cmap=plt.get_cmap('jet'))
+plt.ylabel('Latitude', fontsize=14)
+plt.xlabel('Longitude', fontsize=14)
+acabamentos = dados_completo['acabamento']
+tick_values = np.linspace(acabamentos.min(), acabamentos.max(), 11)
+cbar = plt.colorbar()
+cbar.ax.set_yticklabels(['%d' % (round(v)) for v in tick_values], fontsize=14)
+cbar.set_label('Acabamento', fontsize=16)
+plt.legend(fontsize=16)
 plt.savefig('scatter.png')
-plt.legend()
+print('Foi!!')
 
 atributos = ['acabamento', 'peso_carcaca', 'tipificacao', 'maturidade']
 scatter_matrix(dados_completo[atributos], figsize=(12, 8))
