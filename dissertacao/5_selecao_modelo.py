@@ -9,6 +9,8 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn import tree
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
 
 warnings.filterwarnings('ignore')
 
@@ -49,12 +51,6 @@ def mostrar_correlacao(dados, classe):
 mostrar_correlacao(dados_completo, 'acabamento')
 
 
-def fazer_selecao_features():
-    pass
-
-
-fazer_selecao_features()
-
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
 split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
@@ -75,6 +71,20 @@ resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.acabamento"] = Y_teste.values
 resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
+
+
+def fazer_selecao_features():
+    # create a base classifier used to evaluate a subset of attributes
+    model = RandomForestClassifier()
+    # create the RFE model and select 3 attributes
+    rfe = RFE(model, 3)
+    rfe = rfe.fit(X_treino, Y_treino)
+    # summarize the selection of the attributes
+    print('Suporte: ', rfe.support_)
+    print('Ranking: ', rfe.ranking_)
+
+
+fazer_selecao_features()
 
 seed = 7
 num_folds = 5
