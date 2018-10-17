@@ -132,11 +132,17 @@ def escolher_parametros():
         ]
     elif nome == 'DTC':
         return [
-            {'max_features': [1, 10, 13, 20, 27],
-             'max_depth': [1, 10, 15, 16, 17],
-             'min_samples_split': range(10, 100, 5),
-             'min_samples_leaf': range(1, 30, 2),
-             'class_weight': [None, 'balanced']
+            #{'max_features': [1, 10, 13, 20, 27],
+             #'max_depth': [1, 10, 15, 16, 17],
+             #'min_samples_split': range(10, 100, 5),
+             #'min_samples_leaf': range(1, 30, 2),
+             #'class_weight': [None, 'balanced']
+             #}
+            {'max_features': [20],
+             'max_depth': [15]
+             #'min_samples_split': range(10, 100, 5),
+             #'min_samples_leaf': 2,
+             #'class_weight': [None, 'balanced']
              }
         ]
     elif nome == 'NB':
