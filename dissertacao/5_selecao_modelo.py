@@ -28,6 +28,7 @@ def buscar_quantidades_iguais(quantidade, classe):
     return classe.sample(quantidade, random_state=7)
 
 
+
 def mostrar_correlacao(dados, classe):
     matriz_correlacao = dados.corr()
     print('Correlaçao com ' + classe + '\n', matriz_correlacao[classe].sort_values(ascending=False))
@@ -137,7 +138,7 @@ def mostrar_features_mais_importantes(melhor_modelo):
         print('Características mais importantes RF :')
         feature_importances = pd.DataFrame(melhor_modelo.feature_importances_,
                                            index=X_treino.columns,
-                                           columns=(['importance']).sort_values('importance', ascending=False))
+                                           columns=['importance']).sort_values('importance', ascending=False)
         print(feature_importances)
 
 
@@ -167,22 +168,22 @@ def escolher_parametros():
              #'min_samples_leaf': range(1, 30, 2),
              #'class_weight': [None, 'balanced']
              #}
-            {'max_features': [20, 25],
-             'max_depth': [14, 15],
-             'min_samples_split': range(2, 20, 5),
-             'min_samples_leaf': range(1, 20, 3),
+            {'max_features': range(20, 27, 1),
+             'max_depth': [13, 14],
+             'min_samples_split': range(5, 10, 1),
+             'min_samples_leaf': range(15, 20, 1),
              #'class_weight': [None, 'balanced']
              }
         ]
     elif nome == 'NB':
         return [
-            {'alpha': [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 10, 11, 12],
+            {'alpha': range(5, 10, 1),
              'fit_prior': [True, False],
              'class_prior': [None, [1, 2, 3, 4, 5]]}
         ]
     elif nome == 'RF':
         return [
-            {'n_estimators': [10, 50], 'max_features': [10, 20, 27]},
+            {'n_estimators': range(10, 300, 50), 'max_features': [10, 20, 27]},
             # {'bootstrap': [False], 'n_estimators': [10, 50, 70], 'max_features': [10, 20, 27]}
         ]
     return None

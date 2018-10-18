@@ -5,7 +5,7 @@ classe_4 4537
 classe_5 20
 10% Treino 90% teste
 
-10 fold
+5 fold
 Usando GridSearchCV
 
 Features mais importantes:  ['tipificacao#_C' 'tipificacao#_F' 'tipificacao#_M' 'peso_carcaca'
@@ -45,3 +45,51 @@ Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='g
 Validação cruzada DTC : [0.65889383 0.66312031 0.65738649 0.66392128 0.66061666]
 DTC: (0.6608) +/- (0.002)
 Tempo de execução do DTC: 85.7686 segundos
+
+classe_1 293
+classe_2 26922
+classe_3 36834
+classe_4 4537
+classe_5 20
+10% Treino 90% teste
+
+5 fold
+Usando GridSearchCV
+
+Features mais importantes:  ['tipificacao#_C' 'tipificacao#_F' 'tipificacao#_M' 'peso_carcaca'
+ 'questionario_classificacao_estabelecimento_rural'
+ 'possui_outros_incentivos' 'area_total_destinada_confinamento'
+ 'area_manejada_80_boa_cobertura_vegetal' 'area_manejada_20_erosao'
+ 'dispoe_de_identificacao_individual' 'rastreamento_sisbov'
+ 'apresenta_atestado_programas_controle_qualidade' 'confinamento'
+ 'suplementacao' 'fertirrigacao' 'ilp' 'ilpf' 'latitude' 'longitude'
+ 'eh_precoce']
+Matriz de Confusão
+[[    0   167   126     0     0]
+ [    0 14502 12420     0     0]
+ [    0 10779 26055     0     0]
+ [    0   445  4092     0     0]
+ [    0     1    19     0     0]]
+Precision:  0.547285374620816
+Recall:  0.5911582077369326
+Melhores parametros NB : MultinomialNB(alpha=10, class_prior=None, fit_prior=True)
+Validação cruzada NB : [0.59250893 0.59229032 0.58661905 0.59453353 0.58969313]
+NB: (0.5911) +/- (0.003)
+Tempo de execução do NB: 9.3531 segundos
+Matriz de Confusão
+[[   20   197    74     2     0]
+ [   26 16153 10602   141     0]
+ [    2  9458 26406   968     0]
+ [    0   446  2632  1459     0]
+ [    0     0     9    11     0]]
+Precision:  0.6374996427438913
+Recall:  0.6418972101565461
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=14,
+            max_features=20, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=19, min_samples_split=7,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Validação cruzada DTC : [0.66210012 0.66501494 0.65665768 0.65918367 0.65529558]
+DTC: (0.6597) +/- (0.004)
+Tempo de execução do DTC: 88.6983 segundos
