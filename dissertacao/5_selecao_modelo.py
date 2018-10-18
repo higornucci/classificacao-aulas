@@ -27,7 +27,6 @@ def buscar_quantidades_iguais(quantidade, classe):
     return classe.sample(quantidade, random_state=7)
 
 
-
 def mostrar_correlacao(dados, classe):
     matriz_correlacao = dados.corr()
     print('Correlaçao com ' + classe + '\n', matriz_correlacao[classe].sort_values(ascending=False))
@@ -51,13 +50,20 @@ def mostrar_correlacao(dados, classe):
 
 mostrar_correlacao(dados_completo, 'acabamento')
 
+classe_1 = buscar_quantidades_iguais(199, 1)
+classe_2 = buscar_quantidades_iguais(199, 2)
+classe_3 = buscar_quantidades_iguais(199, 3)
+classe_4 = buscar_quantidades_iguais(199, 4)
+classe_5 = buscar_quantidades_iguais(198, 5)
+dados_qtde_iguais = classe_2.append(classe_3).append(classe_4).append(classe_1).append(classe_5)
+dados_qtde_iguais.set_index('index', inplace=True)
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
-for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
-    conjunto_treinamento = dados_completo.loc[trainamento_index]
-    conjunto_teste = dados_completo.loc[teste_index]
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+for trainamento_index, teste_index in split.split(dados_qtde_iguais, dados_qtde_iguais['acabamento']):
+    conjunto_treinamento = dados_qtde_iguais.loc[trainamento_index]
+    conjunto_teste = dados_qtde_iguais.loc[teste_index]
 
 X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
     'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
