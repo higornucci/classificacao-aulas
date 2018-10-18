@@ -12,7 +12,6 @@ from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
-
 warnings.filterwarnings('ignore')
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
