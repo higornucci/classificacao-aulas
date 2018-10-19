@@ -1,10 +1,11 @@
 import warnings
 import time
-import numpy
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
-from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, StratifiedShuffleSplit
+from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
+    StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, precision_score, recall_score
@@ -12,6 +13,7 @@ from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
+
 warnings.filterwarnings('ignore')
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
@@ -38,7 +40,7 @@ def mostrar_correlacao(dados, classe):
     ax = fig.add_subplot(111)
     cax = ax.matshow(matriz_correlacao, vmin=-1, vmax=1)
     fig.colorbar(cax)
-    ticks = numpy.arange(0, 28, 1)
+    ticks = np.arange(0, 28, 1)
     ax.set_xticks(ticks)
     ax.set_yticks(ticks)
     ax.set_xticklabels(colunas)
@@ -50,20 +52,20 @@ def mostrar_correlacao(dados, classe):
 
 mostrar_correlacao(dados_completo, 'acabamento')
 
-classe_1 = buscar_quantidades_iguais(199, 1)
-classe_2 = buscar_quantidades_iguais(199, 2)
-classe_3 = buscar_quantidades_iguais(199, 3)
-classe_4 = buscar_quantidades_iguais(199, 4)
+classe_1 = buscar_quantidades_iguais(250, 1)
+classe_2 = buscar_quantidades_iguais(350, 2)
+classe_3 = buscar_quantidades_iguais(350, 3)
+classe_4 = buscar_quantidades_iguais(350, 4)
 classe_5 = buscar_quantidades_iguais(198, 5)
-dados_qtde_iguais = classe_2.append(classe_3).append(classe_4).append(classe_1).append(classe_5)
-dados_qtde_iguais.set_index('index', inplace=True)
+frames = [classe_1, classe_2, classe_3, classe_4, classe_5]
+dados_qtde_iguais = pd.concat(frames)
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
-for trainamento_index, teste_index in split.split(dados_qtde_iguais, dados_qtde_iguais['acabamento']):
-    conjunto_treinamento = dados_qtde_iguais.loc[trainamento_index]
-    conjunto_teste = dados_qtde_iguais.loc[teste_index]
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=7)
+for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
+    conjunto_treinamento = dados_completo.loc[trainamento_index]
+    conjunto_teste = dados_completo.loc[teste_index]
 
 X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
     'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
@@ -99,10 +101,10 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=seed)
 
 # preparando alguns modelos
-modelos_base = [('NB', MultinomialNB()),
-                ('DTC', tree.DecisionTreeClassifier()),
-                ('RF', RandomForestClassifier(random_state=seed)),
-                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+modelos_base = [# ('NB', MultinomialNB()),
+                # ('DTC', tree.DecisionTreeClassifier()),
+                # ('RF', RandomForestClassifier(random_state=seed)),
+                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 ('SVM', SVC())]
 
 
@@ -150,14 +152,14 @@ def mostrar_features_mais_importantes(melhor_modelo):
 def escolher_parametros():
     if nome == 'K-NN':
         return [
-            {'n_neighbors': [1, 4, 5, 10, 15],
-             'weights': ['uniform', 'distance']}
+            {'n_neighbors': [15],
+             'weights': ['uniform']}
         ]
     elif nome == 'SVM':
         return [
             {'kernel': ['rbf'],
-             'gamma': [0.01, 0.1, 1, 5],
-             'C': [1, 500, 1000]
+             'gamma': [5],
+             'C': [1]
              }
             # {'kernel': ['sigmoid'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
             # 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
@@ -167,17 +169,17 @@ def escolher_parametros():
         ]
     elif nome == 'DTC':
         return [
-            #{'max_features': [1, 10, 13, 20, 27],
-             #'max_depth': [1, 10, 15, 16, 17],
-             #'min_samples_split': range(10, 100, 5),
-             #'min_samples_leaf': range(1, 30, 2),
-             #'class_weight': [None, 'balanced']
-             #}
-            {'max_features': range(20, 27, 1),
-             'max_depth': [13, 14],
-             'min_samples_split': range(5, 10, 1),
-             'min_samples_leaf': range(15, 20, 1),
-             #'class_weight': [None, 'balanced']
+            # {'max_features': [1, 10, 13, 20, 27],
+            # 'max_depth': [1, 10, 15, 16, 17],
+            # 'min_samples_split': range(10, 100, 5),
+            # 'min_samples_leaf': range(1, 30, 2),
+            # 'class_weight': [None, 'balanced']
+            # }
+            {'max_features': 20,
+             'max_depth': 13,
+             'min_samples_split': 7,
+             'min_samples_leaf': 17,
+             # 'class_weight': [None, 'balanced']
              }
         ]
     elif nome == 'NB':
@@ -188,7 +190,11 @@ def escolher_parametros():
         ]
     elif nome == 'RF':
         return [
-            {'n_estimators': range(10, 300, 50), 'max_features': [10, 20, 27]},
+            {'n_estimators': range(10, 300, 50),
+             'max_features': [10, 20, 27],
+             'max_depth': range(1, 10, 1),
+             'min_samples_split': range(5, 10, 1),
+             'min_samples_leaf': range(15, 20, 1)}
             # {'bootstrap': [False], 'n_estimators': [10, 50, 70], 'max_features': [10, 20, 27]}
         ]
     return None
