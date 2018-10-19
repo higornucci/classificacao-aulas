@@ -27,7 +27,6 @@ def buscar_quantidades_iguais(quantidade, classe):
     return classe.sample(quantidade, random_state=7)
 
 
-
 def mostrar_correlacao(dados, classe):
     matriz_correlacao = dados.corr()
     print('Correlaçao com ' + classe + '\n', matriz_correlacao[classe].sort_values(ascending=False))
@@ -88,7 +87,7 @@ def fazer_selecao_features():
 fazer_selecao_features()
 
 seed = 7
-num_folds = 5
+num_folds = 10
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=seed)
 
