@@ -1,11 +1,13 @@
 import warnings
 import time
+import statistics
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
+from sklearn.base import clone
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, precision_score, recall_score
@@ -51,14 +53,6 @@ def mostrar_correlacao(dados, classe):
 
 
 mostrar_correlacao(dados_completo, 'acabamento')
-
-classe_1 = buscar_quantidades_iguais(250, 1)
-classe_2 = buscar_quantidades_iguais(350, 2)
-classe_3 = buscar_quantidades_iguais(350, 3)
-classe_4 = buscar_quantidades_iguais(350, 4)
-classe_5 = buscar_quantidades_iguais(198, 5)
-frames = [classe_1, classe_2, classe_3, classe_4, classe_5]
-dados_qtde_iguais = pd.concat(frames)
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
@@ -126,14 +120,25 @@ def rodar_algoritmos():
     grid_search = GridSearchCV(modelo, escolher_parametros(), cv=kfold, n_jobs=-1)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
-    cv_resultados = cross_val_score(BaggingClassifier(melhor_modelo), X_treino, Y_treino, cv=kfold, scoring=scoring)
+
+    cv_resultados = list()
+    skfolds = StratifiedKFold(n_splits=num_folds, random_state=random_state)
+    for train_index, test_index in skfolds.split(X_treino, Y_treino):
+        clone_clf = clone(BaggingClassifier(melhor_modelo))
+        x_train_folds = X_treino[train_index]
+        y_train_folds = (Y_treino[train_index])
+        x_test_fold = X_treino[test_index]
+        y_test_fold = (Y_treino[test_index])
+        clone_clf.fit(x_train_folds, y_train_folds)
+        y_pred = clone_clf.predict(x_test_fold)
+        cv_resultados.append(sum(y_pred == y_test_fold) / len(y_pred))
 
     mostrar_features_mais_importantes(melhor_modelo)
     gerar_matriz_confusao(melhor_modelo)
 
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
-    print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
+    print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, sum(cv_resultados) / num_folds, statistics.stdev(cv_resultados)))
     melhor_modelo.fit(X_treino, Y_treino)
     preds = melhor_modelo.predict(X_teste)
     final = time.time()

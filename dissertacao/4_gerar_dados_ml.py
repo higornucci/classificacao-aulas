@@ -1,9 +1,7 @@
 import warnings
 import pandas as pd
-import hashlib
 import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder, Imputer, StandardScaler, LabelEncoder, MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler
 
 warnings.filterwarnings('ignore')
 
@@ -63,9 +61,6 @@ for cc in colunas_categoricas:
     dados_categoricos = dados_categoricos.join(dummies)
 
 dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
-
-# train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
-# print(len(train_set), "train +", len(test_set), "test")
 
 dados_completo.to_csv('../input/DadosCompletoTransformadoML.csv', sep='\t')
 
