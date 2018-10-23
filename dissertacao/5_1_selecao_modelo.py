@@ -95,7 +95,7 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [# ('NB', MultinomialNB()),
+modelos_base = [('NB', MultinomialNB()),
                 # ('DTC', tree.DecisionTreeClassifier()),
                 # ('RF', RandomForestClassifier(random_state=seed)),
                 # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
@@ -164,7 +164,8 @@ def escolher_parametros():
         return [
             {'kernel': ['rbf'],
              'gamma': [5],
-             'C': [1]
+             'C': [1],
+             'class_weight': ['balanced']
              }
             # {'kernel': ['sigmoid'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
             # 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
