@@ -1,11 +1,15 @@
 import warnings
 import time
 import statistics
+from collections import Counter
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from imblearn.over_sampling import SMOTE, ADASYN
+from imblearn.under_sampling import ClusterCentroids
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
-from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
+from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
 from sklearn.base import clone
 from sklearn.naive_bayes import MultinomialNB
@@ -52,24 +56,30 @@ def mostrar_correlacao(dados, classe):
     plt.show()
 
 
-mostrar_correlacao(dados_completo, 'acabamento')
+# mostrar_correlacao(dados_completo, 'acabamento')
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
-    'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
-print('X Treino:', X_treino.info())
+balanceador = ClusterCentroids(random_state=0)
+# balanceador = SMOTE()
+# balanceador = ADASYN()
+X_treino, Y_treino = balanceador.fit_resample(conjunto_treinamento.drop('acabamento', axis=1),
+                                              conjunto_treinamento['acabamento'])
+print(sorted(Counter(Y_treino).items()))
+
+X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
+
 print('X Teste:', X_teste.info())
-mostrar_quantidade_por_classe(conjunto_treinamento, 1)
-mostrar_quantidade_por_classe(conjunto_treinamento, 2)
-mostrar_quantidade_por_classe(conjunto_treinamento, 3)
-mostrar_quantidade_por_classe(conjunto_treinamento, 4)
-mostrar_quantidade_por_classe(conjunto_treinamento, 5)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 1)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 2)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 3)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 4)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 5)
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.acabamento"] = Y_teste.values
@@ -87,19 +97,19 @@ def fazer_selecao_features():
     print('Features mais importantes: ', feat_rfe_20)
 
 
-fazer_selecao_features()
+# fazer_selecao_features()
 
 random_state = 42
-num_folds = 10
+num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [('NB', MultinomialNB()),
-                # ('DTC', tree.DecisionTreeClassifier()),
-                # ('RF', RandomForestClassifier(random_state=seed)),
-                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-                ('SVM', SVC())]
+modelos_base = [  # ('NB', MultinomialNB()),
+    ('DTC', tree.DecisionTreeClassifier()),
+    ('RF', RandomForestClassifier(random_state=random_state)),
+    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    ('SVM', SVC())]
 
 
 def gerar_matriz_confusao(modelo):
@@ -120,23 +130,25 @@ def rodar_algoritmos():
     grid_search = GridSearchCV(modelo, escolher_parametros(), cv=kfold, n_jobs=-1)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
+    print('Melhores parametros ' + nome + ' :', melhor_modelo)
 
     cv_resultados = list()
     skfolds = StratifiedKFold(n_splits=num_folds, random_state=random_state)
-    for train_index, test_index in skfolds.split(X_treino, Y_treino):
+    X = conjunto_treinamento.drop('acabamento', axis=1)
+    Y = conjunto_treinamento['acabamento']
+    for train_index, test_index in skfolds.split(X, Y):
         clone_clf = clone(BaggingClassifier(melhor_modelo))
-        x_train_folds = X_treino[train_index]
-        y_train_folds = (Y_treino[train_index])
-        x_test_fold = X_treino[test_index]
-        y_test_fold = (Y_treino[test_index])
+        x_train_folds, y_train_folds = balanceador.fit_resample(X[train_index],
+                                                                (Y[train_index]))
+        x_test_fold = X[test_index]
+        y_test_fold = (Y[test_index])
         clone_clf.fit(x_train_folds, y_train_folds)
         y_pred = clone_clf.predict(x_test_fold)
         cv_resultados.append(sum(y_pred == y_test_fold) / len(y_pred))
 
-    mostrar_features_mais_importantes(melhor_modelo)
+    # mostrar_features_mais_importantes(melhor_modelo)
     gerar_matriz_confusao(melhor_modelo)
 
-    print('Melhores parametros ' + nome + ' :', melhor_modelo)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, sum(cv_resultados) / num_folds, statistics.stdev(cv_resultados)))
     melhor_modelo.fit(X_treino, Y_treino)
@@ -181,10 +193,10 @@ def escolher_parametros():
             # 'min_samples_leaf': range(1, 30, 2),
             # 'class_weight': [None, 'balanced']
             # }
-            {'max_features': 20,
-             'max_depth': 13,
-             'min_samples_split': 7,
-             'min_samples_leaf': 17,
+            {'max_features': [20],
+             'max_depth': [13],
+             'min_samples_split': [7],
+             'min_samples_leaf': [17],
              # 'class_weight': [None, 'balanced']
              }
         ]
