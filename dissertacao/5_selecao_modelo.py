@@ -8,7 +8,7 @@ from sklearn.model_selection import cross_val_score, cross_val_predict, GridSear
     StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, precision_score, recall_score
+from sklearn.metrics import confusion_matrix
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
@@ -16,16 +16,19 @@ from sklearn.linear_model import LogisticRegression
 
 warnings.filterwarnings('ignore')
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
-dados_completo.set_index('index', inplace=True)
+# 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
+dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
+# dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+# dados_completo.set_index('index', inplace=True)
+print(dados_completo.head())
 
 
 def mostrar_quantidade_por_classe(df, classe):
-    print(df.loc[df['acabamento'] == classe].info())
+    print(df.loc[df['classe'] == classe].info())
 
 
 def buscar_quantidades_iguais(quantidade, classe):
-    classe = dados_completo.loc[dados_completo['acabamento'] == classe]
+    classe = dados_completo.loc[dados_completo['classe'] == classe]
     return classe.sample(quantidade, random_state=7)
 
 
@@ -50,35 +53,35 @@ def mostrar_correlacao(dados, classe):
     plt.show()
 
 
-mostrar_correlacao(dados_completo, 'acabamento')
+# mostrar_correlacao(dados_completo, 'classe')
 
-classe_1 = buscar_quantidades_iguais(250, 1)
-classe_2 = buscar_quantidades_iguais(350, 2)
-classe_3 = buscar_quantidades_iguais(350, 3)
-classe_4 = buscar_quantidades_iguais(350, 4)
-classe_5 = buscar_quantidades_iguais(198, 5)
-frames = [classe_1, classe_2, classe_3, classe_4, classe_5]
-dados_qtde_iguais = pd.concat(frames)
+# classe_1 = buscar_quantidades_iguais(250, 1)
+# classe_2 = buscar_quantidades_iguais(350, 2)
+# classe_3 = buscar_quantidades_iguais(350, 3)
+# classe_4 = buscar_quantidades_iguais(350, 4)
+# classe_5 = buscar_quantidades_iguais(198, 5)
+# frames = [classe_1, classe_2, classe_3, classe_4, classe_5]
+# dados_qtde_iguais = pd.concat(frames)
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=7)
-for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+for trainamento_index, teste_index in split.split(dados_completo, dados_completo['classe']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
-    'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
+X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('classe', axis=1), conjunto_teste.drop(
+    'classe', axis=1), conjunto_treinamento['classe'], conjunto_teste['classe']
 print('X Treino:', X_treino.info())
 print('X Teste:', X_teste.info())
 mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 mostrar_quantidade_por_classe(conjunto_treinamento, 2)
 mostrar_quantidade_por_classe(conjunto_treinamento, 3)
-mostrar_quantidade_por_classe(conjunto_treinamento, 4)
-mostrar_quantidade_por_classe(conjunto_treinamento, 5)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 4)
+# mostrar_quantidade_por_classe(conjunto_treinamento, 5)
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
-resultado["item.acabamento"] = Y_teste.values
+resultado["item.classe"] = Y_teste.values
 resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 
@@ -93,18 +96,18 @@ def fazer_selecao_features():
     print('Features mais importantes: ', feat_rfe_20)
 
 
-fazer_selecao_features()
+# fazer_selecao_features()
 
 random_state = 42
-num_folds = 10
+num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [# ('NB', MultinomialNB()),
-                # ('DTC', tree.DecisionTreeClassifier()),
-                # ('RF', RandomForestClassifier(random_state=seed)),
-                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+modelos_base = [('NB', MultinomialNB()),
+                ('DTC', tree.DecisionTreeClassifier()),
+                ('RF', RandomForestClassifier(random_state=random_state)),
+                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 ('SVM', SVC())]
 
 
@@ -114,10 +117,6 @@ def gerar_matriz_confusao(modelo):
     matriz_confusao = confusion_matrix(Y_treino, y_train_pred)
     print('Matriz de Confusão')
     print(matriz_confusao)
-    precision = precision_score(Y_treino, y_train_pred, average=average)
-    print('Precision: ', precision)
-    recall = recall_score(Y_treino, y_train_pred, average=average)
-    print('Recall: ', recall)
 
 
 def rodar_algoritmos():
@@ -158,40 +157,42 @@ def escolher_parametros():
     elif nome == 'SVM':
         return [
             {'kernel': ['rbf'],
-             'gamma': [5],
-             'C': [1]
+             'gamma': [0.01, 0.1, 1, 5],
+             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+             },
+            {'kernel': ['sigmoid'],
+             'gamma': [0.01, 0.1, 1, 5],
+             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+             },
+            {'kernel': ['linear'],
+             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
              }
-            # {'kernel': ['sigmoid'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
-            # 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
-            # },
-            # {'kernel': ['linear'], 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
-            # }
         ]
     elif nome == 'DTC':
         return [
-            # {'max_features': [1, 10, 13, 20, 27],
-            # 'max_depth': [1, 10, 15, 16, 17],
-            # 'min_samples_split': range(10, 100, 5),
-            # 'min_samples_leaf': range(1, 30, 2),
-            # 'class_weight': [None, 'balanced']
-            # }
-            {'max_features': 20,
-             'max_depth': 13,
-             'min_samples_split': 7,
-             'min_samples_leaf': 17,
-             # 'class_weight': [None, 'balanced']
+            {'max_features': range(1, 4, 1),
+             'max_depth': [1, 10, 15, 16, 17],
+             'min_samples_split': range(10, 100, 5),
+             'min_samples_leaf': range(1, 30, 2),
+             'class_weight': [None, 'balanced']
              }
+            # {'max_features': 20,
+            #  'max_depth': 13,
+            #  'min_samples_split': 7,
+            #  'min_samples_leaf': 17,
+            #  # 'class_weight': [None, 'balanced']
+            #  }
         ]
     elif nome == 'NB':
         return [
             {'alpha': range(5, 10, 1),
              'fit_prior': [True, False],
-             'class_prior': [None, [1, 2, 3, 4, 5]]}
+             'class_prior': [None, [1, 2, 3]]}
         ]
     elif nome == 'RF':
         return [
             {'n_estimators': range(10, 300, 50),
-             'max_features': [10, 20, 27],
+             'max_features': range(1, 4, 1),
              'max_depth': range(1, 10, 1),
              'min_samples_split': range(5, 10, 1),
              'min_samples_leaf': range(15, 20, 1)}
