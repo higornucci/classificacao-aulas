@@ -16,9 +16,8 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.set_index('index', inplace=True)
 
 
-def plot_resampling(X, y, sampling, ax):
-    X_res, y_res = sampling.fit_resample(X, y)
-    ax.scatter(X_res[:, 0], X_res[:, 1], c=y_res, alpha=0.8, edgecolor='k')
+def plot_resampling(X, y, ax):
+    ax.scatter(X[:, 0], X[:, 1], c=y, alpha=0.8, edgecolor='k')
     # make nice plotting
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -26,7 +25,7 @@ def plot_resampling(X, y, sampling, ax):
     ax.get_yaxis().tick_left()
     ax.spines['left'].set_position(('outward', 10))
     ax.spines['bottom'].set_position(('outward', 10))
-    return Counter(y_res)
+    return Counter(y)
 
 
 def plot_decision_function(X, y, clf, ax):
@@ -45,13 +44,13 @@ def plot_decision_function(X, y, clf, ax):
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(20, 10))
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.1, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.95, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-balanceador = ClusterCentroids(random_state=0)
-# balanceador = SMOTE()
+# balanceador = ClusterCentroids(random_state=0)
+balanceador = SMOTE()
 # balanceador = ADASYN()
 X_balanceado, Y_balanceado = balanceador.fit_resample(conjunto_treinamento.drop('acabamento', axis=1),
                                                       conjunto_treinamento['acabamento'])
@@ -100,15 +99,15 @@ def gerar_matriz_confusao_treino(modelo):
 # svc_clf = grid_search.best_estimator_
 svc_clf = SVC(C=1000, class_weight='balanced', gamma=0.01, kernel='rbf')
 print('Melhores parametros :', svc_clf)
-clf = BaggingClassifier(svc_clf)
+clf = svc_clf
 clf.fit(X_balanceado, Y_balanceado)
 gerar_matriz_confusao_treino(clf)
 
-plot_decision_function(X_balanceado, Y_balanceado, clf, ax1)
-ax1.set_title('Decision function for {}'.format(balanceador.__class__.__name__))
-plot_resampling(X_balanceado, Y_balanceado, balanceador, ax2)
-ax2.set_title('Resampling using {}'.format(balanceador.__class__.__name__))
-fig.tight_layout()
+# plot_decision_function(X_balanceado, Y_balanceado, clf, ax1)
+# ax1.set_title('Decision function for {}'.format(balanceador.__class__.__name__))
+# plot_resampling(X_balanceado, Y_balanceado, balanceador, ax2)
+# ax2.set_title('Resampling using {}'.format(balanceador.__class__.__name__))
+# fig.tight_layout()
 
 y_pred = svc_clf.predict(X_teste)
 matriz_confusao = confusion_matrix(Y_teste, y_pred)
