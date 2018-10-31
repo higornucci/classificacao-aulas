@@ -1,0 +1,151 @@
+/home/higornucci/projetos/classificacao-aulas/venv/bin/python /home/higornucci/programas/pycharm-2018.2.2/helpers/pydev/pydevconsole.py 34353 44641
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/higornucci/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.6 (default, Sep 12 2018, 18:26:19) 
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
+runfile('/home/higornucci/projetos/classificacao-aulas/dissertacao/5_1_selecao_modelo.py', wdir='/home/higornucci/projetos/classificacao-aulas/dissertacao')
+[(1, 158), (2, 158), (3, 158), (4, 158), (5, 158)]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 137213 entries, 608202 to 226916
+Data columns (total 27 columns):
+tipificacao#_C                                      137213 non-null int64
+tipificacao#_F                                      137213 non-null int64
+tipificacao#_M                                      137213 non-null int64
+maturidade                                          137213 non-null float64
+peso_carcaca                                        137213 non-null float64
+questionario_classificacao_estabelecimento_rural    137213 non-null float64
+possui_outros_incentivos                            137213 non-null float64
+fabrica_racao                                       137213 non-null float64
+area_total_destinada_confinamento                   137213 non-null float64
+area_manejada_80_boa_cobertura_vegetal              137213 non-null float64
+area_manejada_20_erosao                             137213 non-null float64
+dispoe_de_identificacao_individual                  137213 non-null float64
+rastreamento_sisbov                                 137213 non-null float64
+faz_controle_pastejo_regua_de_manejo_embrapa        137213 non-null float64
+lita_trace                                          137213 non-null float64
+apresenta_atestado_programas_controle_qualidade     137213 non-null float64
+envolvido_em_organizacao                            137213 non-null float64
+confinamento                                        137213 non-null float64
+semi_confinamento                                   137213 non-null float64
+suplementacao                                       137213 non-null float64
+fertirrigacao                                       137213 non-null float64
+ifp                                                 137213 non-null float64
+ilp                                                 137213 non-null float64
+ilpf                                                137213 non-null float64
+latitude                                            137213 non-null float64
+longitude                                           137213 non-null float64
+eh_precoce                                          137213 non-null float64
+dtypes: float64(24), int64(3)
+memory usage: 29.3 MB
+X Teste: None
+
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=13,
+            max_features=20, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=17, min_samples_split=7,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Elapsed computation time: 7.588 secs
+Elapsed computation time: 439.569 secs
+Resultados não balanceado  [0.6675017308603287]
+Resultados balanceado  [0.07941004992165579]
+Elapsed computation time: 3.917 secs
+Elapsed computation time: 250.782 secs
+Resultados não balanceado  [0.6675017308603287, 0.6649904345449577]
+Resultados balanceado  [0.07941004992165579, 0.12181834745376696]
+Elapsed computation time: 3.630 secs
+Elapsed computation time: 231.820 secs
+Resultados não balanceado  [0.6675017308603287, 0.6649904345449577, 0.6633688621663478]
+Resultados balanceado  [0.07941004992165579, 0.12181834745376696, 0.21575111596975494]
+Elapsed computation time: 3.727 secs
+Elapsed computation time: 230.443 secs
+Resultados não balanceado  [0.6675017308603287, 0.6649904345449577, 0.6633688621663478, 0.6650481014503317]
+Resultados balanceado  [0.07941004992165579, 0.12181834745376696, 0.21575111596975494, 0.24289410392828512]
+Elapsed computation time: 3.677 secs
+Elapsed computation time: 232.571 secs
+Resultados não balanceado  [0.6675017308603287, 0.6649904345449577, 0.6633688621663478, 0.6650481014503317, 0.6680180016033817]
+Resultados balanceado  [0.07941004992165579, 0.12181834745376696, 0.21575111596975494, 0.24289410392828512, 0.1865115516361781]
+Matriz de Confusão
+[[113  33   0  10   2]
+ [ 33  80  35  10   0]
+ [ 11  44  56  46   1]
+ [ 18  11  23  98   8]
+ [  1   2   5  17 133]]
+Precision:  0.6096539000666398
+Recall:  0.6075949367088608
+Tempo de execução do DTC: 1412.6452 segundos
+
+Melhores parametros RF : RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=7, max_features=27, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=16, min_samples_split=5,
+            min_weight_fraction_leaf=0.0, n_estimators=110, n_jobs=None,
+            oob_score=False, random_state=42, verbose=0, warm_start=False)
+Elapsed computation time: 212.532 secs
+Elapsed computation time: 236.048 secs
+Resultados não balanceado  [0.6371205771963706]
+Resultados balanceado  [0.1900302445067959]
+Elapsed computation time: 210.503 secs
+Elapsed computation time: 239.341 secs
+Resultados não balanceado  [0.6371205771963706, 0.636849776806049]
+Resultados balanceado  [0.1900302445067959, 0.19170082900610366]
+Elapsed computation time: 211.407 secs
+Elapsed computation time: 230.179 secs
+Resultados não balanceado  [0.6371205771963706, 0.636849776806049, 0.6362120798032249]
+Resultados balanceado  [0.1900302445067959, 0.19170082900610366, 0.14026601074974948]
+Elapsed computation time: 211.972 secs
+Elapsed computation time: 229.136 secs
+Resultados não balanceado  [0.6371205771963706, 0.636849776806049, 0.6362120798032249, 0.6380548065009839]
+Resultados balanceado  [0.1900302445067959, 0.19170082900610366, 0.14026601074974948, 0.22778040959113768]
+Elapsed computation time: 211.766 secs
+Elapsed computation time: 233.518 secs
+Resultados não balanceado  [0.6371205771963706, 0.636849776806049, 0.6362120798032249, 0.6380548065009839, 0.6371073536914219]
+Resultados balanceado  [0.1900302445067959, 0.19170082900610366, 0.14026601074974948, 0.22778040959113768, 0.1560655200058305]
+Matriz de Confusão
+[[125  20   5   4   4]
+ [ 28  96  28   6   0]
+ [ 10  48  72  28   0]
+ [ 11  14  30  86  17]
+ [  2   2   1   8 145]]
+Precision:  0.6595962996370509
+Recall:  0.6632911392405063
+Tempo de execução do RF: 5729.8035 segundos
+
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=None, n_neighbors=15, p=2,
+           weights='uniform')
+Elapsed computation time: 1692.194 secs
+Elapsed computation time: 238.408 secs
+Resultados não balanceado  [0.6713825019130562]
+Resultados balanceado  [0.35382429034726526]
+Elapsed computation time: 1692.140 secs
+Elapsed computation time: 241.868 secs
+Resultados não balanceado  [0.6713825019130562, 0.6696091828368407]
+Resultados balanceado  [0.35382429034726526, 0.37340803498223557]
+Elapsed computation time: 1724.339 secs
+Elapsed computation time: 232.816 secs
+Resultados não balanceado  [0.6713825019130562, 0.6696091828368407, 0.6685979775895053]
+Resultados balanceado  [0.35382429034726526, 0.37340803498223557, 0.3639154595973399]
+Elapsed computation time: 1733.311 secs
+Elapsed computation time: 231.343 secs
+Resultados não balanceado  [0.6713825019130562, 0.6696091828368407, 0.6685979775895053, 0.667653596676627]
+Resultados balanceado  [0.35382429034726526, 0.37340803498223557, 0.3639154595973399, 0.36554369215071786]
+Elapsed computation time: 1731.064 secs
+Elapsed computation time: 236.398 secs
+Resultados não balanceado  [0.6713825019130562, 0.6696091828368407, 0.6685979775895053, 0.667653596676627, 0.6681182129582391]
+Resultados balanceado  [0.35382429034726526, 0.37340803498223557, 0.3639154595973399, 0.36554369215071786, 0.365197507470301]
+Matriz de Confusão
+[[ 61  53  23  12   9]
+ [ 38  67  37  11   5]
+ [ 25  57  32  27  17]
+ [ 12  39  37  32  38]
+ [  2   0   6  11 139]]
+Precision:  0.4003212920008152
+Recall:  0.4189873417721519
+Tempo de execução do K-NN: 9764.9906 segundos
+
+Melhores parametros SVM : SVC(C=1, cache_size=200, class_weight='balanced', coef0=0.0,
+  decision_function_shape='ovr', degree=3, gamma=5, kernel='rbf',
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)

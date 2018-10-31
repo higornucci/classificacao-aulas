@@ -1,20 +1,20 @@
 import warnings
 import time
-import statistics
 from collections import Counter
+from functools import wraps
 
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 from imblearn.over_sampling import SMOTE, ADASYN
 from imblearn.under_sampling import ClusterCentroids
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
-from sklearn.base import clone
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, precision_score, recall_score
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
@@ -24,6 +24,19 @@ warnings.filterwarnings('ignore')
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
+
+
+def timeit(f):
+    @wraps(f)
+    def wrapper(*args, **kwds):
+        start_time = time.time()
+        result = f(*args, **kwds)
+        elapsed_time = time.time() - start_time
+        print('Elapsed computation time: {:.3f} secs'
+              .format(elapsed_time))
+        return elapsed_time, result
+
+    return wrapper
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -60,7 +73,7 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -84,6 +97,23 @@ resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.acabamento"] = Y_teste.values
 resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
+
+
+@timeit
+def fit_predict_imbalanced_model(modelo, X_train, y_train, X_test, y_test):
+    modelo.fit(X_train, y_train)
+    y_pred = modelo.predict(X_test)
+    n_correct = sum(y_pred == y_test)
+    return n_correct / len(y_pred)
+
+
+@timeit
+def fit_predict_balanced_model(modelo, X_train, y_train, X_test, y_test):
+    X_balanceado, y_balanceado = balanceador.fit_resample(X_train, y_train)
+    modelo.fit(X_balanceado, y_balanceado)
+    y_pred = modelo.predict(X_test)
+    n_correct = sum(y_pred == y_test)
+    return n_correct / len(y_pred)
 
 
 def fazer_selecao_features():
@@ -132,29 +162,65 @@ def rodar_algoritmos():
     melhor_modelo = grid_search.best_estimator_
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
 
-    cv_resultados = list()
-    skfolds = StratifiedKFold(n_splits=num_folds, random_state=random_state)
+    skf = StratifiedKFold(n_splits=num_folds, random_state=random_state)
     X = conjunto_treinamento.drop('acabamento', axis=1)
     Y = conjunto_treinamento['acabamento']
-    for train_index, test_index in skfolds.split(X, Y):
-        clone_clf = clone(BaggingClassifier(melhor_modelo))
-        x_train_folds, y_train_folds = balanceador.fit_resample(X[train_index],
-                                                                (Y[train_index]))
-        x_test_fold = X[test_index]
-        y_test_fold = (Y[test_index])
-        clone_clf.fit(x_train_folds, y_train_folds)
-        y_pred = clone_clf.predict(x_test_fold)
-        cv_resultados.append(sum(y_pred == y_test_fold) / len(y_pred))
+
+    cv_results_imbalanced = []
+    cv_time_imbalanced = []
+    cv_results_balanced = []
+    cv_time_balanced = []
+    for train_idx, valid_idx in skf.split(X, Y):
+        # X_local_train = preprocessor.fit_transform(X_train.iloc[train_idx])
+        X_local_train = X.iloc[train_idx]
+        y_local_train = Y.iloc[train_idx].values.ravel()
+        # X_local_test = preprocessor.transform(X_train.iloc[valid_idx])
+        X_local_test = X.iloc[valid_idx]
+        y_local_test = Y.iloc[valid_idx].values.ravel()
+
+        elapsed_time, score = fit_predict_imbalanced_model(melhor_modelo, X_local_train, y_local_train, X_local_test,
+                                                             y_local_test)
+        cv_time_imbalanced.append(elapsed_time)
+        cv_results_imbalanced.append(score)
+
+        elapsed_time, score = fit_predict_balanced_model(melhor_modelo, X_local_train, y_local_train, X_local_test,
+                                                           y_local_test)
+        cv_time_balanced.append(elapsed_time)
+        cv_results_balanced.append(score)
+        print('Resultados não balanceado ', cv_results_imbalanced)
+        print('Resultados balanceado ', cv_results_balanced)
 
     # mostrar_features_mais_importantes(melhor_modelo)
     gerar_matriz_confusao(melhor_modelo)
 
-    print('Validação cruzada ' + nome + ' :', cv_resultados)
-    print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, sum(cv_resultados) / num_folds, statistics.stdev(cv_resultados)))
+    df_results = (pd.DataFrame({'Balanced model': cv_results_balanced,
+                                'Imbalanced model': cv_results_imbalanced})
+                  .unstack().reset_index())
+    df_time = (pd.DataFrame({'Balanced model': cv_time_balanced,
+                             'Imbalanced model': cv_time_imbalanced})
+               .unstack().reset_index())
+
     melhor_modelo.fit(X_treino, Y_treino)
     preds = melhor_modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
+
+    plt.figure()
+    sns.boxplot(y='level_0', x=0, data=df_time)
+    sns.despine(top=True, right=True, left=True)
+    plt.xlabel('time [s]')
+    plt.ylabel('')
+    plt.title('Computation time difference using a random under-sampling')
+
+    plt.figure()
+    sns.boxplot(y='level_0', x=0, data=df_results, whis=10.0)
+    sns.despine(top=True, right=True, left=True)
+    ax = plt.gca()
+    ax.xaxis.set_major_formatter(
+        plt.FuncFormatter(lambda x, pos: "%i%%" % (100 * x)))
+    plt.xlabel('ROC-AUC')
+    plt.ylabel('')
+    plt.title('Difference in terms of ROC-AUC using a random under-sampling')
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
