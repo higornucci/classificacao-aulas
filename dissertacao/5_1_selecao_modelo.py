@@ -27,6 +27,7 @@ dados_completo.set_index('index', inplace=True)
 
 random_state = 42
 
+
 def timeit(f):
     @wraps(f)
     def wrapper(*args, **kwds):
@@ -74,7 +75,7 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
