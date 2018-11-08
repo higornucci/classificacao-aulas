@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from imblearn.over_sampling import SMOTE, ADASYN
-from imblearn.under_sampling import ClusterCentroids
+from imblearn.under_sampling import ClusterCentroids, RandomUnderSampler, NearMiss
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
@@ -25,6 +25,7 @@ warnings.filterwarnings('ignore')
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
 
+random_state = 42
 
 def timeit(f):
     @wraps(f)
@@ -73,13 +74,15 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-balanceador = ClusterCentroids(random_state=0)
-# balanceador = SMOTE()
+# balanceador = ClusterCentroids(random_state=random_state)
+# balanceador = RandomUnderSampler(random_state=random_state, replacement=True)
+# balanceador = NearMiss(version=3)
+balanceador = SMOTE()
 # balanceador = ADASYN()
 X_treino, Y_treino = balanceador.fit_resample(conjunto_treinamento.drop('acabamento', axis=1),
                                               conjunto_treinamento['acabamento'])
@@ -129,7 +132,6 @@ def fazer_selecao_features():
 
 # fazer_selecao_features()
 
-random_state = 42
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
@@ -148,10 +150,6 @@ def gerar_matriz_confusao(modelo):
     matriz_confusao = confusion_matrix(Y_treino, y_train_pred)
     print('Matriz de Confusão')
     print(matriz_confusao)
-    precision = precision_score(Y_treino, y_train_pred, average=average)
-    print('Precision: ', precision)
-    recall = recall_score(Y_treino, y_train_pred, average=average)
-    print('Recall: ', recall)
 
 
 def rodar_algoritmos():

@@ -1,3 +1,5 @@
+ClusterCentroids
+
 /home/higornucci/projetos/classificacao-aulas/venv/bin/python /home/higornucci/programas/pycharm-2018.2.2/helpers/pydev/pydevconsole.py 34353 44641
 import sys; print('Python %s on %s' % (sys.version, sys.platform))
 sys.path.extend(['/home/higornucci/projetos/classificacao-aulas'])
@@ -149,3 +151,32 @@ Melhores parametros SVM : SVC(C=1, cache_size=200, class_weight='balanced', coef
   decision_function_shape='ovr', degree=3, gamma=5, kernel='rbf',
   max_iter=-1, probability=False, random_state=None, shrinking=True,
   tol=0.001, verbose=False)
+Elapsed computation time: 83298.398 secs
+Elapsed computation time: 236.894 secs
+Resultados não balanceado  [0.5797288926137812]
+Resultados balanceado  [0.44119629778085484]
+Elapsed computation time: 91809.282 secs
+Elapsed computation time: 252.032 secs
+Resultados não balanceado  [0.5797288926137812, 0.5777990343445386]
+Resultados balanceado  [0.44119629778085484, 0.4482463332422338]
+Elapsed computation time: 88642.985 secs
+Elapsed computation time: 243.109 secs
+Resultados não balanceado  [0.5797288926137812, 0.5777990343445386, 0.5770155780267833]
+Resultados balanceado  [0.44119629778085484, 0.4482463332422338, 0.4507333515532477]
+Elapsed computation time: 87821.322 secs
+Elapsed computation time: 243.179 secs
+Resultados não balanceado  [0.5797288926137812, 0.5777990343445386, 0.5770155780267833, 0.5813078492821223]
+Resultados balanceado  [0.44119629778085484, 0.4482463332422338, 0.4507333515532477, 0.4840117338386415]
+Elapsed computation time: 81084.335 secs
+Elapsed computation time: 251.613 secs
+Resultados não balanceado  [0.5797288926137812, 0.5777990343445386, 0.5770155780267833, 0.5813078492821223, 0.5758417753808032]
+Resultados balanceado  [0.44119629778085484, 0.4482463332422338, 0.4507333515532477, 0.4840117338386415, 0.45270024050725166]
+Matriz de Confusão
+[[  5  96  22  35   0]
+ [ 39  11  87  21   0]
+ [ 17  84   4  53   0]
+ [ 24  41  74  11   8]
+ [  2   3   4  11 138]]
+Precision:  0.2308794256967974
+Recall:  0.2139240506329114
+Tempo de execução do SVM: 433895.2909 segundos

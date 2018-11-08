@@ -17,18 +17,18 @@ from sklearn.linear_model import LogisticRegression
 warnings.filterwarnings('ignore')
 
 # 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
-dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
-# dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
-# dados_completo.set_index('index', inplace=True)
+# dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
+dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo.set_index('index', inplace=True)
 print(dados_completo.head())
 
 
 def mostrar_quantidade_por_classe(df, classe):
-    print(df.loc[df['classe'] == classe].info())
+    print(df.loc[df['acabamento'] == classe].info())
 
 
 def buscar_quantidades_iguais(quantidade, classe):
-    classe = dados_completo.loc[dados_completo['classe'] == classe]
+    classe = dados_completo.loc[dados_completo['acabamento'] == classe]
     return classe.sample(quantidade, random_state=7)
 
 
@@ -53,7 +53,7 @@ def mostrar_correlacao(dados, classe):
     plt.show()
 
 
-# mostrar_correlacao(dados_completo, 'classe')
+# mostrar_correlacao(dados_completo, 'acabamento')
 
 # classe_1 = buscar_quantidades_iguais(250, 1)
 # classe_2 = buscar_quantidades_iguais(350, 2)
@@ -66,12 +66,12 @@ def mostrar_correlacao(dados, classe):
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
 split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
-for trainamento_index, teste_index in split.split(dados_completo, dados_completo['classe']):
+for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('classe', axis=1), conjunto_teste.drop(
-    'classe', axis=1), conjunto_treinamento['classe'], conjunto_teste['classe']
+X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
+    'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
 print('X Treino:', X_treino.info())
 print('X Teste:', X_teste.info())
 mostrar_quantidade_por_classe(conjunto_treinamento, 1)
@@ -104,7 +104,7 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [('NB', MultinomialNB()),
+modelos_base = [#  ('NB', MultinomialNB()),
                 ('DTC', tree.DecisionTreeClassifier()),
                 ('RF', RandomForestClassifier(random_state=random_state)),
                 ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
