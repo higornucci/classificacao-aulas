@@ -16,28 +16,28 @@ dados_completo['acabamento'].replace(['Gordura Excessiva - acima de 10 mm de esp
 
 # Substituindo os valores da tipificação
 dados_completo['tipificacao'].replace(['Macho INTEIRO'], 'M', inplace=True)  # M
-dados_completo['tipificacao'].replace(['Fêmea'], 'F', inplace=True)  # F
 dados_completo['tipificacao'].replace(['Macho CASTRADO'], 'C', inplace=True)  # C
+dados_completo['tipificacao'].replace(['Fêmea'], 'F', inplace=True)  # F
 
 # Substituindo os valores da maturidade
-dados_completo['maturidade'].replace(['Dente de leite'], 0, inplace=True)
-dados_completo['maturidade'].replace(['Dois dentes'], 2, inplace=True)
-dados_completo['maturidade'].replace(['Quatro dentes'], 4, inplace=True)
-dados_completo['maturidade'].replace(['Seis dentes'], 6, inplace=True)
-dados_completo['maturidade'].replace(['Oito dentes'], 8, inplace=True)
+# dados_completo['maturidade'].replace(['Dente de leite'], 0, inplace=True)
+# dados_completo['maturidade'].replace(['Dois dentes'], 2, inplace=True)
+# dados_completo['maturidade'].replace(['Quatro dentes'], 4, inplace=True)
+# dados_completo['maturidade'].replace(['Seis dentes'], 6, inplace=True)
+# dados_completo['maturidade'].replace(['Oito dentes'], 8, inplace=True)
 
 
-def eh_precoce(linha):
-    if linha['maturidade'] == 0:
-        return 1
-    if linha['maturidade'] == 2:
-        return 1
-    if linha['maturidade'] == 4 and linha['tipificacao'] != 'M':
-        return 1
-    return 0
-
-
-dados_completo['eh_precoce'] = dados_completo.apply(lambda linha:  eh_precoce(linha), axis=1)
+# def eh_precoce(linha):
+#     if linha['maturidade'] == 0:
+#         return 1
+#     if linha['maturidade'] == 2:
+#         return 1
+#     if linha['maturidade'] == 4 and linha['tipificacao'] != 'M':
+#         return 1
+#     return 0
+#
+#
+# dados_completo['eh_precoce'] = dados_completo.apply(lambda linha:  eh_precoce(linha), axis=1)
 
 # Substituindo os valores da rispoa
 # rispoa_label_encoder = LabelEncoder()
