@@ -7,14 +7,18 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+from category_encoders import BinaryEncoder
 from imblearn.over_sampling import SMOTE, ADASYN
 from imblearn.under_sampling import ClusterCentroids, RandomUnderSampler, NearMiss
+from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import MultinomialNB, GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import MinMaxScaler, Imputer
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
@@ -22,7 +26,7 @@ from sklearn.linear_model import LogisticRegression
 
 warnings.filterwarnings('ignore')
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
 
 random_state = 42
@@ -71,25 +75,38 @@ def mostrar_correlacao(dados, classe):
     plt.show()
 
 
+def transformar_dados_colunas(X_train):
+    num_pipeline = Pipeline([
+        ('std_scaler', MinMaxScaler()),
+    ])
+    full_pipeline = ColumnTransformer(transformers=[
+        ("num", num_pipeline, [19, 20]),
+        ("cat", BinaryEncoder(), [0, 1, 18])],
+        remainder='passthrough')
+    X_train = full_pipeline.fit_transform(X_train)
+    return pd.DataFrame(X_train)
+
+
 # mostrar_correlacao(dados_completo, 'acabamento')
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
 # balanceador = ClusterCentroids(random_state=random_state)
-# balanceador = RandomUnderSampler(random_state=random_state, replacement=True)
+balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
-balanceador = SMOTE()
+# balanceador = SMOTE()
 # balanceador = ADASYN()
-X_treino, Y_treino = balanceador.fit_resample(conjunto_treinamento.drop('acabamento', axis=1),
-                                              conjunto_treinamento['acabamento'])
+X_treino, Y_treino = balanceador.fit_resample(
+    transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1)),
+    conjunto_treinamento['acabamento'])
 print(sorted(Counter(Y_treino).items()))
 
-X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
+X_teste, Y_teste = transformar_dados_colunas(conjunto_teste.drop('acabamento', axis=1)), conjunto_teste['acabamento']
 
 print('X Teste:', X_teste.info())
 # mostrar_quantidade_por_classe(conjunto_treinamento, 1)
@@ -100,6 +117,7 @@ print('X Teste:', X_teste.info())
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.acabamento"] = Y_teste.values
+
 resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 
@@ -138,7 +156,9 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [  # ('NB', MultinomialNB()),
+modelos_base = [
+    ('GNB', GaussianNB()),
+    ('MNB', MultinomialNB()),
     ('DTC', tree.DecisionTreeClassifier()),
     ('RF', RandomForestClassifier(random_state=random_state)),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
@@ -162,7 +182,7 @@ def rodar_algoritmos():
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
 
     skf = StratifiedKFold(n_splits=num_folds, random_state=random_state)
-    X = conjunto_treinamento.drop('acabamento', axis=1)
+    X = transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1))
     Y = conjunto_treinamento['acabamento']
 
     cv_results_imbalanced = []
@@ -178,12 +198,12 @@ def rodar_algoritmos():
         y_local_test = Y.iloc[valid_idx].values.ravel()
 
         elapsed_time, score = fit_predict_imbalanced_model(melhor_modelo, X_local_train, y_local_train, X_local_test,
-                                                             y_local_test)
+                                                           y_local_test)
         cv_time_imbalanced.append(elapsed_time)
         cv_results_imbalanced.append(score)
 
         elapsed_time, score = fit_predict_balanced_model(melhor_modelo, X_local_train, y_local_train, X_local_test,
-                                                           y_local_test)
+                                                         y_local_test)
         cv_time_balanced.append(elapsed_time)
         cv_results_balanced.append(score)
         print('Resultados não balanceado ', cv_results_imbalanced)
@@ -199,8 +219,6 @@ def rodar_algoritmos():
                              'Imbalanced model': cv_time_imbalanced})
                .unstack().reset_index())
 
-    melhor_modelo.fit(X_treino, Y_treino)
-    preds = melhor_modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
 
@@ -209,7 +227,8 @@ def rodar_algoritmos():
     sns.despine(top=True, right=True, left=True)
     plt.xlabel('time [s]')
     plt.ylabel('')
-    plt.title('Computation time difference using a random under-sampling')
+    plt.title('Computation time difference using a ' + str(balanceador) + ' with ' + nome)
+    plt.show()
 
     plt.figure()
     sns.boxplot(y='level_0', x=0, data=df_results, whis=10.0)
@@ -219,7 +238,8 @@ def rodar_algoritmos():
         plt.FuncFormatter(lambda x, pos: "%i%%" % (100 * x)))
     plt.xlabel('ROC-AUC')
     plt.ylabel('')
-    plt.title('Difference in terms of ROC-AUC using a random under-sampling')
+    plt.title('Difference in terms of ROC-AUC using a ' + str(balanceador) + ' with ' + nome)
+    plt.show()
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
@@ -241,7 +261,7 @@ def escolher_parametros():
         return [
             {'kernel': ['rbf'],
              'gamma': [5],
-             'C': [1],
+             'C': [250],
              'class_weight': ['balanced']
              }
             # {'kernel': ['sigmoid'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
@@ -258,18 +278,22 @@ def escolher_parametros():
             # 'min_samples_leaf': range(1, 30, 2),
             # 'class_weight': [None, 'balanced']
             # }
-            {'max_features': [20],
-             'max_depth': [13],
-             'min_samples_split': [7],
-             'min_samples_leaf': [17],
+            {'max_features': range(15, 29, 1),
+             'max_depth': range(5, 15, 1),
+             'min_samples_split': range(5, 10, 1),
+             'min_samples_leaf': range(10, 20, 1),
              # 'class_weight': [None, 'balanced']
              }
         ]
-    elif nome == 'NB':
+    elif nome == 'MNB':
         return [
             {'alpha': range(5, 10, 1),
              'fit_prior': [True, False],
              'class_prior': [None, [1, 2, 3, 4, 5]]}
+        ]
+    elif nome == 'GNB':
+        return [
+            {'var_smoothing': [1e-09, 1e-05, 1]}
         ]
     elif nome == 'RF':
         return [
@@ -292,4 +316,4 @@ def imprimir_resultados():
 
 for nome, modelo in modelos_base:
     rodar_algoritmos()
-    imprimir_resultados()
+    # imprimir_resultados()
