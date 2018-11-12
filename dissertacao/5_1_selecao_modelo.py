@@ -83,7 +83,7 @@ def transformar_dados_colunas(X_train):
     ])
     full_pipeline = ColumnTransformer(transformers=[
         ("num", num_pipeline, [19, 20]),
-        ("cat", OneHotEncoder(), [0, 1, 18])],
+        ("cat", BinaryEncoder(), [0, 1, 18])],
         remainder='passthrough')
     X_train = full_pipeline.fit_transform(X_train)
     return pd.DataFrame(X_train)
@@ -93,7 +93,7 @@ def transformar_dados_colunas(X_train):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.5, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]

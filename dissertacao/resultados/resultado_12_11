@@ -1,0 +1,227 @@
+/home/higornucci/projetos/classificacao-aulas/venv/bin/python /home/higornucci/programas/pycharm-2018.2.2/helpers/pydev/pydevconsole.py 37497 35943
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/higornucci/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.6 (default, Sep 12 2018, 18:26:19) 
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
+runfile('/home/higornucci/projetos/classificacao-aulas/dissertacao/5_1_selecao_modelo.py', wdir='/home/higornucci/projetos/classificacao-aulas/dissertacao') >> output.txt
+[(1, 288377), (2, 112503), (3, 93168), (4, 228859), (5, 294297)]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 137213 entries, 0 to 137212
+Data columns (total 30 columns):
+0     137213 non-null float64
+1     137213 non-null float64
+2     137213 non-null float64
+3     137213 non-null float64
+4     137213 non-null float64
+5     137213 non-null float64
+6     137213 non-null float64
+7     137213 non-null float64
+8     137213 non-null float64
+9     137213 non-null float64
+10    137213 non-null float64
+11    137213 non-null float64
+12    137213 non-null float64
+13    137213 non-null float64
+14    137213 non-null float64
+15    137213 non-null float64
+16    137213 non-null float64
+17    137213 non-null float64
+18    137213 non-null float64
+19    137213 non-null float64
+20    137213 non-null float64
+21    137213 non-null float64
+22    137213 non-null float64
+23    137213 non-null float64
+24    137213 non-null float64
+25    137213 non-null float64
+26    137213 non-null float64
+27    137213 non-null float64
+28    137213 non-null float64
+29    137213 non-null float64
+dtypes: float64(30)
+memory usage: 31.4 MB
+X Teste: None
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Melhores parametros GNB : GaussianNB(priors=None, var_smoothing=1e-05)
+Elapsed computation time: 1.025 secs
+Elapsed computation time: 9.602 secs
+Resultados não balanceado  [0.5555059578034471]
+Resultados balanceado  [0.496855491111153]
+Elapsed computation time: 1.053 secs
+Elapsed computation time: 9.770 secs
+Resultados não balanceado  [0.5555059578034471, 0.5519540858157966]
+Resultados balanceado  [0.496855491111153, 0.478393491399758]
+Elapsed computation time: 1.019 secs
+Elapsed computation time: 10.033 secs
+Resultados não balanceado  [0.5555059578034471, 0.5519540858157966, 0.5509611004828278]
+Resultados balanceado  [0.496855491111153, 0.478393491399758, 0.4674933708754077]
+Elapsed computation time: 1.005 secs
+Elapsed computation time: 9.812 secs
+Resultados não balanceado  [0.5555059578034471, 0.5519540858157966, 0.5509611004828278, 0.5586418628379856]
+Resultados balanceado  [0.496855491111153, 0.478393491399758, 0.4674933708754077, 0.47539347587262376]
+Elapsed computation time: 1.078 secs
+Elapsed computation time: 9.736 secs
+Resultados não balanceado  [0.5555059578034471, 0.5519540858157966, 0.5509611004828278, 0.5586418628379856, 0.5524196487136506]
+Resultados balanceado  [0.496855491111153, 0.478393491399758, 0.4674933708754077, 0.47539347587262376, 0.46219450111735216]
+Matriz de Confusão
+[[241221   4629  11196  22080   9251]
+ [ 65905  21507  11308  11661   2122]
+ [ 28494   6546  19419  19903  18806]
+ [ 50833   4748  11423  83149  78706]
+ [ 11872      0   4717   6688 271020]]
+Tempo de execução do GNB: 96.1215 segundos
+Melhores parametros MNB : MultinomialNB(alpha=5, class_prior=None, fit_prior=True)
+Elapsed computation time: 0.619 secs
+Elapsed computation time: 8.646 secs
+Resultados não balanceado  [0.5608807346135627]
+Resultados balanceado  [0.44013753704908803]
+Elapsed computation time: 0.666 secs
+Elapsed computation time: 8.740 secs
+Resultados não balanceado  [0.5608807346135627, 0.5586134645167168]
+Resultados balanceado  [0.44013753704908803, 0.4403857876663281]
+Elapsed computation time: 0.611 secs
+Elapsed computation time: 8.808 secs
+Resultados não balanceado  [0.5608807346135627, 0.5586134645167168, 0.5598341987792658]
+Resultados balanceado  [0.44013753704908803, 0.4403857876663281, 0.42568541891893813]
+Elapsed computation time: 0.690 secs
+Elapsed computation time: 8.777 secs
+Resultados não balanceado  [0.5608807346135627, 0.5586134645167168, 0.5598341987792658, 0.5598443990962758]
+Resultados balanceado  [0.44013753704908803, 0.4403857876663281, 0.42568541891893813, 0.4552681889005236]
+Elapsed computation time: 0.604 secs
+Elapsed computation time: 8.409 secs
+Resultados não balanceado  [0.5608807346135627, 0.5586134645167168, 0.5598341987792658, 0.5598443990962758, 0.5588513956708695]
+Resultados balanceado  [0.44013753704908803, 0.4403857876663281, 0.42568541891893813, 0.4552681889005236, 0.41646650937072893]
+Matriz de Confusão
+[[222626    409   2135  43596  19611]
+ [ 57846   5335   1690  26450  21182]
+ [ 23574   4956   2959  45007  16672]
+ [ 48678   1297    738 126738  51408]
+ [ 15715      0   1224  50619 226739]]
+Tempo de execução do MNB: 136.8644 segundos
+
+
+
+
+
+
+
+/home/higornucci/projetos/classificacao-aulas/venv/bin/python /home/higornucci/programas/pycharm-2018.2.2/helpers/pydev/pydevconsole.py 40647 42311
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/higornucci/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.6 (default, Sep 12 2018, 18:26:19)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
+runfile('/home/higornucci/projetos/classificacao-aulas/dissertacao/5_1_selecao_modelo.py', wdir='/home/higornucci/projetos/classificacao-aulas/dissertacao')
+[(1, 180824), (2, 69610), (3, 55418), (4, 145791), (5, 184018)]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 343031 entries, 0 to 343030
+Data columns (total 30 columns):
+0     343031 non-null float64
+1     343031 non-null float64
+2     343031 non-null float64
+3     343031 non-null float64
+4     343031 non-null float64
+5     343031 non-null float64
+6     343031 non-null float64
+7     343031 non-null float64
+8     343031 non-null float64
+9     343031 non-null float64
+10    343031 non-null float64
+11    343031 non-null float64
+12    343031 non-null float64
+13    343031 non-null float64
+14    343031 non-null float64
+15    343031 non-null float64
+16    343031 non-null float64
+17    343031 non-null float64
+18    343031 non-null float64
+19    343031 non-null float64
+20    343031 non-null float64
+21    343031 non-null float64
+22    343031 non-null float64
+23    343031 non-null float64
+24    343031 non-null float64
+25    343031 non-null float64
+26    343031 non-null float64
+27    343031 non-null float64
+28    343031 non-null float64
+29    343031 non-null float64
+dtypes: float64(30)
+memory usage: 78.5 MB
+X Teste: None
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Melhores parametros GNB : GaussianNB(priors=None, var_smoothing=1e-05)
+Elapsed computation time: 0.942 secs
+Elapsed computation time: 8.578 secs
+Resultados não balanceado  [0.5530113106343284]
+Resultados balanceado  [0.4861338050396712]
+Elapsed computation time: 0.849 secs
+Elapsed computation time: 8.572 secs
+Resultados não balanceado  [0.5530113106343284, 0.5571961636008512]
+Resultados balanceado  [0.4861338050396712, 0.45714697876175575]
+Elapsed computation time: 0.827 secs
+Elapsed computation time: 8.674 secs
+Resultados não balanceado  [0.5530113106343284, 0.5571961636008512, 0.5569775238317348]
+Resultados balanceado  [0.4861338050396712, 0.45714697876175575, 0.48263957022195925]
+Elapsed computation time: 0.725 secs
+Elapsed computation time: 7.841 secs
+Resultados não balanceado  [0.5530113106343284, 0.5571961636008512, 0.5569775238317348, 0.5530420079876396]
+Resultados balanceado  [0.4861338050396712, 0.45714697876175575, 0.48263957022195925, 0.4625271108475344]
+Elapsed computation time: 0.906 secs
+Elapsed computation time: 8.955 secs
+Resultados não balanceado  [0.5530113106343284, 0.5571961636008512, 0.5569775238317348, 0.5530420079876396, 0.5525042271587662]
+Resultados balanceado  [0.4861338050396712, 0.45714697876175575, 0.48263957022195925, 0.4625271108475344, 0.4928131629011103]
+Matriz de Confusão
+[[148347   7283   4232  13720   7242]
+ [ 38565  14848   3245  11385   1567]
+ [ 15699   8166   8201  11738  11614]
+ [ 31333   8485   2831  43711  59431]
+ [  3512    408   2371   1037 176690]]
+Tempo de execução do GNB: 81.9079 segundos
+Melhores parametros MNB : MultinomialNB(alpha=5, class_prior=None, fit_prior=True)
+Elapsed computation time: 0.813 secs
+Elapsed computation time: 7.380 secs
+Resultados não balanceado  [0.5520201725746269]
+Resultados balanceado  [0.4858145120304627]
+Elapsed computation time: 0.552 secs
+Elapsed computation time: 7.080 secs
+Resultados não balanceado  [0.5520201725746269, 0.5556948371862519]
+Resultados balanceado  [0.4858145120304627, 0.45192264002780647]
+Elapsed computation time: 0.509 secs
+Elapsed computation time: 6.679 secs
+Resultados não balanceado  [0.5520201725746269, 0.5556948371862519, 0.5523277847418593]
+Resultados balanceado  [0.4858145120304627, 0.45192264002780647, 0.476395477351673]
+Elapsed computation time: 0.554 secs
+Elapsed computation time: 6.736 secs
+Resultados não balanceado  [0.5520201725746269, 0.5556948371862519, 0.5523277847418593, 0.5514823776346092]
+Resultados balanceado  [0.4858145120304627, 0.45192264002780647, 0.476395477351673, 0.4940759176468258]
+Elapsed computation time: 0.552 secs
+Elapsed computation time: 7.085 secs
+Resultados não balanceado  [0.5520201725746269, 0.5556948371862519, 0.5523277847418593, 0.5514823776346092, 0.5516879482245933]
+Resultados balanceado  [0.4858145120304627, 0.45192264002780647, 0.476395477351673, 0.4940759176468258, 0.4300657441607463]
+Matriz de Confusão
+[[151554   1498   2107  22597   3068]
+ [ 44380   7107   2014  15397    712]
+ [ 17664   4538   5194  21868   6154]
+ [ 35777   2865   1069  75108  30972]
+ [  1303      0   2122  28851 151742]]
+Tempo de execução do MNB: 106.5342 segundos
