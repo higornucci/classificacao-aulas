@@ -11,7 +11,7 @@ from category_encoders import BinaryEncoder, OneHotEncoder
 from imblearn.over_sampling import SMOTE, ADASYN
 from imblearn.combine import SMOTEENN
 from imblearn.ensemble import BalancedBaggingClassifier
-from imblearn.under_sampling import ClusterCentroids, RandomUnderSampler, NearMiss
+from imblearn.under_sampling import ClusterCentroids, RandomUnderSampler, NearMiss, AllKNN, NeighbourhoodCleaningRule
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, \
@@ -93,7 +93,7 @@ def transformar_dados_colunas(X_train):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -101,9 +101,13 @@ for trainamento_index, teste_index in split.split(dados_completo, dados_completo
 # balanceador = ClusterCentroids(random_state=random_state)
 # balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
+# balanceador = AllKNN(allow_minority=True)
+balanceador = NeighbourhoodCleaningRule()
+
 # balanceador = SMOTE()
 # balanceador = ADASYN()
-balanceador = SMOTEENN(random_state=random_state)
+
+# balanceador = SMOTEENN(random_state=random_state)
 X_treino, Y_treino = balanceador.fit_resample(
     transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1)),
     conjunto_treinamento['acabamento'])
@@ -134,18 +138,18 @@ def fit_predict_imbalanced_model(modelo, X_train, y_train, X_test, y_test):
 
 @timeit
 def fit_predict_balanced_model(modelo, X_train, y_train, X_test, y_test):
-    # X_balanceado, y_balanceado = balanceador.fit_resample(X_train, y_train)]
-    bbc = BalancedBaggingClassifier(base_estimator=modelo,
-                                    sampling_strategy='auto',
-                                    replacement=False,
-                                    random_state=random_state)
-    bbc.fit(X_train, y_train)
-    y_pred = bbc.predict(X_test)
-    # modelo.fit(X_train, y_train)
-    # y_pred = modelo.predict(X_test)
-    # n_correct = sum(y_pred == y_test)
-    # return n_correct / len(y_pred)
-    return balanced_accuracy_score(y_test, y_pred)
+    X_balanceado, y_balanceado = AllKNN(allow_minority=True).fit_resample(X_train, y_train)
+    # bbc = BalancedBaggingClassifier(base_estimator=modelo,
+    #                                 sampling_strategy='all',
+    #                                 replacement=False,
+    #                                 random_state=random_state)
+    # bbc.fit(X_train, y_train)
+    # y_pred = bbc.predict(X_test)
+    modelo.fit(X_balanceado, y_balanceado)
+    y_pred = modelo.predict(X_test)
+    n_correct = sum(y_pred == y_test)
+    return n_correct / len(y_pred)
+    # return balanced_accuracy_score(y_test, y_pred)
 
 
 def fazer_selecao_features():
@@ -237,8 +241,8 @@ def rodar_algoritmos():
     sns.despine(top=True, right=True, left=True)
     plt.xlabel('time [s]')
     plt.ylabel('')
-    plt.title('Computation time difference using a ' + str(balanceador) + ' with ' + nome)
-    plt.show()
+    plt.title('Computation time difference with ' + nome)
+    plt.savefig('tempo ' + nome + '.svg')
 
     plt.figure()
     sns.boxplot(y='level_0', x=0, data=df_results, whis=10.0)
@@ -246,10 +250,10 @@ def rodar_algoritmos():
     ax = plt.gca()
     ax.xaxis.set_major_formatter(
         plt.FuncFormatter(lambda x, pos: "%i%%" % (100 * x)))
-    plt.xlabel('ROC-AUC')
+    plt.xlabel('Acuracy')
     plt.ylabel('')
-    plt.title('Difference in terms of ROC-AUC using a ' + str(balanceador) + ' with ' + nome)
-    plt.show()
+    plt.title('Difference in terms of acuracy with ' + nome)
+    plt.savefig('acuracia' + nome +'.svg')
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
