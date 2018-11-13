@@ -226,11 +226,11 @@ def rodar_algoritmos():
     # mostrar_features_mais_importantes(melhor_modelo)
     gerar_matriz_confusao(melhor_modelo)
 
-    df_results = (pd.DataFrame({'Balanced model': cv_results_balanced,
-                                'Imbalanced model': cv_results_imbalanced})
+    df_results = (pd.DataFrame({'Balanced ': cv_results_balanced,
+                                'Imbalanced ': cv_results_imbalanced})
                   .unstack().reset_index())
-    df_time = (pd.DataFrame({'Balanced model': cv_time_balanced,
-                             'Imbalanced model': cv_time_imbalanced})
+    df_time = (pd.DataFrame({'Balanced ': cv_time_balanced,
+                             'Imbalanced ': cv_time_imbalanced})
                .unstack().reset_index())
 
     final = time.time()
