@@ -225,3 +225,172 @@ Matriz de Confusão
  [ 35777   2865   1069  75108  30972]
  [  1303      0   2122  28851 151742]]
 Tempo de execução do MNB: 106.5342 segundos
+
+
+/home/higornucci/projetos/classificacao-aulas/venv/bin/python /home/higornucci/programas/pycharm-2018.2.2/helpers/pydev/pydevconsole.py 40927 36775
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/higornucci/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.6 (default, Sep 12 2018, 18:26:19)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
+runfile('/home/higornucci/projetos/classificacao-aulas/dissertacao/5_1_selecao_modelo.py', wdir='/home/higornucci/projetos/classificacao-aulas/dissertacao')
+[(1, 829), (2, 136529), (3, 210410), (4, 14188), (5, 158)]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 137213 entries, 0 to 137212
+Data columns (total 30 columns):
+0     137213 non-null float64
+1     137213 non-null float64
+2     137213 non-null float64
+3     137213 non-null float64
+4     137213 non-null float64
+5     137213 non-null float64
+6     137213 non-null float64
+7     137213 non-null float64
+8     137213 non-null float64
+9     137213 non-null float64
+10    137213 non-null float64
+11    137213 non-null float64
+12    137213 non-null float64
+13    137213 non-null float64
+14    137213 non-null float64
+15    137213 non-null float64
+16    137213 non-null float64
+17    137213 non-null float64
+18    137213 non-null float64
+19    137213 non-null float64
+20    137213 non-null float64
+21    137213 non-null float64
+22    137213 non-null float64
+23    137213 non-null float64
+24    137213 non-null float64
+25    137213 non-null float64
+26    137213 non-null float64
+27    137213 non-null float64
+28    137213 non-null float64
+29    137213 non-null float64
+dtypes: float64(30)
+memory usage: 31.4 MB
+X Teste: None
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Melhores parametros GNB : GaussianNB(priors=None, var_smoothing=1e-05)
+Elapsed computation time: 1.025 secs
+Elapsed computation time: 288.356 secs
+Resultados não balanceado  [0.5506595488831396]
+Resultados balanceado  [0.5623929599533579]
+Elapsed computation time: 1.062 secs
+Elapsed computation time: 296.282 secs
+Resultados não balanceado  [0.5506595488831396, 0.5520087455588959]
+Resultados balanceado  [0.5623929599533579, 0.5600437277944794]
+Elapsed computation time: 1.002 secs
+Elapsed computation time: 294.139 secs
+Resultados não balanceado  [0.5506595488831396, 0.5520087455588959, 0.5523549239318575]
+Resultados balanceado  [0.5623929599533579, 0.5600437277944794, 0.5476906258540585]
+Elapsed computation time: 1.038 secs
+Elapsed computation time: 297.573 secs
+Resultados não balanceado  [0.5506595488831396, 0.5520087455588959, 0.5523549239318575, 0.5503425406311493]
+Resultados balanceado  [0.5623929599533579, 0.5600437277944794, 0.5476906258540585, 0.5368140077253845]
+Elapsed computation time: 1.006 secs
+Elapsed computation time: 286.990 secs
+Resultados não balanceado  [0.5506595488831396, 0.5520087455588959, 0.5523549239318575, 0.5503425406311493, 0.5509893593761388]
+Resultados balanceado  [0.5623929599533579, 0.5600437277944794, 0.5476906258540585, 0.5368140077253845, 0.5515177465199329]
+Matriz de Confusão
+[[    59    489    259     10     12]
+ [  1357  78729  52886   3331    226]
+ [  3218  46096 145431  13808   1857]
+ [    51   1801   6258   5654    424]
+ [     6      1     60      3     88]]
+Tempo de execução do GNB: 1486.6831 segundos
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Melhores parametros MNB : MultinomialNB(alpha=5, class_prior=None, fit_prior=True)
+Elapsed computation time: 0.608 secs
+Elapsed computation time: 305.719 secs
+Resultados não balanceado  [0.5657362533250738]
+Resultados balanceado  [0.5669751849287614]
+Elapsed computation time: 0.585 secs
+Elapsed computation time: 292.441 secs
+Resultados não balanceado  [0.5657362533250738, 0.5628769244784549]
+Resultados balanceado  [0.5669751849287614, 0.5654914821900338]
+Elapsed computation time: 0.590 secs
+Elapsed computation time: 291.158 secs
+Resultados não balanceado  [0.5657362533250738, 0.5628769244784549, 0.5631593331511342]
+Resultados balanceado  [0.5669751849287614, 0.5654914821900338, 0.5661929488931402]
+Elapsed computation time: 0.583 secs
+Elapsed computation time: 304.530 secs
+Resultados não balanceado  [0.5657362533250738, 0.5628769244784549, 0.5631593331511342, 0.5611198163399169]
+Resultados balanceado  [0.5669751849287614, 0.5654914821900338, 0.5661929488931402, 0.563615990088186]
+Elapsed computation time: 0.622 secs
+Elapsed computation time: 287.501 secs
+Resultados não balanceado  [0.5657362533250738, 0.5628769244784549, 0.5631593331511342, 0.5611198163399169, 0.5602999052547191]
+Resultados balanceado  [0.5669751849287614, 0.5654914821900338, 0.5661929488931402, 0.563615990088186, 0.5628780701115079]
+Matriz de Confusão
+[[     0    433    396      0      0]
+ [     0  59027  77494      8      0]
+ [     0  41297 169053     60      0]
+ [     0   1354  12620    214      0]
+ [     0      9    149      0      0]]
+Tempo de execução do MNB: 1532.1729 segundos
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=14,
+            max_features=28, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=10, min_samples_split=9,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Elapsed computation time: 4.477 secs
+Elapsed computation time: 278.776 secs
+Resultados não balanceado  [0.6694147870130817]
+Resultados balanceado  [0.6589020879641438]
+Elapsed computation time: 4.433 secs
+Elapsed computation time: 276.607 secs
+Resultados não balanceado  [0.6694147870130817, 0.6720051015760226]
+Resultados balanceado  [0.6589020879641438, 0.6607998542406851]
+Elapsed computation time: 4.323 secs
+Elapsed computation time: 278.050 secs
+Resultados não balanceado  [0.6694147870130817, 0.6720051015760226, 0.6692265646351462]
+Resultados balanceado  [0.6589020879641438, 0.6607998542406851, 0.6556891682609092]
+Elapsed computation time: 4.444 secs
+Elapsed computation time: 279.649 secs
+Resultados não balanceado  [0.6694147870130817, 0.6720051015760226, 0.6692265646351462, 0.6670887690401575]
+Resultados balanceado  [0.6589020879641438, 0.6607998542406851, 0.6556891682609092, 0.6562477224692078]
+Elapsed computation time: 4.438 secs
+Elapsed computation time: 276.730 secs
+Resultados não balanceado  [0.6694147870130817, 0.6720051015760226, 0.6692265646351462, 0.6670887690401575, 0.6659135631513738]
+Resultados balanceado  [0.6589020879641438, 0.6607998542406851, 0.6556891682609092, 0.6562477224692078, 0.6568945412141972]
+Matriz de Confusão
+[[   156    543    130      0      0]
+ [   113 104391  31826    199      0]
+ [    12  27939 180392   2052     15]
+ [     0    250   4824   9107      7]
+ [     0      2     55     75     26]]
+Tempo de execução do DTC: 29772.8303 segundos
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
