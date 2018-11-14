@@ -1,8 +1,11 @@
 import warnings
 import time
+from collections import Counter
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from imblearn.under_sampling import NeighbourhoodCleaningRule
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
     StratifiedShuffleSplit
@@ -22,6 +25,8 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.set_index('index', inplace=True)
 print(dados_completo.head())
 
+random_state = 42
+
 
 def mostrar_quantidade_por_classe(df, classe):
     print(df.loc[df['acabamento'] == classe].info())
@@ -29,7 +34,7 @@ def mostrar_quantidade_por_classe(df, classe):
 
 def buscar_quantidades_iguais(quantidade, classe):
     classe = dados_completo.loc[dados_completo['acabamento'] == classe]
-    return classe.sample(quantidade, random_state=7)
+    return classe.sample(quantidade, random_state=random_state)
 
 
 def mostrar_correlacao(dados, classe):
@@ -65,14 +70,28 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=7)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-X_treino, X_teste, Y_treino, Y_teste = conjunto_treinamento.drop('acabamento', axis=1), conjunto_teste.drop(
-    'acabamento', axis=1), conjunto_treinamento['acabamento'], conjunto_teste['acabamento']
-print('X Treino:', X_treino.info())
+# balanceador = ClusterCentroids(random_state=random_state)
+# balanceador = RandomUnderSampler(random_state=random_state)
+# balanceador = NearMiss(version=3)
+# balanceador = AllKNN(allow_minority=True)
+balanceador = NeighbourhoodCleaningRule()
+
+# balanceador = SMOTE()
+# balanceador = ADASYN()
+
+# balanceador = SMOTEENN(random_state=random_state)
+X_treino, Y_treino = balanceador.fit_resample(
+    conjunto_treinamento.drop('acabamento', axis=1),
+    conjunto_treinamento['acabamento'])
+print(sorted(Counter(Y_treino).items()))
+
+X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
+
 print('X Teste:', X_teste.info())
 mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 mostrar_quantidade_por_classe(conjunto_treinamento, 2)
@@ -98,7 +117,6 @@ def fazer_selecao_features():
 
 # fazer_selecao_features()
 
-random_state = 42
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)

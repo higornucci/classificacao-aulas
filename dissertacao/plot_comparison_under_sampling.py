@@ -18,7 +18,7 @@ import numpy as np
 import pandas as pd
 
 from sklearn.svm import LinearSVC
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, LogisticRegressionCV
 
 from imblearn.pipeline import make_pipeline
 from imblearn.under_sampling import (ClusterCentroids, RandomUnderSampler,
@@ -38,7 +38,7 @@ print(__doc__)
 # ``make_classification`` from scikit-learn but fixing some parameters.
 
 def create_dataset():
-    dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
+    dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
     dados_completo.set_index('index', inplace=True)
     return dados_completo.drop('acabamento', axis=1), dados_completo['acabamento']
 
@@ -90,11 +90,11 @@ def plot_decision_function(X, y, clf, ax):
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 6))
 X, y = create_dataset()
 
-clf = LinearSVC().fit(X, y)
+clf = LogisticRegression().fit(X, y)
 plot_decision_function(X, y, clf, ax1)
-ax1.set_title('Linear SVC with y={}'.format(Counter(y)))
+ax1.set_title('LogisticRegression with y={}'.format(Counter(y)))
 sampler = ClusterCentroids(random_state=0)
-clf = make_pipeline(sampler, LinearSVC())
+clf = make_pipeline(sampler, LogisticRegression())
 clf.fit(X, y)
 plot_decision_function(X, y, clf, ax2)
 ax2.set_title('Decision function for {}'.format(sampler.__class__.__name__))
@@ -121,11 +121,11 @@ fig.tight_layout()
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 6))
 X, y = create_dataset()
 
-clf = LinearSVC().fit(X, y)
+clf = LogisticRegression().fit(X, y)
 plot_decision_function(X, y, clf, ax1)
 ax1.set_title('Linear SVC with y={}'.format(Counter(y)))
 sampler = RandomUnderSampler(random_state=0)
-clf = make_pipeline(sampler, LinearSVC())
+clf = make_pipeline(sampler, LogisticRegression())
 clf.fit(X, y)
 plot_decision_function(X, y, clf, ax2)
 ax2.set_title('Decision function for {}'.format(sampler.__class__.__name__))
@@ -152,7 +152,7 @@ ax_arr = ((ax1, ax2), (ax3, ax4), (ax5, ax6))
 for ax, sampler in zip(ax_arr, (NearMiss(version=1),
                                 NearMiss(version=2),
                                 NearMiss(version=3))):
-    clf = make_pipeline(sampler, LinearSVC())
+    clf = make_pipeline(sampler, LogisticRegression())
     clf.fit(X, y)
     plot_decision_function(X, y, clf, ax[0])
     ax[0].set_title('Decision function for {}-{}'.format(
@@ -179,7 +179,7 @@ for ax, sampler in zip(ax_arr, (
         EditedNearestNeighbours(),
         RepeatedEditedNearestNeighbours(),
         AllKNN(allow_minority=True))):
-    clf = make_pipeline(sampler, LinearSVC())
+    clf = make_pipeline(sampler, LogisticRegression())
     clf.fit(X, y)
     plot_decision_function(X, y, clf, ax[0])
     ax[0].set_title('Decision function for {}'.format(
@@ -207,7 +207,7 @@ for ax, sampler in zip(ax_arr, (
         CondensedNearestNeighbour(random_state=0),
         OneSidedSelection(random_state=0),
         NeighbourhoodCleaningRule())):
-    clf = make_pipeline(sampler, LinearSVC())
+    clf = make_pipeline(sampler, LogisticRegression())
     clf.fit(X, y)
     plot_decision_function(X, y, clf, ax[0])
     ax[0].set_title('Decision function for {}'.format(
@@ -225,13 +225,13 @@ fig.tight_layout()
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(20, 6))
 X, y = create_dataset()
 
-clf = LinearSVC().fit(X, y)
+clf = LogisticRegression().fit(X, y)
 plot_decision_function(X, y, clf, ax1)
 ax1.set_title('Linear SVC with y={}'.format(Counter(y)))
 sampler = InstanceHardnessThreshold(
     random_state=0, estimator=LogisticRegression(solver='lbfgs',
                                                  multi_class='auto'))
-clf = make_pipeline(sampler, LinearSVC())
+clf = make_pipeline(sampler, LogisticRegression())
 clf.fit(X, y)
 plot_decision_function(X, y, clf, ax2)
 ax2.set_title('Decision function for {}'.format(sampler.__class__.__name__))
