@@ -24,7 +24,7 @@ from sklearn.preprocessing import MinMaxScaler, Imputer, MultiLabelBinarizer
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression, SGDClassifier
 
 warnings.filterwarnings('ignore')
 
@@ -93,16 +93,16 @@ def transformar_dados_colunas(X_train):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
 # balanceador = ClusterCentroids(random_state=random_state)
-# balanceador = RandomUnderSampler(random_state=random_state)
+balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule()
+# balanceador = NeighbourhoodCleaningRule()
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -138,7 +138,7 @@ def fit_predict_imbalanced_model(modelo, X_train, y_train, X_test, y_test):
 
 @timeit
 def fit_predict_balanced_model(modelo, X_train, y_train, X_test, y_test):
-    X_balanceado, y_balanceado = AllKNN(allow_minority=True).fit_resample(X_train, y_train)
+    X_balanceado, y_balanceado = NeighbourhoodCleaningRule().fit_resample(X_train, y_train)
     # bbc = BalancedBaggingClassifier(base_estimator=modelo,
     #                                 sampling_strategy='all',
     #                                 replacement=False,
@@ -175,6 +175,7 @@ modelos_base = [
     ('MNB', MultinomialNB()),
     ('DTC', tree.DecisionTreeClassifier()),
     ('RF', RandomForestClassifier(random_state=random_state)),
+    ('SGD', SGDClassifier(random_state=random_state, class_weight='balanced')),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC())]
 
@@ -253,7 +254,7 @@ def rodar_algoritmos():
     plt.xlabel('Acuracy')
     plt.ylabel('')
     plt.title('Difference in terms of acuracy with ' + nome)
-    plt.savefig('acuracia' + nome +'.svg')
+    plt.savefig('acuracia' + nome + '.svg')
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
@@ -270,6 +271,15 @@ def escolher_parametros():
         return [
             {'n_neighbors': [15],
              'weights': ['uniform']}
+        ]
+    elif nome == 'SGD':
+        return [
+            {'alpha': [10 ** x for x in range(-6, 1)],  # learning rate
+             'n_iter': [1000],  # number of epochs
+             'loss': ['log'],  # logistic regression,
+             'penalty': ['l2', 'elasticnet'],
+             'l1_ratio': [0, 0.05, 0.1, 0.2, 0.5, 0.8, 0.9, 0.95, 1],
+             'n_jobs': [-1]}
         ]
     elif nome == 'SVM':
         return [

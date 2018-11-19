@@ -271,16 +271,7 @@ Data columns (total 30 columns):
 dtypes: float64(30)
 memory usage: 31.4 MB
 X Teste: None
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
+
 Melhores parametros GNB : GaussianNB(priors=None, var_smoothing=1e-05)
 Elapsed computation time: 1.025 secs
 Elapsed computation time: 288.356 secs
@@ -309,14 +300,7 @@ Matriz de Confusão
  [    51   1801   6258   5654    424]
  [     6      1     60      3     88]]
 Tempo de execução do GNB: 1486.6831 segundos
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
+
 Melhores parametros MNB : MultinomialNB(alpha=5, class_prior=None, fit_prior=True)
 Elapsed computation time: 0.608 secs
 Elapsed computation time: 305.719 secs
@@ -345,14 +329,7 @@ Matriz de Confusão
  [     0   1354  12620    214      0]
  [     0      9    149      0      0]]
 Tempo de execução do MNB: 1532.1729 segundos
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
+
 Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=14,
             max_features=28, max_leaf_nodes=None,
             min_impurity_decrease=0.0, min_impurity_split=None,
@@ -386,11 +363,4 @@ Matriz de Confusão
  [     0    250   4824   9107      7]
  [     0      2     55     75     26]]
 Tempo de execução do DTC: 29772.8303 segundos
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/home/higornucci/projetos/classificacao-aulas/venv/lib/python3.6/site-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
+
