@@ -70,7 +70,7 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.8, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -96,8 +96,8 @@ print('X Teste:', X_teste.info())
 mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 mostrar_quantidade_por_classe(conjunto_treinamento, 2)
 mostrar_quantidade_por_classe(conjunto_treinamento, 3)
-# mostrar_quantidade_por_classe(conjunto_treinamento, 4)
-# mostrar_quantidade_por_classe(conjunto_treinamento, 5)
+mostrar_quantidade_por_classe(conjunto_treinamento, 4)
+mostrar_quantidade_por_classe(conjunto_treinamento, 5)
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.classe"] = Y_teste.values
@@ -122,9 +122,9 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [#  ('NB', MultinomialNB()),
-                ('DTC', tree.DecisionTreeClassifier()),
-                ('RF', RandomForestClassifier(random_state=random_state)),
+modelos_base = [('NB', MultinomialNB()),
+                #('DTC', tree.DecisionTreeClassifier()),
+                #('RF', RandomForestClassifier(random_state=random_state)),
                 ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 ('SVM', SVC())]
 
@@ -145,7 +145,7 @@ def rodar_algoritmos():
     melhor_modelo = grid_search.best_estimator_
     cv_resultados = cross_val_score(BaggingClassifier(melhor_modelo), X_treino, Y_treino, cv=kfold, scoring=scoring)
 
-    mostrar_features_mais_importantes(melhor_modelo)
+    # mostrar_features_mais_importantes(melhor_modelo)
     gerar_matriz_confusao(melhor_modelo)
 
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
@@ -205,7 +205,7 @@ def escolher_parametros():
         return [
             {'alpha': range(5, 10, 1),
              'fit_prior': [True, False],
-             'class_prior': [None, [1, 2, 3]]}
+             'class_prior': [None, [1, 2, 3, 4, 5]]}
         ]
     elif nome == 'RF':
         return [

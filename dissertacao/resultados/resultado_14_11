@@ -1,0 +1,233 @@
+/usr/bin/python3 /home/higornucci/projetos/classificacao-aulas/dissertacao/5_selecao_modelo.py
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+       tipificacao#_C  tipificacao#_F  tipificacao#_M  maturidade  \
+index
+0                   0               0               1         0.0
+1                   0               0               1         0.0
+2                   0               0               1         0.0
+3                   0               0               1         0.0
+4                   0               0               1         0.0
+
+       peso_carcaca  questionario_classificacao_estabelecimento_rural  \
+index
+0          0.603333                                          0.555556
+1          0.620000                                          0.555556
+2          0.730000                                          0.555556
+3          0.718333                                          0.555556
+4          0.693333                                          0.555556
+
+       possui_outros_incentivos  fabrica_racao  \
+index
+0                           0.0            1.0
+1                           0.0            1.0
+2                           0.0            1.0
+3                           0.0            1.0
+4                           0.0            1.0
+
+       area_total_destinada_confinamento  \
+index
+0                                    0.0
+1                                    0.0
+2                                    0.0
+3                                    0.0
+4                                    0.0
+
+       area_manejada_80_boa_cobertura_vegetal     ...      semi_confinamento  \
+index                                             ...
+0                                         1.0     ...                    1.0
+1                                         1.0     ...                    1.0
+2                                         1.0     ...                    1.0
+3                                         1.0     ...                    1.0
+4                                         1.0     ...                    1.0
+
+       suplementacao  fertirrigacao  ifp  ilp  ilpf  latitude  longitude  \
+index
+0                1.0            1.0  0.0  1.0   0.0  0.424344   0.861451
+1                1.0            1.0  0.0  1.0   0.0  0.424344   0.861451
+2                1.0            1.0  0.0  1.0   0.0  0.424344   0.861451
+3                1.0            1.0  0.0  1.0   0.0  0.424344   0.861451
+4                1.0            1.0  0.0  1.0   0.0  0.424344   0.861451
+
+       eh_precoce  acabamento
+index
+0             1.0           3
+1             1.0           2
+2             1.0           3
+3             1.0           3
+4             1.0           3
+
+[5 rows x 28 columns]
+[(1, 954), (2, 141176), (3, 215432), (4, 17294), (5, 158)]
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 137213 entries, 208320 to 456898
+Data columns (total 27 columns):
+tipificacao#_C                                      137213 non-null int64
+tipificacao#_F                                      137213 non-null int64
+tipificacao#_M                                      137213 non-null int64
+maturidade                                          137213 non-null float64
+peso_carcaca                                        137213 non-null float64
+questionario_classificacao_estabelecimento_rural    137213 non-null float64
+possui_outros_incentivos                            137213 non-null float64
+fabrica_racao                                       137213 non-null float64
+area_total_destinada_confinamento                   137213 non-null float64
+area_manejada_80_boa_cobertura_vegetal              137213 non-null float64
+area_manejada_20_erosao                             137213 non-null float64
+dispoe_de_identificacao_individual                  137213 non-null float64
+rastreamento_sisbov                                 137213 non-null float64
+faz_controle_pastejo_regua_de_manejo_embrapa        137213 non-null float64
+lita_trace                                          137213 non-null float64
+apresenta_atestado_programas_controle_qualidade     137213 non-null float64
+envolvido_em_organizacao                            137213 non-null float64
+confinamento                                        137213 non-null float64
+semi_confinamento                                   137213 non-null float64
+suplementacao                                       137213 non-null float64
+fertirrigacao                                       137213 non-null float64
+ifp                                                 137213 non-null float64
+ilp                                                 137213 non-null float64
+ilpf                                                137213 non-null float64
+latitude                                            137213 non-null float64
+longitude                                           137213 non-null float64
+eh_precoce                                          137213 non-null float64
+dtypes: float64(24), int64(3)
+memory usage: 29.3 MB
+X Teste: None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 2345 entries, 640337 to 234062
+Data columns (total 28 columns):
+tipificacao#_C                                      2345 non-null int64
+tipificacao#_F                                      2345 non-null int64
+tipificacao#_M                                      2345 non-null int64
+maturidade                                          2345 non-null float64
+peso_carcaca                                        2345 non-null float64
+questionario_classificacao_estabelecimento_rural    2345 non-null float64
+possui_outros_incentivos                            2345 non-null float64
+fabrica_racao                                       2345 non-null float64
+area_total_destinada_confinamento                   2345 non-null float64
+area_manejada_80_boa_cobertura_vegetal              2345 non-null float64
+area_manejada_20_erosao                             2345 non-null float64
+dispoe_de_identificacao_individual                  2345 non-null float64
+rastreamento_sisbov                                 2345 non-null float64
+faz_controle_pastejo_regua_de_manejo_embrapa        2345 non-null float64
+lita_trace                                          2345 non-null float64
+apresenta_atestado_programas_controle_qualidade     2345 non-null float64
+envolvido_em_organizacao                            2345 non-null float64
+confinamento                                        2345 non-null float64
+semi_confinamento                                   2345 non-null float64
+suplementacao                                       2345 non-null float64
+fertirrigacao                                       2345 non-null float64
+ifp                                                 2345 non-null float64
+ilp                                                 2345 non-null float64
+ilpf                                                2345 non-null float64
+latitude                                            2345 non-null float64
+longitude                                           2345 non-null float64
+eh_precoce                                          2345 non-null float64
+acabamento                                          2345 non-null int64
+dtypes: float64(24), int64(4)
+memory usage: 531.3 KB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 215378 entries, 293128 to 368434
+Data columns (total 28 columns):
+tipificacao#_C                                      215378 non-null int64
+tipificacao#_F                                      215378 non-null int64
+tipificacao#_M                                      215378 non-null int64
+maturidade                                          215378 non-null float64
+peso_carcaca                                        215378 non-null float64
+questionario_classificacao_estabelecimento_rural    215378 non-null float64
+possui_outros_incentivos                            215378 non-null float64
+fabrica_racao                                       215378 non-null float64
+area_total_destinada_confinamento                   215378 non-null float64
+area_manejada_80_boa_cobertura_vegetal              215378 non-null float64
+area_manejada_20_erosao                             215378 non-null float64
+dispoe_de_identificacao_individual                  215378 non-null float64
+rastreamento_sisbov                                 215378 non-null float64
+faz_controle_pastejo_regua_de_manejo_embrapa        215378 non-null float64
+lita_trace                                          215378 non-null float64
+apresenta_atestado_programas_controle_qualidade     215378 non-null float64
+envolvido_em_organizacao                            215378 non-null float64
+confinamento                                        215378 non-null float64
+semi_confinamento                                   215378 non-null float64
+suplementacao                                       215378 non-null float64
+fertirrigacao                                       215378 non-null float64
+ifp                                                 215378 non-null float64
+ilp                                                 215378 non-null float64
+ilpf                                                215378 non-null float64
+latitude                                            215378 non-null float64
+longitude                                           215378 non-null float64
+eh_precoce                                          215378 non-null float64
+acabamento                                          215378 non-null int64
+dtypes: float64(24), int64(4)
+memory usage: 47.7 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 294671 entries, 551558 to 274296
+Data columns (total 28 columns):
+tipificacao#_C                                      294671 non-null int64
+tipificacao#_F                                      294671 non-null int64
+tipificacao#_M                                      294671 non-null int64
+maturidade                                          294671 non-null float64
+peso_carcaca                                        294671 non-null float64
+questionario_classificacao_estabelecimento_rural    294671 non-null float64
+possui_outros_incentivos                            294671 non-null float64
+fabrica_racao                                       294671 non-null float64
+area_total_destinada_confinamento                   294671 non-null float64
+area_manejada_80_boa_cobertura_vegetal              294671 non-null float64
+area_manejada_20_erosao                             294671 non-null float64
+dispoe_de_identificacao_individual                  294671 non-null float64
+rastreamento_sisbov                                 294671 non-null float64
+faz_controle_pastejo_regua_de_manejo_embrapa        294671 non-null float64
+lita_trace                                          294671 non-null float64
+apresenta_atestado_programas_controle_qualidade     294671 non-null float64
+envolvido_em_organizacao                            294671 non-null float64
+confinamento                                        294671 non-null float64
+semi_confinamento                                   294671 non-null float64
+suplementacao                                       294671 non-null float64
+fertirrigacao                                       294671 non-null float64
+ifp                                                 294671 non-null float64
+ilp                                                 294671 non-null float64
+ilpf                                                294671 non-null float64
+latitude                                            294671 non-null float64
+longitude                                           294671 non-null float64
+eh_precoce                                          294671 non-null float64
+acabamento                                          294671 non-null int64
+dtypes: float64(24), int64(4)
+memory usage: 65.2 MB
+
+Matriz de Confusão
+[[   311    503    135      5      0]
+ [   110 110427  30327    311      1]
+ [    25  26587 186556   2253     11]
+ [     0    323   5059  11900     12]
+ [     0      2     59     79     18]]
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=17,
+            max_features=3, max_leaf_nodes=None, min_impurity_decrease=0.0,
+            min_impurity_split=None, min_samples_leaf=1,
+            min_samples_split=15, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best')
+Validação cruzada DTC : [0.84893007 0.85492774 0.84677946 0.84800405 0.84948   ]
+DTC: (0.8496) +/- (0.003)
+Tempo de execução do DTC: 12226.2384 segundos
+Matriz de Confusão
+[[    0   118    39     0     0]
+ [    0 22001 12074     0     0]
+ [    0 13158 39038     0     0]
+ [    0   290  3764     0     0]
+ [    0     0    40     0     0]]
+Melhores parametros NB : MultinomialNB(alpha=5, class_prior=None, fit_prior=True)
+Validação cruzada NB : [0.67491439 0.6675504  0.67349757 0.68018118 0.67386621]
+NB: (0.6740) +/- (0.004)
+Tempo de execução do NB: 29.5733 segundos
+Matriz de Confusão
+[[   35   106    16     0     0]
+ [    6 27021  6951    97     0]
+ [    0  5912 45738   546     0]
+ [    0    95  1050  2909     0]
+ [    0     2    16    22     0]]
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=None, n_neighbors=15, p=2,
+           weights='uniform')
+Validação cruzada K-NN : [0.84270408 0.83595692 0.83716306 0.83561644 0.83936364]
+K-NN: (0.8382) +/- (0.003)
+Tempo de execução do K-NN: 2144.8343 segundos
+
