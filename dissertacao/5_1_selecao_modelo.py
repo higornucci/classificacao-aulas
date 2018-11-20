@@ -93,16 +93,16 @@ def transformar_dados_colunas(X_train):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.8, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
 # balanceador = ClusterCentroids(random_state=random_state)
-balanceador = RandomUnderSampler(random_state=random_state)
+# balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-# balanceador = NeighbourhoodCleaningRule()
+balanceador = NeighbourhoodCleaningRule()
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -138,14 +138,14 @@ def fit_predict_imbalanced_model(modelo, X_train, y_train, X_test, y_test):
 
 @timeit
 def fit_predict_balanced_model(modelo, X_train, y_train, X_test, y_test):
-    X_balanceado, y_balanceado = NeighbourhoodCleaningRule().fit_resample(X_train, y_train)
+    # X_train, y_train = NeighbourhoodCleaningRule().fit_resample(X_train, y_train)
     # bbc = BalancedBaggingClassifier(base_estimator=modelo,
     #                                 sampling_strategy='all',
     #                                 replacement=False,
     #                                 random_state=random_state)
     # bbc.fit(X_train, y_train)
     # y_pred = bbc.predict(X_test)
-    modelo.fit(X_balanceado, y_balanceado)
+    modelo.fit(X_train, y_train)
     y_pred = modelo.predict(X_test)
     n_correct = sum(y_pred == y_test)
     return n_correct / len(y_pred)
@@ -171,17 +171,16 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    ('GNB', GaussianNB()),
+    # ('GNB', GaussianNB()),
     ('MNB', MultinomialNB()),
     ('DTC', tree.DecisionTreeClassifier()),
-    ('RF', RandomForestClassifier(random_state=random_state)),
-    ('SGD', SGDClassifier(random_state=random_state, class_weight='balanced')),
+    # ('RF', RandomForestClassifier(random_state=random_state)),
+    # ('SGD', SGDClassifier(random_state=random_state, class_weight='balanced')),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC())]
 
 
 def gerar_matriz_confusao(modelo):
-    average = 'weighted'
     y_train_pred = cross_val_predict(modelo, X_treino, Y_treino, cv=kfold)
     matriz_confusao = confusion_matrix(Y_treino, y_train_pred)
     print('Matriz de Confusão')
@@ -197,8 +196,10 @@ def rodar_algoritmos():
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
 
     skf = StratifiedKFold(n_splits=num_folds, random_state=random_state)
-    X = transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1))
-    Y = conjunto_treinamento['acabamento']
+    # X = transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1))
+    # Y = conjunto_treinamento['acabamento']
+    X = X_treino
+    Y = Y_treino
 
     cv_results_imbalanced = []
     cv_time_imbalanced = []
@@ -206,11 +207,11 @@ def rodar_algoritmos():
     cv_time_balanced = []
     for train_idx, valid_idx in skf.split(X, Y):
         # X_local_train = preprocessor.fit_transform(X_train.iloc[train_idx])
-        X_local_train = X.iloc[train_idx]
-        y_local_train = Y.iloc[train_idx].values.ravel()
+        X_local_train = X[train_idx]
+        y_local_train = Y[train_idx]
         # X_local_test = preprocessor.transform(X_train.iloc[valid_idx])
-        X_local_test = X.iloc[valid_idx]
-        y_local_test = Y.iloc[valid_idx].values.ravel()
+        X_local_test = X[valid_idx]
+        y_local_test = Y[valid_idx]
 
         elapsed_time, score = fit_predict_imbalanced_model(melhor_modelo, X_local_train, y_local_train, X_local_test,
                                                            y_local_test)
