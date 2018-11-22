@@ -1,17 +1,21 @@
 import warnings
 import time
+import multiprocessing
 from collections import Counter
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from imblearn.under_sampling import NeighbourhoodCleaningRule
+from imblearn.combine import SMOTEENN
+from imblearn.pipeline import make_pipeline, Pipeline
+from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler
+from imblearn.over_sampling import RandomOverSampler
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
-    StratifiedShuffleSplit
+    StratifiedShuffleSplit, RandomizedSearchCV
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
@@ -26,6 +30,7 @@ dados_completo.set_index('index', inplace=True)
 print(dados_completo.head())
 
 random_state = 42
+n_jobs = multiprocessing.cpu_count()-1
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -70,7 +75,7 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.8, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -79,20 +84,23 @@ for trainamento_index, teste_index in split.split(dados_completo, dados_completo
 # balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule()
+balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs)
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
+# balanceador = RandomOverSampler()
 
 # balanceador = SMOTEENN(random_state=random_state)
-X_treino, Y_treino = balanceador.fit_resample(
-    conjunto_treinamento.drop('acabamento', axis=1),
-    conjunto_treinamento['acabamento'])
-print(sorted(Counter(Y_treino).items()))
+# X_treino, Y_treino = balanceador.fit_resample(
+#     conjunto_treinamento.drop('acabamento', axis=1),
+#     conjunto_treinamento['acabamento'])
+# print(sorted(Counter(Y_treino).items()))
+X_treino, Y_treino = conjunto_treinamento.drop('acabamento', axis=1), conjunto_treinamento['acabamento']
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
-print('X Teste:', X_teste.info())
+print('X Treino:', X_treino.info())
+# print('X Teste:', X_teste.info())
 mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 mostrar_quantidade_por_classe(conjunto_treinamento, 2)
 mostrar_quantidade_por_classe(conjunto_treinamento, 3)
@@ -123,38 +131,51 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [('NB', MultinomialNB()),
-                #('DTC', tree.DecisionTreeClassifier()),
-                #('RF', RandomForestClassifier(random_state=random_state)),
+                ('DTC', tree.DecisionTreeClassifier()),
+                # ('RF', RandomForestClassifier(random_state=random_state)),
                 ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-                ('SVM', SVC())]
+                # ('SVM', SVC())
+                ]
 
 
 def gerar_matriz_confusao(modelo):
-    average = 'weighted'
-    y_train_pred = cross_val_predict(modelo, X_treino, Y_treino, cv=kfold)
-    matriz_confusao = confusion_matrix(Y_treino, y_train_pred)
+    average = None
+    # y_train_pred = cross_val_predict(modelo, X_treino, Y_treino, cv=kfold)
+    X_treino_balanceado, Y_treino_balanceado = balanceador.fit_resample(X_treino, Y_treino)
+    modelo.fit(X_treino_balanceado, Y_treino_balanceado)
+    y_train_pred = modelo.predict(X_teste)
+    matriz_confusao = confusion_matrix(Y_teste, y_train_pred)
     print('Matriz de Confusão')
     print(matriz_confusao)
+    precision = precision_score(Y_teste, y_train_pred, average=average)
+    print('Precision: ', precision)
+    recall = recall_score(Y_teste, y_train_pred, average=average)
+    print('Recall: ', recall)
+    f1 = f1_score(Y_teste, y_train_pred, average=average)
+    print('F1 score: ', f1)
 
 
 def rodar_algoritmos():
     global preds
     inicio = time.time()
-    grid_search = GridSearchCV(modelo, escolher_parametros(), cv=kfold, n_jobs=-1)
+    pipeline = Pipeline([('bal', balanceador),
+                         ('clf', modelo)])
+    grid_search = RandomizedSearchCV(pipeline, param_distributions=escolher_parametros(),
+                                     n_iter=1000, cv=kfold, n_jobs=n_jobs)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
-    cv_resultados = cross_val_score(BaggingClassifier(melhor_modelo), X_treino, Y_treino, cv=kfold, scoring=scoring)
+    pipeline_melhor_modelo = Pipeline([('bal', balanceador),
+                                       ('clf', modelo)])
+    cv_resultados = cross_val_score(pipeline_melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
 
     # mostrar_features_mais_importantes(melhor_modelo)
-    gerar_matriz_confusao(melhor_modelo)
 
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
-    melhor_modelo.fit(X_treino, Y_treino)
-    preds = melhor_modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
+    gerar_matriz_confusao(BaggingClassifier(melhor_modelo))
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
@@ -202,11 +223,9 @@ def escolher_parametros():
             #  }
         ]
     elif nome == 'NB':
-        return [
-            {'alpha': range(5, 10, 1),
-             'fit_prior': [True, False],
-             'class_prior': [None, [1, 2, 3, 4, 5]]}
-        ]
+        return {'clf__alpha': range(1, 10, 1),
+                'clf__fit_prior': [True, False],
+                'clf__class_prior': [None, [1, 2, 3, 4, 5]]}
     elif nome == 'RF':
         return [
             {'n_estimators': range(10, 300, 50),
@@ -228,4 +247,4 @@ def imprimir_resultados():
 
 for nome, modelo in modelos_base:
     rodar_algoritmos()
-    imprimir_resultados()
+    # imprimir_resultados()
