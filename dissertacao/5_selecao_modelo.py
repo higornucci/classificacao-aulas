@@ -30,7 +30,7 @@ dados_completo.set_index('index', inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count()-1
+n_jobs = multiprocessing.cpu_count() - 1
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -75,16 +75,16 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.7, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
 # balanceador = ClusterCentroids(random_state=random_state)
-# balanceador = RandomUnderSampler(random_state=random_state)
+balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs)
+# balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy='auto')
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -160,13 +160,10 @@ def rodar_algoritmos():
     inicio = time.time()
     pipeline = Pipeline([('bal', balanceador),
                          ('clf', modelo)])
-    grid_search = RandomizedSearchCV(pipeline, param_distributions=escolher_parametros(),
-                                     n_iter=1000, cv=kfold, n_jobs=n_jobs)
+    grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, n_jobs=n_jobs)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
-    pipeline_melhor_modelo = Pipeline([('bal', balanceador),
-                                       ('clf', modelo)])
-    cv_resultados = cross_val_score(pipeline_melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
+    cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
 
     # mostrar_features_mais_importantes(melhor_modelo)
 
@@ -189,44 +186,45 @@ def mostrar_features_mais_importantes(melhor_modelo):
 
 def escolher_parametros():
     if nome == 'K-NN':
-        return {'clf__n_neighbors': range(13, 17, 2),
-                'clf__weights': ['uniform', 'distance']}
+        return [{'clf__n_neighbors': range(13, 17, 2),
+                 'clf__weights': ['uniform', 'distance']}]
     elif nome == 'SVM':
-        return {'clf__kernel': ['rbf'],
-                'clf__gamma': [5],  # 0.01, 0.1, 1, 5],
-                'clf__C': [1000]  # 0.001, 0.10, 0.1, 10, 25, 50, 100,
-                #  },
-                # {'kernel': ['sigmoid'],
-                # 'gamma': [0.01, 0.1, 1, 5],
-                # 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
-                # },
-                # {'kernel': ['linear'],
-                #              'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
-                }
+        return [{'clf__kernel': ['rbf'],
+                 'clf__gamma': [5],  # 0.01, 0.1, 1, 5],
+                 'clf__C': [1000]  # 0.001, 0.10, 0.1, 10, 25, 50, 100,
+                 #  },
+                 # {'kernel': ['sigmoid'],
+                 # 'gamma': [0.01, 0.1, 1, 5],
+                 # 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+                 # },
+                 # {'kernel': ['linear'],
+                 #              'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+                 }]
     elif nome == 'DTC':
-        return {'clf__max_features': range(1, 27, 1),
-                'clf__max_depth': [1, 10, 15, 16, 17],
-                'clf__min_samples_split': range(10, 100, 5),
-                'clf__min_samples_leaf': range(1, 30, 2),
-                'clf__class_weight': [None, 'balanced']
-                }
-        # {'max_features': 20,
-        #  'max_depth': 13,
-        #  'min_samples_split': 7,
-        #  'min_samples_leaf': 17,
-        #  # 'class_weight': [None, 'balanced']
-        #  }
+        return [{'clf__max_features': range(1, 27, 2),
+                 'clf__max_depth': [1, 10, 15, 16, 17],
+                 'clf__min_samples_split': range(10, 100, 5),
+                 'clf__min_samples_leaf': range(1, 30, 2),
+                 'clf__class_weight': [None, 'balanced']
+                 # },
+                 # {'max_features': 20,
+                 #  'max_depth': 13,
+                 #  'min_samples_split': 7,
+                 #  'min_samples_leaf': 17,
+                 #  # 'class_weight': [None, 'balanced']
+                 }]
     elif nome == 'NB':
-        return {'clf__alpha': range(1, 10, 1),
-                'clf__fit_prior': [True, False],
-                'clf__class_prior': [None, [1, 2, 3, 4, 5]]}
+        return [{'clf__alpha': range(1, 10, 1),
+                 'clf__fit_prior': [True, False],
+                 'clf__class_prior': [None, [1, 2, 3, 4, 5]]}]
     elif nome == 'RF':
-        return {'clf__n_estimators': range(10, 300, 50),
-                'clf__max_features': range(1, 27, 1),
-                'clf__max_depth': range(1, 10, 1),
-                'clf__min_samples_split': range(5, 10, 1),
-                'clf__min_samples_leaf': range(15, 20, 1)}
-        # {'bootstrap': [False], 'n_estimators': [10, 50, 70], 'max_features': [10, 20, 27]}
+        return [{'clf__n_estimators': range(10, 300, 50),
+                 'clf__max_features': range(1, 27, 2),
+                 'clf__max_depth': range(1, 10, 1),
+                 'clf__min_samples_split': range(5, 10, 1),
+                 'clf__min_samples_leaf': range(15, 20, 1)}
+                # {'bootstrap': [False], 'n_estimators': [10, 50, 70], 'max_features': [10, 20, 27]}
+                ]
     return None
 
 
