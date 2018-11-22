@@ -9,12 +9,22 @@ from pandas.plotting import scatter_matrix
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)  # display all columns
 
+
+def mostrar_quantidade_por_classe(df, classe):
+    print(df.loc[df['acabamento'] == classe].info())
+
+
 dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
 
+mostrar_quantidade_por_classe(dados_completo, 1)
+mostrar_quantidade_por_classe(dados_completo, 2)
+mostrar_quantidade_por_classe(dados_completo, 3)
+mostrar_quantidade_por_classe(dados_completo, 4)
+mostrar_quantidade_por_classe(dados_completo, 5)
+
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
-
 
 train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 print(len(train_set), "train +", len(test_set), "test")

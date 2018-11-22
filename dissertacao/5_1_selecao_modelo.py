@@ -11,7 +11,8 @@ from category_encoders import BinaryEncoder, OneHotEncoder
 from imblearn.over_sampling import SMOTE, ADASYN
 from imblearn.combine import SMOTEENN
 from imblearn.ensemble import BalancedBaggingClassifier
-from imblearn.under_sampling import ClusterCentroids, RandomUnderSampler, NearMiss, AllKNN, NeighbourhoodCleaningRule
+from imblearn.under_sampling import ClusterCentroids, RandomUnderSampler, NearMiss, AllKNN, NeighbourhoodCleaningRule, \
+    EditedNearestNeighbours
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, \
@@ -28,7 +29,7 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 
 warnings.filterwarnings('ignore')
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
+dados_completo = pd.read_csv('../input/DadosCompletoTransformado2.csv', encoding='utf-8', delimiter='\t')
 dados_completo.set_index('index', inplace=True)
 
 random_state = 42
@@ -102,7 +103,8 @@ for trainamento_index, teste_index in split.split(dados_completo, dados_completo
 # balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule()
+balanceador = EditedNearestNeighbours(sampling_strategy='auto', n_jobs=-1)
+# balanceador = NeighbourhoodCleaningRule(sampling_strategy='auto', n_jobs=-1)
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -138,7 +140,7 @@ def fit_predict_imbalanced_model(modelo, X_train, y_train, X_test, y_test):
 
 @timeit
 def fit_predict_balanced_model(modelo, X_train, y_train, X_test, y_test):
-    # X_train, y_train = NeighbourhoodCleaningRule().fit_resample(X_train, y_train)
+    X_train, y_train = EditedNearestNeighbours(sampling_strategy='auto', n_jobs=-1).fit_resample(X_train, y_train)
     # bbc = BalancedBaggingClassifier(base_estimator=modelo,
     #                                 sampling_strategy='all',
     #                                 replacement=False,
@@ -173,11 +175,12 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 modelos_base = [
     # ('GNB', GaussianNB()),
     ('MNB', MultinomialNB()),
-    ('DTC', tree.DecisionTreeClassifier()),
+    # ('DTC', tree.DecisionTreeClassifier()),
     # ('RF', RandomForestClassifier(random_state=random_state)),
     # ('SGD', SGDClassifier(random_state=random_state, class_weight='balanced')),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC())]
+    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    # ('SVM', SVC())
+]
 
 
 def gerar_matriz_confusao(modelo):
@@ -196,10 +199,10 @@ def rodar_algoritmos():
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
 
     skf = StratifiedKFold(n_splits=num_folds, random_state=random_state)
-    # X = transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1))
-    # Y = conjunto_treinamento['acabamento']
-    X = X_treino
-    Y = Y_treino
+    X = transformar_dados_colunas(conjunto_treinamento.drop('acabamento', axis=1))
+    Y = conjunto_treinamento['acabamento']
+    # X = X_treino
+    # Y = Y_treino
 
     cv_results_imbalanced = []
     cv_time_imbalanced = []
@@ -207,11 +210,11 @@ def rodar_algoritmos():
     cv_time_balanced = []
     for train_idx, valid_idx in skf.split(X, Y):
         # X_local_train = preprocessor.fit_transform(X_train.iloc[train_idx])
-        X_local_train = X[train_idx]
-        y_local_train = Y[train_idx]
+        X_local_train = X.iloc[train_idx]
+        y_local_train = Y.iloc[train_idx]
         # X_local_test = preprocessor.transform(X_train.iloc[valid_idx])
-        X_local_test = X[valid_idx]
-        y_local_test = Y[valid_idx]
+        X_local_test = X.iloc[valid_idx]
+        y_local_test = Y.iloc[valid_idx]
 
         elapsed_time, score = fit_predict_imbalanced_model(melhor_modelo, X_local_train, y_local_train, X_local_test,
                                                            y_local_test)
@@ -270,8 +273,8 @@ def mostrar_features_mais_importantes(melhor_modelo):
 def escolher_parametros():
     if nome == 'K-NN':
         return [
-            {'n_neighbors': [15],
-             'weights': ['uniform']}
+            {'n_neighbors': range(10, 17, 1),
+             'weights': ['uniform', 'distance']}
         ]
     elif nome == 'SGD':
         return [
@@ -285,9 +288,9 @@ def escolher_parametros():
     elif nome == 'SVM':
         return [
             {'kernel': ['rbf'],
-             'gamma': [5],
-             'C': [250],
-             'class_weight': ['balanced']
+             'gamma': [1, 5, 25],
+             'C': [250, 1000, 2000],
+             'class_weight': ['balanced', '']
              }
             # {'kernel': ['sigmoid'], 'gamma': [1e-2, 1e-3, 1e-4, 1e-5],
             # 'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
@@ -312,7 +315,7 @@ def escolher_parametros():
         ]
     elif nome == 'MNB':
         return [
-            {'alpha': range(5, 10, 1),
+            {'alpha': [0.001, 0.01, 0.1, 1, 4, 5, 6, 7],
              'fit_prior': [True, False],
              'class_prior': [None, [1, 2, 3, 4, 5]]}
         ]
@@ -323,7 +326,7 @@ def escolher_parametros():
     elif nome == 'RF':
         return [
             {'n_estimators': range(10, 300, 50),
-             'max_features': [10, 20, 27],
+             'max_features': [10, 20, 25, 29],
              'max_depth': range(1, 10, 1),
              'min_samples_split': range(5, 10, 1),
              'min_samples_leaf': range(15, 20, 1)}
