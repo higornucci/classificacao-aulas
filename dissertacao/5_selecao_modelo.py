@@ -169,26 +169,26 @@ def mostrar_features_mais_importantes(melhor_modelo):
 def escolher_parametros():
     if nome == 'K-NN':
         return [
-            {'n_neighbors': [15],
-             'weights': ['uniform']}
+            {'n_neighbors': range(12, 17, 1),
+             'weights': ['uniform', 'distance']}
         ]
     elif nome == 'SVM':
         return [
             {'kernel': ['rbf'],
              'gamma': [0.01, 0.1, 1, 5],
              'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
-             },
-            {'kernel': ['sigmoid'],
-             'gamma': [0.01, 0.1, 1, 5],
-             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
-             },
-            {'kernel': ['linear'],
-             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+            #  },
+            # {'kernel': ['sigmoid'],
+            #  'gamma': [0.01, 0.1, 1, 5],
+            #  'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+            #  },
+            # {'kernel': ['linear'],
+            #  'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
              }
         ]
     elif nome == 'DTC':
         return [
-            {'max_features': range(1, 4, 1),
+            {'max_features': range(1, 27, 1),
              'max_depth': [1, 10, 15, 16, 17],
              'min_samples_split': range(10, 100, 5),
              'min_samples_leaf': range(1, 30, 2),
@@ -210,7 +210,7 @@ def escolher_parametros():
     elif nome == 'RF':
         return [
             {'n_estimators': range(10, 300, 50),
-             'max_features': range(1, 4, 1),
+             'max_features': range(1, 27, 1),
              'max_depth': range(1, 10, 1),
              'min_samples_split': range(5, 10, 1),
              'min_samples_leaf': range(15, 20, 1)}
