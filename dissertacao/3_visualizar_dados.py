@@ -5,6 +5,7 @@ import matplotlib.image as mpimg
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from pandas.plotting import scatter_matrix
+from mpl_toolkits.mplot3d import Axes3D
 
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -26,6 +27,34 @@ mostrar_quantidade_por_classe(dados_completo, 5)
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
 
+
+def plotar_dataset_2d():
+    grafico = pd.DataFrame()
+    grafico['maturidade'] = dados_completo['maturidade'] + dados_completo['tipificacao']
+    grafico['peso_carcaca'] = dados_completo['peso_carcaca']
+    grafico['acabamento'] = dados_completo['acabamento']
+    sns.lmplot(x="maturidade", y="peso_carcaca", data=grafico, hue="acabamento", fit_reg=False, legend=False)
+    plt.legend()
+    plt.savefig('dataset_completo.svg')
+    plt.show()
+
+
+plotar_dataset_2d()
+
+
+def plotar_dataset_3d():
+    fig = plt.figure()
+    ax2 = Axes3D(fig)
+
+    sequence_containing_x_vals = dados_completo['maturidade']
+    sequence_containing_y_vals = dados_completo['tipificacao']
+    sequence_containing_z_vals = dados_completo['acabamento']
+
+    ax2.scatter(sequence_containing_x_vals, sequence_containing_y_vals, sequence_containing_z_vals)
+    plt.show()
+
+
+plotar_dataset_3d()
 train_set, test_set = train_test_split(dados_completo, test_size=0.2, random_state=42)
 print(len(train_set), "train +", len(test_set), "test")
 

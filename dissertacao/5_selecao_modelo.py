@@ -6,9 +6,11 @@ from collections import Counter
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
 from imblearn.combine import SMOTEENN
+from imblearn.metrics import classification_report_imbalanced
 from imblearn.pipeline import make_pipeline, Pipeline
-from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler
+from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler, EditedNearestNeighbours
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
@@ -75,22 +77,23 @@ def mostrar_correlacao(dados, classe):
 
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.8, random_state=random_state)
 for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
 # balanceador = ClusterCentroids(random_state=random_state)
-balanceador = RandomUnderSampler(random_state=random_state)
+# balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
 # balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy='auto')
+# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy='auto')
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
 # balanceador = RandomOverSampler()
 
-# balanceador = SMOTEENN(random_state=random_state)
+balanceador = SMOTEENN(random_state=random_state, sampling_strategy='auto')
 # X_treino, Y_treino = balanceador.fit_resample(
 #     conjunto_treinamento.drop('acabamento', axis=1),
 #     conjunto_treinamento['acabamento'])
@@ -147,12 +150,7 @@ def gerar_matriz_confusao(modelo):
     matriz_confusao = confusion_matrix(Y_teste, y_train_pred)
     print('Matriz de Confusão')
     print(matriz_confusao)
-    precision = precision_score(Y_teste, y_train_pred, average=average)
-    print('Precision: ', precision)
-    recall = recall_score(Y_teste, y_train_pred, average=average)
-    print('Recall: ', recall)
-    f1 = f1_score(Y_teste, y_train_pred, average=average)
-    print('F1 score: ', f1)
+    print(classification_report_imbalanced(Y_teste, y_train_pred))
 
 
 def rodar_algoritmos():
