@@ -1,3 +1,6 @@
+balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3]))
+70/30
+
 /usr/bin/python3 /home/higornucci/projetos/classificacao-aulas/dissertacao/5_selecao_modelo.py
 /usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
   import imp
@@ -208,6 +211,7 @@ Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='g
 Validação cruzada DTC : [0.84893007 0.85492774 0.84677946 0.84800405 0.84948   ]
 DTC: (0.8496) +/- (0.003)
 Tempo de execução do DTC: 12226.2384 segundos
+
 Matriz de Confusão
 [[    0   118    39     0     0]
  [    0 22001 12074     0     0]
@@ -218,6 +222,7 @@ Melhores parametros NB : MultinomialNB(alpha=5, class_prior=None, fit_prior=True
 Validação cruzada NB : [0.67491439 0.6675504  0.67349757 0.68018118 0.67386621]
 NB: (0.6740) +/- (0.004)
 Tempo de execução do NB: 29.5733 segundos
+
 Matriz de Confusão
 [[   35   106    16     0     0]
  [    6 27021  6951    97     0]

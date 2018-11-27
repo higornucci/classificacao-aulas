@@ -7,8 +7,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
+from imblearn.metrics import classification_report_imbalanced
 from imblearn.pipeline import make_pipeline, Pipeline
-from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler
+from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler, EditedNearestNeighbours
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
 from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
@@ -16,17 +17,19 @@ from sklearn.model_selection import cross_val_score, cross_val_predict, GridSear
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE
 from sklearn.linear_model import LogisticRegression
 
 warnings.filterwarnings('ignore')
+pd.set_option('display.max_columns', None)  # display all columns
 
 # 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
 # dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
-dados_completo.set_index('index', inplace=True)
+# dados_completo = pd.read_csv('../input/dados.csv', encoding='utf-8', delimiter='\t')
 print(dados_completo.head())
 
 random_state = 42
@@ -65,26 +68,25 @@ def mostrar_correlacao(dados, classe):
 
 # mostrar_correlacao(dados_completo, 'acabamento')
 
-# classe_1 = buscar_quantidades_iguais(250, 1)
-# classe_2 = buscar_quantidades_iguais(350, 2)
-# classe_3 = buscar_quantidades_iguais(350, 3)
-# classe_4 = buscar_quantidades_iguais(350, 4)
-# classe_5 = buscar_quantidades_iguais(198, 5)
-# frames = [classe_1, classe_2, classe_3, classe_4, classe_5]
-# dados_qtde_iguais = pd.concat(frames)
-
+X_completo = dados_completo.drop(['acabamento'], axis=1)
+Y_completo = dados_completo['acabamento']
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=random_state)
-for trainamento_index, teste_index in split.split(dados_completo, dados_completo['acabamento']):
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.5, random_state=random_state)
+for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
+
+print(dados_completo.info())
+print(conjunto_treinamento.info())
+print(conjunto_teste.info())
 # balanceador = ClusterCentroids(random_state=random_state)
 # balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs)
+balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([0, 2]))
+# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy='majoritary')
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -130,10 +132,10 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [# ('NB', MultinomialNB()),
-                # ('DTC', tree.DecisionTreeClassifier()),
+modelos_base = [('NB', MultinomialNB()),
+                ('DTC', tree.DecisionTreeClassifier()),
                 # ('RF', RandomForestClassifier(random_state=random_state)),
-                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 ('SVM', SVC())
                 ]
 
@@ -141,16 +143,17 @@ modelos_base = [# ('NB', MultinomialNB()),
 def gerar_matriz_confusao(modelo):
     average = None
     modelo.fit(X_treino, Y_treino)
-    y_train_pred = modelo.predict(X_teste)
-    matriz_confusao = confusion_matrix(Y_teste, y_train_pred)
+    y_pred = modelo.predict(X_teste)
+    matriz_confusao = confusion_matrix(Y_teste, y_pred)
     print('Matriz de Confusão')
     print(matriz_confusao)
-    precision = precision_score(Y_teste, y_train_pred, average=average)
+    precision = precision_score(Y_teste, y_pred, average=average)
     print('Precision: ', precision)
-    recall = recall_score(Y_teste, y_train_pred, average=average)
+    recall = recall_score(Y_teste, y_pred, average=average)
     print('Recall: ', recall)
-    f1 = f1_score(Y_teste, y_train_pred, average=average)
+    f1 = f1_score(Y_teste, y_pred, average=average)
     print('F1 score: ', f1)
+    print(classification_report_imbalanced(Y_teste, y_pred))
 
 
 def rodar_algoritmos():
