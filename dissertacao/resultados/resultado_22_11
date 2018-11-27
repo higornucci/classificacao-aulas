@@ -1,0 +1,65 @@
+/home/higornucci/projetos/classificacao-aulas/venv/bin/python /home/higornucci/programas/pycharm-2018.2.2/helpers/pydev/pydevconsole.py 42323 33845
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/higornucci/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.6 (default, Sep 12 2018, 18:26:19)
+[GCC 8.0.1 20180414 (experimental) [trunk revision 259383]] on linux
+runfile('/home/higornucci/projetos/classificacao-aulas/dissertacao/5_2_selecao_modelo.py', wdir='/home/higornucci/projetos/classificacao-aulas/dissertacao')
+       tipificacao#_C  tipificacao#_F     ...      eh_precoce  acabamento
+index                                     ...
+0                   0               0     ...             1.0           3
+1                   0               0     ...             1.0           2
+2                   0               0     ...             1.0           3
+3                   0               0     ...             1.0           3
+4                   0               0     ...             1.0           3
+[5 rows x 28 columns]
+[(1, 741), (2, 123475), (3, 187730), (4, 15120), (5, 138)]
+
+Melhores parametros NB : MultinomialNB(alpha=3, class_prior=None, fit_prior=True)
+Validação cruzada NB : [0.66325907 0.66077841 0.66432359 0.66187347 0.66344743]
+NB: (0.6627) +/- (0.001)
+Tempo de execução do NB: 23.8696 segundos
+Matriz de Confusão
+[[    0   537   342     0     0]
+ [    0 44906 35861     0     0]
+ [    0 33969 76533     0     0]
+ [    0  1486 12125     0     0]
+ [    0     1    59     0     0]]
+Precision:  [0.         0.55508721 0.6126561  0.         0.        ]
+Recall:  [0.        0.5559944 0.6925938 0.        0.       ]
+F1 score:  [0.         0.55554044 0.65017713 0.         0.        ]
+
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=19,
+            max_features=19, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=5,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Validação cruzada DTC : [0.8593411  0.8563286  0.86519155 0.8630654  0.86237775]
+DTC: (0.8613) +/- (0.003)
+Tempo de execução do DTC: 3958.8889 segundos
+Matriz de Confusão
+[[  201   544   132     2     0]
+ [  264 50035 30081   385     2]
+ [   88 28020 79439  2928    27]
+ [    6  1063  7100  5409    33]
+ [    0     5    13    23    19]]
+Precision:  [0.35957066 0.62805177 0.68033229 0.61838345 0.2345679 ]
+Recall:  [0.22866894 0.61949806 0.71889197 0.39739916 0.31666667]
+F1 score:  [0.27955494 0.62374559 0.69908082 0.48385365 0.26950355]
+
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=None, n_neighbors=12, p=2,
+           weights='distance')
+Validação cruzada K-NN : [0.94868739 0.95070369 0.94955762 0.9448044  0.94521699]
+K-NN: (0.9478) +/- (0.002)
+Tempo de execução do K-NN: 28893.8824 segundos
+Matriz de Confusão
+[[  210   527   139     2     1]
+ [  261 48964 31046   495     1]
+ [   82 28134 78848  3418    20]
+ [    2  1120  6602  5863    24]
+ [    0     1    11    21    27]]
+Precision:  [0.37837838 0.62179666 0.67595974 0.59832636 0.36986301]
+Recall:  [0.23890785 0.6062377  0.71354365 0.43075454 0.45      ]
+F1 score:  [0.29288703 0.61391861 0.6942434  0.50089705 0.40601504]
