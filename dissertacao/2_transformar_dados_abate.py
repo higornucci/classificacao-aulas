@@ -20,11 +20,11 @@ dados_completo['tipificacao'].replace(['Macho CASTRADO'], '2', inplace=True)  # 
 dados_completo['tipificacao'].replace(['Fêmea'], '3', inplace=True)  # F
 
 # Substituindo os valores da maturidade
-dados_completo['maturidade'].replace(['Dente de leite'], 0, inplace=True)
-dados_completo['maturidade'].replace(['Dois dentes'], 2, inplace=True)
-dados_completo['maturidade'].replace(['Quatro dentes'], 4, inplace=True)
-dados_completo['maturidade'].replace(['Seis dentes'], 6, inplace=True)
-dados_completo['maturidade'].replace(['Oito dentes'], 8, inplace=True)
+# dados_completo['maturidade'].replace(['Dente de leite'], 0, inplace=True)
+# dados_completo['maturidade'].replace(['Dois dentes'], 2, inplace=True)
+# dados_completo['maturidade'].replace(['Quatro dentes'], 4, inplace=True)
+# dados_completo['maturidade'].replace(['Seis dentes'], 6, inplace=True)
+# dados_completo['maturidade'].replace(['Oito dentes'], 8, inplace=True)
 
 
 def eh_precoce(linha):
@@ -35,9 +35,6 @@ def eh_precoce(linha):
     if linha['maturidade'] == 4 and linha['tipificacao'] != 2:
         return 1
     return 0
-
-
-dados_completo['eh_precoce'] = dados_completo.apply(lambda linha:  eh_precoce(linha), axis=1)
 
 # Substituindo os valores da rispoa
 # rispoa_label_encoder = LabelEncoder()
