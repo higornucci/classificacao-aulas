@@ -90,15 +90,10 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
     # dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.groupby(['EstabelecimentoIdentificador'])['PraticaRecuperacaoPastagemDescricao'].apply(lambda x: ','.join(x.astype('category'))).reset_index()
     # dados_pratica_recuperacao_pastagem_resumido.set_index('EstabelecimentoIdentificador', inplace=True)
     dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
-    novos_nomes_colunas = {'Fertirrigação': 'fertirrigacao',
-                           'IFP - Integração Pecuária-Floresta': 'ifp',
-                           'ILP - Integração Lavoura-Pecuária': 'ilp',
-                           'ILPF - Integração Lavoura-Pecuária-Floresta': 'ilpf',
-                           'Nenhum': 'nenhum'}
+    novos_nomes_colunas = {'PraticaRecuperacaoPastagemDescricao': 'tipo_recuperacao_pastagem'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
-    dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.fillna('Nenhum', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8',
                                                        sep='\t')
