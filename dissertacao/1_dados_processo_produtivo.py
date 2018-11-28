@@ -84,16 +84,21 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
     dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem.drop_duplicates(
         subset=['EstabelecimentoIdentificador', 'QuestionarioPraticaRecuperacaoPastagem',
                 'PraticaRecuperacaoPastagemDescricao'])
-    # dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.pivot(
-    #     index='EstabelecimentoIdentificador', columns='PraticaRecuperacaoPastagemDescricao',
-    #     values='QuestionarioPraticaRecuperacaoPastagem')
-    dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.groupby(['EstabelecimentoIdentificador'])['PraticaRecuperacaoPastagemDescricao'].apply(lambda x: ','.join(x.astype('category'))).reset_index()
-    dados_pratica_recuperacao_pastagem_resumido.set_index('EstabelecimentoIdentificador', inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.pivot(
+         index='EstabelecimentoIdentificador', columns='PraticaRecuperacaoPastagemDescricao',
+         values='QuestionarioPraticaRecuperacaoPastagem')
+    # dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.groupby(['EstabelecimentoIdentificador'])['PraticaRecuperacaoPastagemDescricao'].apply(lambda x: ','.join(x.astype('category'))).reset_index()
+    # dados_pratica_recuperacao_pastagem_resumido.set_index('EstabelecimentoIdentificador', inplace=True)
     dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
-    novos_nomes_colunas = {'PraticaRecuperacaoPastagemDescricao': 'tipo_recuperacao_pastagem'}
+    novos_nomes_colunas = {'Fertirrigação': 'fertirrigacao',
+                           'IFP - Integração Pecuária-Floresta': 'ifp',
+                           'ILP - Integração Lavoura-Pecuária': 'ilp',
+                           'ILPF - Integração Lavoura-Pecuária-Floresta': 'ilpf',
+                           'Nenhum': 'nenhum'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    dados_pratica_recuperacao_pastagem_resumido.fillna('Nenhum', inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8',
                                                        sep='\t')
@@ -212,9 +217,9 @@ def gerar_arquivo_dados_abate():
 
 
 def ler_municipios_ms():
-    csv = pd.read_csv('../input/Municipios_Brasileiros_MS.csv', encoding='utf-8')
-    csv['Nome do Município'] = csv['Nome do Município'].str.lower()
-    csv['Nome do Município'] = csv['Nome do Município'] \
+    csv = pd.read_csv('../input/cidades.csv', encoding='utf-8', delimiter='\t')
+    csv['Cidade'] = csv['Cidade'].str.lower()
+    csv['Cidade'] = csv['Cidade'] \
         .str.normalize('NFKD') \
         .str.encode('ascii', errors='ignore') \
         .str.decode('utf-8')
@@ -245,8 +250,8 @@ def gerar_dados_completo():
     dados_municipios_ms = ler_municipios_ms()
     dados_completo = pd.merge(dados_completo, dados_municipios_ms,
                               how='left', left_on='estabelecimento_municipio',
-                              right_on='Nome do Município')
-    dados_completo.drop(['Nome do Município', 'estabelecimento_municipio'], axis=1, inplace=True)
+                              right_on='Cidade')
+    dados_completo.drop(['Cidade', 'estabelecimento_municipio'], axis=1, inplace=True)
     dados_completo.index.name = 'index'
 
     dados_completo.to_csv('../input/DadosCompleto.csv', encoding='utf-8', sep='\t')
