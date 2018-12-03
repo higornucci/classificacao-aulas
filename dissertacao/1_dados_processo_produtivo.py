@@ -1,5 +1,6 @@
 import warnings
 import pandas as pd
+from datetime import date, datetime
 
 warnings.filterwarnings('ignore')
 
@@ -89,11 +90,19 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
          values='QuestionarioPraticaRecuperacaoPastagem')
     # dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.groupby(['EstabelecimentoIdentificador'])['PraticaRecuperacaoPastagemDescricao'].apply(lambda x: ','.join(x.astype('category'))).reset_index()
     # dados_pratica_recuperacao_pastagem_resumido.set_index('EstabelecimentoIdentificador', inplace=True)
+    # dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
+    # novos_nomes_colunas = {'PraticaRecuperacaoPastagemDescricao': 'tipo_recuperacao_pastagem'}
+
     dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
-    novos_nomes_colunas = {'PraticaRecuperacaoPastagemDescricao': 'tipo_recuperacao_pastagem'}
+    novos_nomes_colunas = {'Fertirrigação': 'fertirrigacao',
+                           'IFP - Integração Pecuária-Floresta': 'ifp',
+                           'ILP - Integração Lavoura-Pecuária': 'ilp',
+                           'ILPF - Integração Lavoura-Pecuária-Floresta': 'ilpf',
+                           'Nenhum': 'nenhum'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    dados_pratica_recuperacao_pastagem_resumido.fillna('Nenhum', inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8',
                                                        sep='\t')
@@ -134,7 +143,7 @@ def gerar_arquivo_dados_abate():
                       'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
                       'Classificador1', 'Classificador2', 'IdentificadorLoteSituacaoLote'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
-    dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce', 'DataAbate', 'AprovacaoCarcacaSif'], axis=1, inplace=True)
+    dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce', 'AprovacaoCarcacaSif'], axis=1, inplace=True)
     # Remover os ids vazios
     dados_abate_resumido = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
     dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio'], axis=1)
@@ -144,6 +153,7 @@ def gerar_arquivo_dados_abate():
                            'Maturidade': 'maturidade',
                            'Acabamento': 'acabamento',
                            'Peso': 'peso_carcaca',
+                           'DataAbate': 'data_abate',
                            'Rispoa': 'rispoa'}
 
     dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
@@ -221,6 +231,38 @@ def ler_municipios_ms():
     return csv
 
 
+def tratar_municipios(dados_completo):
+    dados_municipios_ms = ler_municipios_ms()
+    dados_completo = pd.merge(dados_completo, dados_municipios_ms,
+                              how='left', left_on='estabelecimento_municipio',
+                              right_on='Cidade')
+    dados_completo.drop(['Cidade', 'estabelecimento_municipio'], axis=1, inplace=True)
+    dados_completo.index.name = 'index'
+    return dados_completo
+
+
+def get_season(now):
+    Y = 2000  # dummy leap year to allow input X-02-29 (leap day)
+    seasons = [(0, (date(Y, 1, 1), date(Y, 3, 20))),
+               (1, (date(Y, 3, 21), date(Y, 6, 20))),
+               (2, (date(Y, 6, 21), date(Y, 9, 22))),
+               (3, (date(Y, 9, 23), date(Y, 12, 20))),
+               (0, (date(Y, 12, 21), date(Y, 12, 31)))]
+    if isinstance(now, datetime):
+        now = now.date()
+    now = now.replace(year=Y)
+    return next(season for season, (start, end) in seasons
+                if start <= now <= end)
+
+
+def tratar_data_abate(dados_completo):
+    dados_completo['data_abate'] = dados_completo['data_abate'].astype('datetime64')
+    dados_completo['mes_abate'] = dados_completo['data_abate'].map(lambda d: d.month - 1)
+    dados_completo['estacao_abate'] = dados_completo['data_abate'].map(lambda d: get_season(d))
+    dados_completo.drop('data_abate', axis=1, inplace=True)
+    return dados_completo
+
+
 def gerar_dados_completo():
     dados_processo_produtivo = ler_dados_processo_produtivo_base()
     dados_perguntas_classificam_resumido = gerar_arquivo_dados_perguntas_classificam(dados_processo_produtivo)
@@ -242,12 +284,8 @@ def gerar_dados_completo():
     data_frames = [dados_completo_abates, dados_completo_perguntas]
 
     dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_completo_abates.index])
-    dados_municipios_ms = ler_municipios_ms()
-    dados_completo = pd.merge(dados_completo, dados_municipios_ms,
-                              how='left', left_on='estabelecimento_municipio',
-                              right_on='Cidade')
-    dados_completo.drop(['Cidade', 'estabelecimento_municipio'], axis=1, inplace=True)
-    dados_completo.index.name = 'index'
+    dados_completo = tratar_municipios(dados_completo)
+    dados_completo = tratar_data_abate(dados_completo)
 
     dados_completo.to_csv('../input/DadosCompleto.csv', encoding='utf-8', sep='\t')
 
