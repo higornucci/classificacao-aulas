@@ -28,7 +28,6 @@ warnings.filterwarnings('ignore')
 # 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
 # dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
-dados_completo.set_index('index', inplace=True)
 print(dados_completo.head())
 
 random_state = 42
@@ -199,7 +198,7 @@ def escolher_parametros():
                  #              'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
                  }]
     elif nome == 'DTC':
-        return [{'clf__max_features': range(1, 27, 2),
+        return [{'clf__max_features': range(20, 29, 2),
                  'clf__max_depth': [1, 10, 15, 16, 17],
                  'clf__min_samples_split': range(10, 100, 5),
                  'clf__min_samples_leaf': range(1, 30, 2),

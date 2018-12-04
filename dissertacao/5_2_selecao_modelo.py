@@ -25,6 +25,7 @@ from sklearn.linear_model import LogisticRegression
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
+pd.set_option('display.width', 2000)  # display all columns
 
 # 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
 # dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
@@ -77,22 +78,18 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-
-print(dados_completo.info())
-print(conjunto_treinamento.info())
-print(conjunto_teste.info())
 # balanceador = ClusterCentroids(random_state=random_state)
 # balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3]))
+# balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy='majoritary')
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
 # balanceador = RandomOverSampler()
 
-# balanceador = SMOTEENN(random_state=random_state)
+balanceador = SMOTEENN(random_state=random_state)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('acabamento', axis=1),
     conjunto_treinamento['acabamento'])
@@ -101,7 +98,7 @@ print(sorted(Counter(Y_treino).items()))
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
-# print('X Treino:', X_treino.info())
+print('X Treino:', X_treino)
 # print('X Teste:', X_teste.info())
 # mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 2)

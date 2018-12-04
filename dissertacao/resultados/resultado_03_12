@@ -1,6 +1,6 @@
 Resultado com com meso micro mes estacao
 50/50
-NeighbourhoodCleaningRule
+NeighbourhoodCleaningRule 2 e 3
 /usr/bin/python3 /home/higornucci/projetos/classificacao-aulas/dissertacao/5_2_selecao_modelo.py
    Unnamed: 0  microrregiao  mesoregiao  tipificacao  maturidade  \
 0           0           1.0    0.333333          0.0         0.0
@@ -99,90 +99,8 @@ estacao_abate                                       686061 non-null float64
 acabamento                                          686061 non-null int64
 dtypes: float64(28), int64(2)
 memory usage: 157.0 MB
-None
-<class 'pandas.core.frame.DataFrame'>
-Int64Index: 343030 entries, 593796 to 202501
-Data columns (total 30 columns):
-Unnamed: 0                                          343030 non-null int64
-microrregiao                                        343030 non-null float64
-mesoregiao                                          343030 non-null float64
-tipificacao                                         343030 non-null float64
-maturidade                                          343030 non-null float64
-peso_carcaca                                        343030 non-null float64
-questionario_classificacao_estabelecimento_rural    343030 non-null float64
-possui_outros_incentivos                            343030 non-null float64
-fabrica_racao                                       343030 non-null float64
-area_total_destinada_confinamento                   343030 non-null float64
-area_manejada_80_boa_cobertura_vegetal              343030 non-null float64
-area_manejada_20_erosao                             343030 non-null float64
-dispoe_de_identificacao_individual                  343030 non-null float64
-rastreamento_sisbov                                 343030 non-null float64
-faz_controle_pastejo_regua_de_manejo_embrapa        343030 non-null float64
-lita_trace                                          343030 non-null float64
-apresenta_atestado_programas_controle_qualidade     343030 non-null float64
-envolvido_em_organizacao                            343030 non-null float64
-confinamento                                        343030 non-null float64
-semi_confinamento                                   343030 non-null float64
-suplementacao                                       343030 non-null float64
-fertirrigacao                                       343030 non-null float64
-ifp                                                 343030 non-null float64
-ilp                                                 343030 non-null float64
-ilpf                                                343030 non-null float64
-latitude                                            343030 non-null float64
-longitude                                           343030 non-null float64
-mes_abate                                           343030 non-null float64
-estacao_abate                                       343030 non-null float64
-acabamento                                          343030 non-null int64
-dtypes: float64(28), int64(2)
-memory usage: 81.1 MB
-None
-<class 'pandas.core.frame.DataFrame'>
-Int64Index: 343031 entries, 75007 to 149612
-Data columns (total 30 columns):
-Unnamed: 0                                          343031 non-null int64
-microrregiao                                        343031 non-null float64
-mesoregiao                                          343031 non-null float64
-tipificacao                                         343031 non-null float64
-maturidade                                          343031 non-null float64
-peso_carcaca                                        343031 non-null float64
-questionario_classificacao_estabelecimento_rural    343031 non-null float64
-possui_outros_incentivos                            343031 non-null float64
-fabrica_racao                                       343031 non-null float64
-area_total_destinada_confinamento                   343031 non-null float64
-area_manejada_80_boa_cobertura_vegetal              343031 non-null float64
-area_manejada_20_erosao                             343031 non-null float64
-dispoe_de_identificacao_individual                  343031 non-null float64
-rastreamento_sisbov                                 343031 non-null float64
-faz_controle_pastejo_regua_de_manejo_embrapa        343031 non-null float64
-lita_trace                                          343031 non-null float64
-apresenta_atestado_programas_controle_qualidade     343031 non-null float64
-envolvido_em_organizacao                            343031 non-null float64
-confinamento                                        343031 non-null float64
-semi_confinamento                                   343031 non-null float64
-suplementacao                                       343031 non-null float64
-fertirrigacao                                       343031 non-null float64
-ifp                                                 343031 non-null float64
-ilp                                                 343031 non-null float64
-ilpf                                                343031 non-null float64
-latitude                                            343031 non-null float64
-longitude                                           343031 non-null float64
-mes_abate                                           343031 non-null float64
-estacao_abate                                       343031 non-null float64
-acabamento                                          343031 non-null int64
-dtypes: float64(28), int64(2)
-memory usage: 81.1 MB
-None
+
 [(1, 1466), (2, 83670), (3, 130140), (4, 22685), (5, 99)]
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
 Melhores parametros NB : MultinomialNB(alpha=3, class_prior=None, fit_prior=True)
 Validação cruzada NB : [0.54493521 0.54771906 0.55028144 0.54080904 0.54401294]
 NB: (0.5456) +/- (0.003)
@@ -206,8 +124,6 @@ F1 score:  [0.01314402 0.43776015 0.62337076 0.02692936 0.        ]
 
 avg / total       0.53      0.53      0.57      0.51      0.50      0.27    343031
 
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
 Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=19,
             max_features=25, max_leaf_nodes=None,
             min_impurity_decrease=0.0, min_impurity_split=None,
@@ -236,8 +152,6 @@ F1 score:  [0.51347798 0.6696969  0.73524668 0.63664094 0.25766871]
 
 avg / total       0.70      0.70      0.75      0.70      0.72      0.52    343031
 
-/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
-  import imp
 Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
            metric_params=None, n_jobs=None, n_neighbors=12, p=2,
            weights='distance')
@@ -263,3 +177,96 @@ F1 score:  [0.55939454 0.63388252 0.71339315 0.57822761 0.42774566]
 
 avg / total       0.67      0.67      0.73      0.67      0.70      0.48    343031
 
+
+
+
+
+Resultado com com meso micro mes estacao
+50/50
+NeighbourhoodCleaningRule 2, 3 e 4
+
+/usr/bin/python3 /home/higornucci/projetos/classificacao-aulas/dissertacao/5_2_selecao_modelo.py
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+   Unnamed: 0  microrregiao  mesoregiao  tipificacao  maturidade  peso_carcaca  questionario_classificacao_estabelecimento_rural  possui_outros_incentivos  fabrica_racao  area_total_destinada_confinamento  area_manejada_80_boa_cobertura_vegetal  area_manejada_20_erosao  dispoe_de_identificacao_individual  rastreamento_sisbov  faz_controle_pastejo_regua_de_manejo_embrapa  lita_trace  apresenta_atestado_programas_controle_qualidade  envolvido_em_organizacao  confinamento  semi_confinamento  suplementacao  fertirrigacao  ifp  ilp  ilpf  latitude  longitude  mes_abate  estacao_abate  acabamento
+0           0           1.0    0.333333          0.0         0.0      0.603333                                          0.555556                       0.0            1.0                                0.0                                     1.0                      0.0                                 1.0                  0.0                                           1.0         0.0                                              0.0                       0.0           1.0                1.0            1.0            1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           3
+1           1           1.0    0.333333          0.0         0.0      0.620000                                          0.555556                       0.0            1.0                                0.0                                     1.0                      0.0                                 1.0                  0.0                                           1.0         0.0                                              0.0                       0.0           1.0                1.0            1.0            1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           2
+2           2           1.0    0.333333          0.0         0.0      0.730000                                          0.555556                       0.0            1.0                                0.0                                     1.0                      0.0                                 1.0                  0.0                                           1.0         0.0                                              0.0                       0.0           1.0                1.0            1.0            1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           3
+3           3           1.0    0.333333          0.0         0.0      0.718333                                          0.555556                       0.0            1.0                                0.0                                     1.0                      0.0                                 1.0                  0.0                                           1.0         0.0                                              0.0                       0.0           1.0                1.0            1.0            1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           3
+4           4           1.0    0.333333          0.0         0.0      0.693333                                          0.555556                       0.0            1.0                                0.0                                     1.0                      0.0                                 1.0                  0.0                                           1.0         0.0                                              0.0                       0.0           1.0                1.0            1.0            1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           3
+[(1, 1466), (2, 83670), (3, 130140), (4, 11487), (5, 99)]
+Melhores parametros NB : MultinomialNB(alpha=3, class_prior=None, fit_prior=True)
+Validação cruzada NB : [0.55965972 0.5623168  0.56345323 0.5564445  0.55848449]
+NB: (0.5601) +/- (0.003)
+Tempo de execução do NB: 10.1693 segundos
+Matriz de Confusão
+[[    81    761    623      0      0]
+ [  4227  54110  73473   2802      0]
+ [  6183  52105 120560   5322      0]
+ [   366   5612  15173   1534      0]
+ [     3     13     83      0      0]]
+Precision:  [0.00745856 0.48054635 0.57433591 0.15883206 0.        ]
+Recall:  [0.0552901  0.40197011 0.65461259 0.06762178 0.        ]
+F1 score:  [0.01314402 0.43776015 0.61185236 0.09485824 0.        ]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.01      0.06      0.97      0.01      0.23      0.05      1465
+          2       0.48      0.40      0.72      0.44      0.54      0.28    134612
+          3       0.57      0.65      0.44      0.61      0.54      0.29    184170
+          4       0.16      0.07      0.97      0.09      0.26      0.06     22685
+          5       0.00      0.00      1.00      0.00      0.00      0.00        99
+
+avg / total       0.51      0.51      0.59      0.51      0.52      0.27    343031
+
+Melhores parametros DTC : DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=19,
+            max_features=22, max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=5,
+            min_weight_fraction_leaf=0.0, presort=False, random_state=None,
+            splitter='best')
+Validação cruzada DTC : [0.84010667 0.84226302 0.85028211 0.84446355 0.84490093]
+DTC: (0.8444) +/- (0.003)
+Tempo de execução do DTC: 3712.1067 segundos
+Matriz de Confusão
+[[   810    510    144      1      0]
+ [   657  87266  46103    583      3]
+ [   245  38664 140903   4328     30]
+ [    14   1305   9052  12259     55]
+ [     0      6     26     18     49]]
+Precision:  [0.46929316 0.68309446 0.71805757 0.71318867 0.35766423]
+Recall:  [0.55290102 0.64827801 0.76507032 0.54040115 0.49494949]
+F1 score:  [0.50767784 0.665231   0.74081883 0.61488689 0.41525424]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.47      0.55      1.00      0.51      0.74      0.53      1465
+          2       0.68      0.65      0.81      0.67      0.72      0.51    134612
+          3       0.72      0.77      0.65      0.74      0.71      0.50    184170
+          4       0.71      0.54      0.98      0.61      0.73      0.51     22685
+          5       0.36      0.49      1.00      0.42      0.70      0.47        99
+
+avg / total       0.70      0.70      0.74      0.70      0.71      0.51    343031
+
+Melhores parametros K-NN : KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+           metric_params=None, n_jobs=None, n_neighbors=12, p=2,
+           weights='distance')
+Validação cruzada K-NN : [0.94036232 0.94111035 0.93974257 0.93967645 0.94141632]
+K-NN: (0.9405) +/- (0.001)
+Tempo de execução do K-NN: 205.2240 segundos
+Matriz de Confusão
+[[   852    429    176      7      1]
+ [   462  83085  49598   1458      9]
+ [   278  41994 136746   5128     24]
+ [    28   2461   8817  11351     28]
+ [     1     11     40     10     37]]
+Precision:  [0.52560148 0.649203   0.69990838 0.6322268  0.37373737]
+Recall:  [0.58156997 0.61721838 0.74249878 0.5003747  0.37373737]
+F1 score:  [0.5521711  0.63280679 0.72057479 0.55862595 0.37373737]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.53      0.58      1.00      0.55      0.76      0.56      1465
+          2       0.65      0.62      0.78      0.63      0.70      0.48    134612
+          3       0.70      0.74      0.63      0.72      0.68      0.47    184170
+          4       0.63      0.50      0.98      0.56      0.70      0.47     22685
+          5       0.37      0.37      1.00      0.37      0.61      0.35        99
+
+avg / total       0.67      0.68      0.72      0.67      0.69      0.47    343031
