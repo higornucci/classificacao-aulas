@@ -85,7 +85,7 @@ print(conjunto_teste.info())
 # balanceador = RandomUnderSampler(random_state=random_state)
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
-balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([0, 2]))
+balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3]))
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy='majoritary')
 
 # balanceador = SMOTE()
@@ -207,7 +207,7 @@ def escolher_parametros():
         ]
     elif nome == 'DTC':
         return [
-            {'max_features': range(1, 27, 2),
+            {'max_features': range(20, 29, 1),
              'max_depth': [16, 17, 18, 19],
              'min_samples_split': range(5, 11, 1),
              'min_samples_leaf': range(1, 5, 1),
