@@ -20,8 +20,8 @@ from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn import tree
-from sklearn.feature_selection import RFE
-from sklearn.linear_model import LogisticRegression
+from sklearn.feature_selection import RFE, VarianceThreshold
+from sklearn.linear_model import LogisticRegression, RandomizedLasso, Lasso, Ridge
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -30,11 +30,12 @@ pd.set_option('display.width', 2000)  # display all columns
 # 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
 # dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 # dados_completo = pd.read_csv('../input/dados.csv', encoding='utf-8', delimiter='\t')
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count()-1
+n_jobs = multiprocessing.cpu_count() - 1
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -83,23 +84,23 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
 # balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy='majoritary')
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
 # balanceador = RandomOverSampler()
 
-balanceador = SMOTEENN(random_state=random_state)
+# balanceador = SMOTEENN(random_state=random_state)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('acabamento', axis=1),
     conjunto_treinamento['acabamento'])
 print(sorted(Counter(Y_treino).items()))
 # X_treino, Y_treino = conjunto_treinamento.drop('acabamento', axis=1), conjunto_treinamento['acabamento']
+X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
-print('X Treino:', X_treino)
-# print('X Teste:', X_teste.info())
+print('X Treino:', X_treino.head(50))
 # mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 2)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 3)
@@ -111,18 +112,41 @@ resultado["item.classe"] = Y_teste.values
 resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 
-def fazer_selecao_features():
-    rfe = RFE(LogisticRegression(), 20)
-    rfe = rfe.fit(X_treino, Y_treino)
-    feature_rfe_scoring = pd.DataFrame({
-        'feature': X_treino.columns,
-        'score': rfe.ranking_
-    })
-    feat_rfe_20 = feature_rfe_scoring[feature_rfe_scoring['score'] == 1]['feature'].values
-    print('Features mais importantes: ', feat_rfe_20)
+def fazer_selecao_features_vt():
+    features = X_treino.columns
+    vt = VarianceThreshold(threshold=(.8 * (1 - .8)))
+    vt.fit(X_treino)
+    print("Caraterísticas ordenadas pelo rank VarianceThreshold:")
+    print(X_treino[features[vt.get_support(indices=True)]])
+    print(sorted(zip(map(lambda x: round(x, 4), vt.variances_), features), reverse=True))
 
 
-# fazer_selecao_features()
+def fazer_selecao_features_rfe():
+    features = X_treino.columns
+    rfe = RFE(tree.DecisionTreeClassifier(), 22)
+    rfe.fit(X_treino, Y_treino)
+    print("Caraterísticas ordenadas pelo rank RFE:")
+    print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_), features)))
+    print("Características selecionadas", sorted(zip(rfe.support_, features)))
+
+
+def pretty_print_coefs(coefs, names):
+    lst = zip(coefs, names)
+    lst = sorted(lst, key=lambda x: -np.abs(x[0]))
+    return " + ".join("%s * %s" % (round(coef, 3), name) for coef, name in lst)
+
+
+def fazer_selecao_features_ridge():
+    features = X_treino.columns
+    ridge = Ridge(alpha=1)
+    ridge.fit(X_treino, Y_treino)
+    print("Caraterísticas ordenadas pelo rank Ridge:")
+    print(pretty_print_coefs(ridge.coef_, features))
+
+
+fazer_selecao_features_vt()
+fazer_selecao_features_rfe()
+fazer_selecao_features_ridge()
 
 num_folds = 5
 scoring = 'accuracy'
