@@ -74,7 +74,7 @@ X_completo = dados_completo.drop(['acabamento'], axis=1)
 Y_completo = dados_completo['acabamento']
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.5, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=random_state)
 for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -84,7 +84,7 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
 # balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=list([1, 2, 3, 4]))
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -130,23 +130,26 @@ def fazer_selecao_features_rfe():
     print("Características selecionadas", sorted(zip(rfe.support_, features)))
 
 
-def pretty_print_coefs(coefs, names):
+def pretty_print_linear(coefs, names=None, sort=False):
+    if names is None:
+        names = ["X%s" % x for x in range(len(coefs))]
     lst = zip(coefs, names)
-    lst = sorted(lst, key=lambda x: -np.abs(x[0]))
-    return " + ".join("%s * %s" % (round(coef, 3), name) for coef, name in lst)
+    if sort:
+        lst = sorted(lst, key=lambda x: -np.abs(x[0]))
+    return " + ".join("%s * %s" % (round(coef, 3), name)
+                      for coef, name in lst)
 
 
-def fazer_selecao_features_ridge():
+def fazer_selecao_features_lasso():
     features = X_treino.columns
-    ridge = Ridge(alpha=1)
-    ridge.fit(X_treino, Y_treino)
-    print("Caraterísticas ordenadas pelo rank Ridge:")
-    print(pretty_print_coefs(ridge.coef_, features))
+    lasso = Lasso(alpha=.3)
+    lasso.fit(X_treino, Y_treino)
+    print("Lasso model: ", pretty_print_linear(lasso.coef_, features, sort=True))
 
 
 fazer_selecao_features_vt()
 fazer_selecao_features_rfe()
-fazer_selecao_features_ridge()
+fazer_selecao_features_lasso()
 
 num_folds = 5
 scoring = 'accuracy'
