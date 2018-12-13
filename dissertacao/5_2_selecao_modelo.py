@@ -5,6 +5,7 @@ from collections import Counter
 
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
 from imblearn.metrics import classification_report_imbalanced
@@ -35,7 +36,7 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 1
+n_jobs = multiprocessing.cpu_count() #- 1
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -69,12 +70,14 @@ def mostrar_correlacao(dados, classe):
 
 
 # mostrar_correlacao(dados_completo, 'acabamento')
-
+test_size = 0.3
+train_size = 0.9
+print(((train_size * 100), '/', test_size * 100))
 X_completo = dados_completo.drop(['acabamento'], axis=1)
 Y_completo = dados_completo['acabamento']
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=test_size, random_state=random_state)
 for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -91,6 +94,7 @@ balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=list([1, 
 # balanceador = RandomOverSampler()
 
 # balanceador = SMOTEENN(random_state=random_state)
+print(balanceador)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('acabamento', axis=1),
     conjunto_treinamento['acabamento'])
@@ -157,7 +161,7 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [('NB', MultinomialNB()),
+modelos_base = [('MNB', MultinomialNB()),
                 ('DTC', tree.DecisionTreeClassifier()),
                 # ('RF', RandomForestClassifier(random_state=random_state)),
                 ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
@@ -165,12 +169,12 @@ modelos_base = [('NB', MultinomialNB()),
                 ]
 
 
-def gerar_matriz_confusao(modelo):
+def gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino, X_teste, Y_teste):
     average = None
     modelo.fit(X_treino, Y_treino)
     y_pred = modelo.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
-    print('Matriz de Confusão')
+    print('Matriz de Confusão ' + tipo)
     print(matriz_confusao)
     precision = precision_score(Y_teste, y_pred, average=average)
     print('Precision: ', precision)
@@ -181,24 +185,44 @@ def gerar_matriz_confusao(modelo):
     print(classification_report_imbalanced(Y_teste, y_pred))
 
 
+def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino, X_teste, Y_teste):
+    cv_resultados = cross_val_score(modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
+    print('Validação cruzada ' + nome + ' :', cv_resultados)
+    print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
+    gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino, X_teste, Y_teste)
+    return cv_resultados
+
+
+def imprimir_acuracia(nome, df_results):
+    plt.figure()
+    sns.boxplot(y='level_0', x=0, data=df_results, whis=10.0)
+    sns.despine(top=True, right=True, left=True)
+    ax = plt.gca()
+    ax.xaxis.set_major_formatter(
+        plt.FuncFormatter(lambda x, pos: "%i%%" % (100 * x)))
+    plt.xlabel('Acuracy')
+    plt.ylabel('')
+    plt.title('Difference in terms of acuracy with ' + nome)
+    plt.savefig('acuracia' + nome + '.svg')
+
+
 def rodar_algoritmos():
     global preds
     inicio = time.time()
     grid_search = GridSearchCV(modelo, escolher_parametros(), cv=kfold, n_jobs=-1)
     grid_search.fit(X_treino, Y_treino)
     melhor_modelo = grid_search.best_estimator_
-    cv_resultados = cross_val_score(melhor_modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
-
-    # mostrar_features_mais_importantes(melhor_modelo)
-
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
-    print('Validação cruzada ' + nome + ' :', cv_resultados)
-    print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
+    cv_results_balanced = rodar_modelo(melhor_modelo, nome, 'Balanceado', X_treino, Y_treino, X_teste, Y_teste)
+    cv_results_imbalanced = rodar_modelo(melhor_modelo, nome, 'Não Balanceado',
+                                         conjunto_treinamento.drop('acabamento', axis=1),
+                                         conjunto_treinamento['acabamento'], X_teste, Y_teste)
+
     melhor_modelo.fit(X_treino, Y_treino)
     preds = melhor_modelo.predict(X_teste)
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
-    gerar_matriz_confusao(melhor_modelo)
+    return cv_results_balanced, cv_results_imbalanced
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
@@ -245,7 +269,7 @@ def escolher_parametros():
             #  # 'class_weight': [None, 'balanced']
             #  }
         ]
-    elif nome == 'NB':
+    elif nome == 'MNB':
         return [
             {'alpha': [0.01, 1, 2, 3],
              'fit_prior': [True, False],
@@ -271,5 +295,9 @@ def imprimir_resultados():
 
 
 for nome, modelo in modelos_base:
-    rodar_algoritmos()
+    cv_results_balanced, cv_results_imbalanced = rodar_algoritmos()
+    df_results = (pd.DataFrame({'Balanced ': cv_results_balanced,
+                                'Imbalanced ': cv_results_imbalanced})
+                  .unstack().reset_index())
+    imprimir_acuracia(nome, df_results)
     # imprimir_resultados()

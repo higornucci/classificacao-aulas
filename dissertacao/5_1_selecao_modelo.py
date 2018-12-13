@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from category_encoders import BinaryEncoder, OneHotEncoder
+from imblearn.metrics import classification_report_imbalanced
 from imblearn.over_sampling import SMOTE, ADASYN
 from imblearn.combine import SMOTEENN
 from imblearn.ensemble import BalancedBaggingClassifier
