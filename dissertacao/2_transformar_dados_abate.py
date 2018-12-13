@@ -37,6 +37,16 @@ def eh_precoce(linha):
     return 0
 
 
+colunas_categoricas = ['microrregiao', 'mesoregiao']
+dados_categoricos = dados_completo[colunas_categoricas]
+for cc in colunas_categoricas:
+    labelEncoder = LabelEncoder()
+    dados_categoricos[cc] = labelEncoder.fit_transform(dados_categoricos[cc])
+    print(cc, labelEncoder.classes_)
+
+dados_alvo = dados_completo['acabamento']
+dados_completo = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)
+dados_completo = dados_completo.join(dados_categoricos).join(dados_alvo)
 # Substituindo os valores da rispoa
 # rispoa_label_encoder = LabelEncoder()
 # rispoa_labels = rispoa_label_encoder.fit_transform(dados_completo['rispoa'])
