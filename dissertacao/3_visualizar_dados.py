@@ -61,8 +61,8 @@ def plotar_dataset_2d_balanced():
     plt.show()
 
 
-#plotar_dataset_2d_balanced()
-#plotar_dataset_2d_imbalanced()
+plotar_dataset_2d_balanced()
+plotar_dataset_2d_imbalanced()
 
 
 def plotar_dataset_3d_imbalanced():

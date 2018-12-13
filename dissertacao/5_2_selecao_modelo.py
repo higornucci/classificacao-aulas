@@ -37,6 +37,7 @@ print(dados_completo.head())
 
 random_state = 42
 n_jobs = multiprocessing.cpu_count() #- 1
+classes_balancear = list([2, 3])
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -70,8 +71,9 @@ def mostrar_correlacao(dados, classe):
 
 
 # mostrar_correlacao(dados_completo, 'acabamento')
-test_size = 0.5
-train_size = 0.5
+print('Classes para balancear', classes_balancear)
+test_size = 0.3
+train_size = 0.7
 print(((train_size * 100), '/', test_size * 100))
 X_completo = dados_completo.drop(['acabamento'], axis=1)
 Y_completo = dados_completo['acabamento']
@@ -87,7 +89,7 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
 # balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=list([2, 3]))
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=classes_balancear)
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
