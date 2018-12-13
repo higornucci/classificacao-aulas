@@ -51,7 +51,7 @@ dados_alvo = dados_completo['acabamento']
 for cc in colunas_categoricas:
     labelEncoder = LabelEncoder()
     dados_categoricos[cc] = labelEncoder.fit_transform(dados_categoricos[cc])
-    print(labelEncoder.classes_)
+    print(cc, labelEncoder.classes_)
 #     prefix = '{}#'.format(cc)
 #     dummies = pd.get_dummies(dados_categoricos[cc], prefix=prefix).astype(np.int8)
 #     dados_categoricos.drop(cc, axis=1, inplace=True)

@@ -74,7 +74,7 @@ X_completo = dados_completo.drop(['acabamento'], axis=1)
 Y_completo = dados_completo['acabamento']
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=random_state)
+split = StratifiedShuffleSplit(n_splits=1, test_size=0.9, random_state=random_state)
 for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
@@ -101,6 +101,7 @@ X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
 print('X Treino:', X_treino.head(50))
+print('Y Treino:', Y_treino)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 2)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 3)
