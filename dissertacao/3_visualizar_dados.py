@@ -5,7 +5,6 @@ import matplotlib.image as mpimg
 import seaborn as sns
 from imblearn.under_sampling import EditedNearestNeighbours
 from mpl_toolkits.mplot3d import Axes3D
-from sklearn.model_selection import train_test_split
 
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -61,21 +60,21 @@ def plotar_dataset_2d_balanced():
     plt.show()
 
 
-plotar_dataset_2d_balanced()
-plotar_dataset_2d_imbalanced()
+# plotar_dataset_2d_balanced()
+# plotar_dataset_2d_imbalanced()
 
 
 def plotar_dataset_3d_imbalanced():
-    x = pd.DataFrame(np.array(dados_completo['maturidade']).reshape(-1, 1))
-    y = pd.DataFrame(np.array(dados_completo['peso_carcaca']).reshape(-1, 1))
-    z = pd.DataFrame(np.array(dados_completo['tipificacao']).reshape(-1, 1))
+    x = pd.DataFrame(np.array(dados_completo['tipificacao']).reshape(-1, 1))
+    y = pd.DataFrame(np.array(dados_completo['maturidade']).reshape(-1, 1))
+    z = pd.DataFrame(np.array(dados_completo['peso_carcaca']).reshape(-1, 1))
     target = pd.DataFrame(np.array(dados_completo['acabamento']).reshape(-1, 1))
 
     new_data = [x, y, z, target]
 
     new_data = pd.concat(new_data, axis=1, ignore_index=True)
 
-    new_data.columns = ['maturity', 'carcass_weight', 'typification', 'carcass_fatness_degree']
+    new_data.columns = ['typification', 'maturity', 'carcass_weight', 'carcass_fatness_degree']
 
     colors = new_data['carcass_fatness_degree'].map(
         {1: 'blue', 2: 'darkorange', 3: 'green', 4: 'crimson', 5: 'purple'})
@@ -93,16 +92,16 @@ def plotar_dataset_3d_imbalanced():
 
 
 def plotar_dataset_3d_balanced():
-    x = pd.DataFrame(np.array(conjunto_balanceado['maturidade']).reshape(-1, 1))
-    y = pd.DataFrame(np.array(conjunto_balanceado['peso_carcaca']).reshape(-1, 1))
-    z = pd.DataFrame(np.array(conjunto_balanceado['tipificacao']).reshape(-1, 1))
-    target = pd.DataFrame(np.array(conjunto_balanceado['acabamento']).reshape(-1, 1))
+    x = pd.DataFrame(np.array(dados_completo['tipificacao']).reshape(-1, 1))
+    y = pd.DataFrame(np.array(dados_completo['maturidade']).reshape(-1, 1))
+    z = pd.DataFrame(np.array(dados_completo['peso_carcaca']).reshape(-1, 1))
+    target = pd.DataFrame(np.array(dados_completo['acabamento']).reshape(-1, 1))
 
     new_data = [x, y, z, target]
 
     new_data = pd.concat(new_data, axis=1, ignore_index=True)
 
-    new_data.columns = ['maturity', 'carcass_weight', 'typification', 'carcass_fatness_degree']
+    new_data.columns = ['typification', 'maturity', 'carcass_weight', 'carcass_fatness_degree']
 
     colors = new_data['carcass_fatness_degree'].map(
         {1: 'blue', 2: 'darkorange', 3: 'green', 4: 'crimson', 5: 'purple'})
@@ -121,9 +120,7 @@ def plotar_dataset_3d_balanced():
 
 plotar_dataset_3d_imbalanced()
 plotar_dataset_3d_balanced()
-train_set, test_set = train_test_split(dados_completo, test_size=0.3, random_state=42)
-print(len(train_set), "train +", len(test_set), "test")
-
+exit()
 ax = plt.axes()
 sns.countplot(x='acabamento', data=dados_completo, ax=ax)
 ax.set_title('Distribution of carcass fatness degree')

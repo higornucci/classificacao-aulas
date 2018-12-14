@@ -37,7 +37,6 @@ print(dados_completo.head())
 
 random_state = 42
 n_jobs = multiprocessing.cpu_count() #- 1
-classes_balancear = list([2, 3])
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -71,6 +70,7 @@ def mostrar_correlacao(dados, classe):
 
 
 # mostrar_correlacao(dados_completo, 'acabamento')
+classes_balancear = list([3])
 print('Classes para balancear', classes_balancear)
 test_size = 0.3
 train_size = 0.7
@@ -89,7 +89,7 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
 # balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, sampling_strategy=classes_balancear)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode', sampling_strategy=classes_balancear)
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -245,8 +245,8 @@ def escolher_parametros():
     elif nome == 'SVM':
         return [
             {'kernel': ['rbf'],
-             'gamma': [0.01, 0.1, 1, 5],
-             'C': [0.001, 0.10, 0.1, 10, 25, 50, 100, 1000]
+             'gamma': [0.1, 1, 5],
+             'C': [0.001, 100, 1000]
              #  },
              # {'kernel': ['sigmoid'],
              #  'gamma': [0.01, 0.1, 1, 5],
