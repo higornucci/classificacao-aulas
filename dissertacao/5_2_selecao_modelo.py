@@ -22,6 +22,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 from sklearn import tree
 from sklearn.feature_selection import RFE, VarianceThreshold
+from yellowbrick.features import RFECV
 from sklearn.linear_model import LogisticRegression, RandomizedLasso, Lasso, Ridge
 
 warnings.filterwarnings('ignore')
@@ -70,10 +71,10 @@ def mostrar_correlacao(dados, classe):
 
 
 # mostrar_correlacao(dados_completo, 'acabamento')
-classes_balancear = list([3])
+classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
-test_size = 0.3
-train_size = 0.7
+test_size = 0.2
+train_size = 0.8
 print(((train_size * 100), '/', test_size * 100))
 X_completo = dados_completo.drop(['acabamento'], axis=1)
 Y_completo = dados_completo['acabamento']
@@ -119,45 +120,22 @@ resultado["item.classe"] = Y_teste.values
 resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 
-def fazer_selecao_features_vt():
-    features = X_treino.columns
-    vt = VarianceThreshold(threshold=(.8 * (1 - .8)))
-    vt.fit(X_treino)
-    print("Caraterísticas ordenadas pelo rank VarianceThreshold:")
-    print(X_treino[features[vt.get_support(indices=True)]])
-    print(sorted(zip(map(lambda x: round(x, 4), vt.variances_), features), reverse=True))
-
-
 def fazer_selecao_features_rfe():
     features = X_treino.columns
-    rfe = RFE(tree.DecisionTreeClassifier(), 22)
+    cv = StratifiedKFold(5)
+    rfe = RFECV(RandomForestClassifier(), cv=cv, scoring='f1_weighted')
+
     rfe.fit(X_treino, Y_treino)
+    print(rfe.poof())
     print("Caraterísticas ordenadas pelo rank RFE:")
     print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_), features)))
-    print("Características selecionadas", sorted(zip(rfe.support_, features)))
+    ranking = sorted(zip(rfe.support_, features))
+    print("Características selecionadas", ranking)
+    return rfe.transform(X_treino)
 
 
-def pretty_print_linear(coefs, names=None, sort=False):
-    if names is None:
-        names = ["X%s" % x for x in range(len(coefs))]
-    lst = zip(coefs, names)
-    if sort:
-        lst = sorted(lst, key=lambda x: -np.abs(x[0]))
-    return " + ".join("%s * %s" % (round(coef, 3), name)
-                      for coef, name in lst)
-
-
-def fazer_selecao_features_lasso():
-    features = X_treino.columns
-    lasso = Lasso(alpha=.3)
-    lasso.fit(X_treino, Y_treino)
-    print("Lasso model: ", pretty_print_linear(lasso.coef_, features, sort=True))
-
-
-fazer_selecao_features_vt()
-fazer_selecao_features_rfe()
-fazer_selecao_features_lasso()
-
+# print(fazer_selecao_features_rfe())
+# exit()
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
@@ -172,18 +150,11 @@ modelos_base = [('MNB', MultinomialNB()),
 
 
 def gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino, X_teste, Y_teste):
-    average = None
     modelo.fit(X_treino, Y_treino)
     y_pred = modelo.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
     print('Matriz de Confusão ' + tipo)
     print(matriz_confusao)
-    precision = precision_score(Y_teste, y_pred, average=average)
-    print('Precision: ', precision)
-    recall = recall_score(Y_teste, y_pred, average=average)
-    print('Recall: ', recall)
-    f1 = f1_score(Y_teste, y_pred, average=average)
-    print('F1 score: ', f1)
     print(classification_report_imbalanced(Y_teste, y_pred))
 
 
