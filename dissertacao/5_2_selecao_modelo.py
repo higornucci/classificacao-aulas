@@ -103,8 +103,8 @@ X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['acabamento'
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
-# print('X Treino:', X_treino.head(50))
-# print('Y Treino:', Y_treino)
+print('X Treino:', X_treino.head(50))
+print('Y Treino:', Y_treino)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 1)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 2)
 # mostrar_quantidade_por_classe(conjunto_treinamento, 3)
