@@ -27,7 +27,7 @@ mostrar_quantidade_por_classe(dados_completo, 5)
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
 
-balanceador = EditedNearestNeighbours(n_jobs=-1, sampling_strategy=list([1, 2, 3, 4]))
+balanceador = EditedNearestNeighbours(n_jobs=-1, sampling_strategy=list([2, 3]))
 X_treino, Y_treino = balanceador.fit_resample(
     dados_completo.drop(['acabamento'], axis=1),
     dados_completo['acabamento'])
@@ -35,6 +35,7 @@ X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['acabamento'
 Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
 conjunto_balanceado = X_treino.join(Y_treino)
 conjunto_balanceado = conjunto_balanceado.sample(frac=1)
+# conjunto_balanceado.to_csv('../input/DadosCompletoTransformadoMLBalanceado.csv', sep='\t')
 print(conjunto_balanceado.shape)
 print(conjunto_balanceado.describe(include=['number']))
 

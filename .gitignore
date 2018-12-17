@@ -15,4 +15,6 @@ input/DadosCompletoTransformadoML.csv
 input/DadosAbate.csv
 input/campos_precoce_dados_teste.csv
 input/DadosCompletoUnderBalanceadoML.csv
+input/DadosCompletoTransformadoMLBalanceado.csv
+input/DadosCompletoTransformadoMLTeste.csv
 input/dados.csv
