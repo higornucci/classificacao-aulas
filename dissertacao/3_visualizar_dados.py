@@ -15,8 +15,8 @@ def mostrar_quantidade_por_classe(df, classe):
     print(df.loc[df['acabamento'] == classe].info())
 
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
-# dados_completo.drop('index', axis=1, inplace=True)
+dados_completo = pd.read_csv('../input/DadosCompletoTransformado.csv', encoding='utf-8', delimiter='\t')
+dados_completo.drop('index', axis=1, inplace=True)
 
 mostrar_quantidade_por_classe(dados_completo, 1)
 mostrar_quantidade_por_classe(dados_completo, 2)
@@ -35,10 +35,8 @@ X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['acabamento'
 Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
 conjunto_balanceado = X_treino.join(Y_treino)
 conjunto_balanceado = conjunto_balanceado.sample(frac=1)
-conjunto_balanceado.to_csv('../input/DadosCompletoTransformadoMLBalanceado.csv', sep='\t')
 print(conjunto_balanceado.shape)
-print(conjunto_balanceado.describe(include=['number']))
-exit()
+print(conjunto_balanceado.describe())
 
 
 def plotar_dataset_2d_imbalanced():
