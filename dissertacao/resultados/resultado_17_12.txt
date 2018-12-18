@@ -243,3 +243,7 @@ Matriz de Confusão Não Balanceado
 avg / total       0.69      0.69      0.73      0.69      0.70      0.49    548848
 
 Tempo de execução do K-NN: 9406.1369 segundos
+
+
+Validação cruzada SVM : [0.72468575 0.72684363 0.72452085 0.7214866  0.72298615]
+SVM: (0.7241) +/- (0.002)
