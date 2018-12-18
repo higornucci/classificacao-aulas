@@ -18,3 +18,5 @@ input/DadosCompletoUnderBalanceadoML.csv
 input/DadosCompletoTransformadoMLBalanceado.csv
 input/DadosCompletoTransformadoMLTeste.csv
 input/dados.csv
+input/DadosCompletoTransformadoMLBalanceadoX.csv
+input/DadosCompletoTransformadoMLBalanceadoY.csv
