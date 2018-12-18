@@ -58,7 +58,7 @@ for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
-    clf = GridSearchCV(SVC(), tuned_parameters, cv=kfold,
+    clf = GridSearchCV(SVC(), tuned_parameters, cv=kfold, n_jobs=n_jobs,
                        scoring='%s_macro' % score, refit=True, verbose=2)
     clf.fit(X_treino, Y_treino)
 
