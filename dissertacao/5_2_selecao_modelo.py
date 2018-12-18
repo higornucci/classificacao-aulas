@@ -9,21 +9,17 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
 from imblearn.metrics import classification_report_imbalanced
-from imblearn.pipeline import make_pipeline, Pipeline
 from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler, EditedNearestNeighbours
 from imblearn.over_sampling import RandomOverSampler
-from sklearn.ensemble import RandomForestClassifier, BaggingClassifier
-from sklearn.model_selection import cross_val_score, cross_val_predict, GridSearchCV, StratifiedKFold, \
-    StratifiedShuffleSplit, RandomizedSearchCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score, cross_val_predict, StratifiedKFold, \
+    StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import confusion_matrix
 from sklearn.svm import SVC
 from sklearn import tree
-from sklearn.feature_selection import RFE, VarianceThreshold
 from yellowbrick.features import RFECV
-from sklearn.linear_model import LogisticRegression, RandomizedLasso, Lasso, Ridge
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -85,7 +81,8 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = NearMiss(version=3)
 # balanceador = AllKNN(allow_minority=True)
 # balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode', sampling_strategy=classes_balancear)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
+                                      sampling_strategy=classes_balancear, n_neighbors=4)
 
 # balanceador = SMOTE()
 # balanceador = ADASYN()
@@ -93,11 +90,20 @@ balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode', sampling_s
 
 # balanceador = SMOTEENN(random_state=random_state)
 print(balanceador)
-X_treino, Y_treino = balanceador.fit_resample(
-    conjunto_treinamento.drop('acabamento', axis=1),
-    conjunto_treinamento['acabamento'])
+# X_treino, Y_treino = balanceador.fit_resample(
+#     conjunto_treinamento.drop('acabamento', axis=1),
+#     conjunto_treinamento['acabamento'])
+# X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
+# Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
+#
+# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+# exit()
+X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
+X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
+Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
+Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 print(sorted(Counter(Y_treino).items()))
-X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
@@ -130,27 +136,27 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
-modelos_base = [('MNB', MultinomialNB()),
-                ('DTC', tree.DecisionTreeClassifier()),
-                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+modelos_base = [
+                #  ('MNB', MultinomialNB()),
+                #  ('DTC', tree.DecisionTreeClassifier()),
+                #  ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 ('SVM', SVC())
                 ]
 
 
-def gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino, X_teste, Y_teste):
-    modelo.fit(X_treino, Y_treino)
-    y_pred = modelo.predict(X_teste)
-    matriz_confusao = confusion_matrix(Y_teste, y_pred)
+def gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino):
+    y_pred = cross_val_predict(modelo, X_treino, Y_treino, n_jobs=n_jobs)
+    matriz_confusao = confusion_matrix(Y_treino, y_pred)
     print('Matriz de Confusão ' + tipo)
     print(matriz_confusao)
-    print(classification_report_imbalanced(Y_teste, y_pred))
+    print(classification_report_imbalanced(Y_treino, y_pred))
 
 
-def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino, X_teste, Y_teste):
+def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino):
     cv_resultados = cross_val_score(modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
-    gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino, X_teste, Y_teste)
+    gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino)
     return cv_resultados
 
 
@@ -169,10 +175,13 @@ def imprimir_acuracia(nome, df_results):
 
 def rodar_algoritmos():
     inicio = time.time()
-    cv_results_balanced = rodar_modelo(modelo, nome, 'Balanceado', X_treino, Y_treino, X_teste, Y_teste)
-    cv_results_imbalanced = rodar_modelo(modelo, nome, 'Não Balanceado',
+    # melhor_modelo = BaggingClassifier(modelo, max_features=28, n_jobs=n_jobs,
+    #                                   random_state=random_state)
+    melhor_modelo = modelo
+    cv_results_balanced = rodar_modelo(melhor_modelo, nome, 'Balanceado', X_treino, Y_treino)
+    cv_results_imbalanced = rodar_modelo(melhor_modelo, nome, 'Não Balanceado',
                                          conjunto_treinamento.drop('acabamento', axis=1),
-                                         conjunto_treinamento['acabamento'], X_teste, Y_teste)
+                                         conjunto_treinamento['acabamento'])
 
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
