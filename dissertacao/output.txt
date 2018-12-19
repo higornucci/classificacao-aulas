@@ -126,3 +126,212 @@ Y Treino:         acabamento
 402532           5
 
 [402533 rows x 1 columns]
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:528: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:528: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:528: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+Validação cruzada MNB : [0.62234809 0.62224403 0.62320047 0.62320821 0.62018508]
+MNB: (0.6222) +/- (0.001)
+Matriz de Confusão Balanceado
+[[     0   1396    949      0      0]
+ [     0  95740  68950      0      0]
+ [     0  44313 154731      0      0]
+ [     0   3401  32895      0      0]
+ [     0      0    158      0      0]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000      2345
+          2     0.6610    0.5813    0.7935    0.6186    0.6792    0.4515    164690
+          3     0.6005    0.7774    0.4941    0.6776    0.6197    0.3950    199044
+          4     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000     36296
+          5     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000       158
+
+avg / total     0.5673    0.6222    0.6653    0.5881    0.5843    0.3800    402533
+
+Validação cruzada MNB : [0.57282367 0.5716407  0.5735629  0.57090409 0.56950113]
+MNB: (0.5717) +/- (0.001)
+Matriz de Confusão Não Balanceado
+[[     0   1163   1182      0      0]
+ [     0  50675 164703      0      0]
+ [     0  31605 263066      0      0]
+ [     0    871  35425      0      0]
+ [     0      0    158      0      0]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000      2345
+          2     0.6010    0.2353    0.8991    0.3382    0.4599    0.1975    215378
+          3     0.5663    0.8927    0.2074    0.6930    0.4303    0.1978    294671
+          4     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000     36296
+          5     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000       158
+
+avg / total     0.5399    0.5716    0.5349    0.5048    0.4115    0.1837    548848
+
+Tempo de execução do MNB: 10.2914 segundos
+Validação cruzada DTC : [0.88540269 0.88321512 0.88178668 0.88267955 0.88342339]
+DTC: (0.8833) +/- (0.001)
+Matriz de Confusão Balanceado
+[[  1323    823    166     33      0]
+ [   885 149542  12785   1478      0]
+ [   194  11761 177570   9503     16]
+ [    40   1641  11158  23383     74]
+ [     1      2     18     66     71]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.5415    0.5642    0.9972    0.5526    0.7501    0.5382      2345
+          2     0.9131    0.9080    0.9402    0.9106    0.9240    0.8510    164690
+          3     0.8804    0.8921    0.8814    0.8862    0.8868    0.7872    199044
+          4     0.6785    0.6442    0.9697    0.6609    0.7904    0.6044     36296
+          5     0.4410    0.4494    0.9998    0.4451    0.6703    0.4245       158
+
+avg / total     0.8734    0.8742    0.9142    0.8737    0.8924    0.7952    402533
+
+Validação cruzada DTC : [0.63716613 0.63697732 0.63785187 0.63797282 0.63760841]
+DTC: (0.6375) +/- (0.000)
+Matriz de Confusão Não Balanceado
+[[  1094    982    256     13      0]
+ [  1300 135335  76094   2647      2]
+ [   350  88091 193278  12920     32]
+ [    13   3103  14334  18784     62]
+ [     0      4     35     55     64]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.3968    0.4665    0.9970    0.4289    0.6820    0.4404      2345
+          2     0.5948    0.6284    0.7236    0.6111    0.6743    0.4503    215378
+          3     0.6806    0.6559    0.6431    0.6680    0.6495    0.4223    294671
+          4     0.5457    0.5175    0.9695    0.5313    0.7083    0.4791     36296
+          5     0.4000    0.4051    0.9998    0.4025    0.6364    0.3809       158
+
+avg / total     0.6367    0.6351    0.6979    0.6356    0.6632    0.4371    548848
+
+Tempo de execução do DTC: 50.6904 segundos
+Validação cruzada K-NN : [0.88317931 0.88263132 0.88327723 0.88146225 0.88131172]
+K-NN: (0.8824) +/- (0.001)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Matriz de Confusão Balanceado
+[[   932   1225    173     15      0]
+ [   326 147611  16294    459      0]
+ [    60  13881 179416   5686      1]
+ [    18   1621  11420  23207     30]
+ [     0      1     25    106     26]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.6976    0.3974    0.9990    0.5064    0.6301    0.3732      2345
+          2     0.8982    0.8963    0.9297    0.8973    0.9128    0.8305    164690
+          3     0.8654    0.9014    0.8628    0.8830    0.8819    0.7807    199044
+          4     0.7874    0.6394    0.9829    0.7057    0.7927    0.6069     36296
+          5     0.4561    0.1646    0.9999    0.2419    0.4056    0.1508       158
+
+avg / total     0.8706    0.8725    0.9018    0.8704    0.8849    0.7828    402533
+
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:528: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:528: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:850: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:850: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/model_selection/_validation.py:850: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  estimator.fit(X_train, y_train, **fit_params)
+Validação cruzada K-NN : [0.68917392 0.69042544 0.68884941 0.6870946  0.68918993]
+K-NN: (0.6889) +/- (0.001)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+Matriz de Confusão Não Balanceado
+[[   752   1363    223      7      0]
+ [   643 139484  74211   1038      2]
+ [   196  68234 217798   8435      8]
+ [    10   2225  14147  19887     27]
+ [     0      5     35     94     24]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.4697    0.3207    0.9984    0.3811    0.5658    0.2985      2345
+          2     0.6601    0.6476    0.7846    0.6538    0.7128    0.5012    215378
+          3     0.7108    0.7391    0.6514    0.7247    0.6939    0.4857    294671
+          4     0.6750    0.5479    0.9813    0.6049    0.7333    0.5144     36296
+          5     0.3934    0.1519    0.9999    0.2192    0.3897    0.1390       158
+
+avg / total     0.6874    0.6886    0.7271    0.6873    0.7033    0.4927    548848
+
+Tempo de execução do K-NN: 6797.4069 segundos
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+Validação cruzada SVM : [0.72468575 0.72684363 0.72452085 0.7214866  0.72298615]
+SVM: (0.7241) +/- (0.002)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+/usr/local/lib/python3.6/dist-packages/sklearn/externals/joblib/externals/cloudpickle/cloudpickle.py:47: DeprecationWarning: the imp module is deprecated in favour of importlib; see the module's documentation for alternative uses
+  import imp
+/usr/local/lib/python3.6/dist-packages/sklearn/utils/validation.py:752: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  y = column_or_1d(y, warn=True)
+/usr/local/lib/python3.6/dist-packages/sklearn/svm/base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+  "avoid this warning.", FutureWarning)
+Matriz de Confusão Balanceado
+[[     0   1914    431      0      0]
+ [     0 125522  39003    165      0]
+ [     0  37323 160603   1118      0]
+ [     0   2852  28929   4515      0]
+ [     0      0    135     23      0]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000      2345
+          2     0.7489    0.7622    0.8230    0.7555    0.7920    0.6235    164690
+          3     0.7010    0.8069    0.6634    0.7502    0.7316    0.5429    199044
+          4     0.7756    0.1244    0.9964    0.2144    0.3521    0.1131     36296
+          5     0.0000    0.0000    1.0000    0.0000    0.0000    0.0000       158
+
+avg / total     0.7230    0.7220    0.7608    0.6994    0.7176    0.5338    402533
+
