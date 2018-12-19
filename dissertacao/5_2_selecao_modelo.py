@@ -1,3 +1,4 @@
+import itertools
 import warnings
 import time
 import multiprocessing
@@ -137,26 +138,68 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-                #  ('MNB', MultinomialNB()),
-                #  ('DTC', tree.DecisionTreeClassifier()),
-                #  ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-                ('SVM', SVC())
+                # ('MNB', MultinomialNB()),
+                ('RF', RandomForestClassifier()),
+                # ('DTC', tree.DecisionTreeClassifier()),
+                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                # ('SVM', SVC())
                 ]
 
 
-def gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino):
+def plot_confusion_matrix(cm, nome, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.gray):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    plt.figure()
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        np.set_printoptions(precision=2)
+        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.svg'
+    else:
+        nome_arquivo = 'matriz_confusao_' + nome + '.svg'
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment="center",
+                 color="black" if cm[i, j] > thresh else "white")
+
+    plt.ylabel('Actual class')
+    plt.xlabel('Predicted class')
+    plt.grid('off')
+    plt.tight_layout()
+    plt.savefig(nome_arquivo)
+
+
+def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
     y_pred = cross_val_predict(modelo, X_treino, Y_treino, n_jobs=n_jobs)
     matriz_confusao = confusion_matrix(Y_treino, y_pred)
     print('Matriz de Confusão ' + tipo)
     print(matriz_confusao)
-    print(classification_report_imbalanced(Y_treino, y_pred))
+    plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], True,
+                          title='Confusion matrix ' + nome + ', normalized')
+    plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False, title='Confusion matrix ' + nome)
+    print(classification_report_imbalanced(y_true=Y_treino, y_pred=y_pred, digits=4))
 
 
 def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino):
     cv_resultados = cross_val_score(modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
-    gerar_matriz_confusao(modelo, tipo, X_treino, Y_treino)
+    if tipo == 'Balanceado':
+        gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino)
     return cv_resultados
 
 
