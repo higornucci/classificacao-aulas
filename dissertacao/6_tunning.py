@@ -6,7 +6,7 @@ import pandas as pd
 from collections import Counter
 from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
-from sklearn.ensemble import BaggingClassifier
+from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, cross_val_score, StratifiedKFold
 from sklearn.svm import SVC
@@ -49,16 +49,25 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1, 0.1, 0.001, 0.0001],
-                     'C': [1, 10, 100, 1000]},
-                    {'kernel': ['linear'], 'C': [1, 10, 100, 1000]}]
+tuned_parameters = [
+            {'n_estimators': range(10, 300, 50),
+             'max_features': range(1, 28, 1),
+             'max_depth': range(1, 10, 1),
+             'min_samples_split': range(5, 10, 1),
+             'min_samples_leaf': range(15, 20, 1)},
+            {'bootstrap': [False],
+             'n_estimators': range(10, 300, 50),
+             'max_features': range(1, 28, 1),
+             'max_depth': range(1, 10, 1),
+             'min_samples_split': range(5, 10, 1),
+             'min_samples_leaf': range(15, 20, 1)}]
 
 scores = ['precision', 'recall']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
-    clf = GridSearchCV(SVC(), tuned_parameters, cv=kfold, n_jobs=n_jobs,
+    clf = GridSearchCV(RandomForestClassifier(), tuned_parameters, cv=kfold, n_jobs=n_jobs,
                        scoring='%s_macro' % score, refit=True, verbose=2)
     clf.fit(X_treino, Y_treino)
 
