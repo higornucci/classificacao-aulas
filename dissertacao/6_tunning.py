@@ -67,9 +67,9 @@ for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
-    clf = GridSearchCV(RandomForestClassifier(), tuned_parameters, cv=kfold, n_jobs=n_jobs,
+    clf = GridSearchCV(RandomForestClassifier(random_state=random_state), tuned_parameters, cv=kfold, n_jobs=n_jobs,
                        scoring='%s_macro' % score, refit=True, verbose=2)
-    clf.fit(X_treino, Y_treino)
+    clf.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
     print()
