@@ -139,9 +139,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
                 # ('MNB', MultinomialNB()),
-                ('RF', RandomForestClassifier()),
+                # ('RF', RandomForestClassifier()),
                 # ('DTC', tree.DecisionTreeClassifier()),
-                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 # ('SVM', SVC())
                 ]
 
