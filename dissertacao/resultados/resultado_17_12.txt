@@ -280,3 +280,36 @@ Matriz de Confusão Balanceado
           4       0.60      0.16      0.99      0.25      0.40      0.15      9074
           5       0.00      0.00      1.00      0.00      0.00      0.00        40
 avg / total       0.65      0.65      0.67      0.64      0.64      0.41    137213
+
+
+Características mais importantes RF :
+                                                  importance
+peso_carcaca                                        0.350388
+tipificacao                                         0.123185
+mes_abate                                           0.111746
+maturidade                                          0.055494
+longitude                                           0.051811
+latitude                                            0.050280
+estacao_abate                                       0.044302
+microrregiao                                        0.026321
+questionario_classificacao_estabelecimento_rural    0.021108
+confinamento                                        0.019284
+semi_confinamento                                   0.016102
+fabrica_racao                                       0.013049
+ilpf                                                0.013001
+mesoregiao                                          0.011621
+ilp                                                 0.011439
+dispoe_de_identificacao_individual                  0.011277
+envolvido_em_organizacao                            0.010984
+rastreamento_sisbov                                 0.010502
+lita_trace                                          0.010414
+suplementacao                                       0.007464
+area_manejada_80_boa_cobertura_vegetal              0.006802
+faz_controle_pastejo_regua_de_manejo_embrapa        0.006411
+fertirrigacao                                       0.005963
+ifp                                                 0.004603
+possui_outros_incentivos                            0.002908
+apresenta_atestado_programas_controle_qualidade     0.002482
+area_total_destinada_confinamento                   0.000730
+area_manejada_20_erosao                             0.000328
+Tempo de execução do RF: 73.1241 segundos

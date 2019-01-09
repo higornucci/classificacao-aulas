@@ -119,7 +119,7 @@ resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 def fazer_selecao_features_rfe():
     features = X_treino.columns
-    rfe = RFECV(RandomForestClassifier(), cv=kfold, scoring='f1_weighted')
+    rfe = RFECV(RandomForestClassifier(), cv=kfold, scoring='accuracy')
 
     rfe.fit(X_treino, Y_treino)
     print(rfe.poof())
@@ -130,18 +130,18 @@ def fazer_selecao_features_rfe():
     return rfe.transform(X_treino)
 
 
-# print(fazer_selecao_features_rfe())
-# exit()
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
+# print(fazer_selecao_features_rfe())
+# exit()
 
 # preparando alguns modelos
 modelos_base = [
                 # ('MNB', MultinomialNB()),
-                # ('RF', RandomForestClassifier()),
+                ('RF', RandomForestClassifier()),
                 # ('DTC', tree.DecisionTreeClassifier()),
-                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 # ('SVM', SVC())
                 ]
 
@@ -225,6 +225,7 @@ def rodar_algoritmos():
     cv_results_imbalanced = rodar_modelo(melhor_modelo, nome, 'Não Balanceado',
                                          conjunto_treinamento.drop('acabamento', axis=1),
                                          conjunto_treinamento['acabamento'])
+    mostrar_features_mais_importantes(melhor_modelo)
 
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
@@ -232,6 +233,7 @@ def rodar_algoritmos():
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
+    melhor_modelo.fit(X_treino, Y_treino)
     if nome == 'RF':
         print('Características mais importantes RF :')
         feature_importances = pd.DataFrame(melhor_modelo.feature_importances_,

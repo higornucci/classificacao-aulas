@@ -1,15 +1,12 @@
 import multiprocessing
 import warnings
-import seaborn as sns
-import matplotlib.pyplot as plt
 import pandas as pd
 from collections import Counter
 from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
-from sklearn.ensemble import BaggingClassifier, RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix
-from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, cross_val_score, StratifiedKFold
-from sklearn.svm import SVC
+from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, StratifiedKFold
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -19,7 +16,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count()  # - 1
+n_jobs = multiprocessing.cpu_count() - 1
 
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
@@ -49,18 +46,13 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-tuned_parameters = [
-            {'n_estimators': range(10, 300, 50),
-             'max_features': range(1, 28, 1),
-             'max_depth': range(1, 10, 1),
-             'min_samples_split': range(5, 10, 1),
-             'min_samples_leaf': range(15, 20, 1)},
-            {'bootstrap': [False],
-             'n_estimators': range(10, 300, 50),
-             'max_features': range(1, 28, 1),
-             'max_depth': range(1, 10, 1),
-             'min_samples_split': range(5, 10, 1),
-             'min_samples_leaf': range(15, 20, 1)}]
+tuned_parameters = {
+    'bootstrap': [True],
+    'max_depth': [50, 100],
+    'max_features': range(20, 28, 2),
+    'min_samples_leaf': range(15, 21, 2),
+    'min_samples_split': range(4, 10, 2),
+    'n_estimators': [100, 500, 1000]}
 
 scores = ['precision', 'recall']
 for score in scores:
