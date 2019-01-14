@@ -48,11 +48,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 tuned_parameters = {
     'bootstrap': [True],
-    'max_depth': [50, 100],
-    'max_features': range(20, 28, 2),
-    'min_samples_leaf': range(15, 21, 2),
-    'min_samples_split': range(4, 10, 2),
-    'n_estimators': [100, 500, 1000]}
+    'max_depth': [10, 30],
+    'max_features': range(24, 28, 2),
+    'min_samples_leaf': range(11, 15, 2),
+    'min_samples_split': range(6, 10, 2),
+    'n_estimators': [500, 1000]}
 
 scores = ['precision', 'recall']
 for score in scores:
