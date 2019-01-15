@@ -1,0 +1,10 @@
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+EditedNearestNeighbours(kind_sel='mode', n_jobs=3, n_neighbors=4,
+            random_state=None, ratio=None, return_indices=False,
+            sampling_strategy=[2, 3])
+[('acabamento', 1)]
+# Tuning hyper-parameters for precision
+
+Fitting 5 folds for each of 32 candidates, totalling 160 fits
+[Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.

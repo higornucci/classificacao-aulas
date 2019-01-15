@@ -139,9 +139,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
                 # ('MNB', MultinomialNB()),
-                ('RF', RandomForestClassifier()),
+                ('RFC', RandomForestClassifier()),
                 # ('DTC', tree.DecisionTreeClassifier()),
-                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 # ('SVM', SVC())
                 ]
 
@@ -184,14 +184,16 @@ def plot_confusion_matrix(cm, nome, classes,
 
 
 def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
-    y_pred = cross_val_predict(modelo, X_treino, Y_treino, n_jobs=n_jobs)
-    matriz_confusao = confusion_matrix(Y_treino, y_pred)
+    # y_pred = cross_val_predict(modelo, X_treino, Y_treino, n_jobs=n_jobs)
+    modelo.fit(X_treino, Y_treino)
+    y_pred = modelo.predict(X_teste)
+    matriz_confusao = confusion_matrix(Y_teste, y_pred)
     print('Matriz de Confusão ' + tipo)
     print(matriz_confusao)
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], True,
                           title='Confusion matrix ' + nome + ', normalized')
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False, title='Confusion matrix ' + nome)
-    print(classification_report_imbalanced(y_true=Y_treino, y_pred=y_pred, digits=4))
+    print(classification_report_imbalanced(y_true=Y_teste, y_pred=y_pred, digits=4))
 
 
 def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino):
@@ -234,8 +236,8 @@ def rodar_algoritmos():
 
 def mostrar_features_mais_importantes(melhor_modelo):
     melhor_modelo.fit(X_treino, Y_treino)
-    if nome == 'RF':
-        print('Características mais importantes RF :')
+    if nome == 'RFC':
+        print('Características mais importantes RFC :')
         feature_importances = pd.DataFrame(melhor_modelo.feature_importances_,
                                            index=X_treino.columns,
                                            columns=['importance']).sort_values('importance', ascending=False)

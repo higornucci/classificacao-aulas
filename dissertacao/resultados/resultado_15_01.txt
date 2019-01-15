@@ -1,0 +1,289 @@
+Validação cruzada RF : [0.91497739 0.91433043 0.91369695 0.91267732 0.91360785]
+RF: (0.9139) +/- (0.001)
+Matriz de Confusão Balanceado
+[[  344   209    30     3     0]
+ [  458 39247 13271   869     0]
+ [  132 21642 47950  3939     5]
+ [    9   373  2834  5846    12]
+ [    0     1     3    15    21]]
+                   pre       rec       spe        f1       geo       iba       sup
+          1     0.3648    0.5870    0.9956    0.4500    0.7645    0.5606       586
+          2     0.6385    0.7289    0.7334    0.6807    0.7311    0.5343     53845
+          3     0.7482    0.6509    0.7460    0.6962    0.6968    0.4810     73668
+          4     0.5478    0.6443    0.9623    0.5921    0.7874    0.6003      9074
+          5     0.5526    0.5250    0.9999    0.5385    0.7245    0.5000        40
+avg / total     0.6902    0.6808    0.7565    0.6821    0.7166    0.5101    137213
+Validação cruzada RF : [0.66 0.66 0.66 0.66 0.66]
+RF: (0.6587) +/- (0.001)
+Características mais importantes RF :
+                                                  importance
+peso_carcaca                                        0.353425
+tipificacao                                         0.122424
+mes_abate                                           0.110905
+maturidade                                          0.055925
+latitude                                            0.054110
+longitude                                           0.050632
+estacao_abate                                       0.042839
+microrregiao                                        0.029567
+questionario_classificacao_estabelecimento_rural    0.020229
+confinamento                                        0.016532
+semi_confinamento                                   0.015512
+fabrica_racao                                       0.014216
+mesoregiao                                          0.013118
+ilpf                                                0.011217
+envolvido_em_organizacao                            0.010816
+dispoe_de_identificacao_individual                  0.010478
+ilp                                                 0.010415
+rastreamento_sisbov                                 0.009423
+lita_trace                                          0.008200
+suplementacao                                       0.007446
+faz_controle_pastejo_regua_de_manejo_embrapa        0.007208
+area_manejada_80_boa_cobertura_vegetal              0.006766
+fertirrigacao                                       0.006271
+ifp                                                 0.004810
+apresenta_atestado_programas_controle_qualidade     0.003393
+possui_outros_incentivos                            0.003076
+area_total_destinada_confinamento                   0.000783
+area_manejada_20_erosao                             0.000264
+Tempo de execução do RF: 88.7202 segundos
+
+
+Validação cruzada K-NN : [0.88 0.88 0.88 0.88 0.88]
+K-NN: (0.8824) +/- (0.001)
+Matriz de Confusão Balanceado
+[[  244   297    42     3     0]
+ [  242 39212 13822   569     0]
+ [   79 20806 49787  2993     3]
+ [    9   429  3049  5583     4]
+ [    0     2     3    23    12]]
+                   pre       rec       spe        f1       geo       iba       sup
+          1     0.4251    0.4164    0.9976    0.4207    0.6445    0.3912       586
+          2     0.6455    0.7282    0.7417    0.6844    0.7349    0.5394     53845
+          3     0.7464    0.6758    0.7338    0.7094    0.7042    0.4930     73668
+          4     0.6088    0.6153    0.9720    0.6120    0.7733    0.5767      9074
+          5     0.6316    0.3000    0.9999    0.4068    0.5477    0.2790        40
+avg / total     0.6963    0.6912    0.7539    0.6918    0.7205    0.5163    137213
+
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+EditedNearestNeighbours(kind_sel='mode', n_jobs=3, n_neighbors=4,
+            random_state=None, ratio=None, return_indices=False,
+            sampling_strategy=[2, 3])
+[('acabamento', 1)]
+# Tuning hyper-parameters for precision
+
+Fitting 5 folds for each of 16 candidates, totalling 80 fits
+[Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
+
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.6min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.6min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.6min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 2.8min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 7.2min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 2.9min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.2min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 2.9min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 2.8min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 2.9min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 8.6min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 6.7min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.4min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.6min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.8min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 9.5min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 8.2min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.3min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.6min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.9min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 8.0min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 8.2min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.5min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 7.2min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 7.3min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.3min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.1min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 2.9min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 8.5min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 6.7min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.4min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.7min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.9min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 9.5min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.5min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.2min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.9min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.8min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 8.1min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 6.4min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.6min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.6min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 2.9min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.3min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 2.8min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 7.2min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 7.3min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.3min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.2min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=10, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 8.7min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.4min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=100, total= 2.9min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=6, n_estimators=250, total= 7.4min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.0min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.3min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=100, total= 3.8min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 9.5min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=11, min_samples_split=8, n_estimators=250, total= 8.2min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=100, total= 3.3min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=6, n_estimators=250, total= 7.7min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 3.3min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=100, total= 3.1min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 8.1min
+[CV] bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250
+[CV]  bootstrap=True, max_depth=30, max_features=28, min_samples_leaf=13, min_samples_split=8, n_estimators=250, total= 6.4min
+
+Best parameters set found on development set:
+
+{'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 6, 'n_estimators': 250}
+
+Grid scores on development set:
+
+0.643 (+/-0.022) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 6, 'n_estimators': 100}
+0.643 (+/-0.024) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 6, 'n_estimators': 250}
+0.643 (+/-0.022) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 8, 'n_estimators': 100}
+0.643 (+/-0.024) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 8, 'n_estimators': 250}
+0.639 (+/-0.022) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 6, 'n_estimators': 100}
+0.639 (+/-0.024) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 6, 'n_estimators': 250}
+0.639 (+/-0.022) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 8, 'n_estimators': 100}
+0.639 (+/-0.024) for {'bootstrap': True, 'max_depth': 10, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 8, 'n_estimators': 250}
+0.673 (+/-0.017) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 6, 'n_estimators': 100}
+0.674 (+/-0.018) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 6, 'n_estimators': 250}
+0.673 (+/-0.017) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 8, 'n_estimators': 100}
+0.674 (+/-0.018) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 11, 'min_samples_split': 8, 'n_estimators': 250}
+0.670 (+/-0.021) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 6, 'n_estimators': 100}
+0.671 (+/-0.021) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 6, 'n_estimators': 250}
+0.670 (+/-0.021) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 8, 'n_estimators': 100}
+0.671 (+/-0.021) for {'bootstrap': True, 'max_depth': 30, 'max_features': 28, 'min_samples_leaf': 13, 'min_samples_split': 8, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  190   351    44     1     0]
+ [   87 39745 13567   446     0]
+ [    7 19723 51447  2491     0]
+ [    0   405  3260  5409     0]
+ [    0     1    11    28     0]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.67      0.32      1.00      0.44      0.57      0.30       586
+          2       0.66      0.74      0.75      0.70      0.75      0.56     53845
+          3       0.75      0.70      0.73      0.72      0.72      0.51     73668
+          4       0.65      0.60      0.98      0.62      0.76      0.56      9074
+          5       0.00      0.00      1.00      0.00      0.00      0.00        40
+
+avg / total       0.71      0.71      0.76      0.71      0.73      0.53    137213
+
+
+# Tuning hyper-parameters for recall
+
+Fitting 5 folds for each of 16 candidates, totalling 80 fits
+[Parallel(n_jobs=3)]: Done  35 tasks      | elapsed: 59.9min
+[Parallel(n_jobs=3)]: Done  80 out of  80 | elapsed: 151.6min finished
+[Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.

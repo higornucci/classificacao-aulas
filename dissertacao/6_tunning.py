@@ -1,6 +1,9 @@
+import itertools
 import multiprocessing
 import warnings
+import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 from collections import Counter
 from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
@@ -17,6 +20,44 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
 n_jobs = multiprocessing.cpu_count() - 1
+
+
+def plot_confusion_matrix(cm, nome, classes,
+                          normalize=False,
+                          title='Confusion matrix',
+                          cmap=plt.cm.gray):
+    """
+    This function prints and plots the confusion matrix.
+    Normalization can be applied by setting `normalize=True`.
+    """
+    plt.figure()
+    if normalize:
+        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        np.set_printoptions(precision=2)
+        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.svg'
+    else:
+        nome_arquivo = 'matriz_confusao_' + nome + '.svg'
+
+    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+
+    fmt = '.2f' if normalize else 'd'
+    thresh = cm.max() / 2.
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+        plt.text(j, i, format(cm[i, j], fmt),
+                 horizontalalignment="center",
+                 color="black" if cm[i, j] > thresh else "white")
+
+    plt.ylabel('Actual class')
+    plt.xlabel('Predicted class')
+    plt.grid('off')
+    plt.tight_layout()
+    plt.savefig(nome_arquivo)
+
 
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
@@ -48,11 +89,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 tuned_parameters = {
     'bootstrap': [True],
-    'max_depth': [10, 30],
-    'max_features': range(24, 28, 2),
-    'min_samples_leaf': range(11, 15, 2),
-    'min_samples_split': range(6, 10, 2),
-    'n_estimators': [500, 1000]}
+    'max_depth': [30, 50],
+    'max_features': [27, 28],
+    'min_samples_leaf': range(7, 11, 2),
+    'min_samples_split': range(2, 6, 2),
+    'n_estimators': [250, 500]}
 
 scores = ['precision', 'recall']
 for score in scores:
@@ -83,6 +124,7 @@ for score in scores:
     print()
     y_true, y_pred = Y_teste, clf.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
+    plot_confusion_matrix(matriz_confusao, 'RFC', [1, 2, 3, 4, 5], False, title='Confusion matrix RFC')
     print('Matriz de Confusão')
     print(matriz_confusao)
     print(classification_report_imbalanced(y_true, y_pred))
