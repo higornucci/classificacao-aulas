@@ -19,7 +19,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 1
+n_jobs = multiprocessing.cpu_count()  # - 1
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -83,19 +83,19 @@ Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 print(sorted(Counter(Y_treino).items()))
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
-num_folds = 5
+num_folds = 3
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 tuned_parameters = {
     'bootstrap': [True],
-    'max_depth': [30, 50],
-    'max_features': [27, 28],
-    'min_samples_leaf': range(7, 11, 2),
-    'min_samples_split': range(2, 6, 2),
-    'n_estimators': [250, 500]}
+    'max_depth': [20, 25, 30],
+    'max_features': ['sqrt', 'log2'],
+    'min_samples_leaf': [1, 2, 3],
+    'min_samples_split': [2],
+    'n_estimators': [225, 250, 275]}
 
-scores = ['precision', 'recall']
+scores = ['recall', 'precision']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
@@ -124,7 +124,10 @@ for score in scores:
     print()
     y_true, y_pred = Y_teste, clf.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
-    plot_confusion_matrix(matriz_confusao, 'RFC', [1, 2, 3, 4, 5], False, title='Confusion matrix RFC')
+    plot_confusion_matrix(matriz_confusao, 'RFC_' + score, [1, 2, 3, 4, 5], False,
+                          title='Confusion matrix RFC (best parameters)')
+    plot_confusion_matrix(matriz_confusao, 'RFC_' + score, [1, 2, 3, 4, 5], True,
+                          title='Confusion matrix ' + 'RFC' + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
     print(classification_report_imbalanced(y_true, y_pred))

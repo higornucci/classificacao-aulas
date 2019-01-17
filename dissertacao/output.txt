@@ -6,5 +6,67 @@ EditedNearestNeighbours(kind_sel='mode', n_jobs=3, n_neighbors=4,
 [('acabamento', 1)]
 # Tuning hyper-parameters for precision
 
-Fitting 5 folds for each of 32 candidates, totalling 160 fits
+Fitting 5 folds for each of 600 candidates, totalling 3000 fits
 [Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
+sklearn.externals.joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/externals/loky/process_executor.py", line 418, in _process_worker
+    r = call_item()
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/externals/loky/process_executor.py", line 272, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 567, in __call__
+    return self.func(*args, **kwargs)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 225, in __call__
+    for func, args, kwargs in self.items]
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 225, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/model_selection/_validation.py", line 528, in _fit_and_score
+    estimator.fit(X_train, y_train, **fit_params)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py", line 333, in fit
+    for i, t in enumerate(trees))
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 917, in __call__
+    if self.dispatch_one_batch(iterator):
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 759, in dispatch_one_batch
+    self._dispatch(tasks)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 716, in _dispatch
+    job = self._backend.apply_async(batch, callback=cb)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 182, in apply_async
+    result = ImmediateResult(func)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 549, in __init__
+    self.results = batch()
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 225, in __call__
+    for func, args, kwargs in self.items]
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 225, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py", line 119, in _parallel_build_trees
+    tree.fit(X, y, sample_weight=curr_sample_weight, check_input=False)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/tree/tree.py", line 801, in fit
+    X_idx_sorted=X_idx_sorted)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/tree/tree.py", line 194, in fit
+    % self.min_samples_split)
+ValueError: min_samples_split must be an integer greater than 1 or a float in (0.0, 1.0]; got the integer 1
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "6_tunning.py", line 106, in <module>
+    clf.fit(X_treino, Y_treino.values.ravel())
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/model_selection/_search.py", line 722, in fit
+    self._run_search(evaluate_candidates)
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/model_selection/_search.py", line 1191, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/model_selection/_search.py", line 711, in evaluate_candidates
+    cv.split(X, y, groups)))
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 930, in __call__
+    self.retrieve()
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 833, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/home/ufms/.local/lib/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 521, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/usr/lib/python3.6/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+ValueError: min_samples_split must be an integer greater than 1 or a float in (0.0, 1.0]; got the integer 1
