@@ -222,6 +222,97 @@ Matriz de Confusão
 avg / total       0.71      0.71      0.76      0.71      0.73      0.54    137213
 
 
-# Tuning hyper-parameters for recall
 
-Fitting 3 folds for each of 324 candidates, totalling 972 fits
+
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+EditedNearestNeighbours(kind_sel='mode', n_jobs=2, n_neighbors=4,
+            random_state=None, ratio=None, return_indices=False,
+            sampling_strategy=[2, 3])
+[('acabamento', 1)]
+# Tuning hyper-parameters for accuracy
+
+Fitting 3 folds for each of 54 candidates, totalling 162 fits
+
+Best parameters set found on development set:
+
+{'bootstrap': True, 'criterion': 'entropy', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  354   198    30     4     0]
+ [  440 38801 13661   943     0]
+ [  134 21083 48320  4122     9]
+ [    9   354  2763  5934    14]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.46      0.78      0.58       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.50      0.57      1.00      0.53      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
+
+
+# Tuning hyper-parameters for recall_macro
+
+Fitting 3 folds for each of 54 candidates, totalling 162 fits
+
+Best parameters set found on development set:
+
+{'bootstrap': True, 'criterion': 'gini', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  354   199    29     4     0]
+ [  439 38795 13661   950     0]
+ [  133 21138 48256  4132     9]
+ [    9   352  2760  5940    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.47      0.78      0.58       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.51      0.57      1.00      0.54      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
+
+
+# Tuning hyper-parameters for precision_macro
+
+Best parameters set found on development set:
+
+{'bootstrap': True, 'criterion': 'entropy', 'max_depth': 30, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'min_samples_split': 2, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  228   316    38     4     0]
+ [  148 39617 13559   521     0]
+ [   24 20207 50616  2819     2]
+ [    3   388  2988  5692     3]
+ [    0     1     8    25     6]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.57      0.39      1.00      0.46      0.62      0.36       586
+          2       0.65      0.74      0.75      0.69      0.74      0.55     53845
+          3       0.75      0.69      0.74      0.72      0.71      0.51     73668
+          4       0.63      0.63      0.97      0.63      0.78      0.59      9074
+          5       0.55      0.15      1.00      0.24      0.39      0.14        40
+
+avg / total       0.71      0.70      0.76      0.70      0.73      0.53    137213

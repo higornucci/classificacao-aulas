@@ -87,21 +87,21 @@ num_folds = 3
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-tuned_parameters = {
-    'bootstrap': [True],
-    'max_depth': [20, 25, 30],
-    'max_features': ['sqrt', 'log2'],
-    'min_samples_leaf': [1, 2, 3],
-    'min_samples_split': [2],
-    'n_estimators': [225, 250, 275]}
+param_grid = {"min_weight_fraction_leaf": np.arange(0.1, 0.4, 0.1),
+              "n_estimators": np.arange(30, 300, 15),
+              "max_depth": np.arange(1, 28, 1),
+              "min_samples_split": np.arange(1, 150, 1),
+              "min_samples_leaf": np.arange(1, 60, 1),
+              "max_leaf_nodes": np.arange(2, 60, 1),
+              'max_features': np.arange(2, 28, 2)}
 
-scores = ['recall', 'precision']
+scores = ['f1_macro', 'accuracy']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
-    clf = GridSearchCV(RandomForestClassifier(random_state=random_state), tuned_parameters, cv=kfold, n_jobs=n_jobs,
-                       scoring='%s_macro' % score, refit=True, verbose=2)
+    clf = GridSearchCV(RandomForestClassifier(random_state=random_state), param_grid, cv=kfold, n_jobs=n_jobs,
+                       scoring=score, verbose=2)
     clf.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
