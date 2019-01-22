@@ -19,7 +19,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count()  # - 1
+n_jobs = multiprocessing.cpu_count() - 2
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -88,9 +88,9 @@ scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 param_grid = {"min_weight_fraction_leaf": np.arange(0.1, 0.4, 0.1),
-              "n_estimators": np.arange(30, 300, 15),
+              "n_estimators": np.arange(50, 300, 50),
               "max_depth": np.arange(1, 28, 1),
-              "min_samples_split": np.arange(1, 150, 1),
+              "min_samples_split": np.arange(1, 100, 1),
               "min_samples_leaf": np.arange(1, 60, 1),
               "max_leaf_nodes": np.arange(2, 60, 1),
               'max_features': np.arange(2, 28, 2)}
