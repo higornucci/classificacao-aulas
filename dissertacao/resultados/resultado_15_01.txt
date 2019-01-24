@@ -316,3 +316,40 @@ Matriz de Confusão
           5       0.55      0.15      1.00      0.24      0.39      0.14        40
 
 avg / total       0.71      0.70      0.76      0.70      0.73      0.53    137213
+
+
+
+# Tuning hyper-parameters for accuracy
+
+Fitting 3 folds for each of 4 candidates, totalling 12 fits
+
+{'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+
+Grid scores on development set:
+
+0.912 (+/-0.001) for {'max_depth': 30, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.899 (+/-0.001) for {'max_depth': 30, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'n_estimators': 250}
+0.912 (+/-0.001) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.899 (+/-0.000) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 2, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  352   200    30     4     0]
+ [  434 38820 13650   941     0]
+ [  127 21093 48320  4120     8]
+ [   11   360  2758  5932    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.47      0.77      0.57       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.52      0.57      1.00      0.55      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
+

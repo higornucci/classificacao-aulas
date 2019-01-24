@@ -1,164 +1,251 @@
-pydev debugger: process 7904 is connecting
-
 Classes para balancear [2, 3]
 (80.0, '/', 20.0)
 EditedNearestNeighbours(kind_sel='mode', n_jobs=2, n_neighbors=4,
             random_state=None, ratio=None, return_indices=False,
             sampling_strategy=[2, 3])
 [('acabamento', 1)]
-Fitting 3 folds for each of 4 candidates, totalling 12 fits
+# Tuning hyper-parameters for accuracy
+
+Fitting 4 folds for each of 16 candidates, totalling 64 fits
 [Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.
-pydev debugger: process 7935 is connecting
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[Parallel(n_jobs=2)]: Done  37 tasks      | elapsed: 50.4min
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[Parallel(n_jobs=2)]: Done  64 out of  64 | elapsed: 87.7min finished
+[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+Best parameters set found on development set:
 
-pydev debugger: process 7940 is connecting
+{'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
 
-Traceback (most recent call last):
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydev_bundle/pydev_monkey.py", line 141, in patch_args
-    host, port = _get_host_port()
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydev_bundle/pydev_monkey.py", line 43, in _get_host_port
-    host, port = pydevd.dispatch()
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1487, in dispatch
-    host = setup['client']
-TypeError: 'NoneType' object is not subscriptable
-Traceback (most recent call last):
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydev_bundle/pydev_monkey.py", line 141, in patch_args
-    host, port = _get_host_port()
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydev_bundle/pydev_monkey.py", line 43, in _get_host_port
-    host, port = pydevd.dispatch()
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1487, in dispatch
-    host = setup['client']
-TypeError: 'NoneType' object is not subscriptable
-[CV] min_weight_fraction_leaf=0.1 ....................................
-[CV] min_weight_fraction_leaf=0.1 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..................... min_weight_fraction_leaf=0.1, total=   1.7s
-[CV] min_weight_fraction_leaf=0.1 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-[CV] ..................... min_weight_fraction_leaf=0.1, total=   1.8s
-[CV] min_weight_fraction_leaf=0.2 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..................... min_weight_fraction_leaf=0.1, total=   1.4s
-[CV] min_weight_fraction_leaf=0.2 ....................................
-[CV] ..................... min_weight_fraction_leaf=0.2, total=   1.3s
-[CV] min_weight_fraction_leaf=0.2 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..................... min_weight_fraction_leaf=0.2, total=   1.2s
-[CV] min_weight_fraction_leaf=0.30000000000000004 ....................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-[CV] ..................... min_weight_fraction_leaf=0.2, total=   1.3s
-[CV] min_weight_fraction_leaf=0.30000000000000004 ....................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..... min_weight_fraction_leaf=0.30000000000000004, total=   1.1s
-[CV] min_weight_fraction_leaf=0.30000000000000004 ....................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-[CV] ..... min_weight_fraction_leaf=0.30000000000000004, total=   1.2s
-[CV] min_weight_fraction_leaf=0.4 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..... min_weight_fraction_leaf=0.30000000000000004, total=   1.1s
-[CV] min_weight_fraction_leaf=0.4 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-[CV] ..................... min_weight_fraction_leaf=0.4, total=   1.1s
-[CV] min_weight_fraction_leaf=0.4 ....................................
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:246: FutureWarning: The default value of n_estimators will change from 10 in version 0.20 to 100 in 0.22.
-  "10 in version 0.20 to 100 in 0.22.", FutureWarning)
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..................... min_weight_fraction_leaf=0.4, total=   1.0s
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:458: UserWarning: Some inputs do not have OOB scores. This probably means too few trees were used to compute any reliable oob estimates.
-  warn("Some inputs do not have OOB scores. "
-/home/ufms/.local/lib/python3.6/site-packages/sklearn/ensemble/forest.py:463: RuntimeWarning: invalid value encountered in true_divide
-  predictions[k].sum(axis=1)[:, np.newaxis])
-[CV] ..................... min_weight_fraction_leaf=0.4, total=   1.1s
-[Parallel(n_jobs=2)]: Done  12 out of  12 | elapsed:   10.9s finished
-Traceback (most recent call last):
-  File "<string>", line 1, in <module>
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1282, in settrace
-    stop_at_frame,
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1360, in _locked_settrace
-Traceback (most recent call last):
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 621, in trace_dispatch
-    self.do_wait_suspend(thread, frame, event, arg)
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
-    self._args[0].do_wait_suspend(*args, **kwargs)
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 877, in do_wait_suspend
-    time.sleep(0.01)
-KeyboardInterrupt
-    time.sleep(0.1)  # busy wait until we receive run command
-KeyboardInterrupt
-Traceback (most recent call last):
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1741, in <module>
-    main()
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1735, in main
-    globals = debugger.run(setup['file'], None, None, is_module)
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 1135, in run
-    pydev_imports.execfile(file, globals, locals)  # execute the script
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydev_imps/_pydev_execfile.py", line 18, in execfile
-    exec(compile(contents+"\n", file, 'exec'), glob, loc)
-  File "/home/ufms/projetos/classificacao-aulas/dissertacao/6_tunning.py", line 123, in <module>
-    print("The scores are computed on the full evaluation set.")
-  File "/home/ufms/projetos/classificacao-aulas/dissertacao/6_tunning.py", line 36, in evaluate_param
-    np.set_printoptions(precision=2)
-  File "/home/ufms/projetos/classificacao-aulas/dissertacao/6_tunning.py", line 36, in evaluate_param
-    np.set_printoptions(precision=2)
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 621, in trace_dispatch
-    self.do_wait_suspend(thread, frame, event, arg)
-  File "/home/ufms/programas/pycharm/helpers/pydev/_pydevd_bundle/pydevd_frame.py", line 125, in do_wait_suspend
-    self._args[0].do_wait_suspend(*args, **kwargs)
-  File "/home/ufms/programas/pycharm/helpers/pydev/pydevd.py", line 877, in do_wait_suspend
-    time.sleep(0.01)
-KeyboardInterrupt
+Grid scores on development set:
+
+0.917 (+/-0.002) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.889 (+/-0.003) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
+0.915 (+/-0.002) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.002) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.917 (+/-0.002) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.889 (+/-0.003) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
+0.915 (+/-0.002) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.002) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  352   200    30     4     0]
+ [  435 38821 13648   941     0]
+ [  127 21097 48315  4121     8]
+ [   11   359  2760  5931    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.47      0.77      0.57       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.52      0.57      1.00      0.55      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
+
+
+# Tuning hyper-parameters for f1_macro
+
+Fitting 4 folds for each of 16 candidates, totalling 64 fits
+[Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.9min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.9min
+[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.8min
+[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 

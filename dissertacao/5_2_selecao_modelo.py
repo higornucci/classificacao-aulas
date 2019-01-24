@@ -58,7 +58,7 @@ def mostrar_correlacao(dados, classe):
     ax.set_xticklabels(colunas)
     ax.set_yticklabels(colunas)
     plt.xticks(rotation=90)
-    plt.savefig('corr.svg')
+    plt.savefig('corr.png')
     plt.show()
 
 
@@ -91,15 +91,15 @@ balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
 
 # balanceador = SMOTEENN(random_state=random_state)
 print(balanceador)
-# X_treino, Y_treino = balanceador.fit_resample(
-#     conjunto_treinamento.drop('acabamento', axis=1),
-#     conjunto_treinamento['acabamento'])
-# X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
-# Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
-#
-# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
-# exit()
+X_treino, Y_treino = balanceador.fit_resample(
+    conjunto_treinamento.drop('acabamento', axis=1),
+    conjunto_treinamento['acabamento'])
+X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
+Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
+
+X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
 Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
@@ -121,7 +121,7 @@ def fazer_selecao_features_rfe():
     features = X_treino.columns
     rfe = RFECV(RandomForestClassifier(), cv=kfold, scoring='accuracy')
 
-    rfe.fit(X_treino, Y_treino)
+    rfe.fit(X_treino, Y_treino.values.ravel())
     print(rfe.poof())
     print("Caraterísticas ordenadas pelo rank RFE:")
     print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_), features)))
@@ -139,9 +139,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
                 # ('MNB', MultinomialNB()),
-                ('RFC', RandomForestClassifier()),
+                ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=100)),
                 # ('DTC', tree.DecisionTreeClassifier()),
-                ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+                # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
                 # ('SVM', SVC())
                 ]
 
@@ -158,9 +158,9 @@ def plot_confusion_matrix(cm, nome, classes,
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         np.set_printoptions(precision=2)
-        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.svg'
+        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.png'
     else:
-        nome_arquivo = 'matriz_confusao_' + nome + '.svg'
+        nome_arquivo = 'matriz_confusao_' + nome + '.png'
 
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -185,7 +185,7 @@ def plot_confusion_matrix(cm, nome, classes,
 
 def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
     # y_pred = cross_val_predict(modelo, X_treino, Y_treino, n_jobs=n_jobs)
-    modelo.fit(X_treino, Y_treino)
+    modelo.fit(X_treino, Y_treino.values.ravel())
     y_pred = modelo.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
     print('Matriz de Confusão ' + tipo)
@@ -197,7 +197,7 @@ def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
 
 
 def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino):
-    cv_resultados = cross_val_score(modelo, X_treino, Y_treino, cv=kfold, scoring=scoring, n_jobs=n_jobs)
+    cv_resultados = cross_val_score(modelo, X_treino, Y_treino.values.ravel(), cv=kfold, scoring=scoring, n_jobs=n_jobs)
     print('Validação cruzada ' + nome + ' :', cv_resultados)
     print("{0}: ({1:.4f}) +/- ({2:.3f})".format(nome, cv_resultados.mean(), cv_resultados.std()))
     if tipo == 'Balanceado':
@@ -215,7 +215,7 @@ def imprimir_acuracia(nome, df_results):
     plt.xlabel('Acuracy')
     plt.ylabel('')
     plt.title('Difference in terms of acuracy with ' + nome)
-    plt.savefig('acuracia' + nome + '.svg')
+    plt.savefig('acuracia' + nome + '.png')
 
 
 def rodar_algoritmos():
@@ -235,8 +235,8 @@ def rodar_algoritmos():
 
 
 def mostrar_features_mais_importantes(melhor_modelo):
-    melhor_modelo.fit(X_treino, Y_treino)
     if nome == 'RFC':
+        melhor_modelo.fit(X_treino, Y_treino.values.ravel())
         print('Características mais importantes RFC :')
         feature_importances = pd.DataFrame(melhor_modelo.feature_importances_,
                                            index=X_treino.columns,

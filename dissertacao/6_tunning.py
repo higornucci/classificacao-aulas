@@ -34,9 +34,9 @@ def plot_confusion_matrix(cm, nome, classes,
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         np.set_printoptions(precision=2)
-        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.svg'
+        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.png'
     else:
-        nome_arquivo = 'matriz_confusao_' + nome + '.svg'
+        nome_arquivo = 'matriz_confusao_' + nome + '.png'
 
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -83,25 +83,23 @@ Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 print(sorted(Counter(Y_treino).items()))
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
-num_folds = 3
+num_folds = 4
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-param_grid = {"min_weight_fraction_leaf": np.arange(0.1, 0.4, 0.1),
-              "n_estimators": np.arange(50, 300, 50),
-              "max_depth": np.arange(1, 28, 1),
-              "min_samples_split": np.arange(1, 100, 1),
-              "min_samples_leaf": np.arange(1, 60, 1),
-              "max_leaf_nodes": np.arange(2, 60, 1),
-              'max_features': np.arange(2, 28, 2)}
+param_grid = {"n_estimators": [250],
+              "min_samples_leaf": [1, 3],
+              'max_features': ['sqrt', 9, 10, 11],
+              'max_depth': [50, 75]}
 
-scores = ['f1_macro', 'accuracy']
+scores = ['accuracy', 'f1_macro']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
-    clf = GridSearchCV(RandomForestClassifier(random_state=random_state), param_grid, cv=kfold, n_jobs=n_jobs,
-                       scoring=score, verbose=2)
+    np.set_printoptions(precision=4)
+    clf = GridSearchCV(RandomForestClassifier(random_state=random_state, oob_score=True),
+                       param_grid, cv=kfold, n_jobs=n_jobs, scoring=score, verbose=2)
     clf.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
@@ -109,6 +107,8 @@ for score in scores:
     print(clf.best_params_)
     print()
     print("Grid scores on development set:")
+
+
     print()
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
