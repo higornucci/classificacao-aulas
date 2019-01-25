@@ -83,16 +83,17 @@ Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 print(sorted(Counter(Y_treino).items()))
 
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
-num_folds = 4
+num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 param_grid = {"n_estimators": [250],
-              "min_samples_leaf": [1, 3],
-              'max_features': ['sqrt', 9, 10, 11],
+              "min_samples_leaf": [1],
+              'min_samples_split': [2],
+              'max_features': ['sqrt', 'log2', None],
               'max_depth': [50, 75]}
 
-scores = ['accuracy', 'f1_macro']
+scores = ['f1_macro', 'recall_macro']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()

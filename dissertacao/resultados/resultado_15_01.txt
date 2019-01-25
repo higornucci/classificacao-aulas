@@ -353,3 +353,133 @@ Matriz de Confusão
 
 avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
 
+
+# Tuning hyper-parameters for accuracy
+
+Best parameters set found on development set:
+
+{'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+
+Grid scores on development set:
+
+0.917 (+/-0.002) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.889 (+/-0.003) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
+0.915 (+/-0.002) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.002) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.917 (+/-0.002) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.889 (+/-0.003) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
+0.915 (+/-0.002) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.002) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.914 (+/-0.002) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.888 (+/-0.003) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  352   200    30     4     0]
+ [  435 38821 13648   941     0]
+ [  127 21097 48315  4121     8]
+ [   11   359  2760  5931    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.47      0.77      0.57       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.52      0.57      1.00      0.55      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
+
+
+# Tuning hyper-parameters for f1_macro
+
+Best parameters set found on development set:
+
+{'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+
+Grid scores on development set:
+
+0.747 (+/-0.026) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.645 (+/-0.015) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
+0.746 (+/-0.026) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.648 (+/-0.012) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.745 (+/-0.025) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.647 (+/-0.011) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.745 (+/-0.025) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.649 (+/-0.014) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.747 (+/-0.027) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+0.645 (+/-0.015) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
+0.746 (+/-0.026) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.648 (+/-0.012) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.745 (+/-0.025) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.647 (+/-0.011) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.745 (+/-0.025) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
+0.649 (+/-0.014) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  352   200    30     4     0]
+ [  434 38820 13650   941     0]
+ [  127 21093 48320  4120     8]
+ [   11   360  2758  5932    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.47      0.77      0.57       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.52      0.57      1.00      0.55      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
+
+
+# Tuning hyper-parameters for accuracy
+
+Best parameters set found on development set:
+
+{'max_depth': 75, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+
+Grid scores on development set:
+
+0.919 (+/-0.001) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.920 (+/-0.001) for {'max_depth': 50, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.905 (+/-0.002) for {'max_depth': 50, 'max_features': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.919 (+/-0.001) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.920 (+/-0.001) for {'max_depth': 75, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.905 (+/-0.002) for {'max_depth': 75, 'max_features': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  354   199    29     4     0]
+ [  439 38795 13661   950     0]
+ [  133 21138 48256  4132     9]
+ [    9   352  2760  5940    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+
+          1       0.38      0.60      1.00      0.47      0.78      0.58       586
+          2       0.64      0.72      0.74      0.68      0.73      0.53     53845
+          3       0.75      0.66      0.74      0.70      0.70      0.48     73668
+          4       0.54      0.65      0.96      0.59      0.79      0.61      9074
+          5       0.51      0.57      1.00      0.54      0.76      0.55        40
+
+avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213

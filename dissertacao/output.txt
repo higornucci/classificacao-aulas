@@ -6,160 +6,81 @@ EditedNearestNeighbours(kind_sel='mode', n_jobs=2, n_neighbors=4,
 [('acabamento', 1)]
 # Tuning hyper-parameters for accuracy
 
-Fitting 4 folds for each of 16 candidates, totalling 64 fits
+Fitting 5 folds for each of 6 candidates, totalling 30 fits
 [Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[Parallel(n_jobs=2)]: Done  37 tasks      | elapsed: 50.4min
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[CV] max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
-[Parallel(n_jobs=2)]: Done  64 out of  64 | elapsed: 87.7min finished
-[CV]  max_depth=75, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.7min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.1min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.9min
+[CV] max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.1min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 1.8min
+[CV] max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV] max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 6.2min
+[CV]  max_depth=75, max_features=None, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 5.3min
+[Parallel(n_jobs=2)]: Done  30 out of  30 | elapsed: 57.3min finished
 Best parameters set found on development set:
 
-{'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
+{'max_depth': 75, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
 
 Grid scores on development set:
 
-0.917 (+/-0.002) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
-0.889 (+/-0.003) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
-0.915 (+/-0.002) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
-0.888 (+/-0.003) for {'max_depth': 50, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
-0.914 (+/-0.002) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
-0.888 (+/-0.002) for {'max_depth': 50, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
-0.914 (+/-0.002) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
-0.888 (+/-0.003) for {'max_depth': 50, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
-0.917 (+/-0.002) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'n_estimators': 250}
-0.889 (+/-0.003) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 3, 'n_estimators': 250}
-0.915 (+/-0.002) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 1, 'n_estimators': 250}
-0.888 (+/-0.003) for {'max_depth': 75, 'max_features': 9, 'min_samples_leaf': 3, 'n_estimators': 250}
-0.914 (+/-0.002) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 1, 'n_estimators': 250}
-0.888 (+/-0.002) for {'max_depth': 75, 'max_features': 10, 'min_samples_leaf': 3, 'n_estimators': 250}
-0.914 (+/-0.002) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 1, 'n_estimators': 250}
-0.888 (+/-0.003) for {'max_depth': 75, 'max_features': 11, 'min_samples_leaf': 3, 'n_estimators': 250}
+0.919 (+/-0.001) for {'max_depth': 50, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.920 (+/-0.001) for {'max_depth': 50, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.905 (+/-0.002) for {'max_depth': 50, 'max_features': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.919 (+/-0.001) for {'max_depth': 75, 'max_features': 'sqrt', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.920 (+/-0.001) for {'max_depth': 75, 'max_features': 'log2', 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
+0.905 (+/-0.002) for {'max_depth': 75, 'max_features': None, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 250}
 
 Detailed classification report:
 
@@ -167,85 +88,33 @@ The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
 Matriz de Confusão
-[[  352   200    30     4     0]
- [  435 38821 13648   941     0]
- [  127 21097 48315  4121     8]
- [   11   359  2760  5931    13]
+[[  354   199    29     4     0]
+ [  439 38795 13661   950     0]
+ [  133 21138 48256  4132     9]
+ [    9   352  2760  5940    13]
  [    0     1     2    14    23]]
                    pre       rec       spe        f1       geo       iba       sup
 
-          1       0.38      0.60      1.00      0.47      0.77      0.57       586
+          1       0.38      0.60      1.00      0.47      0.78      0.58       586
           2       0.64      0.72      0.74      0.68      0.73      0.53     53845
           3       0.75      0.66      0.74      0.70      0.70      0.48     73668
           4       0.54      0.65      0.96      0.59      0.79      0.61      9074
-          5       0.52      0.57      1.00      0.55      0.76      0.55        40
+          5       0.51      0.57      1.00      0.54      0.76      0.55        40
 
 avg / total       0.69      0.68      0.76      0.68      0.72      0.51    137213
 
 
 # Tuning hyper-parameters for f1_macro
 
-Fitting 4 folds for each of 16 candidates, totalling 64 fits
+Fitting 5 folds for each of 6 candidates, totalling 30 fits
 [Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, n_estimators=250, total= 1.9min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=3, n_estimators=250, total= 1.7min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=1, n_estimators=250, total= 2.5min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=9, min_samples_leaf=3, n_estimators=250, total= 2.4min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=1, n_estimators=250, total= 2.7min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=10, min_samples_leaf=3, n_estimators=250, total= 2.6min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.9min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.9min
-[CV] max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=1, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
-[CV]  max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250, total= 2.8min
-[CV] max_depth=50, max_features=11, min_samples_leaf=3, n_estimators=250 
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.1min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
+[CV]  max_depth=50, max_features=sqrt, min_samples_leaf=1, min_samples_split=2, n_estimators=250, total= 2.0min
+[CV] max_depth=50, max_features=log2, min_samples_leaf=1, min_samples_split=2, n_estimators=250 
