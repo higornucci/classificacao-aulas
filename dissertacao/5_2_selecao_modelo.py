@@ -91,15 +91,15 @@ balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
 
 # balanceador = SMOTEENN(random_state=random_state)
 print(balanceador)
-X_treino, Y_treino = balanceador.fit_resample(
-    conjunto_treinamento.drop('acabamento', axis=1),
-    conjunto_treinamento['acabamento'])
-X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
-Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
-
-X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
-exit()
+# X_treino, Y_treino = balanceador.fit_resample(
+#     conjunto_treinamento.drop('acabamento', axis=1),
+#     conjunto_treinamento['acabamento'])
+# X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
+# Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
+#
+# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+# exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
 Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
