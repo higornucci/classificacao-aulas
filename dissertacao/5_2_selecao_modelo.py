@@ -120,7 +120,7 @@ resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 def fazer_selecao_features_rfe():
     features = X_treino.columns
     rfe = RFECV(RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250,
-                                       max_depth=75, max_features='sqrt', min_samples_leaf='1'),
+                                       max_depth=75, max_features='sqrt', min_samples_leaf=1, min_samples_split=2),
                 cv=kfold, scoring='accuracy')
 
     rfe.fit(X_treino, Y_treino.values.ravel())
@@ -142,7 +142,7 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 modelos_base = [
     # ('MNB', MultinomialNB()),
     ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250,
-                                   max_depth=75, max_features='sqrt', min_samples_leaf='1')),
+                                   max_depth=75, max_features='sqrt', min_samples_leaf=1, min_samples_split=2)),
     # ('DTC', tree.DecisionTreeClassifier()),
     # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     # ('SVM', SVC())
