@@ -47,16 +47,12 @@ def gerar_arquivo_dados_perguntas_classificam(dados_processo_produtivo):
 
 def gerar_arquivo_dados_perguntas_nao_classificam(dados_processo_produtivo):
     dados_perguntas_nao_classificam = dados_processo_produtivo.filter(
-        ['EstabelecimentoIdentificador', 'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao',
-         'TipoAlimentacaoDescricao'], axis=1)
+        ['EstabelecimentoIdentificador', 'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao'], axis=1)
     dados_perguntas_nao_classificam_resumido = dados_perguntas_nao_classificam.drop_duplicates(
-        subset=['EstabelecimentoIdentificador', 'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao',
-                'TipoAlimentacaoDescricao'])
-    dados_perguntas_nao_classificam_resumido['processo_e_tipo_alimentacao'] = dados_perguntas_nao_classificam_resumido[
-                                                                                  'FazConfinamentoDescricao'] + ' - ' + \
-                                                                              dados_perguntas_nao_classificam_resumido[
-                                                                                  'TipoAlimentacaoDescricao']
-    dados_perguntas_nao_classificam_resumido.drop(['FazConfinamentoDescricao', 'TipoAlimentacaoDescricao'], axis=1,
+        subset=['EstabelecimentoIdentificador', 'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao'])
+    dados_perguntas_nao_classificam_resumido['processo_e_tipo_alimentacao'] = \
+        dados_perguntas_nao_classificam_resumido['FazConfinamentoDescricao']
+    dados_perguntas_nao_classificam_resumido.drop(['FazConfinamentoDescricao'], axis=1,
                                                   inplace=True)
     dados_perguntas_nao_classificam_resumido = dados_perguntas_nao_classificam_resumido.pivot(
         index='EstabelecimentoIdentificador', columns='processo_e_tipo_alimentacao',
@@ -64,9 +60,9 @@ def gerar_arquivo_dados_perguntas_nao_classificam(dados_processo_produtivo):
 
     dados_perguntas_nao_classificam_resumido.index.name = 'estabelecimento_identificador'
     novos_nomes_colunas = {
-        'CONFINAMENTO - ALTO CONCENTRADO, ALTO CONCENTRADO + VOLUMOSO, CONCENTRADO + VOLUMOSO, GRÃO INTEIRO, RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO, RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'confinamento',
-        'SEMI-CONFINAMENTO - RAÇÃO BALANCEADA PARA CONSUMO IGUAL OU SUPERIOR A 0,8% DO PESO VIVO, RAÇÃO BALANCEADA PARA CONSUMO INFERIOR A 0,8% DO PESO VIVO': 'semi_confinamento',
-        'SUPLEMENTAÇÃO A CAMPO - CREEP-FEEDING, FORNECIMENTO ESTRATÉGICO DE SILAGEM OU FENO, PROTEICO, PROTEICO ENERGÉTICO, SAL MINERAL, SAL MINERAL + URÉIA': 'suplementacao'}
+        'CONFINAMENTO': 'confinamento',
+        'SEMI-CONFINAMENTO': 'semi_confinamento',
+        'SUPLEMENTAÇÃO A CAMPO': 'suplementacao'}
 
     dados_perguntas_nao_classificam_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
@@ -112,7 +108,7 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
 def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
     dados_cadastro_estabelecimento = dados_processo_produtivo.drop(
         ['QuestionarioPraticaRecuperacaoPastagem', 'PraticaRecuperacaoPastagemDescricao',
-         'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao', 'TipoAlimentacaoDescricao',
+         'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao',
          'PerguntaQuestionario', 'Resposta'], axis=1)
     dados_cadastro_estabelecimento.fillna('Nenhum', inplace=True)
     dados_cadastro_estabelecimento_resumido = dados_cadastro_estabelecimento.drop_duplicates(
@@ -137,9 +133,9 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
 
 
 def gerar_arquivo_dados_abate():
-    dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='utf-8', delimiter='\t')
+    dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='utf-8', delimiter=';')
     # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
-    dados_abate.drop(['EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'IncentivoProdutorSituacao',
+    dados_abate.drop(['excluir1', 'excluir2', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'IncentivoProdutorSituacao',
                       'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
                       'Classificador1', 'Classificador2', 'IdentificadorLoteSituacaoLote'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
@@ -165,50 +161,50 @@ def gerar_arquivo_dados_abate():
     # dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin(
     #     [26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566,
     #      4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
-    dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin(
-        [1034, 1282, 1300, 1323, 1363, 1453, 1463, 1470, 1654, 1702, 1920, 1937, 1965, 3979, 4033,
-         4062, 4072, 4099, 4100, 4146, 4159, 4160, 4161,
-         4187, 4247, 4248, 4269, 4314, 4326, 4340, 4345,
-         4361, 4433, 4437, 4450, 4452, 4549, 4550, 4566,
-         4610, 4611, 4612, 4613, 4616, 4621, 4622, 4633,
-         4634, 4642, 4651, 4652, 4654, 4662, 4673, 4677,
-         4685, 4692, 4726, 4727, 4728, 4760, 4771, 4772,
-         4831, 4832, 4833, 4851, 4853, 4872, 4873, 4920,
-         4927, 4948, 4952, 4955, 5068, 5077, 5082, 5098,
-         5114, 5126, 5168, 5194, 5351, 5568, 5665, 5722,
-         5934, 6059, 6095, 6158, 6194, 6498, 6551, 6605,
-         6607, 6652, 6848, 6850, 6851, 6880, 7023, 7145,
-         7166, 7190, 7194, 7196, 7197, 7200, 7209, 7217,
-         7223, 7229, 7233, 7238, 7239, 7245, 7247, 7249,
-         7255, 7258, 7259, 7264, 7269, 7271, 7272, 7281,
-         7282, 7284, 7290, 7291, 7292, 7294, 7295, 7301,
-         7320, 7321, 7325, 7327, 7328, 7331, 7334, 7337,
-         7341, 7347, 7361, 7368, 7371, 7388, 7396, 7398,
-         7403, 7404, 7414, 7415, 7417, 7423, 7426, 7428,
-         7431, 7437, 7438, 7459, 7473, 7477, 7478, 7498,
-         7503, 7511, 7512, 7516, 7522, 7535, 7547, 7552,
-         7568, 7570, 7573, 7579, 7583, 7588, 7591, 7592,
-         7599, 7613, 7623, 7629, 7646, 7660, 7662, 7665,
-         7674, 7696, 7711, 7713, 7722, 7190, 7194, 7196,
-         7197, 7199, 7200, 7201, 7209, 7215, 7217, 7223,
-         7227, 7229, 7233, 7238, 7239, 7245, 7247, 7248,
-         7249, 7254, 7255, 7258, 7259, 7260, 7264, 7265,
-         7269, 7271, 7272, 7275, 7280, 7281, 7282, 7284,
-         7290, 7291, 7292, 7294, 7295, 7301, 7304, 7305,
-         7310, 7320, 7321, 7325, 7327, 7328, 7331, 7334,
-         7337, 7340, 7341, 7347, 7353, 7354, 7361, 7368,
-         7371, 7388, 7396, 7398, 7403, 7404, 7410, 7411,
-         7414, 7415, 7416, 7417, 7419, 7423, 7426, 7428,
-         7431, 7437, 7438, 7440, 7451, 7452, 7459, 7460,
-         7471, 7472, 7473, 7477, 7478, 7482, 7496, 7498,
-         7503, 7510, 7511, 7512, 7516, 7522, 7530, 7535,
-         7537, 7547, 7548, 7550, 7552, 7561, 7562, 7568,
-         7570, 7573, 7579, 7586, 7587, 7588, 7591, 7592,
-         7593, 7594, 7595, 7598, 7599, 7601, 7604, 7613,
-         7618, 7620, 7623, 7629, 7631, 7632, 7637, 7642,
-         7643, 7646, 7660, 7662, 7665, 7668, 7670, 7673,
-         7674, 7686, 7695, 7696, 7708, 7711, 7713, 7719,
-         7722, 7727, 7729, 7739])]
+    # dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin(
+    #     [1034, 1282, 1300, 1323, 1363, 1453, 1463, 1470, 1654, 1702, 1920, 1937, 1965, 3979, 4033,
+    #      4062, 4072, 4099, 4100, 4146, 4159, 4160, 4161,
+    #      4187, 4247, 4248, 4269, 4314, 4326, 4340, 4345,
+    #      4361, 4433, 4437, 4450, 4452, 4549, 4550, 4566,
+    #      4610, 4611, 4612, 4613, 4616, 4621, 4622, 4633,
+    #      4634, 4642, 4651, 4652, 4654, 4662, 4673, 4677,
+    #      4685, 4692, 4726, 4727, 4728, 4760, 4771, 4772,
+    #      4831, 4832, 4833, 4851, 4853, 4872, 4873, 4920,
+    #      4927, 4948, 4952, 4955, 5068, 5077, 5082, 5098,
+    #      5114, 5126, 5168, 5194, 5351, 5568, 5665, 5722,
+    #      5934, 6059, 6095, 6158, 6194, 6498, 6551, 6605,
+    #      6607, 6652, 6848, 6850, 6851, 6880, 7023, 7145,
+    #      7166, 7190, 7194, 7196, 7197, 7200, 7209, 7217,
+    #      7223, 7229, 7233, 7238, 7239, 7245, 7247, 7249,
+    #      7255, 7258, 7259, 7264, 7269, 7271, 7272, 7281,
+    #      7282, 7284, 7290, 7291, 7292, 7294, 7295, 7301,
+    #      7320, 7321, 7325, 7327, 7328, 7331, 7334, 7337,
+    #      7341, 7347, 7361, 7368, 7371, 7388, 7396, 7398,
+    #      7403, 7404, 7414, 7415, 7417, 7423, 7426, 7428,
+    #      7431, 7437, 7438, 7459, 7473, 7477, 7478, 7498,
+    #      7503, 7511, 7512, 7516, 7522, 7535, 7547, 7552,
+    #      7568, 7570, 7573, 7579, 7583, 7588, 7591, 7592,
+    #      7599, 7613, 7623, 7629, 7646, 7660, 7662, 7665,
+    #      7674, 7696, 7711, 7713, 7722, 7190, 7194, 7196,
+    #      7197, 7199, 7200, 7201, 7209, 7215, 7217, 7223,
+    #      7227, 7229, 7233, 7238, 7239, 7245, 7247, 7248,
+    #      7249, 7254, 7255, 7258, 7259, 7260, 7264, 7265,
+    #      7269, 7271, 7272, 7275, 7280, 7281, 7282, 7284,
+    #      7290, 7291, 7292, 7294, 7295, 7301, 7304, 7305,
+    #      7310, 7320, 7321, 7325, 7327, 7328, 7331, 7334,
+    #      7337, 7340, 7341, 7347, 7353, 7354, 7361, 7368,
+    #      7371, 7388, 7396, 7398, 7403, 7404, 7410, 7411,
+    #      7414, 7415, 7416, 7417, 7419, 7423, 7426, 7428,
+    #      7431, 7437, 7438, 7440, 7451, 7452, 7459, 7460,
+    #      7471, 7472, 7473, 7477, 7478, 7482, 7496, 7498,
+    #      7503, 7510, 7511, 7512, 7516, 7522, 7530, 7535,
+    #      7537, 7547, 7548, 7550, 7552, 7561, 7562, 7568,
+    #      7570, 7573, 7579, 7586, 7587, 7588, 7591, 7592,
+    #      7593, 7594, 7595, 7598, 7599, 7601, 7604, 7613,
+    #      7618, 7620, 7623, 7629, 7631, 7632, 7637, 7642,
+    #      7643, 7646, 7660, 7662, 7665, 7668, 7670, 7673,
+    #      7674, 7686, 7695, 7696, 7708, 7711, 7713, 7719,
+    #      7722, 7727, 7729, 7739])]
 
     dados_abate_resumido = dados_abate_resumido[dados_abate_resumido['peso_carcaca'].between(150, 450, inclusive=True)]
     dados_abate_resumido['estabelecimento_identificador'] = dados_abate_resumido[
@@ -286,6 +282,7 @@ def gerar_dados_completo():
     dados_completo = pd.concat(data_frames, axis=1, join_axes=[dados_completo_abates.index])
     dados_completo = tratar_municipios(dados_completo)
     dados_completo = tratar_data_abate(dados_completo)
+    dados_completo.dropna(inplace=True)
 
     dados_completo.to_csv('../input/DadosCompleto.csv', encoding='utf-8', sep='\t')
 

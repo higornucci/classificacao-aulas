@@ -1,0 +1,47 @@
+
+Validação cruzada RFC : [0.92082774 0.91939831 0.91974611 0.91871413 0.9197938 ]
+RFC: (0.9197) +/- (0.001)
+Matriz de Confusão Balanceado
+[[  354   199    29     4     0]
+ [  439 38795 13661   950     0]
+ [  133 21138 48256  4132     9]
+ [    9   352  2760  5940    13]
+ [    0     1     2    14    23]]
+                   pre       rec       spe        f1       geo       iba       sup
+          1     0.3786    0.6041    0.9957    0.4655    0.7756    0.5780       586
+          2     0.6414    0.7205    0.7398    0.6786    0.7301    0.5320     53845
+          3     0.7458    0.6550    0.7411    0.6975    0.6967    0.4813     73668
+          4     0.5380    0.6546    0.9602    0.5906    0.7928    0.6094      9074
+          5     0.5111    0.5750    0.9998    0.5412    0.7582    0.5505        40
+avg / total     0.6894    0.6805    0.7563    0.6820    0.7165    0.5101    137213
+Características mais importantes RFC :
+                                                  importance
+peso_carcaca                                        0.355863
+tipificacao                                         0.127501
+mes_abate                                           0.111254
+maturidade                                          0.052888
+latitude                                            0.050682
+longitude                                           0.049753
+estacao_abate                                       0.043563
+microrregiao                                        0.027936
+questionario_classificacao_estabelecimento_rural    0.020088
+semi_confinamento                                   0.016494
+confinamento                                        0.016077
+fabrica_racao                                       0.013129
+envolvido_em_organizacao                            0.012468
+mesoregiao                                          0.011668
+ilp                                                 0.011596
+ilpf                                                0.010476
+dispoe_de_identificacao_individual                  0.010266
+lita_trace                                          0.009582
+rastreamento_sisbov                                 0.009298
+suplementacao                                       0.007392
+area_manejada_80_boa_cobertura_vegetal              0.006901
+faz_controle_pastejo_regua_de_manejo_embrapa        0.006368
+fertirrigacao                                       0.006112
+ifp                                                 0.004550
+apresenta_atestado_programas_controle_qualidade     0.003633
+possui_outros_incentivos                            0.003289
+area_total_destinada_confinamento                   0.000913
+area_manejada_20_erosao                             0.000260
+Tempo de execução do RFC: 553.0990 segundos

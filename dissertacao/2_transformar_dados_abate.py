@@ -1,5 +1,6 @@
 import warnings
 import pandas as pd
+import numpy as np
 from sklearn.preprocessing import LabelEncoder
 
 warnings.filterwarnings('ignore')
@@ -68,5 +69,6 @@ dados_completo = dados_completo.applymap(lambda x: 0 if "NÃO" in str(x) else x)
 # Substituindo os valores 'Sim' por 0
 dados_completo = dados_completo.applymap(lambda x: 1 if "Sim" in str(x) else x)
 dados_completo = dados_completo.applymap(lambda x: 1 if "SIM" in str(x) else x)
+print(np.any(np.isnan(dados_completo)))
 
 dados_completo.to_csv('../input/DadosCompletoTransformado.csv', sep='\t')

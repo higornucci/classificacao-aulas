@@ -19,7 +19,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 2
+n_jobs = multiprocessing.cpu_count() - 3
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -87,13 +87,14 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-param_grid = {"n_estimators": [250],
-              "min_samples_leaf": [1],
-              'min_samples_split': [2],
+param_grid = {"n_estimators": [100, 250],
+              "min_samples_leaf": [1, 5, 10],
+              'min_samples_split': [2, 5, 10],
               'max_features': ['sqrt', 'log2', None],
+              'criterion': ['gini', 'entropy'],
               'max_depth': [50, 75]}
 
-scores = ['f1_macro', 'recall_macro']
+scores = ['accuracy', 'f1_macro']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
@@ -108,8 +109,6 @@ for score in scores:
     print(clf.best_params_)
     print()
     print("Grid scores on development set:")
-
-
     print()
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']

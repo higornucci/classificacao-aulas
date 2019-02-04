@@ -40,13 +40,9 @@ dados_completo['ilp'] = dados_completo['ilp'].astype('int32')
 dados_completo['ilpf'] = dados_completo['ilpf'].astype('int32')
 dados_completo['latitude'] = dados_completo['latitude'].astype('float64')
 dados_completo['longitude'] = dados_completo['longitude'].astype('float64')
-dados_completo['microrregiao'] = dados_completo['microrregiao'].astype('category')
-dados_completo['mesoregiao'] = dados_completo['mesoregiao'].astype('category')
+dados_completo['microrregiao'] = dados_completo['microrregiao'].astype('int32')
+dados_completo['mesoregiao'] = dados_completo['mesoregiao'].astype('int32')
 print(dados_completo.info())
-
-colunas_categoricas = ['microrregiao', 'mesoregiao']
-dados_categoricos = dados_completo[colunas_categoricas]
-dados_alvo = dados_completo['acabamento']
 
 # for cc in colunas_categoricas:
 #     labelEncoder = LabelEncoder()
@@ -57,16 +53,21 @@ dados_alvo = dados_completo['acabamento']
 #     dados_categoricos.drop(cc, axis=1, inplace=True)
 #     dados_categoricos = dados_categoricos.join(dummies)
 
-dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('acabamento', axis=1)  # remover atributos não numéricos
-dados_numericos = dados_numericos.join(dados_categoricos)
+dados_alvo = dados_completo['acabamento']
+dados_alvo = pd.DataFrame(data=dados_alvo, columns=['acabamento'])
+dados_numericos = dados_completo.drop('acabamento', axis=1)  # remover atributos não numéricos
 dados_numericos_labels = dados_numericos.columns.values.tolist()
 print('nomes colunas:', dados_numericos_labels)
-dados_numericos = MinMaxScaler().fit_transform(dados_numericos)
+dados_numericos[dados_numericos_labels] = MinMaxScaler().fit_transform(dados_numericos[dados_numericos_labels].values)
 dados_numericos = pd.DataFrame(dados_numericos)
 dados_numericos.columns = dados_numericos_labels
 
 dados_completo = dados_numericos.join(dados_alvo)
 
+print(dados_completo[dados_completo.isnull().any(axis=1)])
+print(np.any(np.isnan(dados_completo)))
+dados_completo.dropna(inplace=True)
 dados_completo.to_csv('../input/DadosCompletoTransformadoML.csv', sep='\t')
 
 print(dados_completo.info())
+print(dados_completo.head())

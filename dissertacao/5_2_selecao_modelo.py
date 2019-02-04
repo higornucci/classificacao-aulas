@@ -2,39 +2,31 @@ import itertools
 import warnings
 import time
 import multiprocessing
-from collections import Counter
 
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from imblearn.combine import SMOTEENN
 from imblearn.metrics import classification_report_imbalanced
-from imblearn.under_sampling import NeighbourhoodCleaningRule, RandomUnderSampler, EditedNearestNeighbours
-from imblearn.over_sampling import RandomOverSampler
+from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score, cross_val_predict, StratifiedKFold, \
+from sklearn.model_selection import cross_val_score, StratifiedKFold, \
     StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.svm import SVC
-from sklearn import tree
 from yellowbrick.features import RFECV
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
-# 1 Iris Setosa, 2 Iris Versicolour, 3 Iris Virginica
-# dados_completo = pd.read_csv('../input/iris.csv', encoding='utf-8', delimiter=',')
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
-# dados_completo = pd.read_csv('../input/dados.csv', encoding='utf-8', delimiter='\t')
-print(dados_completo.head())
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count()  # - 1
+n_jobs = multiprocessing.cpu_count() - 3
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -77,19 +69,8 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-# balanceador = ClusterCentroids(random_state=random_state)
-# balanceador = RandomUnderSampler(random_state=random_state)
-# balanceador = NearMiss(version=3)
-# balanceador = AllKNN(allow_minority=True)
-# balanceador = NeighbourhoodCleaningRule(n_jobs=n_jobs, sampling_strategy=list([2, 3, 4]))
 balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
                                       sampling_strategy=classes_balancear, n_neighbors=4)
-
-# balanceador = SMOTE()
-# balanceador = ADASYN()
-# balanceador = RandomOverSampler()
-
-# balanceador = SMOTEENN(random_state=random_state)
 print(balanceador)
 # X_treino, Y_treino = balanceador.fit_resample(
 #     conjunto_treinamento.drop('acabamento', axis=1),
@@ -104,13 +85,11 @@ X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', en
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
 Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
 Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
-print(sorted(Counter(Y_treino).items()))
 
+# X_treino, Y_treino = conjunto_treinamento.drop('acabamento', axis=1), conjunto_treinamento['acabamento']
+print('X Treino', X_treino.describe())
 X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
 
-print('X Treino:', X_treino.head(50))
-print('X Treino', X_treino.shape)
-print('Y Treino:', Y_treino)
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
 resultado["item.classe"] = Y_teste.values
@@ -119,8 +98,8 @@ resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 def fazer_selecao_features_rfe():
     features = X_treino.columns
-    rfe = RFECV(RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250,
-                                       max_depth=75, max_features='sqrt', min_samples_leaf=1, min_samples_split=2),
+    rfe = RFECV(RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250, criterion='entropy',
+                                       max_depth=75, max_features='log2', min_samples_leaf=1, min_samples_split=2),
                 cv=kfold, scoring='accuracy')
 
     rfe.fit(X_treino, Y_treino.values.ravel())
@@ -140,12 +119,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250,
-                                   max_depth=75, max_features='sqrt', min_samples_leaf=1, min_samples_split=2)),
-    # ('DTC', tree.DecisionTreeClassifier()),
-    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    # ('SVM', SVC())
+    ('MNB', MultinomialNB()),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250, criterion='entropy',
+                                   max_depth=75, max_features='log2', min_samples_leaf=1, min_samples_split=2)),
+    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    ('SVM', SVC())
 ]
 
 
@@ -187,7 +165,6 @@ def plot_confusion_matrix(cm, nome, classes,
 
 
 def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
-    # y_pred = cross_val_predict(modelo, X_treino, Y_treino, n_jobs=n_jobs)
     modelo.fit(X_treino, Y_treino.values.ravel())
     y_pred = modelo.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
@@ -223,8 +200,6 @@ def imprimir_acuracia(nome, df_results):
 
 def rodar_algoritmos():
     inicio = time.time()
-    # melhor_modelo = BaggingClassifier(modelo, max_features=28, n_jobs=n_jobs,
-    #                                   random_state=random_state)
     melhor_modelo = modelo
     cv_results_balanced = rodar_modelo(melhor_modelo, nome, 'Balanceado', X_treino, Y_treino)
     cv_results_imbalanced = rodar_modelo(melhor_modelo, nome, 'Não Balanceado',
