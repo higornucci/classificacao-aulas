@@ -8,8 +8,10 @@ from collections import Counter
 from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, StratifiedKFold
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -92,16 +94,28 @@ param_grid = {"n_estimators": [100, 250],
               'min_samples_split': [2, 5, 10],
               'max_features': ['sqrt', 'log2', None],
               'criterion': ['gini', 'entropy'],
+              'class_weight': ['balanced', None],
               'max_depth': [50, 75]}
+modelo = RandomForestClassifier(random_state=random_state, oob_score=True)
 
-scores = ['accuracy', 'f1_macro']
+# param_grid = {'C': [0.5, 1, 10, 100, 1000],
+#               'gamma': [2, 1, 0.1, 0.001],
+#               'kernel': ['linear', 'rbf']}
+# modelo = SVC()
+
+# param_grid = {'weights': ['uniform', 'distance'],
+#               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+# modelo = KNeighborsClassifier()
+
+
+scores = ['accuracy', 'f1_weighted']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
     np.set_printoptions(precision=4)
-    clf = GridSearchCV(RandomForestClassifier(random_state=random_state, oob_score=True),
-                       param_grid, cv=kfold, n_jobs=n_jobs, scoring=score, verbose=2)
+    clf = GridSearchCV(modelo,
+                       param_grid, cv=kfold, refit=True, n_jobs=n_jobs, scoring=score, verbose=2)
     clf.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
@@ -130,5 +144,5 @@ for score in scores:
                           title='Confusion matrix ' + 'RFC' + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
-    print(classification_report_imbalanced(y_true, y_pred))
+    print(classification_report(y_true, y_pred))
     print()

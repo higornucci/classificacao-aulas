@@ -7,14 +7,13 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score, StratifiedKFold, \
     StratifiedShuffleSplit
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.svm import SVC
 from yellowbrick.features import RFECV
 
@@ -31,6 +30,13 @@ n_jobs = multiprocessing.cpu_count() - 3
 
 def mostrar_quantidade_por_classe(df, classe):
     print(df.loc[df['acabamento'] == classe].info())
+
+
+mostrar_quantidade_por_classe(dados_completo, 1)
+mostrar_quantidade_por_classe(dados_completo, 2)
+mostrar_quantidade_por_classe(dados_completo, 3)
+mostrar_quantidade_por_classe(dados_completo, 4)
+mostrar_quantidade_por_classe(dados_completo, 5)
 
 
 def mostrar_correlacao(dados, classe):
@@ -173,7 +179,7 @@ def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], True,
                           title='Confusion matrix ' + nome + ', normalized')
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False, title='Confusion matrix ' + nome)
-    print(classification_report_imbalanced(y_true=Y_teste, y_pred=y_pred, digits=4))
+    print(classification_report(y_true=Y_teste, y_pred=y_pred, digits=4))
 
 
 def rodar_modelo(modelo, nome, tipo, X_treino, Y_treino):

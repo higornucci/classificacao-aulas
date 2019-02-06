@@ -27,7 +27,8 @@ mostrar_quantidade_por_classe(dados_completo, 5)
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
 
-balanceador = EditedNearestNeighbours(n_jobs=-1, sampling_strategy=list([2, 3]))
+classes_balancear = list([2, 3])
+balanceador = EditedNearestNeighbours(kind_sel='mode', sampling_strategy=classes_balancear, n_neighbors=4)
 X_treino, Y_treino = balanceador.fit_resample(
     dados_completo.drop(['acabamento'], axis=1),
     dados_completo['acabamento'])
