@@ -102,7 +102,7 @@ param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
               'gamma': [0.001, 0.01, 0.1, 1, 10],
               'kernel': ['rbf']}
 modelo = SVC()
-
+3
 # param_grid = {'weights': ['uniform', 'distance'],
 #               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
 # modelo = KNeighborsClassifier()
