@@ -21,7 +21,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 3
+n_jobs = multiprocessing.cpu_count() - 2
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -89,19 +89,19 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-param_grid = {"n_estimators": [100, 250],
-              "min_samples_leaf": [1, 5, 10],
-              'min_samples_split': [2, 5, 10],
-              'max_features': ['sqrt', 'log2', None],
-              'criterion': ['gini', 'entropy'],
-              'class_weight': ['balanced', None],
-              'max_depth': [50, 75]}
-modelo = RandomForestClassifier(random_state=random_state, oob_score=True)
+# param_grid = {"n_estimators": [100, 250],
+#               "min_samples_leaf": [1, 5, 10],
+#               'min_samples_split': [2, 5, 10],
+#               'max_features': ['sqrt', 'log2', None],
+#               'criterion': ['gini', 'entropy'],
+#               'class_weight': ['balanced', None],
+#               'max_depth': [50, 75]}
+# modelo = RandomForestClassifier(random_state=random_state, oob_score=True)
 
-# param_grid = {'C': [0.5, 1, 10, 100, 1000],
-#               'gamma': [2, 1, 0.1, 0.001],
-#               'kernel': ['linear', 'rbf']}
-# modelo = SVC()
+param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
+              'gamma': [0.001, 0.01, 0.1, 1, 10],
+              'kernel': ['rbf']}
+modelo = SVC()
 
 # param_grid = {'weights': ['uniform', 'distance'],
 #               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
@@ -138,10 +138,10 @@ for score in scores:
     print()
     y_true, y_pred = Y_teste, clf.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
-    plot_confusion_matrix(matriz_confusao, 'RFC_' + score, [1, 2, 3, 4, 5], False,
-                          title='Confusion matrix RFC (best parameters)')
-    plot_confusion_matrix(matriz_confusao, 'RFC_' + score, [1, 2, 3, 4, 5], True,
-                          title='Confusion matrix ' + 'RFC' + ', normalized')
+    plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], False,
+                          title='Confusion matrix SVC (best parameters)')
+    plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], True,
+                          title='Confusion matrix ' + 'SVC' + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
     print(classification_report(y_true, y_pred))
