@@ -2,12 +2,14 @@ import itertools
 import warnings
 import time
 import multiprocessing
+from collections import Counter
 
 import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-from imblearn.under_sampling import EditedNearestNeighbours
+from imblearn.combine import SMOTEENN
+from imblearn.under_sampling import EditedNearestNeighbours, AllKNN, NeighbourhoodCleaningRule, RandomUnderSampler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score, StratifiedKFold, \
     StratifiedShuffleSplit
@@ -58,6 +60,7 @@ def mostrar_correlacao(dados, classe):
     ax.set_xticklabels(colunas)
     ax.set_yticklabels(colunas)
     plt.xticks(rotation=90)
+    plt.grid('off')
     plt.savefig('figuras/corr.png')
     plt.show()
 
@@ -77,8 +80,12 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
-                                      sampling_strategy=classes_balancear, n_neighbors=4)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+                                      sampling_strategy=classes_balancear, n_neighbors=3)
+# balanceador = AllKNN(sampling_strategy=classes_balancear)
+# balanceador = NeighbourhoodCleaningRule(sampling_strategy=classes_balancear)
+# balanceador = RandomUnderSampler()
+# balanceador = SMOTEENN()
 print(balanceador)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
@@ -88,7 +95,7 @@ Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
 
 X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
 Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
-# exit()
+exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
 Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
@@ -96,6 +103,7 @@ Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 
 # X_treino, Y_treino = conjunto_treinamento.drop('carcass_fatness_degree', axis=1), conjunto_treinamento['carcass_fatness_degree']
 print('X Treino', X_treino.describe())
+print(sorted(Counter(Y_treino).items()))
 X_teste, Y_teste = conjunto_teste.drop('carcass_fatness_degree', axis=1), conjunto_teste['carcass_fatness_degree']
 
 resultado = pd.DataFrame()
@@ -106,7 +114,7 @@ resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 def fazer_selecao_features_rfe():
     features = X_treino.columns
-    rfe = RFECV(RandomForestClassifier(oob_score=True),
+    rfe = RFECV(RandomForestClassifier(random_state=random_state, oob_score=True),
                 cv=kfold, scoring='accuracy')
 
     rfe.fit(X_treino, Y_treino.values.ravel())
@@ -126,9 +134,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(oob_score=True)),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    # ('MNB', MultinomialNB()),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
+    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC())
 ]
 
