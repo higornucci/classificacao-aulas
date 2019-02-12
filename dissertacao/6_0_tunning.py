@@ -89,33 +89,32 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-# param_grid = {"n_estimators": [100, 250],
-#               "min_samples_leaf": [1, 5, 10],
-#               'min_samples_split': [2, 5, 10],
-#               'max_features': ['sqrt', 'log2', None],
-#               'criterion': ['gini', 'entropy'],
-#               'class_weight': ['balanced', None],
-#               'max_depth': [50, 75]}
-# modelo = RandomForestClassifier(random_state=random_state, oob_score=True)
+param_grid = {'n_estimators': [100, 250],
+              'min_samples_leaf': [1, 5, 10],
+              'min_samples_split': [2, 5, 10],
+              'max_features': ['sqrt', 'log2', None],
+              'criterion': ['gini', 'entropy'],
+              'class_weight': ['balanced', None],
+              'max_depth': [50, 75]}
+modelo = RandomForestClassifier(oob_score=True)
 
-param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
-              'gamma': [0.001, 0.01, 0.1, 1, 10],
-              'kernel': ['rbf']}
-modelo = SVC()
-3
+# param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
+#               'gamma': [0.001, 0.01, 0.1, 1, 10],
+#               'kernel': ['rbf']}
+# modelo = SVC()
+
 # param_grid = {'weights': ['uniform', 'distance'],
 #               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
 # modelo = KNeighborsClassifier()
 
 
-scores = ['accuracy', 'f1_weighted']
+scores = ['roc_auc', 'f1_weighted']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
 
     np.set_printoptions(precision=4)
-    clf = GridSearchCV(modelo,
-                       param_grid, cv=kfold, refit=True, n_jobs=n_jobs, scoring=score, verbose=2)
+    clf = GridSearchCV(modelo, param_grid, cv=kfold, refit=True, n_jobs=n_jobs, scoring=score, verbose=2)
     clf.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
