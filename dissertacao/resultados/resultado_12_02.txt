@@ -1,17 +1,266 @@
-Validação cruzada RFC : [0.91260986 0.91273158 0.91444384 0.91333809 0.91229124]
-RFC: (0.9131) +/- (0.001)
+/usr/bin/python3.6 /home/ufms/programas/pycharm/helpers/pydev/pydevconsole.py --mode=client --port=38175
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/ufms/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.7 (default, Oct 22 2018, 11:32:17) 
+[GCC 8.2.0] on linux
+runfile('/home/ufms/projetos/classificacao-aulas/dissertacao/5_2_selecao_modelo.py', wdir='/home/ufms/projetos/classificacao-aulas/dissertacao')
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 5048 entries, 872 to 1056328
+Data columns (total 29 columns):
+typification                 5048 non-null float64
+maturity                     5048 non-null float64
+carcass_weight               5048 non-null float64
+classification               5048 non-null float64
+other_incentives             5048 non-null float64
+makes_ration                 5048 non-null float64
+total_area_confinement       5048 non-null float64
+area_80_vegetation_cover     5048 non-null float64
+area_20_erosion              5048 non-null float64
+individual_identification    5048 non-null float64
+sisbov                       5048 non-null float64
+grazing_control              5048 non-null float64
+trace_list                   5048 non-null float64
+quality_programs             5048 non-null float64
+involved_in_organization     5048 non-null float64
+confinement                  5048 non-null float64
+semi_confinement             5048 non-null float64
+field_supplementation        5048 non-null float64
+fertigation                  5048 non-null float64
+lfi                          5048 non-null float64
+fli                          5048 non-null float64
+clfi                         5048 non-null float64
+latitude                     5048 non-null float64
+longitude                    5048 non-null float64
+mes_abate                    5048 non-null float64
+estacao_abate                5048 non-null float64
+microrregiao                 5048 non-null float64
+mesoregiao                   5048 non-null float64
+carcass_fatness_degree       5048 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 1.2 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 425238 entries, 0 to 1056585
+Data columns (total 29 columns):
+typification                 425238 non-null float64
+maturity                     425238 non-null float64
+carcass_weight               425238 non-null float64
+classification               425238 non-null float64
+other_incentives             425238 non-null float64
+makes_ration                 425238 non-null float64
+total_area_confinement       425238 non-null float64
+area_80_vegetation_cover     425238 non-null float64
+area_20_erosion              425238 non-null float64
+individual_identification    425238 non-null float64
+sisbov                       425238 non-null float64
+grazing_control              425238 non-null float64
+trace_list                   425238 non-null float64
+quality_programs             425238 non-null float64
+involved_in_organization     425238 non-null float64
+confinement                  425238 non-null float64
+semi_confinement             425238 non-null float64
+field_supplementation        425238 non-null float64
+fertigation                  425238 non-null float64
+lfi                          425238 non-null float64
+fli                          425238 non-null float64
+clfi                         425238 non-null float64
+latitude                     425238 non-null float64
+longitude                    425238 non-null float64
+mes_abate                    425238 non-null float64
+estacao_abate                425238 non-null float64
+microrregiao                 425238 non-null float64
+mesoregiao                   425238 non-null float64
+carcass_fatness_degree       425238 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 97.3 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 563290 entries, 1 to 1056583
+Data columns (total 29 columns):
+typification                 563290 non-null float64
+maturity                     563290 non-null float64
+carcass_weight               563290 non-null float64
+classification               563290 non-null float64
+other_incentives             563290 non-null float64
+makes_ration                 563290 non-null float64
+total_area_confinement       563290 non-null float64
+area_80_vegetation_cover     563290 non-null float64
+area_20_erosion              563290 non-null float64
+individual_identification    563290 non-null float64
+sisbov                       563290 non-null float64
+grazing_control              563290 non-null float64
+trace_list                   563290 non-null float64
+quality_programs             563290 non-null float64
+involved_in_organization     563290 non-null float64
+confinement                  563290 non-null float64
+semi_confinement             563290 non-null float64
+field_supplementation        563290 non-null float64
+fertigation                  563290 non-null float64
+lfi                          563290 non-null float64
+fli                          563290 non-null float64
+clfi                         563290 non-null float64
+latitude                     563290 non-null float64
+longitude                    563290 non-null float64
+mes_abate                    563290 non-null float64
+estacao_abate                563290 non-null float64
+microrregiao                 563290 non-null float64
+mesoregiao                   563290 non-null float64
+carcass_fatness_degree       563290 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 128.9 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 62773 entries, 1331 to 1056584
+Data columns (total 29 columns):
+typification                 62773 non-null float64
+maturity                     62773 non-null float64
+carcass_weight               62773 non-null float64
+classification               62773 non-null float64
+other_incentives             62773 non-null float64
+makes_ration                 62773 non-null float64
+total_area_confinement       62773 non-null float64
+area_80_vegetation_cover     62773 non-null float64
+area_20_erosion              62773 non-null float64
+individual_identification    62773 non-null float64
+sisbov                       62773 non-null float64
+grazing_control              62773 non-null float64
+trace_list                   62773 non-null float64
+quality_programs             62773 non-null float64
+involved_in_organization     62773 non-null float64
+confinement                  62773 non-null float64
+semi_confinement             62773 non-null float64
+field_supplementation        62773 non-null float64
+fertigation                  62773 non-null float64
+lfi                          62773 non-null float64
+fli                          62773 non-null float64
+clfi                         62773 non-null float64
+latitude                     62773 non-null float64
+longitude                    62773 non-null float64
+mes_abate                    62773 non-null float64
+estacao_abate                62773 non-null float64
+microrregiao                 62773 non-null float64
+mesoregiao                   62773 non-null float64
+carcass_fatness_degree       62773 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 14.4 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 237 entries, 30454 to 1050389
+Data columns (total 29 columns):
+typification                 237 non-null float64
+maturity                     237 non-null float64
+carcass_weight               237 non-null float64
+classification               237 non-null float64
+other_incentives             237 non-null float64
+makes_ration                 237 non-null float64
+total_area_confinement       237 non-null float64
+area_80_vegetation_cover     237 non-null float64
+area_20_erosion              237 non-null float64
+individual_identification    237 non-null float64
+sisbov                       237 non-null float64
+grazing_control              237 non-null float64
+trace_list                   237 non-null float64
+quality_programs             237 non-null float64
+involved_in_organization     237 non-null float64
+confinement                  237 non-null float64
+semi_confinement             237 non-null float64
+field_supplementation        237 non-null float64
+fertigation                  237 non-null float64
+lfi                          237 non-null float64
+fli                          237 non-null float64
+clfi                         237 non-null float64
+latitude                     237 non-null float64
+longitude                    237 non-null float64
+mes_abate                    237 non-null float64
+estacao_abate                237 non-null float64
+microrregiao                 237 non-null float64
+mesoregiao                   237 non-null float64
+carcass_fatness_degree       237 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 55.5 KB
+None
+Correlaçao com carcass_fatness_degree
+ carcass_fatness_degree       1.000000
+typification                 0.308762
+involved_in_organization     0.111940
+classification               0.099146
+confinement                  0.056320
+fli                          0.054319
+individual_identification    0.046604
+microrregiao                 0.038489
+other_incentives             0.032278
+longitude                    0.028780
+clfi                         0.028634
+makes_ration                 0.028629
+field_supplementation        0.014427
+trace_list                   0.009565
+sisbov                       0.008015
+latitude                     0.003936
+total_area_confinement       0.003624
+mesoregiao                   0.003173
+lfi                         -0.001351
+area_80_vegetation_cover    -0.008410
+quality_programs            -0.008482
+grazing_control             -0.014826
+estacao_abate               -0.017568
+area_20_erosion             -0.022239
+fertigation                 -0.027904
+mes_abate                   -0.033697
+semi_confinement            -0.046201
+maturity                    -0.049436
+carcass_weight              -0.064542
+Name: carcass_fatness_degree, dtype: float64
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+SMOTEENN(enn=None, random_state=None, ratio=None, sampling_strategy='auto',
+     smote=None)
+X Treino        typification      maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification        sisbov  grazing_control    trace_list  quality_programs  involved_in_organization   confinement  semi_confinement  field_supplementation   fertigation           lfi           fli          clfi      latitude     longitude     mes_abate  estacao_abate  microrregiao    mesoregiao
+count  1.561525e+06  1.561525e+06    1.561525e+06    1.561525e+06      1.561525e+06  1.561525e+06            1.561525e+06              1.561525e+06     1.561525e+06               1.561525e+06  1.561525e+06     1.561525e+06  1.561525e+06      1.561525e+06              1.561525e+06  1.561525e+06      1.561525e+06           1.561525e+06  1.561525e+06  1.561525e+06  1.561525e+06  1.561525e+06  1.561525e+06  1.561525e+06  1.561525e+06   1.561525e+06  1.561525e+06  1.561525e+06
+mean   6.196819e-01  4.127603e-01    3.871005e-01    3.447232e-01      4.575824e-02  6.643234e-01            4.612158e-03              7.717002e-01     2.257331e-03               7.479048e-01  3.830464e-01     7.764390e-01  3.527382e-01      1.828990e-02              3.415935e-01  5.476915e-01      5.552250e-01           9.418575e-01  1.114841e-01  5.095593e-02  3.430933e-01  2.954284e-02  5.288271e-01  5.666624e-01  5.807985e-01   6.089154e-01  5.137261e-01  3.422499e-01
+std    4.482580e-01  3.404493e-01    1.467983e-01    3.749057e-01      2.067428e-01  4.699221e-01            6.775610e-02              4.195641e-01     4.730266e-02               4.306228e-01  4.847939e-01     4.164827e-01  4.761943e-01      1.307966e-01              4.728625e-01  4.958873e-01      4.944682e-01           2.290730e-01  3.122277e-01  2.175095e-01  4.729140e-01  1.664595e-01  2.102410e-01  1.891692e-01  2.917241e-01   3.535465e-01  3.702308e-01  3.533902e-01
+min    0.000000e+00  0.000000e+00    0.000000e+00    0.000000e+00      0.000000e+00  0.000000e+00            0.000000e+00              0.000000e+00     0.000000e+00               0.000000e+00  0.000000e+00     0.000000e+00  0.000000e+00      0.000000e+00              0.000000e+00  0.000000e+00      0.000000e+00           0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00   0.000000e+00  0.000000e+00  0.000000e+00
+25%    0.000000e+00  1.857457e-01    2.893333e-01    0.000000e+00      0.000000e+00  0.000000e+00            0.000000e+00              1.000000e+00     0.000000e+00               3.873337e-01  0.000000e+00     1.000000e+00  0.000000e+00      0.000000e+00              0.000000e+00  0.000000e+00      0.000000e+00           1.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  4.172311e-01  4.497142e-01  3.636364e-01   3.333333e-01  1.000000e-01  0.000000e+00
+50%    1.000000e+00  2.500000e-01    3.920000e-01    1.403633e-01      0.000000e+00  1.000000e+00            0.000000e+00              1.000000e+00     0.000000e+00               1.000000e+00  0.000000e+00     1.000000e+00  0.000000e+00      0.000000e+00              0.000000e+00  1.000000e+00      1.000000e+00           1.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  5.517022e-01  5.446398e-01  6.363636e-01   6.666667e-01  5.000000e-01  3.333333e-01
+75%    1.000000e+00  7.500000e-01    4.846667e-01    5.555556e-01      0.000000e+00  1.000000e+00            0.000000e+00              1.000000e+00     0.000000e+00               1.000000e+00  1.000000e+00     1.000000e+00  1.000000e+00      0.000000e+00              1.000000e+00  1.000000e+00      1.000000e+00           1.000000e+00  0.000000e+00  0.000000e+00  1.000000e+00  0.000000e+00  6.942991e-01  7.177711e-01  8.181818e-01   1.000000e+00  8.782419e-01  3.333333e-01
+max    1.000000e+00  1.000000e+00    9.993333e-01    1.000000e+00      1.000000e+00  1.000000e+00            1.000000e+00              1.000000e+00     1.000000e+00               1.000000e+00  1.000000e+00     1.000000e+00  1.000000e+00      1.000000e+00              1.000000e+00  1.000000e+00      1.000000e+00           1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00   1.000000e+00  1.000000e+00  1.000000e+00
+Validação cruzada MNB : [0.57077491 0.56909569 0.57208635 0.57177805 0.57297881]
+MNB: (0.5713) +/- (0.001)
 Matriz de Confusão Balanceado
-[[  531   426    45     8     0]
- [  722 61878 21135  1313     0]
- [  232 34495 72190  5734     7]
- [    9   625  4072  7835    14]
- [    0     2     2    17    26]]
+[[  660    47    16   106   181]
+ [34141 13153  3458 17136 17160]
+ [32308 10158  8723 32682 28787]
+ [ 1600   292   325  5693  4645]
+ [    1     0     0     3    43]]
               precision    recall  f1-score   support
-           1     0.3554    0.5257    0.4241      1010
-           2     0.6351    0.7276    0.6782     85048
-           3     0.7408    0.6408    0.6872    112658
-           4     0.5256    0.6241    0.5706     12555
-           5     0.5532    0.5532    0.5532        47
-   micro avg     0.6741    0.6741    0.6741    211318
-   macro avg     0.5620    0.6143    0.5827    211318
-weighted avg     0.6836    0.6741    0.6754    211318
+           1     0.0096    0.6535    0.0189      1010
+           2     0.5562    0.1547    0.2420     85048
+           3     0.6966    0.0774    0.1394    112658
+           4     0.1024    0.4534    0.1670     12555
+           5     0.0008    0.9149    0.0017        47
+   micro avg     0.1338    0.1338    0.1338    211318
+   macro avg     0.2731    0.4508    0.1138    211318
+weighted avg     0.6013    0.1338    0.1817    211318
+Validação cruzada MNB : [0.57 0.57 0.57 0.57 0.57]
+MNB: (0.5691) +/- (0.000)
+Tempo de execução do MNB: 4.7007 segundos
+Validação cruzada RFC : [0.99 0.99 0.99 0.99 0.99]
+RFC: (0.9936) +/- (0.000)
+Matriz de Confusão Balanceado
+[[  769   205    22    14     0]
+ [ 2986 59127 19889  3042     4]
+ [ 1186 31224 67424 12792    32]
+ [   54   405  1472 10544    80]
+ [    0     1     1     5    40]]
+              precision    recall  f1-score   support
+           1     0.1540    0.7614    0.2561      1010
+           2     0.6500    0.6952    0.6719     85048
+           3     0.7592    0.5985    0.6693    112658
+           4     0.3994    0.8398    0.5414     12555
+           5     0.2564    0.8511    0.3941        47
+   micro avg     0.6526    0.6526    0.6526    211318
+   macro avg     0.4438    0.7492    0.5066    211318
+weighted avg     0.6909    0.6526    0.6607    211318
+Validação cruzada RFC : [0.65 0.65 0.65 0.65 0.65]
+RFC: (0.6530) +/- (0.001)
+Tempo de execução do RFC: 224.8839 segundos
