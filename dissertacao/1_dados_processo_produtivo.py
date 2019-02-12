@@ -6,7 +6,7 @@ warnings.filterwarnings('ignore')
 
 
 def ler_dados_processo_produtivo_base():
-    csv = pd.read_csv('../input/DadosProcessoProdutivo.csv', encoding='utf-8', delimiter='\t')
+    csv = pd.read_csv('../input/DadosProcessoProdutivo.csv', encoding='utf-8', delimiter=';')
     # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
     csv.drop(['IncentivoProdutorIdentificador', 'QuestionarioIdentificador'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
@@ -28,17 +28,17 @@ def gerar_arquivo_dados_perguntas_classificam(dados_processo_produtivo):
         columns='PerguntaQuestionario',
         values='Resposta')
 
-    dados_perguntas_classificam_resumido.index.name = 'estabelecimento_identificador'
+    dados_perguntas_classificam_resumido.index.name = 'property_id'
     novos_nomes_colunas = {
-        'A área do estabelecimento rural é destinada na sua totalidade à atividade do confinamento?': 'area_total_destinada_confinamento',
-        'A área manejada apresenta sinais de erosão laminar ou em sulco igual ou superior a 20% da área total de pastagens (nativas ou cultivadas)?': 'area_manejada_20_erosao',
-        'A área manejada apresenta boa cobertura vegetal, com baixa presença de invasoras e sem manchas de solo descoberto em, no mínimo, 80% da área total de pastagens (nativas ou cultivadas)?': 'area_manejada_80_boa_cobertura_vegetal',
-        'Dispõe de um sistema de identificação individual de bovinos associado a um controle zootécnico e sanitário?': 'dispoe_de_identificacao_individual',
-        'Executa o rastreamento SISBOV?': 'rastreamento_sisbov',
-        'Faz controle de pastejo que atende aos limites mínimos de altura para cada uma das forrageiras ou cultivares exploradas, tendo como parâmetro a régua de manejo instituída pela Empresa Brasileira de Pesquisa Agropecuária (Embrapa)?': 'faz_controle_pastejo_regua_de_manejo_embrapa',
-        'Faz parte da Lista Trace?': 'lita_trace',
-        'O Estabelecimento rural apresenta atestado de Programas de Controle de Qualidade (Boas Práticas Agropecuárias - BPA/BOVINOS ou qualquer outro programa com exigências similares ou superiores ao BPA)?': 'apresenta_atestado_programas_controle_qualidade',
-        'O Estabelecimento rural está envolvido com alguma organização que utiliza-se de mecanismos similares a aliança mercadológica para a comercialização do seu produto?': 'envolvido_em_organizacao'}
+        'A área do estabelecimento rural é destinada na sua totalidade à atividade do confinamento?': 'total_area_confinement',
+        'A área manejada apresenta sinais de erosão laminar ou em sulco igual ou superior a 20% da área total de pastagens (nativas ou cultivadas)?': 'area_20_erosion',
+        'A área manejada apresenta boa cobertura vegetal, com baixa presença de invasoras e sem manchas de solo descoberto em, no mínimo, 80% da área total de pastagens (nativas ou cultivadas)?': 'area_80_vegetation_cover',
+        'Dispõe de um sistema de identificação individual de bovinos associado a um controle zootécnico e sanitário?': 'individual_identification',
+        'Executa o rastreamento SISBOV?': 'sisbov',
+        'Faz controle de pastejo que atende aos limites mínimos de altura para cada uma das forrageiras ou cultivares exploradas, tendo como parâmetro a régua de manejo instituída pela Empresa Brasileira de Pesquisa Agropecuária (Embrapa)?': 'grazing_control',
+        'Faz parte da Lista Trace?': 'trace_list',
+        'O Estabelecimento rural apresenta atestado de Programas de Controle de Qualidade (Boas Práticas Agropecuárias – BPA/BOVINOS ou qualquer outro programa com exigências similares ou superiores ao BPA)?': 'quality_programs',
+        'O Estabelecimento rural está envolvido com alguma organização que utiliza-se de mecanismos similares a aliança mercadológica para a comercialização do seu produto?': 'involved_in_organization'}
     dados_perguntas_classificam_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
     dados_perguntas_classificam_resumido.to_csv('../input/PerguntasClassificam.csv', encoding='utf-8', sep='\t')
     dados_perguntas_classificam_resumido.fillna('Não', inplace=True)
@@ -58,11 +58,11 @@ def gerar_arquivo_dados_perguntas_nao_classificam(dados_processo_produtivo):
         index='EstabelecimentoIdentificador', columns='processo_e_tipo_alimentacao',
         values='QuestionarioConfinamentoFazConfinamento')
 
-    dados_perguntas_nao_classificam_resumido.index.name = 'estabelecimento_identificador'
+    dados_perguntas_nao_classificam_resumido.index.name = 'property_id'
     novos_nomes_colunas = {
-        'CONFINAMENTO': 'confinamento',
-        'SEMI-CONFINAMENTO': 'semi_confinamento',
-        'SUPLEMENTAÇÃO A CAMPO': 'suplementacao'}
+        'CONFINAMENTO': 'confinement',
+        'SEMI-CONFINAMENTO': 'semi_confinement',
+        'SUPLEMENTAÇÃO A CAMPO': 'field_supplementation'}
 
     dados_perguntas_nao_classificam_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
@@ -77,7 +77,7 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
         ['EstabelecimentoIdentificador', 'QuestionarioPraticaRecuperacaoPastagem',
          'PraticaRecuperacaoPastagemDescricao'],
         axis=1)
-    dados_pratica_recuperacao_pastagem['PraticaRecuperacaoPastagemDescricao'].fillna('Nenhum', inplace=True)
+    dados_pratica_recuperacao_pastagem['PraticaRecuperacaoPastagemDescricao'].fillna('none', inplace=True)
     dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem.drop_duplicates(
         subset=['EstabelecimentoIdentificador', 'QuestionarioPraticaRecuperacaoPastagem',
                 'PraticaRecuperacaoPastagemDescricao'])
@@ -86,18 +86,18 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
          values='QuestionarioPraticaRecuperacaoPastagem')
     # dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.groupby(['EstabelecimentoIdentificador'])['PraticaRecuperacaoPastagemDescricao'].apply(lambda x: ','.join(x.astype('category'))).reset_index()
     # dados_pratica_recuperacao_pastagem_resumido.set_index('EstabelecimentoIdentificador', inplace=True)
-    # dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
+    # dados_pratica_recuperacao_pastagem_resumido.index.name = 'property_id'
     # novos_nomes_colunas = {'PraticaRecuperacaoPastagemDescricao': 'tipo_recuperacao_pastagem'}
 
-    dados_pratica_recuperacao_pastagem_resumido.index.name = 'estabelecimento_identificador'
-    novos_nomes_colunas = {'Fertirrigação': 'fertirrigacao',
-                           'IFP - Integração Pecuária-Floresta': 'ifp',
-                           'ILP - Integração Lavoura-Pecuária': 'ilp',
-                           'ILPF - Integração Lavoura-Pecuária-Floresta': 'ilpf',
-                           'Nenhum': 'nenhum'}
+    dados_pratica_recuperacao_pastagem_resumido.index.name = 'property_id'
+    novos_nomes_colunas = {'Fertirrigação': 'fertigation',
+                           'IFP - Integração Pecuária-Floresta': 'lfi',
+                           'ILP - Integração Lavoura-Pecuária': 'fli',
+                           'ILPF - Integração Lavoura-Pecuária-Floresta': 'clfi',
+                           'none': 'none'}
 
     dados_pratica_recuperacao_pastagem_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    dados_pratica_recuperacao_pastagem_resumido.drop(['nenhum'], axis=1, inplace=True)
+    dados_pratica_recuperacao_pastagem_resumido.drop(['none'], axis=1, inplace=True)
     dados_pratica_recuperacao_pastagem_resumido.fillna('Não', inplace=True)
 
     dados_pratica_recuperacao_pastagem_resumido.to_csv('../input/PraticaRecuperacaoPastagem.csv', encoding='utf-8',
@@ -110,22 +110,22 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
         ['QuestionarioPraticaRecuperacaoPastagem', 'PraticaRecuperacaoPastagemDescricao',
          'QuestionarioConfinamentoFazConfinamento', 'FazConfinamentoDescricao',
          'PerguntaQuestionario', 'Resposta'], axis=1)
-    dados_cadastro_estabelecimento.fillna('Nenhum', inplace=True)
+    dados_cadastro_estabelecimento.fillna('none', inplace=True)
     dados_cadastro_estabelecimento_resumido = dados_cadastro_estabelecimento.drop_duplicates(
         subset=['EstabelecimentoIdentificador', 'EstabelecimentoMunicipio'])
 
-    novos_nomes_colunas = {'EstabelecimentoMunicipio': 'estabelecimento_municipio',
-                           'EstabelecimentoIdentificador': 'estabelecimento_identificador',
-                           'QuestionarioPossuiOutrosIncentivos': 'possui_outros_incentivos',
-                           'QuestionarioFabricaRacao': 'fabrica_racao',
-                           'QuestionarioClassificacaoEstabelecimentoRural': 'questionario_classificacao_estabelecimento_rural'}
+    novos_nomes_colunas = {'EstabelecimentoMunicipio': 'city',
+                           'EstabelecimentoIdentificador': 'property_id',
+                           'QuestionarioPossuiOutrosIncentivos': 'other_incentives',
+                           'QuestionarioFabricaRacao': 'makes_ration',
+                           'QuestionarioClassificacaoEstabelecimentoRural': 'classification'}
 
     dados_cadastro_estabelecimento_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
-    dados_cadastro_estabelecimento_resumido.set_index('estabelecimento_identificador', inplace=True)
-    dados_cadastro_estabelecimento_resumido['estabelecimento_municipio'] = dados_cadastro_estabelecimento_resumido[
-        'estabelecimento_municipio'].str.lower()
-    dados_cadastro_estabelecimento_resumido['questionario_classificacao_estabelecimento_rural'] = \
-        dados_cadastro_estabelecimento_resumido['questionario_classificacao_estabelecimento_rural'].astype('int64')
+    dados_cadastro_estabelecimento_resumido.set_index('property_id', inplace=True)
+    dados_cadastro_estabelecimento_resumido['city'] = dados_cadastro_estabelecimento_resumido[
+        'city'].str.lower()
+    dados_cadastro_estabelecimento_resumido['classification'] = \
+        dados_cadastro_estabelecimento_resumido['classification'].astype('int64')
     dados_cadastro_estabelecimento_resumido.sort_index(inplace=True)
 
     dados_cadastro_estabelecimento_resumido.to_csv('../input/CadastroEstabelecimento.csv', encoding='utf-8', sep='\t')
@@ -144,24 +144,24 @@ def gerar_arquivo_dados_abate():
     dados_abate_resumido = dados_abate.loc[~dados_abate['EstabelecimentoIdentificador'].isna()]
     dados_abate_resumido = dados_abate_resumido.drop(['EstabelecimentoMunicipio'], axis=1)
 
-    novos_nomes_colunas = {'EstabelecimentoIdentificador': 'estabelecimento_identificador',
-                           'Tipificacao': 'tipificacao',
-                           'Maturidade': 'maturidade',
-                           'Acabamento': 'acabamento',
-                           'Peso': 'peso_carcaca',
-                           'DataAbate': 'data_abate',
+    novos_nomes_colunas = {'EstabelecimentoIdentificador': 'property_id',
+                           'Tipificacao': 'typification',
+                           'Maturidade': 'maturity',
+                           'Acabamento': 'carcass_fatness_degree',
+                           'Peso': 'carcass_weight',
+                           'DataAbate': 'date_slaughter',
                            'Rispoa': 'rispoa'}
 
     dados_abate_resumido.rename(index=int, columns=novos_nomes_colunas, inplace=True)
 
-    dados_abate_resumido['rispoa'].fillna('Nenhum', inplace=True)
+    dados_abate_resumido['rispoa'].fillna('none', inplace=True)
     dados_abate_resumido.drop('rispoa', axis=1, inplace=True)
 
     # Remover pois não tem estabelecimento com esses ids na lista de estabelecimentos
-    # dados_remover = dados_abate_resumido.loc[dados_abate_resumido['estabelecimento_identificador'].isin(
+    # dados_remover = dados_abate_resumido.loc[dados_abate_resumido['property_id'].isin(
     #     [26, 1029, 1282, 1463, 1473, 1654, 1920, 4032, 4053, 4099, 4100, 4146, 4159, 4190, 4361, 4452, 4500, 4523, 4566,
     #      4613, 4652, 4772, 5168, 5228, 5568, 5934, 6456])]
-    # dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['estabelecimento_identificador'].isin(
+    # dados_abate_resumido = dados_abate_resumido.loc[~dados_abate_resumido['property_id'].isin(
     #     [1034, 1282, 1300, 1323, 1363, 1453, 1463, 1470, 1654, 1702, 1920, 1937, 1965, 3979, 4033,
     #      4062, 4072, 4099, 4100, 4146, 4159, 4160, 4161,
     #      4187, 4247, 4248, 4269, 4314, 4326, 4340, 4345,
@@ -206,11 +206,11 @@ def gerar_arquivo_dados_abate():
     #      7674, 7686, 7695, 7696, 7708, 7711, 7713, 7719,
     #      7722, 7727, 7729, 7739])]
 
-    dados_abate_resumido = dados_abate_resumido[dados_abate_resumido['peso_carcaca'].between(150, 450, inclusive=True)]
-    dados_abate_resumido['estabelecimento_identificador'] = dados_abate_resumido[
-        'estabelecimento_identificador'].astype(
+    dados_abate_resumido = dados_abate_resumido[dados_abate_resumido['carcass_weight'].between(150, 450, inclusive=True)]
+    dados_abate_resumido['property_id'] = dados_abate_resumido[
+        'property_id'].astype(
         'int64')
-    dados_abate_resumido.set_index('estabelecimento_identificador', inplace=True)
+    dados_abate_resumido.set_index('property_id', inplace=True)
     dados_abate_resumido.sort_index(inplace=True)
 
     dados_abate_resumido.to_csv('../input/DadosAbate.csv', encoding='utf-8', sep='\t')
@@ -230,9 +230,9 @@ def ler_municipios_ms():
 def tratar_municipios(dados_completo):
     dados_municipios_ms = ler_municipios_ms()
     dados_completo = pd.merge(dados_completo, dados_municipios_ms,
-                              how='left', left_on='estabelecimento_municipio',
+                              how='left', left_on='city',
                               right_on='Cidade')
-    dados_completo.drop(['Cidade', 'estabelecimento_municipio'], axis=1, inplace=True)
+    dados_completo.drop(['Cidade', 'city'], axis=1, inplace=True)
     dados_completo.index.name = 'index'
     return dados_completo
 
@@ -252,10 +252,10 @@ def get_season(now):
 
 
 def tratar_data_abate(dados_completo):
-    dados_completo['data_abate'] = dados_completo['data_abate'].astype('datetime64')
-    dados_completo['mes_abate'] = dados_completo['data_abate'].map(lambda d: d.month - 1)
-    dados_completo['estacao_abate'] = dados_completo['data_abate'].map(lambda d: get_season(d))
-    dados_completo.drop('data_abate', axis=1, inplace=True)
+    dados_completo['date_slaughter'] = dados_completo['date_slaughter'].astype('datetime64')
+    dados_completo['mes_abate'] = dados_completo['date_slaughter'].map(lambda d: d.month - 1)
+    dados_completo['estacao_abate'] = dados_completo['date_slaughter'].map(lambda d: get_season(d))
+    dados_completo.drop('date_slaughter', axis=1, inplace=True)
     return dados_completo
 
 
