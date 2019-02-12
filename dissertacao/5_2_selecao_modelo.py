@@ -43,9 +43,11 @@ def mostrar_correlacao(dados, classe):
     matriz_correlacao = dados.corr()
     print('Correlaçao com ' + classe + '\n', matriz_correlacao[classe].sort_values(ascending=False))
 
-    colunas = ['C', 'F', 'M', 'mat', 'peso', '% class', 'out_inc', 'fab_rac', 'area_conf', 'area_man_80_cob',
-               'area_man_20_er', 'id_ind', 'sisbov', 'cont_past', 'lita_trace', 'atest_prog_quali', 'envolvido_org',
-               'confi', 'semi_confi', 'suple', 'ferti', 'ifp', 'ilp', 'ilpf', 'lat', 'lon', 'prec', 'acab']
+    colunas = ['typification', 'maturity', 'carcass_weight', 'classification', 'other_incentives', 'makes_ration',
+               'total_area_confinement', 'area_80_vegetation_cover', 'area_20_erosion', 'individual_identification',
+               'sisbov', 'grazing_control', 'trace_list', 'quality_programs', 'involved_in_organization', 'confinement',
+               'semi_confinement', 'field_supplementation', 'fertigation', 'lfi', 'fli', 'clfi', 'latitude',
+               'longitude',	'mes_abate', 'estacao_abate', 'microrregiao', 'mesoregiao', 'carcass_fatness_degree']
     fig = plt.figure()
     ax = fig.add_subplot(111)
     cax = ax.matshow(matriz_correlacao, vmin=-1, vmax=1)
@@ -56,11 +58,11 @@ def mostrar_correlacao(dados, classe):
     ax.set_xticklabels(colunas)
     ax.set_yticklabels(colunas)
     plt.xticks(rotation=90)
-    plt.savefig('corr.png')
+    plt.savefig('figuras/corr.png')
     plt.show()
 
 
-# mostrar_correlacao(dados_completo, 'carcass_fatness_degree')
+mostrar_correlacao(dados_completo, 'carcass_fatness_degree')
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 test_size = 0.2
@@ -165,7 +167,7 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.xlabel('Predicted class')
     plt.grid('off')
     plt.tight_layout()
-    plt.savefig(nome_arquivo)
+    plt.savefig('figuras/' + nome_arquivo)
 
 
 def gerar_matriz_confusao(modelo, nome, tipo, X_treino, Y_treino):
@@ -199,7 +201,7 @@ def imprimir_acuracia(nome, df_results):
     plt.xlabel('Acuracy')
     plt.ylabel('')
     plt.title('Difference in terms of acuracy with ' + nome)
-    plt.savefig('acuracia' + nome + '.png')
+    plt.savefig('figuras/acuracia' + nome + '.png')
 
 
 def rodar_algoritmos():
