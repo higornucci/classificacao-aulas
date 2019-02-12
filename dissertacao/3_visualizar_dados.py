@@ -155,10 +155,10 @@ print('Correlação de Pearson:')
 print(matriz_correlacao['carcass_fatness_degree'].sort_values(ascending=False))
 
 # sns.pairplot(dados_completo, kind="scatter", hue="carcass_fatness_degree", markers=["o", "s", "D"], palette="Set2")
-sns.pairplot(dados_completo, kind="scatter", hue="carcass_fatness_degree", palette="Set2")
-plt.savefig('figuras/matriz_correlacao_pares.png')
-plt.show()
-
-sns.pairplot(dados_completo, kind="reg")
-plt.savefig('figuras/scatter_atributos.png')
-plt.show()
+# sns.pairplot(dados_completo, kind="scatter", hue="carcass_fatness_degree", palette="Set2")
+# plt.savefig('figuras/matriz_correlacao_pares.png')
+# plt.show()
+#
+# sns.pairplot(dados_completo, kind="reg")
+# plt.savefig('figuras/scatter_atributos.png')
+# plt.show()

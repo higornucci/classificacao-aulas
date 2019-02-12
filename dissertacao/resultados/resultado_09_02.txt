@@ -99,3 +99,34 @@ weighted avg     0.7254    0.7255    0.7070    154623
 Tempo de execução do SVM: 120566.0097 segundos
 
 Process finished with exit code 0
+
+Correlação de Pearson
+carcass_fatness_degree       1.000000
+typification                 0.308762
+involved_in_organization     0.111940
+classification               0.099146
+confinement                  0.056320
+fli                          0.054319
+individual_identification    0.046604
+microrregiao                 0.038489
+other_incentives             0.032278
+longitude                    0.028780
+clfi                         0.028634
+makes_ration                 0.028629
+field_supplementation        0.014427
+trace_list                   0.009565
+sisbov                       0.008015
+latitude                     0.003936
+total_area_confinement       0.003624
+mesoregiao                   0.003173
+lfi                         -0.001351
+area_80_vegetation_cover    -0.008410
+quality_programs            -0.008482
+grazing_control             -0.014826
+estacao_abate               -0.017568
+area_20_erosion             -0.022239
+fertigation                 -0.027904
+mes_abate                   -0.033697
+semi_confinement            -0.046201
+maturity                    -0.049436
+carcass_weight              -0.064542

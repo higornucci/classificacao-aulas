@@ -29,7 +29,7 @@ n_jobs = multiprocessing.cpu_count() - 3
 
 
 def mostrar_quantidade_por_classe(df, classe):
-    print(df.loc[df['acabamento'] == classe].info())
+    print(df.loc[df['carcass_fatness_degree'] == classe].info())
 
 
 mostrar_quantidade_por_classe(dados_completo, 1)
@@ -60,14 +60,14 @@ def mostrar_correlacao(dados, classe):
     plt.show()
 
 
-# mostrar_correlacao(dados_completo, 'acabamento')
+# mostrar_correlacao(dados_completo, 'carcass_fatness_degree')
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 test_size = 0.2
 train_size = 0.8
 print(((train_size * 100), '/', test_size * 100))
-X_completo = dados_completo.drop(['acabamento'], axis=1)
-Y_completo = dados_completo['acabamento']
+X_completo = dados_completo.drop(['carcass_fatness_degree'], axis=1)
+Y_completo = dados_completo['carcass_fatness_degree']
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
 split = StratifiedShuffleSplit(n_splits=1, train_size=train_size, test_size=test_size, random_state=random_state)
@@ -78,23 +78,23 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
                                       sampling_strategy=classes_balancear, n_neighbors=4)
 print(balanceador)
-# X_treino, Y_treino = balanceador.fit_resample(
-#     conjunto_treinamento.drop('acabamento', axis=1),
-#     conjunto_treinamento['acabamento'])
-# X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
-# Y_treino = pd.DataFrame(data=Y_treino, columns=['acabamento'])
-#
-# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+X_treino, Y_treino = balanceador.fit_resample(
+    conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
+    conjunto_treinamento['carcass_fatness_degree'])
+X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
+Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
+
+X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
 # exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
 Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
 Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 
-# X_treino, Y_treino = conjunto_treinamento.drop('acabamento', axis=1), conjunto_treinamento['acabamento']
+# X_treino, Y_treino = conjunto_treinamento.drop('carcass_fatness_degree', axis=1), conjunto_treinamento['carcass_fatness_degree']
 print('X Treino', X_treino.describe())
-X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
+X_teste, Y_teste = conjunto_teste.drop('carcass_fatness_degree', axis=1), conjunto_teste['carcass_fatness_degree']
 
 resultado = pd.DataFrame()
 resultado["id"] = Y_teste.index
@@ -104,8 +104,7 @@ resultado.to_csv("y_teste.csv", encoding='utf-8', index=False)
 
 def fazer_selecao_features_rfe():
     features = X_treino.columns
-    rfe = RFECV(RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250, criterion='entropy',
-                                       max_depth=75, max_features='log2', min_samples_leaf=1, min_samples_split=2),
+    rfe = RFECV(RandomForestClassifier(oob_score=True),
                 cv=kfold, scoring='accuracy')
 
     rfe.fit(X_treino, Y_treino.values.ravel())
@@ -126,8 +125,7 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=250, criterion='entropy',
-                                   max_depth=75, max_features='log2', min_samples_leaf=1, min_samples_split=2)),
+    ('RFC', RandomForestClassifier(oob_score=True)),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC())
 ]
@@ -209,9 +207,9 @@ def rodar_algoritmos():
     melhor_modelo = modelo
     cv_results_balanced = rodar_modelo(melhor_modelo, nome, 'Balanceado', X_treino, Y_treino)
     cv_results_imbalanced = rodar_modelo(melhor_modelo, nome, 'Não Balanceado',
-                                         conjunto_treinamento.drop('acabamento', axis=1),
-                                         conjunto_treinamento['acabamento'])
-    mostrar_features_mais_importantes(melhor_modelo)
+                                         conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
+                                         conjunto_treinamento['carcass_fatness_degree'])
+    # mostrar_features_mais_importantes(melhor_modelo)
 
     final = time.time()
     print('Tempo de execução do ' + nome + ': {0:.4f} segundos'.format(final - inicio))
