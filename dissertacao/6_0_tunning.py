@@ -108,7 +108,7 @@ modelo = RandomForestClassifier(oob_score=True)
 # modelo = KNeighborsClassifier()
 
 
-scores = ['roc_auc', 'f1_weighted']
+scores = ['recall_weighted', 'precision_weighted']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
