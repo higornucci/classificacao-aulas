@@ -80,21 +80,21 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-#                                       sampling_strategy=classes_balancear, n_neighbors=3)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+                                      sampling_strategy=classes_balancear, n_neighbors=3)
 # balanceador = AllKNN(sampling_strategy=classes_balancear)
 # balanceador = NeighbourhoodCleaningRule(sampling_strategy=classes_balancear)
 # balanceador = RandomUnderSampler()
-balanceador = SMOTEENN()
+# balanceador = SMOTEENN()
 print(balanceador)
-# X_treino, Y_treino = balanceador.fit_resample(
-#     conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
-#     conjunto_treinamento['carcass_fatness_degree'])
-# X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
-# Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
-#
-# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+X_treino, Y_treino = balanceador.fit_resample(
+    conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
+    conjunto_treinamento['carcass_fatness_degree'])
+X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
+Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
+
+X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
 # exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
