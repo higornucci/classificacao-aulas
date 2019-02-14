@@ -72,7 +72,7 @@ def plotar_dataset_2d_balanced():
     plt.show()
 
 
-plotar_dataset_2d_balanced()
+# plotar_dataset_2d_balanced()
 # plotar_dataset_2d_imbalanced()
 
 
@@ -131,7 +131,7 @@ def plotar_dataset_3d_balanced():
 
 
 # plotar_dataset_3d_imbalanced()
-plotar_dataset_3d_balanced()
+# plotar_dataset_3d_balanced()
 
 # ax = plt.axes()
 # sns.countplot(x='carcass_fatness_degree', data=dados_completo, ax=ax)
@@ -142,9 +142,9 @@ plotar_dataset_3d_balanced()
 ax = plt.axes()
 sns.countplot(x='carcass_fatness_degree', data=conjunto_balanceado, ax=ax)
 ax.set_title('Distribution of carcass fatness degree')
-plt.savefig('figuras/distribuicao_acabamento_balanceada_smoteenn.png')
+plt.savefig('figuras/distribuicao_acabamento_balanceada_smote.png')
 plt.show()
-
+exit()
 # dados_completo.hist(bins=50, figsize=(25, 25))
 # plt.savefig('figuras/histograma.png')
 # plt.show()
