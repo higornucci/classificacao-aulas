@@ -27,7 +27,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 3
+n_jobs = multiprocessing.cpu_count() - 1
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -54,7 +54,7 @@ def mostrar_correlacao(dados, classe):
     ax = fig.add_subplot(111)
     cax = ax.matshow(matriz_correlacao, vmin=-1, vmax=1)
     fig.colorbar(cax)
-    ticks = np.arange(0, 28, 1)
+    ticks = np.arange(0, 29, 1)
     ax.set_xticks(ticks)
     ax.set_yticks(ticks)
     ax.set_xticklabels(colunas)
@@ -65,7 +65,7 @@ def mostrar_correlacao(dados, classe):
     plt.show()
 
 
-mostrar_correlacao(dados_completo, 'carcass_fatness_degree')
+# mostrar_correlacao(dados_completo, 'carcass_fatness_degree')
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 test_size = 0.2
@@ -80,12 +80,12 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-                                      sampling_strategy=classes_balancear, n_neighbors=3)
+# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+#                                       sampling_strategy=classes_balancear, n_neighbors=3)
 # balanceador = AllKNN(sampling_strategy=classes_balancear)
 # balanceador = NeighbourhoodCleaningRule(sampling_strategy=classes_balancear)
 # balanceador = RandomUnderSampler()
-# balanceador = SMOTEENN()
+balanceador = SMOTEENN()
 print(balanceador)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
@@ -102,7 +102,8 @@ Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', en
 Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 
 # X_treino, Y_treino = conjunto_treinamento.drop('carcass_fatness_degree', axis=1), conjunto_treinamento['carcass_fatness_degree']
-print('X Treino', X_treino.describe())
+print('X Treino')
+print(X_treino.describe())
 X_teste, Y_teste = conjunto_teste.drop('carcass_fatness_degree', axis=1), conjunto_teste['carcass_fatness_degree']
 
 resultado = pd.DataFrame()
@@ -133,10 +134,10 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC())
+    # ('MNB', MultinomialNB()),
+    # ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
+    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    ('SVM', SVC(gamma='scale'))
 ]
 
 
@@ -215,9 +216,7 @@ def rodar_algoritmos():
     inicio = time.time()
     melhor_modelo = modelo
     cv_results_balanced = rodar_modelo(melhor_modelo, nome, 'Balanceado', X_treino, Y_treino)
-    cv_results_imbalanced = rodar_modelo(melhor_modelo, nome, 'Não Balanceado',
-                                         conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
-                                         conjunto_treinamento['carcass_fatness_degree'])
+    cv_results_imbalanced = 0
     # mostrar_features_mais_importantes(melhor_modelo)
 
     final = time.time()
