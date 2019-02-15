@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from collections import Counter
+
+from imblearn.combine import SMOTEENN
 from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
@@ -21,7 +23,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 2
+n_jobs = multiprocessing.cpu_count() - 1
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -75,8 +77,9 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
-                                      sampling_strategy=classes_balancear, n_neighbors=4)
+# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
+#                                       sampling_strategy=classes_balancear, n_neighbors=4)
+balanceador = SMOTEENN(n_jobs=n_jobs)
 print(balanceador)
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
