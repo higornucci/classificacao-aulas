@@ -9,6 +9,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
+from imblearn.over_sampling import SMOTE
 from imblearn.under_sampling import EditedNearestNeighbours, AllKNN, NeighbourhoodCleaningRule, RandomUnderSampler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score, StratifiedKFold, \
@@ -27,7 +28,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 1
+n_jobs = multiprocessing.cpu_count() - 3
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -85,7 +86,8 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = AllKNN(sampling_strategy=classes_balancear)
 # balanceador = NeighbourhoodCleaningRule(sampling_strategy=classes_balancear)
 # balanceador = RandomUnderSampler()
-balanceador = SMOTEENN()
+# balanceador = SMOTEENN(n_jobs=n_jobs)
+balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
@@ -134,9 +136,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB()),
-    # ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
-    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    ('MNB', MultinomialNB()),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
+    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC(gamma='scale'))
 ]
 
