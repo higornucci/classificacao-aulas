@@ -28,7 +28,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 3
+n_jobs = multiprocessing.cpu_count() - 1
 
 
 def mostrar_quantidade_por_classe(df, classe):
