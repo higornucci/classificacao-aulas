@@ -1,0 +1,183 @@
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 5048 entries, 872 to 1056328
+Data columns (total 29 columns):
+typification                 5048 non-null float64
+maturity                     5048 non-null float64
+carcass_weight               5048 non-null float64
+classification               5048 non-null float64
+other_incentives             5048 non-null float64
+makes_ration                 5048 non-null float64
+total_area_confinement       5048 non-null float64
+area_80_vegetation_cover     5048 non-null float64
+area_20_erosion              5048 non-null float64
+individual_identification    5048 non-null float64
+sisbov                       5048 non-null float64
+grazing_control              5048 non-null float64
+trace_list                   5048 non-null float64
+quality_programs             5048 non-null float64
+involved_in_organization     5048 non-null float64
+confinement                  5048 non-null float64
+semi_confinement             5048 non-null float64
+field_supplementation        5048 non-null float64
+fertigation                  5048 non-null float64
+lfi                          5048 non-null float64
+fli                          5048 non-null float64
+clfi                         5048 non-null float64
+latitude                     5048 non-null float64
+longitude                    5048 non-null float64
+mes_abate                    5048 non-null float64
+estacao_abate                5048 non-null float64
+microrregiao                 5048 non-null float64
+mesoregiao                   5048 non-null float64
+carcass_fatness_degree       5048 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 1.2 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 425238 entries, 0 to 1056585
+Data columns (total 29 columns):
+typification                 425238 non-null float64
+maturity                     425238 non-null float64
+carcass_weight               425238 non-null float64
+classification               425238 non-null float64
+other_incentives             425238 non-null float64
+makes_ration                 425238 non-null float64
+total_area_confinement       425238 non-null float64
+area_80_vegetation_cover     425238 non-null float64
+area_20_erosion              425238 non-null float64
+individual_identification    425238 non-null float64
+sisbov                       425238 non-null float64
+grazing_control              425238 non-null float64
+trace_list                   425238 non-null float64
+quality_programs             425238 non-null float64
+involved_in_organization     425238 non-null float64
+confinement                  425238 non-null float64
+semi_confinement             425238 non-null float64
+field_supplementation        425238 non-null float64
+fertigation                  425238 non-null float64
+lfi                          425238 non-null float64
+fli                          425238 non-null float64
+clfi                         425238 non-null float64
+latitude                     425238 non-null float64
+longitude                    425238 non-null float64
+mes_abate                    425238 non-null float64
+estacao_abate                425238 non-null float64
+microrregiao                 425238 non-null float64
+mesoregiao                   425238 non-null float64
+carcass_fatness_degree       425238 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 97.3 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 563290 entries, 1 to 1056583
+Data columns (total 29 columns):
+typification                 563290 non-null float64
+maturity                     563290 non-null float64
+carcass_weight               563290 non-null float64
+classification               563290 non-null float64
+other_incentives             563290 non-null float64
+makes_ration                 563290 non-null float64
+total_area_confinement       563290 non-null float64
+area_80_vegetation_cover     563290 non-null float64
+area_20_erosion              563290 non-null float64
+individual_identification    563290 non-null float64
+sisbov                       563290 non-null float64
+grazing_control              563290 non-null float64
+trace_list                   563290 non-null float64
+quality_programs             563290 non-null float64
+involved_in_organization     563290 non-null float64
+confinement                  563290 non-null float64
+semi_confinement             563290 non-null float64
+field_supplementation        563290 non-null float64
+fertigation                  563290 non-null float64
+lfi                          563290 non-null float64
+fli                          563290 non-null float64
+clfi                         563290 non-null float64
+latitude                     563290 non-null float64
+longitude                    563290 non-null float64
+mes_abate                    563290 non-null float64
+estacao_abate                563290 non-null float64
+microrregiao                 563290 non-null float64
+mesoregiao                   563290 non-null float64
+carcass_fatness_degree       563290 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 128.9 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 62773 entries, 1331 to 1056584
+Data columns (total 29 columns):
+typification                 62773 non-null float64
+maturity                     62773 non-null float64
+carcass_weight               62773 non-null float64
+classification               62773 non-null float64
+other_incentives             62773 non-null float64
+makes_ration                 62773 non-null float64
+total_area_confinement       62773 non-null float64
+area_80_vegetation_cover     62773 non-null float64
+area_20_erosion              62773 non-null float64
+individual_identification    62773 non-null float64
+sisbov                       62773 non-null float64
+grazing_control              62773 non-null float64
+trace_list                   62773 non-null float64
+quality_programs             62773 non-null float64
+involved_in_organization     62773 non-null float64
+confinement                  62773 non-null float64
+semi_confinement             62773 non-null float64
+field_supplementation        62773 non-null float64
+fertigation                  62773 non-null float64
+lfi                          62773 non-null float64
+fli                          62773 non-null float64
+clfi                         62773 non-null float64
+latitude                     62773 non-null float64
+longitude                    62773 non-null float64
+mes_abate                    62773 non-null float64
+estacao_abate                62773 non-null float64
+microrregiao                 62773 non-null float64
+mesoregiao                   62773 non-null float64
+carcass_fatness_degree       62773 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 14.4 MB
+None
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 237 entries, 30454 to 1050389
+Data columns (total 29 columns):
+typification                 237 non-null float64
+maturity                     237 non-null float64
+carcass_weight               237 non-null float64
+classification               237 non-null float64
+other_incentives             237 non-null float64
+makes_ration                 237 non-null float64
+total_area_confinement       237 non-null float64
+area_80_vegetation_cover     237 non-null float64
+area_20_erosion              237 non-null float64
+individual_identification    237 non-null float64
+sisbov                       237 non-null float64
+grazing_control              237 non-null float64
+trace_list                   237 non-null float64
+quality_programs             237 non-null float64
+involved_in_organization     237 non-null float64
+confinement                  237 non-null float64
+semi_confinement             237 non-null float64
+field_supplementation        237 non-null float64
+fertigation                  237 non-null float64
+lfi                          237 non-null float64
+fli                          237 non-null float64
+clfi                         237 non-null float64
+latitude                     237 non-null float64
+longitude                    237 non-null float64
+mes_abate                    237 non-null float64
+estacao_abate                237 non-null float64
+microrregiao                 237 non-null float64
+mesoregiao                   237 non-null float64
+carcass_fatness_degree       237 non-null int64
+dtypes: float64(28), int64(1)
+memory usage: 55.5 KB
+None
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+SMOTEENN(enn=None, random_state=None, ratio=None, sampling_strategy='auto',
+     smote=None)
+Traceback (most recent call last):
+  File "5_2_selecao_modelo.py", line 93, in <module>
+    conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
+NameError: name 'conjunto_treinamento' is not defined

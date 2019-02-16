@@ -72,22 +72,22 @@ print('Classes para balancear', classes_balancear)
 test_size = 0.2
 train_size = 0.8
 print(((train_size * 100), '/', test_size * 100))
-X_completo = dados_completo.drop(['carcass_fatness_degree'], axis=1)
-Y_completo = dados_completo['carcass_fatness_degree']
-conjunto_treinamento = pd.DataFrame()
-conjunto_teste = pd.DataFrame()
-split = StratifiedShuffleSplit(n_splits=1, train_size=train_size, test_size=test_size, random_state=random_state)
-for trainamento_index, teste_index in split.split(X_completo, Y_completo):
-    conjunto_treinamento = dados_completo.loc[trainamento_index]
-    conjunto_teste = dados_completo.loc[teste_index]
-
+# X_completo = dados_completo.drop(['carcass_fatness_degree'], axis=1)
+# Y_completo = dados_completo['carcass_fatness_degree']
+# conjunto_treinamento = pd.DataFrame()
+# conjunto_teste = pd.DataFrame()
+# split = StratifiedShuffleSplit(n_splits=1, train_size=train_size, test_size=test_size, random_state=random_state)
+# for trainamento_index, teste_index in split.split(X_completo, Y_completo):
+#     conjunto_treinamento = dados_completo.loc[trainamento_index]
+#     conjunto_teste = dados_completo.loc[teste_index]
+#
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
 # balanceador = AllKNN(sampling_strategy=classes_balancear)
 # balanceador = NeighbourhoodCleaningRule(sampling_strategy=classes_balancear)
 # balanceador = RandomUnderSampler()
-# balanceador = SMOTEENN(n_jobs=n_jobs)
-balanceador = SMOTE(n_jobs=n_jobs)
+balanceador = SMOTEENN()
+# balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
