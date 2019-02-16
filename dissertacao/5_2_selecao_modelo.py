@@ -86,8 +86,8 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 # balanceador = AllKNN(sampling_strategy=classes_balancear)
 # balanceador = NeighbourhoodCleaningRule(sampling_strategy=classes_balancear)
 # balanceador = RandomUnderSampler()
-# balanceador = SMOTEENN()
-balanceador = SMOTE(n_jobs=n_jobs)
+balanceador = SMOTEENN()
+# balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_treino, Y_treino = balanceador.fit_resample(
     conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
