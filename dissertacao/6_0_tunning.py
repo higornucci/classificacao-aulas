@@ -23,7 +23,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = multiprocessing.cpu_count() - 1
+n_jobs = 2
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -111,7 +111,7 @@ param_grid = {'weights': ['uniform', 'distance'],
 modelo = KNeighborsClassifier()
 
 
-scores = ['recall_weighted', 'precision_weighted']
+scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
@@ -129,7 +129,7 @@ for score in scores:
     means = clf.cv_results_['mean_test_score']
     stds = clf.cv_results_['std_test_score']
     for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print("%0.3f (+/-%0.03f) for %r"
+        print("%0.4f (+/-%0.04f) for %r"
               % (mean, std * 2, params))
     print()
 
