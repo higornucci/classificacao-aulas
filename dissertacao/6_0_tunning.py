@@ -68,8 +68,8 @@ print('Classes para balancear', classes_balancear)
 test_size = 0.2
 train_size = 0.8
 print(((train_size * 100), '/', test_size * 100))
-X_completo = dados_completo.drop(['acabamento'], axis=1)
-Y_completo = dados_completo['acabamento']
+X_completo = dados_completo.drop(['carcass_fatness_degree'], axis=1)
+Y_completo = dados_completo['carcass_fatness_degree']
 conjunto_treinamento = pd.DataFrame()
 conjunto_teste = pd.DataFrame()
 split = StratifiedShuffleSplit(n_splits=1, test_size=test_size, random_state=random_state)
@@ -79,7 +79,7 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
 #                                       sampling_strategy=classes_balancear, n_neighbors=4)
-balanceador = SMOTEENN(n_jobs=n_jobs)
+balanceador = SMOTEENN()
 print(balanceador)
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
@@ -87,28 +87,28 @@ Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', en
 Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
 print(sorted(Counter(Y_treino).items()))
 
-X_teste, Y_teste = conjunto_teste.drop('acabamento', axis=1), conjunto_teste['acabamento']
+X_teste, Y_teste = conjunto_teste.drop('carcass_fatness_degree', axis=1), conjunto_teste['carcass_fatness_degree']
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-param_grid = {'n_estimators': [100, 250],
-              'min_samples_leaf': [1, 5, 10],
-              'min_samples_split': [2, 5, 10],
-              'max_features': ['sqrt', 'log2', None],
-              'criterion': ['gini', 'entropy'],
-              'class_weight': ['balanced', None],
-              'max_depth': [50, 75]}
-modelo = RandomForestClassifier(oob_score=True)
+# param_grid = {'n_estimators': [100, 250],
+#               'min_samples_leaf': [1, 5, 10],
+#               'min_samples_split': [2, 5, 10],
+#               'max_features': ['sqrt', 'log2', None],
+#               'criterion': ['gini', 'entropy'],
+#               'class_weight': ['balanced', None],
+#               'max_depth': [50, 75]}
+# modelo = RandomForestClassifier(oob_score=True)
 
 # param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
 #               'gamma': [0.001, 0.01, 0.1, 1, 10],
 #               'kernel': ['rbf']}
 # modelo = SVC()
 
-# param_grid = {'weights': ['uniform', 'distance'],
-#               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
-# modelo = KNeighborsClassifier()
+param_grid = {'weights': ['uniform', 'distance'],
+              'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+modelo = KNeighborsClassifier()
 
 
 scores = ['recall_weighted', 'precision_weighted']

@@ -1,0 +1,9 @@
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+SMOTEENN(enn=None, random_state=None, ratio=None, sampling_strategy='auto',
+     smote=None)
+[('carcass_fatness_degree', 1)]
+# Tuning hyper-parameters for recall_weighted
+
+Fitting 5 folds for each of 16 candidates, totalling 80 fits
+[Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
