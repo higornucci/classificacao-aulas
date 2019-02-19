@@ -1,0 +1,100 @@
+Classes para balancear [2, 3]
+(80.0, '/', 20.0)
+SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=2,
+   out_step='deprecated', random_state=None, ratio=None,
+   sampling_strategy='auto', svm_estimator='deprecated')
+X Treino
+       typification      maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification        sisbov  grazing_control    trace_list  quality_programs  involved_in_organization   confinement  semi_confinement  field_supplementation   fertigation           lfi           fli          clfi      latitude     longitude     mes_abate  estacao_abate  microrregiao    mesoregiao
+count  2.253160e+06  2.253160e+06    2.253160e+06    2.253160e+06      2.253160e+06  2.253160e+06            2.253160e+06              2.253160e+06     2.253160e+06               2.253160e+06  2.253160e+06     2.253160e+06  2.253160e+06      2.253160e+06              2.253160e+06  2.253160e+06      2.253160e+06           2.253160e+06  2.253160e+06  2.253160e+06  2.253160e+06  2.253160e+06  2.253160e+06  2.253160e+06  2.253160e+06   2.253160e+06  2.253160e+06  2.253160e+06
+mean   5.541657e-01  3.642827e-01    3.890261e-01    3.581278e-01      4.957234e-02  6.643722e-01            9.097002e-03              7.786312e-01     1.952436e-03               7.485157e-01  4.078167e-01     7.846487e-01  3.755605e-01      2.045953e-02              3.391279e-01  5.728550e-01      5.371892e-01           9.308301e-01  1.106208e-01  5.120709e-02  3.669121e-01  3.308487e-02  5.271841e-01  5.622358e-01  5.937428e-01   6.220189e-01  5.117955e-01  3.582701e-01
+std    4.545909e-01  3.217881e-01    1.484063e-01    3.823393e-01      2.156008e-01  4.705851e-01            9.494340e-02              4.150462e-01     4.401491e-02               4.313742e-01  4.905222e-01     4.109615e-01  4.831443e-01      1.395368e-01              4.724204e-01  4.933683e-01      4.968809e-01           2.506030e-01  3.119345e-01  2.188035e-01  4.807167e-01  1.769582e-01  2.174141e-01  1.895735e-01  2.947160e-01   3.551597e-01  3.667650e-01  3.626265e-01
+min    0.000000e+00  0.000000e+00    0.000000e+00    0.000000e+00      0.000000e+00  0.000000e+00            0.000000e+00              0.000000e+00     0.000000e+00               0.000000e+00  0.000000e+00     0.000000e+00  0.000000e+00      0.000000e+00              0.000000e+00  0.000000e+00      0.000000e+00           0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00   0.000000e+00  0.000000e+00  0.000000e+00
+25%    0.000000e+00  0.000000e+00    2.895405e-01    0.000000e+00      0.000000e+00  0.000000e+00            0.000000e+00              1.000000e+00     0.000000e+00               3.859370e-01  0.000000e+00     1.000000e+00  0.000000e+00      0.000000e+00              0.000000e+00  0.000000e+00      0.000000e+00           1.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  4.172311e-01  4.475444e-01  3.636364e-01   3.333333e-01  1.000000e-01  0.000000e+00
+50%    5.000000e-01  2.500000e-01    3.966667e-01    5.555556e-01      0.000000e+00  1.000000e+00            0.000000e+00              1.000000e+00     0.000000e+00               1.000000e+00  0.000000e+00     1.000000e+00  0.000000e+00      0.000000e+00              0.000000e+00  1.000000e+00      1.000000e+00           1.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  0.000000e+00  5.517022e-01  5.446398e-01  6.363636e-01   6.666667e-01  5.000000e-01  3.333333e-01
+75%    1.000000e+00  5.000000e-01    4.883333e-01    5.555556e-01      0.000000e+00  1.000000e+00            0.000000e+00              1.000000e+00     0.000000e+00               1.000000e+00  1.000000e+00     1.000000e+00  1.000000e+00      0.000000e+00              1.000000e+00  1.000000e+00      1.000000e+00           1.000000e+00  0.000000e+00  0.000000e+00  1.000000e+00  0.000000e+00  6.942991e-01  7.118525e-01  8.181818e-01   1.000000e+00  8.000000e-01  6.666667e-01
+max    1.000000e+00  1.000000e+00    1.000000e+00    1.000000e+00      1.000000e+00  1.000000e+00            1.000000e+00              1.000000e+00     1.000000e+00               1.000000e+00  1.000000e+00     1.000000e+00  1.000000e+00      1.000000e+00              1.000000e+00  1.000000e+00      1.000000e+00           1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00  1.000000e+00   1.000000e+00  1.000000e+00  1.000000e+00
+Validação cruzada MNB : [0.45892574 0.46018618 0.458416   0.45820962 0.45796108]
+MNB: (0.4587) +/- (0.001)
+Matriz de Confusão Balanceado
+[[  538   189    52   108   123]
+ [23734 29923 10825 11625  8941]
+ [21363 25073 24066 23582 18574]
+ [ 1080  1208  1777  5109  3381]
+ [    0     1     8     2    36]]
+              precision    recall  f1-score   support
+
+           1     0.0115    0.5327    0.0225      1010
+           2     0.5306    0.3518    0.4231     85048
+           3     0.6552    0.2136    0.3222    112658
+           4     0.1264    0.4069    0.1929     12555
+           5     0.0012    0.7660    0.0023        47
+
+   micro avg     0.2824    0.2824    0.2824    211318
+   macro avg     0.2650    0.4542    0.1926    211318
+weighted avg     0.5704    0.2824    0.3536    211318
+
+Tempo de execução do MNB: 8.8557 segundos
+Validação cruzada RFC : [0.82 0.83 0.83 0.84 0.85]
+RFC: (0.8337) +/- (0.009)
+Matriz de Confusão Balanceado
+[[  628   302    73     7     0]
+ [ 1518 54177 27507  1843     3]
+ [  518 33106 70280  8729    25]
+ [   25   696  3203  8569    62]
+ [    0     3     0     7    37]]
+              precision    recall  f1-score   support
+
+           1     0.2335    0.6218    0.3396      1010
+           2     0.6137    0.6370    0.6251     85048
+           3     0.6954    0.6238    0.6577    112658
+           4     0.4474    0.6825    0.5405     12555
+           5     0.2913    0.7872    0.4253        47
+
+   micro avg     0.6327    0.6327    0.6327    211318
+   macro avg     0.4563    0.6705    0.5176    211318
+weighted avg     0.6455    0.6327    0.6360    211318
+
+Tempo de execução do RFC: 329.2366 segundos
+Validação cruzada K-NN : [0.84 0.84 0.84 0.85 0.86]
+K-NN: (0.8458) +/- (0.007)
+Matriz de Confusão Balanceado
+[[  735   225    40    10     0]
+ [ 2554 56081 24259  2150     4]
+ [  924 31091 69944 10666    33]
+ [   43   561  2070  9805    76]
+ [    0     2     0     5    40]]
+              precision    recall  f1-score   support
+
+           1     0.1727    0.7277    0.2791      1010
+           2     0.6376    0.6594    0.6483     85048
+           3     0.7262    0.6209    0.6694    112658
+           4     0.4332    0.7810    0.5572     12555
+           5     0.2614    0.8511    0.4000        47
+
+   micro avg     0.6464    0.6464    0.6464    211318
+   macro avg     0.4462    0.7280    0.5108    211318
+weighted avg     0.6704    0.6464    0.6523    211318
+
+Tempo de execução do K-NN: 38470.3381 segundos
+Traceback (most recent call last):
+  File "5_2_selecao_modelo.py", line 240, in <module>
+    cv_results_balanced, cv_results_imbalanced = rodar_algoritmos()
+  File "5_2_selecao_modelo.py", line 220, in rodar_algoritmos
+    cv_results_balanced = rodar_modelo(melhor_modelo, nome, 'Balanceado', X_treino, Y_treino)
+  File "5_2_selecao_modelo.py", line 196, in rodar_modelo
+    cv_resultados = cross_val_score(modelo, X_treino, Y_treino.values.ravel(), cv=kfold, scoring=scoring, n_jobs=n_jobs)
+  File "/usr/lib64/python3.6/site-packages/sklearn/model_selection/_validation.py", line 402, in cross_val_score
+    error_score=error_score)
+  File "/usr/lib64/python3.6/site-packages/sklearn/model_selection/_validation.py", line 240, in cross_validate
+    for train, test in cv.split(X, y, groups))
+  File "/usr/lib64/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 930, in __call__
+    self.retrieve()
+  File "/usr/lib64/python3.6/site-packages/sklearn/externals/joblib/parallel.py", line 833, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/lib64/python3.6/site-packages/sklearn/externals/joblib/_parallel_backends.py", line 521, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/usr/lib64/python3.6/concurrent/futures/_base.py", line 432, in result
+    return self.__get_result()
+  File "/usr/lib64/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+sklearn.externals.joblib.externals.loky.process_executor.TerminatedWorkerError: A worker process managed by the executor was unexpectedly terminated. This could be caused by a segmentation fault while calling the function or by an excessive memory usage causing the Operating System to kill the worker. The exit codes of the workers are {SIGKILL(-9)}
