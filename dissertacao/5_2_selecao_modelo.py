@@ -89,7 +89,6 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
-<<<<<<< HEAD
 #X_treino, Y_treino = balanceador.fit_resample(
 #    conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
 #    conjunto_treinamento['carcass_fatness_degree'])
