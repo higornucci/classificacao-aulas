@@ -308,3 +308,8 @@ Matriz de Confusão Balanceado
    macro avg     0.3738    0.3507    0.3518    211318
 weighted avg     0.6414    0.6453    0.6418    211318
 
+Validação cruzada SVM : [0.64 0.64 0.64 0.64 0.64]
+SVM: (0.6407) +/- (0.001)
+Tempo de execução do SVM: 346553.6824 segundos
+
+Process finished with exit code 0
