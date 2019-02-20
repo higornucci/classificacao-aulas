@@ -12,6 +12,7 @@ from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, StratifiedKFold
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 
@@ -23,7 +24,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = 2
+n_jobs = 3
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -92,6 +93,9 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
+# param_grid = {'alpha': (1, 0.1, 0.01, 0.001, 0.0001, 0.00001)}
+# modelo = MultinomialNB()
+
 # param_grid = {'n_estimators': [100, 250],
 #               'min_samples_leaf': [1, 5, 10],
 #               'min_samples_split': [2, 5, 10],
@@ -101,14 +105,14 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
-# param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
-#               'gamma': [0.001, 0.01, 0.1, 1, 10],
-#               'kernel': ['rbf']}
-# modelo = SVC()
+param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
+              'gamma': [0.001, 0.01, 0.1, 1, 10],
+              'kernel': ['rbf']}
+modelo = SVC()
 
-param_grid = {'weights': ['uniform', 'distance'],
-              'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
-modelo = KNeighborsClassifier()
+# param_grid = {'weights': ['uniform', 'distance'],
+#               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+# modelo = KNeighborsClassifier()
 
 
 scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
@@ -140,10 +144,10 @@ for score in scores:
     print()
     y_true, y_pred = Y_teste, clf.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
-    plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], False,
-                          title='Confusion matrix SVC (best parameters)')
-    plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], True,
-                          title='Confusion matrix ' + 'SVC' + ', normalized')
+    plot_confusion_matrix(matriz_confusao, 'MNB_' + score, [1, 2, 3, 4, 5], False,
+                          title='Confusion matrix MNB (best parameters)')
+    plot_confusion_matrix(matriz_confusao, 'MNB_' + score, [1, 2, 3, 4, 5], True,
+                          title='Confusion matrix ' + 'MNB' + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
     print(classification_report(y_true, y_pred))
