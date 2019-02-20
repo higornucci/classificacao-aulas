@@ -24,7 +24,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = 3
+n_jobs = 2
 
 
 def plot_confusion_matrix(cm, nome, classes,
