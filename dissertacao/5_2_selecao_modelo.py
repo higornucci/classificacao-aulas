@@ -89,14 +89,14 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
-X_treino, Y_treino = balanceador.fit_resample(
-    conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
-    conjunto_treinamento['carcass_fatness_degree'])
-X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
-Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
+#X_treino, Y_treino = balanceador.fit_resample(
+#    conjunto_treinamento.drop('carcass_fatness_degree', axis=1),
+#    conjunto_treinamento['carcass_fatness_degree'])
+#X_treino = pd.DataFrame(data=X_treino, columns=X_completo.columns)
+#Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
 
-X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+#X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+#Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
 # exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
@@ -136,9 +136,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+#    ('MNB', MultinomialNB()),
+#    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
+#    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC(gamma='scale'))
 ]
 
