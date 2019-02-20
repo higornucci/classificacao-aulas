@@ -61,7 +61,7 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.xlabel('Predicted class')
     plt.grid('off')
     plt.tight_layout()
-    plt.savefig(nome_arquivo)
+    plt.savefig('figuras/' + nome_arquivo)
 
 
 classes_balancear = list([2, 3])
