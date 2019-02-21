@@ -24,7 +24,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = 2
+n_jobs = 3
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -105,14 +105,14 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
-param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
-              'gamma': [0.001, 0.01, 0.1, 1, 10],
-              'kernel': ['rbf']}
-modelo = SVC()
+# param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
+#               'gamma': [0.001, 0.01, 0.1, 1, 10],
+#              'kernel': ['rbf']}
+# modelo = SVC()
 
-# param_grid = {'weights': ['uniform', 'distance'],
-#               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
-# modelo = KNeighborsClassifier()
+param_grid = {'weights': ['uniform', 'distance'],
+              'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+modelo = KNeighborsClassifier()
 
 
 scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']

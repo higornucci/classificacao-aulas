@@ -22,3 +22,4 @@ input/DadosCompletoTransformadoMLBalanceadoX.csv
 input/DadosCompletoTransformadoMLBalanceadoY.csv
 input/DadosCompletoTransformadoMLBalanceadoTeste.csv
 input/DadosCompletoTransformadoMLBalanceadoTreino.csv
+*.arff
