@@ -10,7 +10,7 @@ from imblearn.combine import SMOTEENN
 from imblearn.metrics import classification_report_imbalanced
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, roc_curve, auc, make_scorer
 from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -24,7 +24,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
-n_jobs = 3
+n_jobs = 2
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -107,13 +107,12 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
 #               'gamma': [0.001, 0.01, 0.1, 1, 10],
-#              'kernel': ['rbf']}
+#               'kernel': ['rbf']}
 # modelo = SVC()
 
 param_grid = {'weights': ['uniform', 'distance'],
               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
 modelo = KNeighborsClassifier()
-
 
 scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
 for score in scores:
@@ -121,18 +120,18 @@ for score in scores:
     print()
 
     np.set_printoptions(precision=4)
-    clf = GridSearchCV(modelo, param_grid, cv=kfold, refit=True, n_jobs=n_jobs, scoring=score, verbose=2)
-    clf.fit(X_treino, Y_treino.values.ravel())
+    grid_search = GridSearchCV(modelo, param_grid, cv=kfold, refit=True, n_jobs=n_jobs, scoring=score, verbose=2)
+    grid_search.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
     print()
-    print(clf.best_params_)
+    print(grid_search.best_params_)
     print()
     print("Grid scores on development set:")
     print()
-    means = clf.cv_results_['mean_test_score']
-    stds = clf.cv_results_['std_test_score']
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+    means = grid_search.cv_results_['mean_test_score']
+    stds = grid_search.cv_results_['std_test_score']
+    for mean, std, params in zip(means, stds, grid_search.cv_results_['params']):
         print("%0.4f (+/-%0.04f) for %r"
               % (mean, std * 2, params))
     print()
@@ -142,7 +141,7 @@ for score in scores:
     print("The model is trained on the full development set.")
     print("The scores are computed on the full evaluation set.")
     print()
-    y_true, y_pred = Y_teste, clf.predict(X_teste)
+    y_true, y_pred = Y_teste, grid_search.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
     plot_confusion_matrix(matriz_confusao, 'MNB_' + score, [1, 2, 3, 4, 5], False,
                           title='Confusion matrix MNB (best parameters)')
