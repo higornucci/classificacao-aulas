@@ -15,18 +15,21 @@ from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.svm import SVC
 
 warnings.filterwarnings('ignore')
+pd.set_option('display.max_columns', None)  # display all columns
+pd.set_option('display.width', 2000)  # display all columns
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
 n_jobs = 2
 
-# classes_balancear = list([2, 3])
-# print('Classes para balancear', classes_balancear)
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-#                                       sampling_strategy=classes_balancear, n_neighbors=3)
-balanceador = SMOTEENN()
+classes_balancear = list([2, 3])
+print('Classes para balancear', classes_balancear)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+                                      sampling_strategy=classes_balancear, n_neighbors=3)
+# balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
 
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
@@ -39,9 +42,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC(gamma='scale'))
+    # ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
+    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    # ('SVM', SVC(gamma='scale'))
 ]
 
 
