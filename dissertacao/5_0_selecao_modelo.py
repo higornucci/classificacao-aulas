@@ -7,6 +7,7 @@ from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
+from sklearn.decomposition import PCA
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
@@ -23,7 +24,7 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = 2
+n_jobs = 3
 
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
@@ -42,9 +43,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
-    # ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True)),
-    # ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    # ('SVM', SVC(gamma='scale'))
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=100)),
+    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    ('SVM', SVC(gamma='scale'))
 ]
 
 
@@ -73,7 +74,7 @@ def plot_confusion_matrix(cm, nome, classes,
 
     fmt = '.2f' if normalize else 'd'
     thresh = cm.max() / 2.
-    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
+    for i, j in itertools.product(range(lcm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], fmt),
                  horizontalalignment="center",
                  color="black" if cm[i, j] > thresh else "white")
@@ -98,10 +99,13 @@ def gerar_matriz_confusao(Y_completo, y_pred):
 def rodar_algoritmos():
     pipeline = Pipeline([('bal', balanceador),
                          ('clf', modelo)])
-    grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, n_jobs=n_jobs)
+    grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
+                               scoring='f1_weighted', verbose=2)
     grid_search.fit(X_completo, Y_completo)
     melhor_modelo = grid_search.best_estimator_
-    y_pred = cross_val_predict(melhor_modelo, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
+    pipeline = Pipeline([('bal', balanceador),
+                         ('clf', melhor_modelo)])
+    y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
 
     print('Melhores parametros ' + nome + ' :', melhor_modelo)
     gerar_matriz_confusao(Y_completo, y_pred)
