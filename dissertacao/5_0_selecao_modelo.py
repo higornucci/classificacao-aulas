@@ -86,29 +86,51 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-def gerar_matriz_confusao(Y_completo, y_pred):
-    matriz_confusao = confusion_matrix(Y_completo, y_pred)
-    print('Matriz de Confusão')
-    print(matriz_confusao)
-    plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], True,
-                          title='Confusion matrix ' + nome + ', normalized')
-    plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False, title='Confusion matrix ' + nome)
-    print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
+scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
 
 
 def rodar_algoritmos():
-    pipeline = Pipeline([('bal', balanceador),
-                         ('clf', modelo)])
-    grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
-                               scoring='f1_weighted', verbose=2)
-    grid_search.fit(X_completo, Y_completo)
-    melhor_modelo = grid_search.best_estimator_
-    pipeline = Pipeline([('bal', balanceador),
-                         ('clf', melhor_modelo)])
-    y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
+    for score in scores:
+        pipeline = Pipeline([('bal', balanceador),
+                             ('clf', modelo)])
+        print("# Tuning hyper-parameters for %s" % score)
+        print()
 
-    print('Melhores parametros ' + nome + ' :', melhor_modelo)
-    gerar_matriz_confusao(Y_completo, y_pred)
+        np.set_printoptions(precision=4)
+        grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
+                                   scoring=score, verbose=2)
+        grid_search.fit(X_completo, Y_completo)
+
+        print("Best parameters set found on development set:")
+        print()
+        print(grid_search.best_params_)
+        print()
+        print("Grid scores on development set:")
+        print()
+        means = grid_search.cv_results_['mean_test_score']
+        stds = grid_search.cv_results_['std_test_score']
+        for mean, std, params in zip(means, stds, grid_search.cv_results_['params']):
+            print("%0.4f (+/-%0.04f) for %r"
+                  % (mean, std * 2, params))
+        print()
+
+        print("Detailed classification report:")
+        print()
+        print("The model is trained on the full development set.")
+        print("The scores are computed on the full evaluation set.")
+        print()
+        pipeline = Pipeline([('bal', balanceador),
+                             ('clf', grid_search.best_params_)])
+        y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
+        matriz_confusao = confusion_matrix(Y_completo, y_pred)
+        plot_confusion_matrix(matriz_confusao, nome + '_' + score, [1, 2, 3, 4, 5], False,
+                              title='Confusion matrix' + nome + '(best parameters)')
+        plot_confusion_matrix(matriz_confusao, nome + '_' + score, [1, 2, 3, 4, 5], True,
+                              title='Confusion matrix ' + nome + ', normalized')
+        print('Matriz de Confusão')
+        print(matriz_confusao)
+        print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
+        print()
 
 
 def escolher_parametros():
