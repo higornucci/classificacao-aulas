@@ -8,7 +8,7 @@ from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_predict, StratifiedKFold
+from sklearn.model_selection import cross_val_predict, StratifiedKFold, cross_val_score
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, classification_report
@@ -30,8 +30,8 @@ classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
-balanceador = SMOTEENN()
-# balanceador = SMOTE(n_jobs=n_jobs)
+# balanceador = SMOTEENN()
+balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                      dados_completo['carcass_fatness_degree']
@@ -40,6 +40,24 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
+
+def fazer_selecao_features_rfe():
+    features = X_completo.columns
+    pipeline = Pipeline([('bal', balanceador),
+                         ('clf', MultinomialNB())])
+    rfe = RFECV(pipeline, cv=kfold, scoring='recall_weighted')
+
+    rfe.fit(X_completo, Y_completo.values.ravel())
+    print(rfe.poof())
+    print("Caraterísticas ordenadas pelo rank RFE:")
+    print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_), features)))
+    ranking = sorted(zip(rfe.support_, features))
+    print("Características selecionadas", ranking)
+    return rfe.transform(X_completo)
+
+
+# print(fazer_selecao_features_rfe())
+# exit()
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
@@ -86,7 +104,7 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-def rodar_algoritmos():
+def rodar_algoritmos_predict():
     print('Treinando ' + nome)
     pipeline = Pipeline([('bal', balanceador),
                          ('clf', modelo)])
@@ -102,5 +120,14 @@ def rodar_algoritmos():
     print()
 
 
+def rodar_algoritmos_score():
+    print('Treinando ' + nome)
+    pipeline = Pipeline([('bal', balanceador),
+                         ('clf', modelo)])
+    scores = cross_val_score(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
+    print(scores)
+    print('Accuracy: %0.4f (+/- %0.4f)' % (scores.mean(), scores.std() * 2))
+
+
 for nome, modelo in modelos_base:
-    rodar_algoritmos()
+    rodar_algoritmos_score()

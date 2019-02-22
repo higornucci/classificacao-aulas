@@ -93,7 +93,7 @@ def rodar_algoritmos():
     for score in scores:
         pipeline = Pipeline([('bal', balanceador),
                              ('clf', modelo)])
-        print("# Tuning hyper-parameters for %s in %s" % score % nome)
+        print("# Tuning hyper-parameters for %s in %s" % (score, nome))
         print()
 
         np.set_printoptions(precision=4)
