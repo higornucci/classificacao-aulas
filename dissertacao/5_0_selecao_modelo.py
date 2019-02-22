@@ -30,7 +30,7 @@ classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
-balanceador = SMOTEENN()
+# balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
 
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
@@ -74,7 +74,7 @@ def plot_confusion_matrix(cm, nome, classes,
 
     fmt = '.2f' if normalize else 'd'
     thresh = cm.max() / 2.
-    for i, j in itertools.product(range(lcm.shape[0]), range(cm.shape[1])):
+    for i, j in itertools.product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], fmt),
                  horizontalalignment="center",
                  color="black" if cm[i, j] > thresh else "white")
