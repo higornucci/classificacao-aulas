@@ -13,6 +13,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.svm import SVC
+from yellowbrick.features import RFECV
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -29,9 +30,9 @@ classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
-# balanceador = SMOTEENN()
-balanceador = SMOTE(n_jobs=n_jobs)
-
+balanceador = SMOTEENN()
+# balanceador = SMOTE(n_jobs=n_jobs)
+print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                      dados_completo['carcass_fatness_degree']
 
@@ -86,6 +87,7 @@ def plot_confusion_matrix(cm, nome, classes,
 
 
 def rodar_algoritmos():
+    print('Treinando ' + nome)
     pipeline = Pipeline([('bal', balanceador),
                          ('clf', modelo)])
     y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)

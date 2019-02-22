@@ -32,7 +32,7 @@ print('Classes para balancear', classes_balancear)
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
 balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
-
+print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                      dados_completo['carcass_fatness_degree']
 
@@ -93,7 +93,7 @@ def rodar_algoritmos():
     for score in scores:
         pipeline = Pipeline([('bal', balanceador),
                              ('clf', modelo)])
-        print("# Tuning hyper-parameters for %s" % score)
+        print("# Tuning hyper-parameters for %s in %s" % score % nome)
         print()
 
         np.set_printoptions(precision=4)
