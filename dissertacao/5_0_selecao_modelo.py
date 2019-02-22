@@ -28,9 +28,9 @@ n_jobs = 3
 
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-                                      sampling_strategy=classes_balancear, n_neighbors=3)
-# balanceador = SMOTEENN()
+# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+#                                       sampling_strategy=classes_balancear, n_neighbors=3)
+balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
 
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
