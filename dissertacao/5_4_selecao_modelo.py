@@ -1,3 +1,4 @@
+import os
 import itertools
 import warnings
 import numpy as np
@@ -94,8 +95,12 @@ def rodar_algoritmos():
         x_local_train, x_local_test = X_completo.iloc[train_index], X_completo.iloc[test_index]
         y_local_train, y_local_test = Y_completo.iloc[train_index], Y_completo.iloc[test_index]
 
-        x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
-                                                                                    y_local_test, y_local_train)
+        if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
+            x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
+        else:
+            x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
+                                                                                        y_local_test, y_local_train)
+
         i = i + 1
         modelo.fit(x_local_train, y_local_train)
         y_pred = modelo.predict(x_local_test)
@@ -103,6 +108,22 @@ def rodar_algoritmos():
         print("Accuracy (train) for %d: %0.4f%% " % (i, accuracy * 100))
         y_pred_all[test_index] = y_pred
         print("=====================================")
+
+
+def abrir_conjuntos(i):
+    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'
+    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoYTreino' + str(i) + '.csv'
+    x_teste_nome = '../input/DadosCompletoTransformadoMLXTeste' + str(i) + '.csv'
+    y_teste_nome = '../input/DadosCompletoTransformadoMLYTeste' + str(i) + '.csv'
+    x_local_train = pd.read_csv(x_treino_nome, encoding='utf-8', delimiter='\t')
+    x_local_train.drop(x_local_train.columns[0], axis=1, inplace=True)
+    y_local_train = pd.read_csv(y_treino_nome, encoding='utf-8', delimiter='\t')
+    y_local_train.drop(y_local_train.columns[0], axis=1, inplace=True)
+    x_local_test = pd.read_csv(x_teste_nome, encoding='utf-8', delimiter='\t')
+    x_local_test.drop(x_local_test.columns[0], axis=1, inplace=True)
+    y_local_test = pd.read_csv(y_teste_nome, encoding='utf-8', delimiter='\t')
+    y_local_test.drop(y_local_test.columns[0], axis=1, inplace=True)
+    return x_local_test, x_local_train, y_local_test, y_local_train
 
 
 def salvar_conjuntos(i, x_local_test, x_local_train, y_local_test, y_local_train):
