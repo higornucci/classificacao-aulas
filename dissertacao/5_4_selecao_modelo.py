@@ -24,7 +24,7 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = 3
+n_jobs = 1
 
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
@@ -61,9 +61,10 @@ def fazer_selecao_features_rfe():
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=100)),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
+                            n_estimators=100, class_weight='balanced')),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC(gamma='scale'))
+    ('SVM', SVC(gamma='scale', class_weight='balanced'))
 ]
 
 
