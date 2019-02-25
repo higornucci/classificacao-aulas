@@ -38,7 +38,6 @@ X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), 
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
-y_pred_all = np.chararray(Y_completo.shape)
 
 # preparando alguns modelos
 modelos_base = [
@@ -89,17 +88,18 @@ def plot_confusion_matrix(cm, nome, classes,
 
 def rodar_algoritmos():
     i = 1
+    y_pred_all = np.ndarray(Y_completo.shape, dtype=int)
     for train_index, test_index in kfold.split(X_completo, Y_completo):
         print('Treinando ' + nome)
         print("iteration", i, ":")
         x_local_train, x_local_test = X_completo.iloc[train_index], X_completo.iloc[test_index]
         y_local_train, y_local_test = Y_completo.iloc[train_index], Y_completo.iloc[test_index]
 
-        if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
-            x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
-        else:
-            x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
-                                                                                        y_local_test, y_local_train)
+        # if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
+        #     x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
+        # else:
+        #     x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
+        #                                                                                 y_local_test, y_local_train)
 
         i = i + 1
         modelo.fit(x_local_train, y_local_train)
@@ -108,6 +108,7 @@ def rodar_algoritmos():
         print("Accuracy (train) for %d: %0.4f%% " % (i, accuracy * 100))
         y_pred_all[test_index] = y_pred
         print("=====================================")
+    return y_pred_all
 
 
 def abrir_conjuntos(i):
@@ -150,13 +151,14 @@ def salvar_conjuntos(i, x_local_test, x_local_train, y_local_test, y_local_train
 
 
 for nome, modelo in modelos_base:
-    rodar_algoritmos()
-    matriz_confusao = confusion_matrix(Y_completo, y_pred_all)
+    y_predicao = rodar_algoritmos()
+    y_predicao = pd.Series(y_predicao)
+    matriz_confusao = confusion_matrix(Y_completo, y_predicao)
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False,
                           title='Confusion matrix' + nome)
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], True,
                           title='Confusion matrix ' + nome + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
-    print(classification_report(y_true=Y_completo, y_pred=y_pred_all, digits=4))
+    print(classification_report(y_true=Y_completo, y_pred=y_predicao, digits=4))
     print()
