@@ -23,11 +23,131 @@ Accuracy: 0.5065 (+/- 0.0617)
 
 
 
-(80.0, '/', 20.0)
-Desbalanceado
-Validação cruzada MNB : [0.52737804 0.54990323 0.53979311 0.50771597 0.55277666]
-MNB: (0.5355) +/- (0.017)
-Tempo de execução do MNB: 1.7931 segundos
-Validação cruzada RFC : [0.46014793 0.37854145 0.43823053 0.43352341 0.52598727]
-RFC: (0.4473) +/- (0.048)
-Tempo de execução do RFC: 439.6855 segundos
+/usr/bin/python3.6 /home/ufms/programas/pycharm/helpers/pydev/pydevconsole.py --mode=client --port=45179
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/ufms/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.7 (default, Oct 22 2018, 11:32:17)
+[GCC 8.2.0] on linux
+runfile('/home/ufms/projetos/classificacao-aulas/dissertacao/5_4_selecao_modelo.py', wdir='/home/ufms/projetos/classificacao-aulas/dissertacao')
+   typification  maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification  sisbov  grazing_control  trace_list  quality_programs  involved_in_organization  confinement  semi_confinement  field_supplementation  fertigation  lfi  fli  clfi  latitude  longitude  mes_abate  estacao_abate  microrregiao  mesoregiao  carcass_fatness_degree
+0           0.0      0.50        0.652000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       2
+1           1.0      0.25        0.478000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+2           1.0      0.00        0.244667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+3           1.0      0.00        0.294667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+4           1.0      0.25        0.398000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+Classes para balancear [2, 3]
+EditedNearestNeighbours(kind_sel='all', n_jobs=2, n_neighbors=3,
+            random_state=None, ratio=None, return_indices=False,
+            sampling_strategy=[2, 3])
+Treinando MNB
+iteration 1 :
+Accuracy (train) for 2: 51.9073%
+=====================================
+Treinando MNB
+iteration 2 :
+Accuracy (train) for 3: 55.6055%
+=====================================
+Treinando MNB
+iteration 3 :
+Accuracy (train) for 4: 54.3049%
+=====================================
+Treinando MNB
+iteration 4 :
+Accuracy (train) for 5: 51.9982%
+=====================================
+Treinando MNB
+iteration 5 :
+Accuracy (train) for 6: 55.7736%
+=====================================
+Matriz de Confusão
+[[     0   2065   2977      6      0]
+ [     0  86329 336793   2116      0]
+ [     0  76759 482598   3933      0]
+ [     0   3354  58657    762      0]
+ [     0      4    233      0      0]]
+              precision    recall  f1-score   support
+           1     0.0000    0.0000    0.0000      5048
+           2     0.5123    0.2030    0.2908    425238
+           3     0.5476    0.8567    0.6682    563290
+           4     0.1118    0.0121    0.0219     62773
+           5     0.0000    0.0000    0.0000       237
+   micro avg     0.5392    0.5392    0.5392   1056586
+   macro avg     0.2343    0.2144    0.1962   1056586
+weighted avg     0.5048    0.5392    0.4745   1056586
+Treinando RFC
+iteration 1 :
+Accuracy (train) for 2: 42.0823%
+=====================================
+Treinando RFC
+iteration 2 :
+Accuracy (train) for 3: 36.7004%
+=====================================
+Treinando RFC
+iteration 3 :
+Accuracy (train) for 4: 42.4772%
+=====================================
+Treinando RFC
+iteration 4 :
+Accuracy (train) for 5: 41.7211%
+=====================================
+Treinando RFC
+iteration 5 :
+Accuracy (train) for 6: 51.1611%
+=====================================
+Matriz de Confusão
+[[  1054   2787    908    299      0]
+ [ 27534 183085 157087  57457     75]
+ [ 17266 198114 253589  92362   1959]
+ [   781  10277  36054  14745    916]
+ [     2     25     82     82     46]]
+              precision    recall  f1-score   support
+           1     0.0226    0.2088    0.0408      5048
+           2     0.4643    0.4305    0.4468    425238
+           3     0.5664    0.4502    0.5017    563290
+           4     0.0894    0.2349    0.1295     62773
+           5     0.0154    0.1941    0.0285       237
+   micro avg     0.4283    0.4283    0.4283   1056586
+   macro avg     0.2316    0.3037    0.2294   1056586
+weighted avg     0.4943    0.4283    0.4552   1056586
+Treinando K-NN
+iteration 1 :
+Accuracy (train) for 2: 36.3678%
+=====================================
+Treinando K-NN
+iteration 2 :
+Accuracy (train) for 3: 28.1555%
+=====================================
+Treinando K-NN
+iteration 3 :
+Accuracy (train) for 4: 37.6958%
+=====================================
+Treinando K-NN
+iteration 4 :
+Accuracy (train) for 5: 34.4367%
+=====================================
+Treinando K-NN
+iteration 5 :
+Accuracy (train) for 6: 43.4437%
+=====================================
+Matriz de Confusão
+[[  1020   2535   1066    422      5]
+ [ 32102 165348 156472  70826    490]
+ [ 27064 219403 202771 110235   3817]
+ [  1308  17018  31762  11417   1268]
+ [     6     67     76     63     25]]
+              precision    recall  f1-score   support
+           1     0.0166    0.2021    0.0307      5048
+           2     0.4089    0.3888    0.3986    425238
+           3     0.5171    0.3600    0.4245    563290
+           4     0.0592    0.1819    0.0893     62773
+           5     0.0045    0.1055    0.0086       237
+   micro avg     0.3602    0.3602    0.3602   1056586
+   macro avg     0.2012    0.2476    0.1903   1056586
+weighted avg     0.4438    0.3602    0.3922   1056586
+Treinando SVM
+iteration 1 :
+Accuracy (train) for 2: 41.6565%
+=====================================
+Treinando SVM
+iteration 2 :
