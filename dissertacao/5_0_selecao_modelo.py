@@ -43,9 +43,10 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=100)),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
+                                   n_estimators=100, class_weight='balanced')),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC(gamma='scale'))
+    ('SVM', SVC(gamma='scale', class_weight='balanced'))
 ]
 
 
@@ -149,7 +150,6 @@ def escolher_parametros():
                  'clf__min_samples_split': [2, 5, 10],
                  'clf__max_features': ['sqrt', 'log2', None],
                  'clf__criterion': ['gini', 'entropy'],
-                 'clf__class_weight': ['balanced', None],
                  'clf__max_depth': [50, 75]}
                 ]
     return None

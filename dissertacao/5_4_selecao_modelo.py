@@ -1,19 +1,19 @@
+import os
 import itertools
+import sys
 import warnings
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
-from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_predict, StratifiedKFold, cross_val_score
+from sklearn.model_selection import StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 from sklearn.svm import SVC
-from yellowbrick.features import RFECV
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -24,46 +24,29 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = 3
+n_jobs = 2
 
-classes_balancear = list([2, 3])
-print('Classes para balancear', classes_balancear)
+# classes_balancear = list([2, 3])
+# print('Classes para balancear', classes_balancear)
 # balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
-# balanceador = SMOTEENN()
-balanceador = SMOTE(n_jobs=n_jobs)
+balanceador = SMOTEENN()
+# balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
-                     dados_completo['carcass_fatness_degree']
+                         dados_completo['carcass_fatness_degree']
 
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-
-def fazer_selecao_features_rfe():
-    features = X_completo.columns
-    pipeline = Pipeline([('bal', balanceador),
-                         ('clf', MultinomialNB())])
-    rfe = RFECV(pipeline, cv=kfold, scoring='recall_weighted')
-
-    rfe.fit(X_completo, Y_completo.values.ravel())
-    print(rfe.poof())
-    print("Caraterísticas ordenadas pelo rank RFE:")
-    print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_), features)))
-    ranking = sorted(zip(rfe.support_, features))
-    print("Características selecionadas", ranking)
-    return rfe.transform(X_completo)
-
-
-# print(fazer_selecao_features_rfe())
-# exit()
 # preparando alguns modelos
 modelos_base = [
     ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, n_estimators=100)),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
+                                   n_estimators=100)),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC(gamma='scale'))
+    ('SVM', SVC(gamma='scale', class_weight='balanced'))
 ]
 
 
@@ -104,30 +87,80 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-def rodar_algoritmos_predict():
-    print('Treinando ' + nome)
-    pipeline = Pipeline([('bal', balanceador),
-                         ('clf', modelo)])
-    y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
-    matriz_confusao = confusion_matrix(Y_completo, y_pred)
+def rodar_algoritmos():
+    i = 1
+    y_pred_all = np.ndarray(Y_completo.shape, dtype=int)
+    for train_index, test_index in kfold.split(X_completo, Y_completo):
+        print('Treinando ' + nome)
+        print("iteration", i, ":")
+        x_local_train, x_local_test = X_completo.iloc[train_index], X_completo.iloc[test_index]
+        y_local_train, y_local_test = Y_completo.iloc[train_index], Y_completo.iloc[test_index]
+
+        if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
+            x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
+        else:
+            x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
+                                                                                        y_local_test, y_local_train)
+
+        modelo.fit(x_local_train, y_local_train)
+        y_pred = modelo.predict(x_local_test)
+        accuracy = accuracy_score(y_local_test, y_pred)
+        print("Accuracy (train) for %d: %0.4f%% " % (i, accuracy * 100))
+        i = i + 1
+        y_pred_all[test_index] = y_pred
+        print("=====================================")
+        sys.stdout.flush()
+    return y_pred_all
+
+
+def abrir_conjuntos(i):
+    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'
+    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoYTreino' + str(i) + '.csv'
+    x_teste_nome = '../input/DadosCompletoTransformadoMLXTeste' + str(i) + '.csv'
+    y_teste_nome = '../input/DadosCompletoTransformadoMLYTeste' + str(i) + '.csv'
+    x_local_train = pd.read_csv(x_treino_nome, encoding='utf-8', delimiter='\t')
+    x_local_train.drop(x_local_train.columns[0], axis=1, inplace=True)
+    y_local_train = pd.read_csv(y_treino_nome, encoding='utf-8', delimiter='\t')
+    y_local_train.drop(y_local_train.columns[0], axis=1, inplace=True)
+    x_local_test = pd.read_csv(x_teste_nome, encoding='utf-8', delimiter='\t')
+    x_local_test.drop(x_local_test.columns[0], axis=1, inplace=True)
+    y_local_test = pd.read_csv(y_teste_nome, encoding='utf-8', delimiter='\t')
+    y_local_test.drop(y_local_test.columns[0], axis=1, inplace=True)
+    return x_local_test, x_local_train, y_local_test, y_local_train
+
+
+def salvar_conjuntos(i, x_local_test, x_local_train, y_local_test, y_local_train):
+    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'
+    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoYTreino' + str(i) + '.csv'
+    x_teste_nome = '../input/DadosCompletoTransformadoMLXTeste' + str(i) + '.csv'
+    y_teste_nome = '../input/DadosCompletoTransformadoMLYTeste' + str(i) + '.csv'
+
+    x_local_train = pd.DataFrame(data=x_local_train, columns=X_completo.columns)
+    y_local_train = pd.DataFrame(data=y_local_train, columns=['carcass_fatness_degree'])
+    x_local_test = pd.DataFrame(data=x_local_test, columns=X_completo.columns)
+    y_local_test = pd.DataFrame(data=y_local_test, columns=['carcass_fatness_degree'])
+
+    x_local_train, y_local_train = balanceador.fit_resample(x_local_train, y_local_train)
+
+    x_local_train = pd.DataFrame(data=x_local_train, columns=X_completo.columns)
+    y_local_train = pd.DataFrame(data=y_local_train, columns=['carcass_fatness_degree'])
+
+    x_local_train.to_csv(x_treino_nome, encoding='utf-8', sep='\t')
+    y_local_train.to_csv(y_treino_nome, encoding='utf-8', sep='\t')
+    x_local_test.to_csv(x_teste_nome, encoding='utf-8', sep='\t')
+    y_local_test.to_csv(y_teste_nome, encoding='utf-8', sep='\t')
+    return x_local_test, x_local_train, y_local_test, y_local_train
+
+
+for nome, modelo in modelos_base:
+    y_predicao = rodar_algoritmos()
+    y_predicao = pd.Series(y_predicao)
+    matriz_confusao = confusion_matrix(Y_completo, y_predicao)
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False,
                           title='Confusion matrix' + nome)
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], True,
                           title='Confusion matrix ' + nome + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
-    print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
+    print(classification_report(y_true=Y_completo, y_pred=y_predicao, digits=4))
     print()
-
-
-def rodar_algoritmos_score():
-    print('Treinando ' + nome)
-    pipeline = Pipeline([('bal', balanceador),
-                         ('clf', modelo)])
-    scores = cross_val_score(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
-    print(scores)
-    print('Accuracy: %0.4f (+/- %0.4f)' % (scores.mean(), scores.std() * 2))
-
-
-for nome, modelo in modelos_base:
-    rodar_algoritmos_score()
