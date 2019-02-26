@@ -31,7 +31,7 @@ n_jobs = 1
 #                                       sampling_strategy=classes_balancear, n_neighbors=3)
 balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
-print(balanceador)
+# print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                          dados_completo['carcass_fatness_degree']
 
@@ -43,7 +43,7 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 modelos_base = [
     ('MNB', MultinomialNB()),
     ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
-                                   n_estimators=100, class_weight='balanced')),
+                                   n_estimators=100)),
     ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC(gamma='scale', class_weight='balanced'))
 ]
@@ -95,11 +95,11 @@ def rodar_algoritmos():
         x_local_train, x_local_test = X_completo.iloc[train_index], X_completo.iloc[test_index]
         y_local_train, y_local_test = Y_completo.iloc[train_index], Y_completo.iloc[test_index]
 
-        if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
-            x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
-        else:
-            x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
-                                                                                        y_local_test, y_local_train)
+        # if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
+        #     x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
+        # else:
+        #     x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
+        #                                                                                 y_local_test, y_local_train)
 
         i = i + 1
         modelo.fit(x_local_train, y_local_train)
