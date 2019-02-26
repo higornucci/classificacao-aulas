@@ -1,5 +1,6 @@
 import os
 import itertools
+import sys
 import warnings
 import numpy as np
 import pandas as pd
@@ -108,6 +109,7 @@ def rodar_algoritmos():
         i = i + 1
         y_pred_all[test_index] = y_pred
         print("=====================================")
+        sys.stdout.flush()
     return y_pred_all
 
 
