@@ -106,9 +106,9 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
-param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
-              'gamma': [0.001, 0.01, 0.1, 1, 10],
-              'kernel': ['rbf']}
+param_grid = {'clf__C': [0.01, 0.1, 1, 10, 100, 1000],
+              'clf__gamma': [0.001, 0.01, 0.1, 1, 10],
+              'clf__kernel': ['rbf']}
 modelo = SVC()
 
 # param_grid = {'weights': ['uniform', 'distance'],
