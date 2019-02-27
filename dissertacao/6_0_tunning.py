@@ -8,6 +8,7 @@ from collections import Counter
 
 from imblearn.combine import SMOTEENN
 from imblearn.metrics import classification_report_imbalanced
+from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, roc_curve, auc, make_scorer
@@ -105,14 +106,17 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
-# param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
-#               'gamma': [0.001, 0.01, 0.1, 1, 10],
-#               'kernel': ['rbf']}
-# modelo = SVC()
+param_grid = {'C': [0.01, 0.1, 1, 10, 100, 1000],
+              'gamma': [0.001, 0.01, 0.1, 1, 10],
+              'kernel': ['rbf']}
+modelo = SVC()
 
-param_grid = {'weights': ['uniform', 'distance'],
-              'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
-modelo = KNeighborsClassifier()
+# param_grid = {'weights': ['uniform', 'distance'],
+#               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+# modelo = KNeighborsClassifier()
+
+pipeline = Pipeline([('bal', balanceador),
+                     ('clf', modelo)])
 
 scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
 for score in scores:
@@ -120,7 +124,8 @@ for score in scores:
     print()
 
     np.set_printoptions(precision=4)
-    grid_search = GridSearchCV(modelo, param_grid, cv=kfold, refit=True, n_jobs=n_jobs, scoring=score, verbose=2)
+    grid_search = GridSearchCV(estimator=pipeline, param_grid=param_grid, cv=kfold,
+                               n_jobs=n_jobs, scoring=score, verbose=2)
     grid_search.fit(X_treino, Y_treino.values.ravel())
 
     print("Best parameters set found on development set:")
