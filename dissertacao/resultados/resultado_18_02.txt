@@ -1,0 +1,65 @@
+/usr/bin/python3.6 /home/ufms/programas/pycharm/helpers/pydev/pydevconsole.py --mode=client --port=37551
+import sys; print('Python %s on %s' % (sys.version, sys.platform))
+sys.path.extend(['/home/ufms/projetos/classificacao-aulas'])
+PyDev console: starting.
+Python 3.6.7 (default, Oct 22 2018, 11:32:17)
+[GCC 8.2.0] on linux
+runfile('/home/ufms/projetos/classificacao-aulas/dissertacao/5_4_selecao_modelo.py', wdir='/home/ufms/projetos/classificacao-aulas/dissertacao')
+   typification  maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification  sisbov  grazing_control  trace_list  quality_programs  involved_in_organization  confinement  semi_confinement  field_supplementation  fertigation  lfi  fli  clfi  latitude  longitude  mes_abate  estacao_abate  microrregiao  mesoregiao  carcass_fatness_degree
+0           0.0      0.50        0.652000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       2
+1           1.0      0.25        0.478000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+2           1.0      0.00        0.244667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+3           1.0      0.00        0.294667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+4           1.0      0.25        0.398000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
+SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=1,
+   out_step='deprecated', random_state=None, ratio=None,
+   sampling_strategy='auto', svm_estimator='deprecated')
+Treinando MNB
+iteration 1 :
+Accuracy (train) for 1: 33.9406%
+=====================================
+Treinando MNB
+iteration 2 :
+Accuracy (train) for 2: 25.3115%
+=====================================
+Treinando MNB
+iteration 3 :
+Accuracy (train) for 3: 33.1732%
+=====================================
+Treinando MNB
+iteration 4 :
+Accuracy (train) for 4: 19.1032%
+=====================================
+Treinando MNB
+iteration 5 :
+Accuracy (train) for 5: 13.0975%
+=====================================
+Matriz de Confusão
+[[  2497   1111    305    587    548]
+ [122252 130866  63637  63187  45296]
+ [118736 141494 106862 114618  81580]
+ [  7413   8316  10935  22993  13116]
+ [    37      2     31     28    139]]
+              precision    recall  f1-score   support
+           1     0.0100    0.4947    0.0195      5048
+           2     0.4644    0.3077    0.3702    425238
+           3     0.5879    0.1897    0.2869    563290
+           4     0.1142    0.3663    0.1741     62773
+           5     0.0010    0.5865    0.0020       237
+   micro avg     0.2493    0.2493    0.2493   1056586
+   macro avg     0.2355    0.3890    0.1705   1056586
+weighted avg     0.5072    0.2493    0.3124   1056586
+Treinando RFC
+iteration 1 :
+Accuracy (train) for 1: 43.7102%
+=====================================
+Treinando RFC
+iteration 2 :
+Accuracy (train) for 2: 34.1744%
+=====================================
+Treinando RFC
+iteration 3 :
+Accuracy (train) for 3: 42.2718%
+=====================================
+Treinando RFC
+iteration 4 :

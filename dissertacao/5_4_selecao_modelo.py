@@ -20,19 +20,20 @@ pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
 n_jobs = 2
 
-# classes_balancear = list([2, 3])
+classes_balancear = list([2, 3])
 # print('Classes para balancear', classes_balancear)
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-#                                       sampling_strategy=classes_balancear, n_neighbors=3)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+                                      sampling_strategy=classes_balancear, n_neighbors=3)
 # balanceador = SMOTEENN()
-balanceador = SMOTE(n_jobs=n_jobs)
-print(balanceador)
+# balanceador = SMOTE(n_jobs=n_jobs)
+# print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                          dados_completo['carcass_fatness_degree']
 
@@ -96,11 +97,11 @@ def rodar_algoritmos():
         x_local_train, x_local_test = X_completo.iloc[train_index], X_completo.iloc[test_index]
         y_local_train, y_local_test = Y_completo.iloc[train_index], Y_completo.iloc[test_index]
 
-        if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
-            x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
-        else:
-            x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
-                                                                                        y_local_test, y_local_train)
+        # if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
+        #     x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
+        # else:
+        #     x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
+        #                                                                                 y_local_test, y_local_train)
 
         modelo.fit(x_local_train, y_local_train)
         y_pred = modelo.predict(x_local_test)
