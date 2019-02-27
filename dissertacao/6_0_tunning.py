@@ -22,6 +22,7 @@ pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 
 random_state = 42
