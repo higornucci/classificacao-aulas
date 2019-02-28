@@ -1,5 +1,6 @@
 import itertools
 import multiprocessing
+import sys
 import warnings
 import numpy as np
 import pandas as pd
@@ -95,16 +96,16 @@ num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
-# param_grid = {'alpha': (1, 0.1, 0.01, 0.001, 0.0001, 0.00001)}
+# param_grid = {'clf__alpha': (1, 0.1, 0.01, 0.001, 0.0001, 0.00001)}
 # modelo = MultinomialNB()
 
-# param_grid = {'n_estimators': [100, 250],
-#               'min_samples_leaf': [1, 5, 10],
-#               'min_samples_split': [2, 5, 10],
-#               'max_features': ['sqrt', 'log2', None],
-#               'criterion': ['gini', 'entropy'],
-#               'class_weight': ['balanced', None],
-#               'max_depth': [50, 75]}
+# param_grid = {'clf__n_estimators': [100, 250],
+#               'clf__min_samples_leaf': [1, 5, 10],
+#               'clf__min_samples_split': [2, 5, 10],
+#               'clf__max_features': ['sqrt', 'log2', None],
+#               'clf__criterion': ['gini', 'entropy'],
+#               'clf__class_weight': ['balanced', None],
+#               'clf__max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
 param_grid = {'clf__C': [0.01, 0.1, 1, 10, 100, 1000],
@@ -112,8 +113,8 @@ param_grid = {'clf__C': [0.01, 0.1, 1, 10, 100, 1000],
               'clf__kernel': ['rbf']}
 modelo = SVC()
 
-# param_grid = {'weights': ['uniform', 'distance'],
-#               'n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+# param_grid = {'clf__weights': ['uniform', 'distance'],
+#               'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
 # modelo = KNeighborsClassifier()
 
 pipeline = Pipeline([('bal', balanceador),
@@ -157,3 +158,4 @@ for score in scores:
     print(matriz_confusao)
     print(classification_report(y_true, y_pred))
     print()
+    sys.stdout.flush()
