@@ -1,65 +1,102 @@
-/usr/bin/python3.6 /home/ufms/programas/pycharm/helpers/pydev/pydevconsole.py --mode=client --port=37551
+/usr/bin/python3.6 /home/ufms/programas/pycharm/helpers/pydev/pydevconsole.py --mode=client --port=36647
 import sys; print('Python %s on %s' % (sys.version, sys.platform))
 sys.path.extend(['/home/ufms/projetos/classificacao-aulas'])
 PyDev console: starting.
 Python 3.6.7 (default, Oct 22 2018, 11:32:17)
 [GCC 8.2.0] on linux
-runfile('/home/ufms/projetos/classificacao-aulas/dissertacao/5_4_selecao_modelo.py', wdir='/home/ufms/projetos/classificacao-aulas/dissertacao')
+>>> runfile('/home/ufms/projetos/classificacao-aulas/dissertacao/5_4_selecao_modelo.py', wdir='/home/ufms/projetos/classificacao-aulas/dissertacao')
    typification  maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification  sisbov  grazing_control  trace_list  quality_programs  involved_in_organization  confinement  semi_confinement  field_supplementation  fertigation  lfi  fli  clfi  latitude  longitude  mes_abate  estacao_abate  microrregiao  mesoregiao  carcass_fatness_degree
-0           0.0      0.50        0.652000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       2
-1           1.0      0.25        0.478000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
-2           1.0      0.00        0.244667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
-3           1.0      0.00        0.294667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
-4           1.0      0.25        0.398000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               1.0                    1.0          1.0  0.0  1.0   0.0  0.424575   0.861048   0.818182            1.0           1.0    0.333333                       3
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=1,
+0           0.5      0.25        0.401667        0.000000               1.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          1.0               0.0                    1.0          0.0  0.0  1.0   0.0  0.135471   0.391326   0.818182       1.000000           0.6    1.000000                       3
+1           1.0      0.50        0.210667        1.000000               0.0           0.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               1.0                       1.0          0.0               1.0                    1.0          0.0  0.0  0.0   0.0  0.583376   0.221563   0.272727       0.333333           0.1    0.666667                       2
+2           0.0      0.25        0.454667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       1.0          1.0               1.0                    1.0          0.0  0.0  1.0   0.0  0.339156   0.491407   1.000000       0.000000           0.6    1.000000                       2
+3           0.5      0.50        0.523333        0.555556               0.0           0.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       1.0          0.0               1.0                    1.0          0.0  0.0  0.0   0.0  0.715588   0.488461   0.363636       0.333333           0.0    0.000000                       2
+4           1.0      0.25        0.113333        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       1.0          0.0               0.0                    1.0          0.0  0.0  0.0   1.0  0.475235   0.430278   0.545455       0.666667           0.4    0.000000                       3
+SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=2,
    out_step='deprecated', random_state=None, ratio=None,
    sampling_strategy='auto', svm_estimator='deprecated')
 Treinando MNB
 iteration 1 :
-Accuracy (train) for 1: 33.9406%
+Accuracy (train) for 1: 28.3079%
 =====================================
 Treinando MNB
 iteration 2 :
-Accuracy (train) for 2: 25.3115%
+Accuracy (train) for 2: 27.9880%
 =====================================
 Treinando MNB
 iteration 3 :
-Accuracy (train) for 3: 33.1732%
+Accuracy (train) for 3: 27.8221%
 =====================================
 Treinando MNB
 iteration 4 :
-Accuracy (train) for 4: 19.1032%
+Accuracy (train) for 4: 28.0089%
 =====================================
 Treinando MNB
 iteration 5 :
-Accuracy (train) for 5: 13.0975%
+Accuracy (train) for 5: 27.9867%
 =====================================
 Matriz de Confusão
-[[  2497   1111    305    587    548]
- [122252 130866  63637  63187  45296]
- [118736 141494 106862 114618  81580]
- [  7413   8316  10935  22993  13116]
- [    37      2     31     28    139]]
+[[  2739   1002    282    510    515]
+ [121501 149516  52953  57905  43363]
+ [110176 125824 117635 117932  91723]
+ [  5690   5964   8453  26022  16644]
+ [    11      3     30     21    172]]
               precision    recall  f1-score   support
-           1     0.0100    0.4947    0.0195      5048
-           2     0.4644    0.3077    0.3702    425238
-           3     0.5879    0.1897    0.2869    563290
-           4     0.1142    0.3663    0.1741     62773
-           5     0.0010    0.5865    0.0020       237
-   micro avg     0.2493    0.2493    0.2493   1056586
-   macro avg     0.2355    0.3890    0.1705   1056586
-weighted avg     0.5072    0.2493    0.3124   1056586
+           1     0.0114    0.5426    0.0223      5048
+           2     0.5296    0.3516    0.4226    425238
+           3     0.6559    0.2088    0.3168    563290
+           4     0.1286    0.4145    0.1963     62773
+           5     0.0011    0.7257    0.0023       237
+   micro avg     0.2802    0.2802    0.2802   1056586
+   macro avg     0.2653    0.4487    0.1921   1056586
+weighted avg     0.5705    0.2802    0.3508   1056586
 Treinando RFC
 iteration 1 :
-Accuracy (train) for 1: 43.7102%
+Accuracy (train) for 1: 63.7302%
 =====================================
 Treinando RFC
 iteration 2 :
-Accuracy (train) for 2: 34.1744%
+Accuracy (train) for 2: 63.5958%
 =====================================
 Treinando RFC
 iteration 3 :
-Accuracy (train) for 3: 42.2718%
+Accuracy (train) for 3: 63.4707%
 =====================================
 Treinando RFC
 iteration 4 :
+Accuracy (train) for 4: 63.7002%
+=====================================
+Treinando RFC
+iteration 5 :
+Accuracy (train) for 5: 63.4848%
+=====================================
+Matriz de Confusão
+[[    79   2002   2458    502      7]
+ [  5142 174130 206839  38924    203]
+ [  6918 230236 274326  51534    276]
+ [   760  25654  30536   5791     32]
+ [     6     86    121     24      0]]
+              precision    recall  f1-score   support
+
+           1     0.0061    0.0156    0.0088      5048
+           2     0.4030    0.4095    0.4062    425238
+           3     0.5334    0.4870    0.5092    563290
+           4     0.0598    0.0923    0.0726     62773
+           5     0.0000    0.0000    0.0000       237
+
+   micro avg     0.4300    0.4300    0.4300   1056586
+   macro avg     0.2005    0.2009    0.1994   1056586
+weighted avg     0.4501    0.4300    0.4393   1056586
+
+
+Treinando K-NN
+iteration 1 :
+Accuracy (train) for 1: 64.9672%
+=====================================
+Treinando K-NN
+iteration 2 :
+Accuracy (train) for 2: 64.8503%
+=====================================
+Treinando K-NN
+iteration 3 :
+Accuracy (train) for 3: 64.7508% 
+=====================================

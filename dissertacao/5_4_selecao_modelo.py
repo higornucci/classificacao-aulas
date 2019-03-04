@@ -27,12 +27,12 @@ print(dados_completo.head())
 random_state = 42
 n_jobs = 2
 
-classes_balancear = list([2, 3])
+# classes_balancear = list([2, 3])
 # print('Classes para balancear', classes_balancear)
-balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-                                      sampling_strategy=classes_balancear, n_neighbors=3)
+# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
+#                                       sampling_strategy=classes_balancear, n_neighbors=3)
 # balanceador = SMOTEENN()
-# balanceador = SMOTE(n_jobs=n_jobs)
+balanceador = SMOTE(n_jobs=n_jobs)
 # print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                          dados_completo['carcass_fatness_degree']
