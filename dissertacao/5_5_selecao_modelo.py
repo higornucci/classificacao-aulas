@@ -21,9 +21,9 @@ def plot_confusion_matrix(cm, nome, classes,
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         np.set_printoptions(precision=2)
-        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '_smoteenn.png'
+        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '_smote.png'
     else:
-        nome_arquivo = 'matriz_confusao_' + nome + '_smoteenn.png'
+        nome_arquivo = 'matriz_confusao_' + nome + '_smote.png'
 
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -49,11 +49,11 @@ def plot_confusion_matrix(cm, nome, classes,
 
 
 matriz_confusao = np.array(
-[[  4001,    838,    122,     85,      2],
- [ 17561, 291800,  98334,  17504,     39],
- [  8233, 149992, 335089,  69731,    245],
- [   361,   1855,   6471,  53746,    340],
- [     2,      1,      2,     66,    166]]
+[[   101,   2108,   2297,    541,      1],
+ [  8771, 176870, 193846,  45499,    252],
+ [ 11455, 235050, 256431,  60006,    348],
+ [  1322,  26074,  28541,   6796,     40],
+ [     8,     89,     93,     43,      4]]
 )
 # nome = 'MNB'
 # nome = 'RFC'
