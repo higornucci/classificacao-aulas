@@ -5,14 +5,12 @@ import warnings
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from collections import Counter
 
 from imblearn.combine import SMOTEENN
-from imblearn.metrics import classification_report_imbalanced
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import confusion_matrix, classification_report, roc_auc_score, roc_curve, auc, make_scorer
+from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import StratifiedShuffleSplit, GridSearchCV, StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
@@ -85,13 +83,11 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
 #                                       sampling_strategy=classes_balancear, n_neighbors=4)
 balanceador = SMOTEENN()
 print(balanceador)
-X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
-X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
-Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
-Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
-print(sorted(Counter(Y_treino).items()))
 
-X_teste, Y_teste = conjunto_teste.drop('carcass_fatness_degree', axis=1), conjunto_teste['carcass_fatness_degree']
+X_treino, Y_treino = conjunto_treinamento.drop('carcass_fatness_degree', axis=1), \
+                     conjunto_treinamento['carcass_fatness_degree']
+X_teste, Y_teste = conjunto_teste.drop('carcass_fatness_degree', axis=1), \
+                   conjunto_teste['carcass_fatness_degree']
 num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
