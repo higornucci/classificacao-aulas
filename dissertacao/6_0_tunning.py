@@ -79,9 +79,9 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
-#                                       sampling_strategy=classes_balancear, n_neighbors=4)
-balanceador = SMOTEENN()
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
+                                      sampling_strategy=classes_balancear, n_neighbors=4)
+# balanceador = SMOTEENN()
 print(balanceador)
 
 X_treino, Y_treino = conjunto_treinamento.drop('carcass_fatness_degree', axis=1), \
