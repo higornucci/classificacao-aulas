@@ -43,10 +43,10 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB()),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
-                                   n_estimators=100)),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
+    # ('MNB', MultinomialNB()),
+    # ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
+    #                                n_estimators=100)),
+    # ('K-NN', KNeighborsClassifier(n_jobs=n_jobs)),  # n_jobs=-1 roda com o mesmo número de cores
     ('SVM', SVC(gamma='scale', class_weight='balanced'))
 ]
 
@@ -165,3 +165,4 @@ for nome, modelo in modelos_base:
     print(matriz_confusao)
     print(classification_report(y_true=Y_completo, y_pred=y_predicao, digits=4))
     print()
+    sys.stdout.flush()
