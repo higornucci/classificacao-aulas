@@ -29,16 +29,16 @@ print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
 
 classes_balancear = list([2, 3])
-# balanceador = EditedNearestNeighbours(kind_sel='mode', sampling_strategy=classes_balancear, n_neighbors=4)
-balanceador = SMOTEENN()
+balanceador = EditedNearestNeighbours(n_jobs=2, n_neighbors=5)
+# balanceador = SMOTEENN()
 
-# X_treino, Y_treino = balanceador.fit_resample(
-#     dados_completo.drop('carcass_fatness_degree', axis=1),
-#     dados_completo['carcass_fatness_degree'])
-# X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['carcass_fatness_degree'], axis=1).columns)
-# Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
-# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+X_treino, Y_treino = balanceador.fit_resample(
+    dados_completo.drop('carcass_fatness_degree', axis=1),
+    dados_completo['carcass_fatness_degree'])
+X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['carcass_fatness_degree'], axis=1).columns)
+Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
+X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
 # exit()
 X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
 X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
@@ -48,6 +48,11 @@ conjunto_balanceado = X_treino.join(Y_treino)
 conjunto_balanceado = conjunto_balanceado.sample(frac=1)
 print(conjunto_balanceado.shape)
 print(conjunto_balanceado.describe())
+mostrar_quantidade_por_classe(conjunto_balanceado, 1)
+mostrar_quantidade_por_classe(conjunto_balanceado, 2)
+mostrar_quantidade_por_classe(conjunto_balanceado, 3)
+mostrar_quantidade_por_classe(conjunto_balanceado, 4)
+mostrar_quantidade_por_classe(conjunto_balanceado, 5)
 
 
 def plotar_dataset_2d_imbalanced():

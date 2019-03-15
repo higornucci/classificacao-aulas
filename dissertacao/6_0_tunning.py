@@ -79,9 +79,8 @@ for trainamento_index, teste_index in split.split(X_completo, Y_completo):
     conjunto_treinamento = dados_completo.loc[trainamento_index]
     conjunto_teste = dados_completo.loc[teste_index]
 
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='mode',
-#                                       sampling_strategy=classes_balancear, n_neighbors=4)
-balanceador = SMOTEENN()
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
+# balanceador = SMOTEENN()
 print(balanceador)
 
 X_treino, Y_treino = conjunto_treinamento.drop('carcass_fatness_degree', axis=1), \
@@ -99,8 +98,7 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'clf__min_samples_leaf': [1, 5, 10],
 #               'clf__min_samples_split': [2, 5, 10],
 #               'clf__max_features': ['sqrt', 'log2', None],
-#               'clf__criterion': ['gini', 'entropy'],
-#               'clf__class_weight': ['balanced', None],
+#               'clf__class_weight': ['balanced'],
 #               'clf__max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
