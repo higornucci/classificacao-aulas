@@ -8,23 +8,23 @@ typification  maturity  carcass_weight  classification  other_incentives  makes_
 4           1.0      0.00        0.132667             0.0               0.0           0.0                     0.0                       0.0              0.0                        0.0     0.0              0.0         0.0               0.0                       0.0          0.0               0.0                    1.0          0.0  0.0  0.0   0.0  0.551702   0.607364   0.636364       0.666667           1.0    0.333333                       2
 Treinando MNB
 iteration 1 :
-Accuracy (train) for 1: 56.8581% 
+Accuracy (train) for 1: 56.8581%
 =====================================
 Treinando MNB
 iteration 2 :
-Accuracy (train) for 2: 56.9575% 
+Accuracy (train) for 2: 56.9575%
 =====================================
 Treinando MNB
 iteration 3 :
-Accuracy (train) for 3: 56.9081% 
+Accuracy (train) for 3: 56.9081%
 =====================================
 Treinando MNB
 iteration 4 :
-Accuracy (train) for 4: 56.7764% 
+Accuracy (train) for 4: 56.7764%
 =====================================
 Treinando MNB
 iteration 5 :
-Accuracy (train) for 5: 56.8758% 
+Accuracy (train) for 5: 56.8758%
 =====================================
 Matriz de Confusão
 [[     0   2354   2694      0      0]
@@ -44,26 +44,25 @@ Matriz de Confusão
    macro avg     0.2315    0.2254    0.2071   1056586
 weighted avg     0.5395    0.5688    0.5066   1056586
 
-
 Treinando RFC
 iteration 1 :
-Accuracy (train) for 1: 65.5208% 
+Accuracy (train) for 1: 65.5208%
 =====================================
 Treinando RFC
 iteration 2 :
-Accuracy (train) for 2: 65.5710% 
+Accuracy (train) for 2: 65.5710%
 =====================================
 Treinando RFC
 iteration 3 :
-Accuracy (train) for 3: 65.5566% 
+Accuracy (train) for 3: 65.5566%
 =====================================
 Treinando RFC
 iteration 4 :
-Accuracy (train) for 4: 65.4497% 
+Accuracy (train) for 4: 65.4497%
 =====================================
 Treinando RFC
 iteration 5 :
-Accuracy (train) for 5: 65.5926% 
+Accuracy (train) for 5: 65.5926%
 =====================================
 Matriz de Confusão
 [[  2507   1991    516     34      0]
@@ -86,23 +85,23 @@ weighted avg     0.6547    0.6554    0.6550   1056586
 
 Treinando K-NN
 iteration 1 :
-Accuracy (train) for 1: 68.3829% 
+Accuracy (train) for 1: 68.3829%
 =====================================
 Treinando K-NN
 iteration 2 :
-Accuracy (train) for 2: 68.2996% 
+Accuracy (train) for 2: 68.2996%
 =====================================
 Treinando K-NN
 iteration 3 :
-Accuracy (train) for 3: 68.3103% 
+Accuracy (train) for 3: 68.3103%
 =====================================
 Treinando K-NN
 iteration 4 :
-Accuracy (train) for 4: 68.2701% 
+Accuracy (train) for 4: 68.2701%
 =====================================
 Treinando K-NN
 iteration 5 :
-Accuracy (train) for 5: 68.2148% 
+Accuracy (train) for 5: 68.2148%
 =====================================
 Matriz de Confusão
 [[  1509   3037    486     16      0]
@@ -125,9 +124,9 @@ weighted avg     0.6817    0.6830    0.6816   1056586
 
 Treinando SVM
 iteration 1 :
-Accuracy (train) for 1: 53.8423% 
+Accuracy (train) for 1: 53.8423%
 =====================================
 Treinando SVM
 iteration 2 :
-Accuracy (train) for 2: 53.9289% 
+Accuracy (train) for 2: 53.9289%
 =====================================
