@@ -340,3 +340,169 @@ Matriz de Confusão
    micro avg     0.5588    0.5588    0.5588   1056586
    macro avg     0.3420    0.7136    0.3508   1056586
 weighted avg     0.6569    0.5588    0.5910   1056586
+
+
+typification  maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification  sisbov  grazing_control  trace_list  quality_programs  involved_in_organization  confinement  semi_confinement  field_supplementation  fertigation  lfi  fli  clfi  latitude  longitude  mes_abate  estacao_abate  microrregiao  mesoregiao  carcass_fatness_degree
+0           1.0      0.25        0.086000        0.000000               0.0           0.0                     0.0                       0.0              0.0                        0.0     0.0              0.0         0.0               0.0                       0.0          0.0               0.0                    1.0          0.0  0.0  0.0   0.0  0.854578   0.459943   0.363636       0.333333           0.0    0.000000                       2
+1           0.5      0.75        0.470000        0.000000               0.0           0.0                     0.0                       0.0              0.0                        0.0     1.0              0.0         0.0               0.0                       0.0          0.0               0.0                    1.0          0.0  0.0  0.0   0.0  0.551702   0.607364   0.181818       0.000000           1.0    0.333333                       3
+2           0.0      0.25        0.514667        0.555556               0.0           1.0                     0.0                       1.0              0.0                        1.0     1.0              1.0         1.0               0.0                       1.0          1.0               1.0                    1.0          0.0  0.0  0.0   0.0  0.633863   0.518289   0.363636       0.333333           0.4    0.000000                       3
+3           0.5      0.75        0.425000        0.555556               0.0           1.0                     0.0                       1.0              0.0                        0.0     0.0              1.0         0.0               0.0                       1.0          0.0               1.0                    1.0          0.0  0.0  1.0   0.0  0.173574   0.483101   0.363636       0.333333           0.6    1.000000                       2
+4           1.0      0.00        0.038333        0.000000               0.0           0.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       0.0          0.0               0.0                    1.0          0.0  0.0  1.0   0.0  0.271681   0.668657   0.818182       1.000000           0.8    0.333333                       2
+Classes para balancear [2, 3]
+EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
+            random_state=None, ratio=None, return_indices=False,
+            sampling_strategy='auto')
+Treinando MNB
+iteration 1 :
+Accuracy (train) for 1: 57.3063%
+=====================================
+Treinando MNB
+iteration 2 :
+Accuracy (train) for 2: 57.0550%
+=====================================
+Treinando MNB
+iteration 3 :
+Accuracy (train) for 3: 57.1470%
+=====================================
+Treinando MNB
+iteration 4 :
+Accuracy (train) for 4: 57.2534%
+=====================================
+Treinando MNB
+iteration 5 :
+Accuracy (train) for 5: 57.2591%
+=====================================
+Matriz de Confusão
+[[     0   2611   2437      0      0]
+ [     0 121266 303972      0      0]
+ [     0  80145 483145      0      0]
+ [     0   4278  58495      0      0]
+ [     0      2    235      0      0]]
+              precision    recall  f1-score   support
+
+           1     0.0000    0.0000    0.0000      5048
+           2     0.5822    0.2852    0.3828    425238
+           3     0.5696    0.8577    0.6845    563290
+           4     0.0000    0.0000    0.0000     62773
+           5     0.0000    0.0000    0.0000       237
+
+   micro avg     0.5720    0.5720    0.5720   1056586
+   macro avg     0.2303    0.2286    0.2135   1056586
+weighted avg     0.5379    0.5720    0.5190   1056586
+
+
+Treinando RFC
+iteration 1 :
+Accuracy (train) for 1: 70.4882%
+=====================================
+Treinando RFC
+iteration 2 :
+Accuracy (train) for 2: 70.5426%
+=====================================
+Treinando RFC
+iteration 3 :
+Accuracy (train) for 3: 70.3423%
+=====================================
+Treinando RFC
+iteration 4 :
+Accuracy (train) for 4: 70.4441%
+=====================================
+Treinando RFC
+iteration 5 :
+Accuracy (train) for 5: 70.4919%
+=====================================
+Matriz de Confusão
+[[   737   3607    699      4      1]
+ [   242 277387 146061   1499     49]
+ [    32 116384 436447  10180    247]
+ [     0   3281  29308  29731    453]
+ [     0      1     21     27    188]]
+              precision    recall  f1-score   support
+
+           1     0.7290    0.1460    0.2433      5048
+           2     0.6923    0.6523    0.6717    425238
+           3     0.7125    0.7748    0.7424    563290
+           4     0.7174    0.4736    0.5706     62773
+           5     0.2004    0.7932    0.3200       237
+
+   micro avg     0.7046    0.7046    0.7046   1056586
+   macro avg     0.6103    0.5680    0.5096   1056586
+weighted avg     0.7047    0.7046    0.7012   1056586
+
+
+Treinando K-NN
+iteration 1 :
+Accuracy (train) for 1: 69.7926%
+=====================================
+Treinando K-NN
+iteration 2 :
+Accuracy (train) for 2: 69.6748%
+=====================================
+Treinando K-NN
+iteration 3 :
+Accuracy (train) for 3: 69.6931%
+=====================================
+Treinando K-NN
+iteration 4 :
+Accuracy (train) for 4: 69.7570%
+=====================================
+Treinando K-NN
+iteration 5 :
+Accuracy (train) for 5: 69.7215%
+=====================================
+Matriz de Confusão
+[[   799   3393    829     27      0]
+ [   342 274725 147420   2705     46]
+ [    80 119673 430604  12710    223]
+ [     3   4104  27812  30491    363]
+ [     0      9     55     58    115]]
+              precision    recall  f1-score   support
+
+           1     0.6528    0.1583    0.2548      5048
+           2     0.6836    0.6460    0.6643    425238
+           3     0.7097    0.7644    0.7361    563290
+           4     0.6630    0.4857    0.5607     62773
+           5     0.1539    0.4852    0.2337       237
+
+   micro avg     0.6973    0.6973    0.6973   1056586
+   macro avg     0.5726    0.5079    0.4899   1056586
+weighted avg     0.6960    0.6973    0.6943   1056586
+
+
+Treinando SVM
+iteration 1 :
+Accuracy (train) for 1: 65.1285%
+=====================================
+Treinando SVM
+iteration 2 :
+Accuracy (train) for 2: 65.3827%
+=====================================
+Treinando SVM
+iteration 3 :
+Accuracy (train) for 3: 65.1019%
+=====================================
+Treinando SVM
+iteration 4 :
+Accuracy (train) for 4: 65.2154%
+=====================================
+Treinando SVM
+iteration 5 :
+Accuracy (train) for 5: 65.2912%
+=====================================
+Matriz de Confusão
+[[  1127   3206    653     44     18]
+ [  1866 287241 126602   7890   1639]
+ [   526 161490 366020  30269   4985]
+ [    14   6439  19308  34538   2474]
+ [     0      2      8      6    221]]
+              precision    recall  f1-score   support
+
+           1     0.3190    0.2233    0.2627      5048
+           2     0.6266    0.6755    0.6501    425238
+           3     0.7141    0.6498    0.6804    563290
+           4     0.4748    0.5502    0.5097     62773
+           5     0.0237    0.9325    0.0462       237
+
+   micro avg     0.6522    0.6522    0.6522   1056586
+   macro avg     0.4316    0.6062    0.4298   1056586
+weighted avg     0.6626    0.6522    0.6560   1056586

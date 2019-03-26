@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
-from imblearn.under_sampling import EditedNearestNeighbours
+from imblearn.under_sampling import EditedNearestNeighbours, RandomUnderSampler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
@@ -27,13 +27,13 @@ print(dados_completo.head())
 random_state = 42
 n_jobs = 2
 
-# classes_balancear = list([2, 3])
-# print('Classes para balancear', classes_balancear)
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-#                                       sampling_strategy=classes_balancear, n_neighbors=3)
+classes_balancear = list([2, 3])
+print('Classes para balancear', classes_balancear)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 # balanceador = SMOTEENN()
-balanceador = SMOTE(n_jobs=n_jobs)
-# print(balanceador)
+# balanceador = SMOTE(n_jobs=n_jobs)
+# balanceador = RandomUnderSampler(sampling_strategy={1: 4038, 2: 100000, 3: 120000, 4: 50000, 5: 189})
+print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                          dados_completo['carcass_fatness_degree']
 
@@ -97,11 +97,11 @@ def rodar_algoritmos():
         x_local_train, x_local_test = X_completo.iloc[train_index], X_completo.iloc[test_index]
         y_local_train, y_local_test = Y_completo.iloc[train_index], Y_completo.iloc[test_index]
 
-        # if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'):
-        #     x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
-        # else:
-        #     x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
-        #                                                                                 y_local_test, y_local_train)
+        if os.path.isfile('../input/DadosCompletoTransformadoMLBalanceadoX2Treino' + str(i) + '.csv'):
+            x_local_test, x_local_train, y_local_test, y_local_train = abrir_conjuntos(i)
+        else:
+            x_local_test, x_local_train, y_local_test, y_local_train = salvar_conjuntos(i, x_local_test, x_local_train,
+                                                                                        y_local_test, y_local_train)
 
         modelo.fit(x_local_train, y_local_train)
         y_pred = modelo.predict(x_local_test)
@@ -115,10 +115,10 @@ def rodar_algoritmos():
 
 
 def abrir_conjuntos(i):
-    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'
-    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoYTreino' + str(i) + '.csv'
-    x_teste_nome = '../input/DadosCompletoTransformadoMLXTeste' + str(i) + '.csv'
-    y_teste_nome = '../input/DadosCompletoTransformadoMLYTeste' + str(i) + '.csv'
+    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoX2Treino' + str(i) + '.csv'
+    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoY2Treino' + str(i) + '.csv'
+    x_teste_nome = '../input/DadosCompletoTransformadoMLX2Teste' + str(i) + '.csv'
+    y_teste_nome = '../input/DadosCompletoTransformadoMLY2Teste' + str(i) + '.csv'
     x_local_train = pd.read_csv(x_treino_nome, encoding='utf-8', delimiter='\t')
     x_local_train.drop(x_local_train.columns[0], axis=1, inplace=True)
     y_local_train = pd.read_csv(y_treino_nome, encoding='utf-8', delimiter='\t')
@@ -131,10 +131,10 @@ def abrir_conjuntos(i):
 
 
 def salvar_conjuntos(i, x_local_test, x_local_train, y_local_test, y_local_train):
-    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoXTreino' + str(i) + '.csv'
-    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoYTreino' + str(i) + '.csv'
-    x_teste_nome = '../input/DadosCompletoTransformadoMLXTeste' + str(i) + '.csv'
-    y_teste_nome = '../input/DadosCompletoTransformadoMLYTeste' + str(i) + '.csv'
+    x_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoX2Treino' + str(i) + '.csv'
+    y_treino_nome = '../input/DadosCompletoTransformadoMLBalanceadoY2Treino' + str(i) + '.csv'
+    x_teste_nome = '../input/DadosCompletoTransformadoMLX2Teste' + str(i) + '.csv'
+    y_teste_nome = '../input/DadosCompletoTransformadoMLY2Teste' + str(i) + '.csv'
 
     x_local_train = pd.DataFrame(data=x_local_train, columns=X_completo.columns)
     y_local_train = pd.DataFrame(data=y_local_train, columns=['carcass_fatness_degree'])
