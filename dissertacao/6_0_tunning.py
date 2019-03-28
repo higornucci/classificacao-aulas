@@ -65,8 +65,8 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-classes_balancear = list([2, 3])
-print('Classes para balancear', classes_balancear)
+# classes_balancear = list([2, 3])
+# print('Classes para balancear', classes_balancear)
 test_size = 0.2
 train_size = 0.8
 print(((train_size * 100), '/', test_size * 100))
@@ -102,19 +102,19 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'clf__max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
-param_grid = {'clf__C': [0.01, 0.1, 1, 10, 100, 1000],
-              'clf__gamma': [0.001, 0.01, 0.1, 1, 10],
-              'clf__kernel': ['rbf']}
-modelo = SVC()
+# param_grid = {'clf__C': [0.01, 0.1, 1, 10, 100, 1000],
+#               'clf__gamma': [0.001, 0.01, 0.1, 1, 10],
+#               'clf__kernel': ['rbf']}
+# modelo = SVC()
 
-# param_grid = {'clf__weights': ['uniform', 'distance'],
-#               'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
-# modelo = KNeighborsClassifier()
+param_grid = {'clf__weights': ['uniform', 'distance'],
+              'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+modelo = KNeighborsClassifier()
 
 pipeline = Pipeline([('bal', balanceador),
                      ('clf', modelo)])
 
-scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
+scores = ['f1_weighted', 'recall_weighted', 'precision_weighted']
 for score in scores:
     print("# Tuning hyper-parameters for %s" % score)
     print()
@@ -144,10 +144,10 @@ for score in scores:
     print()
     y_true, y_pred = Y_teste, grid_search.predict(X_teste)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
-    plot_confusion_matrix(matriz_confusao, 'MNB_' + score, [1, 2, 3, 4, 5], False,
-                          title='Confusion matrix MNB (best parameters)')
-    plot_confusion_matrix(matriz_confusao, 'MNB_' + score, [1, 2, 3, 4, 5], True,
-                          title='Confusion matrix ' + 'MNB' + ', normalized')
+    plot_confusion_matrix(matriz_confusao, 'K-NN_' + score, [1, 2, 3, 4, 5], False,
+                          title='Confusion matrix K-NN (best parameters)')
+    plot_confusion_matrix(matriz_confusao, 'K-NN_' + score, [1, 2, 3, 4, 5], True,
+                          title='Confusion matrix ' + 'K-NN' + ', normalized')
     print('Matriz de Confusão')
     print(matriz_confusao)
     print(classification_report(y_true, y_pred))

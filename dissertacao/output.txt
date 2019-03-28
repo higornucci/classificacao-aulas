@@ -1,13 +1,8 @@
-   typification  maturity  carcass_weight  classification  other_incentives  makes_ration  total_area_confinement  area_80_vegetation_cover  area_20_erosion  individual_identification  sisbov  grazing_control  trace_list  quality_programs  involved_in_organization  confinement  semi_confinement  field_supplementation  fertigation  lfi  fli  clfi  latitude  longitude  mes_abate  estacao_abate  microrregiao  mesoregiao  carcass_fatness_degree
-0           1.0      0.00        0.216000        0.000000               0.0           1.0                     0.0                       0.0              0.0                        1.0     1.0              0.0         1.0               0.0                       0.0          1.0               0.0                    1.0          0.0  0.0  0.0   0.0  0.424575   0.861048   0.181818       0.000000           1.0    0.333333                       3
-1           0.0      0.00        0.291667        1.000000               1.0           1.0                     0.0                       1.0              0.0                        1.0     1.0              1.0         1.0               0.0                       1.0          1.0               1.0                    1.0          0.0  0.0  1.0   0.0  0.424575   0.861048   0.545455       0.666667           1.0    0.333333                       3
-2           1.0      0.25        0.135333        0.000000               0.0           1.0                     0.0                       1.0              0.0                        0.0     0.0              1.0         0.0               0.0                       0.0          0.0               1.0                    1.0          0.0  0.0  1.0   0.0  0.790232   0.447544   0.363636       0.333333           0.0    0.000000                       3
-3           0.0      0.00        0.248667        0.000000               0.0           1.0                     0.0                       1.0              0.0                        0.0     0.0              1.0         0.0               0.0                       0.0          1.0               0.0                    1.0          0.0  0.0  1.0   0.0  1.000000   0.460270   0.636364       0.666667           0.0    0.000000                       3
-4           1.0      0.50        0.108000        0.555556               0.0           0.0                     0.0                       1.0              0.0                        1.0     0.0              1.0         0.0               0.0                       1.0          0.0               0.0                    1.0          0.0  0.0  1.0   0.0  0.551702   0.607364   0.000000       0.000000           1.0    0.333333                       2
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=2,
-   out_step='deprecated', random_state=None, ratio=None,
-   sampling_strategy='auto', svm_estimator='deprecated')
-Treinando SVM
-iteration 1 :
-Accuracy (train) for 1: 55.4333% 
-=====================================
+(80.0, '/', 20.0)
+EditedNearestNeighbours(kind_sel='all', n_jobs=2, n_neighbors=5,
+            random_state=None, ratio=None, return_indices=False,
+            sampling_strategy='auto')
+# Tuning hyper-parameters for f1_weighted
+
+Fitting 5 folds for each of 16 candidates, totalling 80 fits
+[Parallel(n_jobs=2)]: Using backend LokyBackend with 2 concurrent workers.

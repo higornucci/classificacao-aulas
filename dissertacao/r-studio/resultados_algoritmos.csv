@@ -1,0 +1,17 @@
+modelo,metrica,valor
+MNB,accuracy,57.15
+MNB,precision,53.79
+MNB,recall,57.2
+MNB,f1_score,51.9
+RFC,accuracy,66.61
+RFC,precision,70.47
+RFC,recall,70.46
+RFC,f1_score,70.12
+KNN,accuracy,68.04
+KNN,precision,69.60
+KNN,recall,69.73
+KNN,f1_score,69.43
+SVM,accuracy,56.11
+SVM,precision,66.26
+SVM,recall,65.22
+SVM,f1_score,65.6
