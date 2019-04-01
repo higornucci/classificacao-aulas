@@ -1,3 +1,4 @@
+RFC
 Classes para balancear [2, 3]
 (80.0, '/', 20.0)
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
