@@ -125,3 +125,42 @@ Matriz de Confusão
 weighted avg     0.6991    0.6996    0.6971   1056586
 
 
+Treinando SVM
+iteration 1 :
+Accuracy (train) for 1: 70.1016% 
+=====================================
+Treinando SVM
+iteration 2 :
+Accuracy (train) for 2: 70.1754% 
+=====================================
+Treinando SVM
+iteration 3 :
+Accuracy (train) for 3: 69.9160% 
+=====================================
+Treinando SVM
+iteration 4 :
+Accuracy (train) for 4: 70.2151% 
+=====================================
+Treinando SVM
+iteration 5 :
+Accuracy (train) for 5: 70.1446% 
+=====================================
+Matriz de Confusão
+[[   797   3297    944      9      1]
+ [   294 281004 141532   2068    340]
+ [    49 121869 426840  13768    764]
+ [     0   3579  26484  31937    773]
+ [     0      1     21     15    200]]
+              precision    recall  f1-score   support
+
+           1     0.6991    0.1579    0.2576      5048
+           2     0.6858    0.6608    0.6731    425238
+           3     0.7164    0.7578    0.7365    563290
+           4     0.6682    0.5088    0.5777     62773
+           5     0.0962    0.8439    0.1728       237
+
+   micro avg     0.7011    0.7011    0.7011   1056586
+   macro avg     0.5731    0.5858    0.4835   1056586
+weighted avg     0.7010    0.7011    0.6991   1056586
+
+
