@@ -102,8 +102,8 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 #               'clf__max_depth': [50, 75]}
 # modelo = RandomForestClassifier(oob_score=True)
 
-param_grid = {'clf__C': [1, 10, 50],
-              'clf__gamma': [1, 10, 50],
+param_grid = {'clf__C': [0.03125, 0.125, 0.5, 2, 8, 16],
+              'clf__gamma': [2**-5, 2**-3, 2**-1, 2**1, 2**3],
               'clf__kernel': ['rbf']}
 modelo = SVC()
 
@@ -145,10 +145,10 @@ for score in scores:
     y_true, y_pred = Y_teste, grid_search.predict(X_teste)
     np.set_printoptions(precision=4)
     matriz_confusao = confusion_matrix(Y_teste, y_pred)
-    plot_confusion_matrix(matriz_confusao, 'K-NN_' + score, [1, 2, 3, 4, 5], False,
-                          title='Confusion matrix K-NN (best parameters)')
-    plot_confusion_matrix(matriz_confusao, 'K-NN_' + score, [1, 2, 3, 4, 5], True,
-                          title='Confusion matrix ' + 'K-NN' + ', normalized')
+    plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], False,
+                          title='Confusion matrix SVC (best parameters)')
+    plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], True,
+                          title='Confusion matrix ' + 'SVC' + ', normalized')
     print('Matriz de Confusão')
     np.set_printoptions(precision=4)
     print(matriz_confusao)

@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
-from imblearn.under_sampling import EditedNearestNeighbours, RandomUnderSampler
+from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
@@ -25,14 +25,13 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = 2
+n_jobs = 3
 
 classes_balancear = list([2, 3])
 print('Classes para balancear', classes_balancear)
 balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 # balanceador = SMOTEENN()
 # balanceador = SMOTE(n_jobs=n_jobs)
-# balanceador = RandomUnderSampler(sampling_strategy={1: 4038, 2: 100000, 3: 120000, 4: 50000, 5: 189})
 print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                          dados_completo['carcass_fatness_degree']
@@ -43,11 +42,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB()),
-    # ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
-    #                                n_estimators=100)),
-    # ('K-NN', KNeighborsClassifier(n_jobs=n_jobs)),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC(gamma='scale', class_weight='balanced'))
+    ('MNB', MultinomialNB(alpha=0.01)),
+    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, class_weight='balanced', max_depth=50,
+                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=5, n_estimators=250)),
+    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('SVM', SVC(class_weight='balanced', C=10, gamma=10, kernel='rbf'))
 ]
 
 
