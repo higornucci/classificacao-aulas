@@ -42,11 +42,12 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB(alpha=0.01)),
-    ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, class_weight='balanced', max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=5, n_estimators=250)),
-    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(class_weight='balanced', C=10, gamma=10, kernel='rbf'))
+    # ('MNB', MultinomialNB(alpha=0.01)),
+    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
+                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=5, n_estimators=250,
+                                   n_jobs=n_jobs)),
+    # ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('SVM', SVC(class_weight='balanced', C=50, gamma=2, kernel='rbf'))
 ]
 
 
@@ -108,6 +109,11 @@ def rodar_algoritmos():
         print("Accuracy (train) for %d: %0.4f%% " % (i, accuracy * 100))
         i = i + 1
         y_pred_all[test_index] = y_pred
+        matriz_confusao = confusion_matrix(y_local_test, y_pred)
+        print('Matriz de Confusão')
+        print(matriz_confusao)
+        print(classification_report(y_true=y_local_test, y_pred=y_pred, digits=4))
+        print()
         print("=====================================")
         sys.stdout.flush()
     return y_pred_all
@@ -123,9 +129,9 @@ def abrir_conjuntos(i):
     y_local_train = pd.read_csv(y_treino_nome, encoding='utf-8', delimiter='\t')
     y_local_train.drop(y_local_train.columns[0], axis=1, inplace=True)
     x_local_test = pd.read_csv(x_teste_nome, encoding='utf-8', delimiter='\t')
-    x_local_test.drop(x_local_test.columns[0], axis=1, inplace=True)
+    x_local_test = x_local_test.set_index(list(x_local_test.columns[[0]]))
     y_local_test = pd.read_csv(y_teste_nome, encoding='utf-8', delimiter='\t')
-    y_local_test.drop(y_local_test.columns[0], axis=1, inplace=True)
+    y_local_test = y_local_test.set_index(list(y_local_test.columns[[0]]))
     return x_local_test, x_local_train, y_local_test, y_local_train
 
 
@@ -154,7 +160,7 @@ def salvar_conjuntos(i, x_local_test, x_local_train, y_local_test, y_local_train
 
 for nome, modelo in modelos_base:
     y_predicao = rodar_algoritmos()
-    y_predicao = pd.Series(y_predicao)
+    # y_predicao = pd.Series(y_predicao)
     matriz_confusao = confusion_matrix(Y_completo, y_predicao)
     plot_confusion_matrix(matriz_confusao, nome, [1, 2, 3, 4, 5], False,
                           title='Confusion matrix' + nome)
