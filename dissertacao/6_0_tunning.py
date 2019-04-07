@@ -149,7 +149,7 @@ for score in scores:
                           title='Confusion matrix SVC (best parameters)')
     plot_confusion_matrix(matriz_confusao, 'SVC_' + score, [1, 2, 3, 4, 5], True,
                           title='Confusion matrix ' + 'SVC' + ', normalized')
-    print('Matriz de Confusão')
+    print('Matriz de Confusao')
     np.set_printoptions(precision=4)
     print(matriz_confusao)
     print(classification_report(y_true, y_pred))
