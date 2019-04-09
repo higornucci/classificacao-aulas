@@ -6,10 +6,18 @@ import seaborn as sns
 from imblearn.combine import SMOTEENN
 from imblearn.under_sampling import EditedNearestNeighbours
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import StratifiedKFold
+from sklearn.neighbors import KNeighborsClassifier
+from yellowbrick.features import RFECV
 
 sns.set_style('whitegrid')
 pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
+
+num_folds = 5
+scoring = 'accuracy'
+kfold = StratifiedKFold(n_splits=num_folds)
 
 
 def mostrar_quantidade_por_classe(df, classe):
@@ -28,31 +36,32 @@ mostrar_quantidade_por_classe(dados_completo, 5)
 print(dados_completo.shape)
 print(dados_completo.describe(include=['number']))
 
-classes_balancear = list([2, 3])
-balanceador = EditedNearestNeighbours(n_jobs=2, n_neighbors=5)
+
+# classes_balancear = list([2, 3])
+# balanceador = EditedNearestNeighbours(n_jobs=2, n_neighbors=5)
 # balanceador = SMOTEENN()
 
-X_treino, Y_treino = balanceador.fit_resample(
-    dados_completo.drop('carcass_fatness_degree', axis=1),
-    dados_completo['carcass_fatness_degree'])
-X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['carcass_fatness_degree'], axis=1).columns)
-Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
-X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
-Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
-# exit()
-X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
-X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
-Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
-Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
-conjunto_balanceado = X_treino.join(Y_treino)
-conjunto_balanceado = conjunto_balanceado.sample(frac=1)
-print(conjunto_balanceado.shape)
-print(conjunto_balanceado.describe())
-mostrar_quantidade_por_classe(conjunto_balanceado, 1)
-mostrar_quantidade_por_classe(conjunto_balanceado, 2)
-mostrar_quantidade_por_classe(conjunto_balanceado, 3)
-mostrar_quantidade_por_classe(conjunto_balanceado, 4)
-mostrar_quantidade_por_classe(conjunto_balanceado, 5)
+# X_treino, Y_treino = balanceador.fit_resample(
+#     dados_completo.drop('carcass_fatness_degree', axis=1),
+#     dados_completo['carcass_fatness_degree'])
+# X_treino = pd.DataFrame(data=X_treino, columns=dados_completo.drop(['carcass_fatness_degree'], axis=1).columns)
+# Y_treino = pd.DataFrame(data=Y_treino, columns=['carcass_fatness_degree'])
+# X_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', sep='\t')
+# Y_treino.to_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', sep='\t')
+# # exit()
+# X_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoX.csv', encoding='utf-8', delimiter='\t')
+# X_treino.drop(X_treino.columns[0], axis=1, inplace=True)
+# Y_treino = pd.read_csv('../input/DadosCompletoTransformadoMLBalanceadoY.csv', encoding='utf-8', delimiter='\t')
+# Y_treino.drop(Y_treino.columns[0], axis=1, inplace=True)
+# conjunto_balanceado = X_treino.join(Y_treino)
+# conjunto_balanceado = conjunto_balanceado.sample(frac=1)
+# print(conjunto_balanceado.shape)
+# print(conjunto_balanceado.describe())
+# mostrar_quantidade_por_classe(conjunto_balanceado, 1)
+# mostrar_quantidade_por_classe(conjunto_balanceado, 2)
+# mostrar_quantidade_por_classe(conjunto_balanceado, 3)
+# mostrar_quantidade_por_classe(conjunto_balanceado, 4)
+# mostrar_quantidade_por_classe(conjunto_balanceado, 5)
 
 
 def plotar_dataset_2d_imbalanced():
@@ -60,21 +69,22 @@ def plotar_dataset_2d_imbalanced():
     grafico['maturity'] = dados_completo['maturity'] + dados_completo['typification']
     grafico['carcass_weight'] = dados_completo['carcass_weight']
     grafico['carcass_fatness_degree'] = dados_completo['carcass_fatness_degree']
-    sns.lmplot(x="maturity", y="carcass_weight", data=grafico, hue="carcass_fatness_degree", fit_reg=False, legend=False)
+    sns.lmplot(x="maturity", y="carcass_weight", data=grafico, hue="carcass_fatness_degree", fit_reg=False,
+               legend=False)
     plt.legend()
     plt.savefig('figuras/dataset_completo2d_imbalanced.png')
     plt.show()
 
 
-def plotar_dataset_2d_balanced():
-    grafico = pd.DataFrame()
-    grafico['maturity'] = conjunto_balanceado['maturity'] + conjunto_balanceado['typification']
-    grafico['carcass_weight'] = conjunto_balanceado['carcass_weight']
-    grafico['carcass_fatness_degree'] = conjunto_balanceado['carcass_fatness_degree']
-    sns.lmplot(x="maturity", y="carcass_weight", data=grafico, hue="carcass_fatness_degree", fit_reg=False, legend=False)
-    plt.legend()
-    plt.savefig('figuras/dataset_completo2d_balanced_smoteenn.png')
-    plt.show()
+# def plotar_dataset_2d_balanced():
+#     grafico = pd.DataFrame()
+#     grafico['maturity'] = conjunto_balanceado['maturity'] + conjunto_balanceado['typification']
+#     grafico['carcass_weight'] = conjunto_balanceado['carcass_weight']
+#     grafico['carcass_fatness_degree'] = conjunto_balanceado['carcass_fatness_degree']
+#     sns.lmplot(x="maturity", y="carcass_weight", data=grafico, hue="carcass_fatness_degree", fit_reg=False, legend=False)
+#     plt.legend()
+#     plt.savefig('figuras/dataset_completo2d_balanced_smoteenn.png')
+#     plt.show()
 
 
 # plotar_dataset_2d_balanced()
@@ -108,52 +118,81 @@ def plotar_dataset_3d_imbalanced():
     plt.show()
 
 
-def plotar_dataset_3d_balanced():
-    x = pd.DataFrame(np.array(conjunto_balanceado['typification']).reshape(-1, 1))
-    y = pd.DataFrame(np.array(conjunto_balanceado['maturity']).reshape(-1, 1))
-    z = pd.DataFrame(np.array(conjunto_balanceado['carcass_weight']).reshape(-1, 1))
-    target = pd.DataFrame(np.array(conjunto_balanceado['carcass_fatness_degree']).reshape(-1, 1))
-
-    new_data = [x, y, z, target]
-
-    new_data = pd.concat(new_data, axis=1, ignore_index=True)
-
-    new_data.columns = ['typification', 'maturity', 'carcass_weight', 'carcass_fatness_degree']
-
-    colors = new_data['carcass_fatness_degree'].map(
-        {1: 'blue', 2: 'darkorange', 3: 'green', 4: 'crimson', 5: 'purple'})
-
-    fig = plt.figure(figsize=(8, 8))
-    fig.add_subplot(111, projection='3d')
-    ax2 = Axes3D(fig)
-    ax2.scatter(new_data.maturity, new_data.typification, new_data.carcass_weight, c=colors)
-    ax2.set_xlabel('maturity')
-    ax2.set_ylabel('typification')
-    ax2.set_zlabel('carcass_weight')
-    ax2.legend()
-    plt.savefig('figuras/dataset_completo3d_balanced_smoteenn.png')
-    plt.show()
+# def plotar_dataset_3d_balanced():
+#     x = pd.DataFrame(np.array(conjunto_balanceado['typification']).reshape(-1, 1))
+#     y = pd.DataFrame(np.array(conjunto_balanceado['maturity']).reshape(-1, 1))
+#     z = pd.DataFrame(np.array(conjunto_balanceado['carcass_weight']).reshape(-1, 1))
+#     target = pd.DataFrame(np.array(conjunto_balanceado['carcass_fatness_degree']).reshape(-1, 1))
+#
+#     new_data = [x, y, z, target]
+#
+#     new_data = pd.concat(new_data, axis=1, ignore_index=True)
+#
+#     new_data.columns = ['typification', 'maturity', 'carcass_weight', 'carcass_fatness_degree']
+#
+#     colors = new_data['carcass_fatness_degree'].map(
+#         {1: 'blue', 2: 'darkorange', 3: 'green', 4: 'crimson', 5: 'purple'})
+#
+#     fig = plt.figure(figsize=(8, 8))
+#     fig.add_subplot(111, projection='3d')
+#     ax2 = Axes3D(fig)
+#     ax2.scatter(new_data.maturity, new_data.typification, new_data.carcass_weight, c=colors)
+#     ax2.set_xlabel('maturity')
+#     ax2.set_ylabel('typification')
+#     ax2.set_zlabel('carcass_weight')
+#     ax2.legend()
+#     plt.savefig('figuras/dataset_completo3d_balanced_smoteenn.png')
+#     plt.show()
 
 
 # plotar_dataset_3d_imbalanced()
 # plotar_dataset_3d_balanced()
 
+ax = plt.axes()
+sns.countplot(x='carcass_fatness_degree', data=dados_completo, ax=ax)
+ax.set_title('Distribution of carcass fatness degree')
+plt.savefig('figuras/distribuicao_acabamento_desbalanceada.png')
+plt.show()
+
+
+def mostrar_features_mais_importantes(melhor_modelo):
+    melhor_modelo.fit(dados_completo.drop(['carcass_fatness_degree'], axis=1),
+                      dados_completo['carcass_fatness_degree'].values)
+    print('Características mais importantes RFC :')
+    feature_importances = pd.DataFrame(melhor_modelo.feature_importances_,
+                                       index=dados_completo.drop(['carcass_fatness_degree'], axis=1).columns,
+                                       columns=['importance']).sort_values('importance', ascending=False)
+    print(feature_importances)
+
+
+def fazer_selecao_features_rfe():
+    features = dados_completo.columns
+    rfe = RFECV(KNeighborsClassifier(n_neighbors=2, weights='distance'),
+                cv=kfold, scoring=scoring)
+
+    rfe.fit(dados_completo.drop(['carcass_fatness_degree'], axis=1), dados_completo['carcass_fatness_degree'].values)
+    print(rfe.poof())
+    print("Caraterísticas ordenadas pelo rank RFE:")
+    print(sorted(zip(map(lambda x: round(x, 4), rfe.ranking_), features)))
+    ranking = sorted(zip(rfe.support_, features))
+    print("Características selecionadas", ranking)
+    return rfe.transform(dados_completo.drop(['carcass_fatness_degree'], axis=1))
+
+
+modelo = RandomForestClassifier(oob_score=True, class_weight='balanced', max_depth=50,
+                                max_features='sqrt', min_samples_leaf=1, min_samples_split=5, n_estimators=250)
+mostrar_features_mais_importantes(modelo)
+print(fazer_selecao_features_rfe())
 # ax = plt.axes()
 # sns.countplot(x='carcass_fatness_degree', data=dados_completo, ax=ax)
 # ax.set_title('Distribution of carcass fatness degree')
-# plt.savefig('figuras/distribuicao_acabamento_desbalanceada.png')
+# plt.savefig('figuras/distribuicao_acabamento.png')
 # plt.show()
 
-ax = plt.axes()
-sns.countplot(x='carcass_fatness_degree', data=conjunto_balanceado, ax=ax)
-ax.set_title('Distribution of carcass fatness degree')
-plt.savefig('figuras/distribuicao_acabamento_balanceada_smote.png')
+dados_completo.hist(bins=50, figsize=(50, 50))
+plt.savefig('figuras/histograma.png')
 plt.show()
-exit()
-# dados_completo.hist(bins=50, figsize=(25, 25))
-# plt.savefig('figuras/histograma.png')
-# plt.show()
-#
+
 # ms_mapa = mpimg.imread('figuras/mato-grosso-so-sul.png')
 #
 # ax = dados_completo.plot(kind='scatter', x='longitude', y='latitude', alpha=0.3, s=dados_completo['carcass_weight'],
@@ -165,9 +204,9 @@ exit()
 # print('Foi!!')
 
 # procurando por correlações
-# matriz_correlacao = dados_completo.corr()
-# print('Correlação de Pearson:')
-# print(matriz_correlacao['carcass_fatness_degree'].sort_values(ascending=False))
+matriz_correlacao = dados_completo.corr()
+print('Correlação de Pearson:')
+print(matriz_correlacao['carcass_fatness_degree'].sort_values(ascending=False))
 
 # sns.pairplot(dados_completo, kind="scatter", hue="carcass_fatness_degree", markers=["o", "s", "D"], palette="Set2")
 # sns.pairplot(dados_completo, kind="scatter", hue="carcass_fatness_degree", palette="Set2")

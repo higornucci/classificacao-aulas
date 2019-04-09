@@ -7,7 +7,6 @@ EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
 # Tuning hyper-parameters for recall_weighted
 
 Fitting 5 folds for each of 72 candidates, totalling 360 fits
-[Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
 Best parameters set found on development set:
 
 {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 5, 'clf__n_estimators': 250}
