@@ -22,9 +22,9 @@ pd.set_option('display.width', 2000)  # display all columns
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
-# dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
-#                      'field_supplementation', 'fertigation', 'lfi', 'clfi'],
-#                     axis=1, inplace=True)
+dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+                     'field_supplementation', 'fertigation', 'lfi', 'clfi'],
+                    axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
@@ -45,11 +45,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB(alpha=0.01)),
+    ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True, class_weight='balanced', max_depth=35,
                                    max_features='sqrt', min_samples_leaf=1, min_samples_split=5, n_estimators=250)),
-    # ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(class_weight='balanced', C=32, gamma=5, kernel='rbf'))
+    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('SVM', SVC(class_weight='balanced', C=100, gamma=1, kernel='rbf'))
 ]
 
 

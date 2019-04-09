@@ -22,6 +22,9 @@ pd.set_option('display.width', 2000)  # display all columns
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
+dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+                     'lfi'],  # , 'fertigation', 'field_supplementation', 'clfi'],
+                    axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
@@ -32,7 +35,7 @@ balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 # balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
-                     dados_completo['carcass_fatness_degree']
+                         dados_completo['carcass_fatness_degree']
 
 num_folds = 5
 scoring = 'accuracy'
@@ -41,11 +44,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 # preparando alguns modelos
 modelos_base = [
     # ('MNB', MultinomialNB(alpha=0.01)),
-    ('RFC', RandomForestClassifier(random_state=random_state, max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=7, n_estimators=250,
+    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
+                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=10, n_estimators=250,
                                    n_jobs=n_jobs)),
     # ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(C=300, gamma=0.5, kernel='rbf'))
+    ('SVM', SVC(class_weight='balanced', C=300, gamma=1, kernel='rbf'))
 ]
 
 

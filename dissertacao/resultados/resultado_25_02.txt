@@ -68,6 +68,7 @@ iteration 5 :
 Accuracy (train) for 5: 70.5279%
 =====================================
 
+{'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 250}
 ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
                                    max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
                                    n_jobs=n_jobs)),
