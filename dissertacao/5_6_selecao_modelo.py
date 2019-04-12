@@ -45,10 +45,10 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 modelos_base = [
     # ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=10, n_estimators=250,
+                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=500,
                                    n_jobs=n_jobs)),
     # ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(class_weight='balanced', C=300, gamma=1, kernel='rbf'))
+    ('SVM', SVC(class_weight='balanced', C=300, gamma=8, kernel='rbf'))
 ]
 
 

@@ -108,3 +108,123 @@ Matriz de Confusão
    micro avg       0.70      0.70      0.70    211318
    macro avg       0.61      0.57      0.50    211318
 weighted avg       0.70      0.70      0.70    211318
+
+
+# Tuning hyper-parameters for f1_weighted
+
+Fitting 5 folds for each of 6 candidates, totalling 30 fits
+Best parameters set found on development set:
+
+{'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 500}
+
+Grid scores on development set:
+
+0.6991 (+/-0.0022) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 250}
+0.6993 (+/-0.0024) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 500}
+0.6990 (+/-0.0024) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 250}
+0.6991 (+/-0.0025) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 500}
+0.6989 (+/-0.0029) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 11, 'clf__n_estimators': 250}
+0.6990 (+/-0.0027) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 11, 'clf__n_estimators': 500}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  133   738   138     1     0]
+ [   42 56103 28541   352    10]
+ [    2 23619 86639  2332    66]
+ [    0   684  5579  6146   146]
+ [    0     0     5     1    41]]
+              precision    recall  f1-score   support
+
+           1       0.75      0.13      0.22      1010
+           2       0.69      0.66      0.68     85048
+           3       0.72      0.77      0.74    112658
+           4       0.70      0.49      0.57     12555
+           5       0.16      0.87      0.26        47
+
+   micro avg       0.71      0.71      0.71    211318
+   macro avg       0.60      0.58      0.50    211318
+weighted avg       0.71      0.71      0.70    211318
+
+
+# Tuning hyper-parameters for recall_weighted
+
+Fitting 5 folds for each of 6 candidates, totalling 30 fits
+Best parameters set found on development set:
+
+{'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 250}
+
+Grid scores on development set:
+
+0.7023 (+/-0.0022) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 250}
+0.7023 (+/-0.0026) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 500}
+0.7023 (+/-0.0023) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 250}
+0.7021 (+/-0.0025) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 500}
+0.7018 (+/-0.0024) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 11, 'clf__n_estimators': 250}
+0.7018 (+/-0.0025) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 11, 'clf__n_estimators': 500}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  133   732   144     1     0]
+ [   41 56219 28411   368     9]
+ [    2 23751 86478  2351    76]
+ [    0   700  5521  6187   147]
+ [    0     0     5     1    41]]
+              precision    recall  f1-score   support
+
+           1       0.76      0.13      0.22      1010
+           2       0.69      0.66      0.68     85048
+           3       0.72      0.77      0.74    112658
+           4       0.69      0.49      0.58     12555
+           5       0.15      0.87      0.26        47
+
+   micro avg       0.71      0.71      0.71    211318
+   macro avg       0.60      0.59      0.49    211318
+weighted avg       0.71      0.71      0.70    211318
+
+
+# Tuning hyper-parameters for precision_weighted
+
+Fitting 5 folds for each of 6 candidates, totalling 30 fits
+Best parameters set found on development set:
+
+{'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 500}
+
+Grid scores on development set:
+
+0.7022 (+/-0.0023) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 250}
+0.7023 (+/-0.0024) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 9, 'clf__n_estimators': 500}
+0.7020 (+/-0.0024) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 250}
+0.7020 (+/-0.0026) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 10, 'clf__n_estimators': 500}
+0.7016 (+/-0.0026) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 11, 'clf__n_estimators': 250}
+0.7019 (+/-0.0024) for {'clf__class_weight': 'balanced', 'clf__max_depth': 50, 'clf__max_features': 'sqrt', 'clf__min_samples_leaf': 1, 'clf__min_samples_split': 11, 'clf__n_estimators': 500}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  134   733   142     1     0]
+ [   40 56131 28510   357    10]
+ [    2 23705 86540  2340    71]
+ [    0   694  5547  6176   138]
+ [    0     0     5     1    41]]
+              precision    recall  f1-score   support
+
+           1       0.76      0.13      0.23      1010
+           2       0.69      0.66      0.68     85048
+           3       0.72      0.77      0.74    112658
+           4       0.70      0.49      0.58     12555
+           5       0.16      0.87      0.27        47
+
+   micro avg       0.71      0.71      0.71    211318
+   macro avg       0.60      0.59      0.50    211318
+weighted avg       0.71      0.71      0.70    211318

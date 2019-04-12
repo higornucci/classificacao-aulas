@@ -159,3 +159,140 @@ Detailed classification report:
 
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
+
+# Tuning hyper-parameters for f1_weighted
+
+Fitting 5 folds for each of 12 candidates, totalling 60 fits
+Best parameters set found on development set:
+
+{'clf__C': 64, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+
+Grid scores on development set:
+
+0.6837 (+/-0.0023) for {'clf__C': 64, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6949 (+/-0.0026) for {'clf__C': 64, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6958 (+/-0.0021) for {'clf__C': 64, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6952 (+/-0.0013) for {'clf__C': 64, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6863 (+/-0.0023) for {'clf__C': 128, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6951 (+/-0.0028) for {'clf__C': 128, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6957 (+/-0.0016) for {'clf__C': 128, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6952 (+/-0.0012) for {'clf__C': 128, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6888 (+/-0.0020) for {'clf__C': 256, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6954 (+/-0.0027) for {'clf__C': 256, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6955 (+/-0.0018) for {'clf__C': 256, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6949 (+/-0.0010) for {'clf__C': 256, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  152   701   153     4     0]
+ [   71 55833 28693   425    26]
+ [   14 23628 86415  2475   126]
+ [    1   730  5429  6277   118]
+ [    0     1     3    14    29]]
+              precision    recall  f1-score   support
+
+           1       0.64      0.15      0.24      1010
+           2       0.69      0.66      0.67     85048
+           3       0.72      0.77      0.74    112658
+           4       0.68      0.50      0.58     12555
+           5       0.10      0.62      0.17        47
+
+   micro avg       0.70      0.70      0.70    211318
+   macro avg       0.56      0.54      0.48    211318
+weighted avg       0.70      0.70      0.70    211318
+
+
+# Tuning hyper-parameters for precision_weighted
+
+Fitting 5 folds for each of 12 candidates, totalling 60 fits
+Best parameters set found on development set:
+
+{'clf__C': 64, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+
+Grid scores on development set:
+
+0.6866 (+/-0.0023) for {'clf__C': 64, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6970 (+/-0.0026) for {'clf__C': 64, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6978 (+/-0.0025) for {'clf__C': 64, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6981 (+/-0.0017) for {'clf__C': 64, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6889 (+/-0.0023) for {'clf__C': 128, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6970 (+/-0.0028) for {'clf__C': 128, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6976 (+/-0.0021) for {'clf__C': 128, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6980 (+/-0.0016) for {'clf__C': 128, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6910 (+/-0.0021) for {'clf__C': 256, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6973 (+/-0.0028) for {'clf__C': 256, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6975 (+/-0.0023) for {'clf__C': 256, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6976 (+/-0.0015) for {'clf__C': 256, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  156   676   176     2     0]
+ [   69 55171 29406   380    22]
+ [   11 22836 87428  2278   105]
+ [    0   671  5614  6164   106]
+ [    0     0     4    13    30]]
+              precision    recall  f1-score   support
+
+           1       0.66      0.15      0.25      1010
+           2       0.70      0.65      0.67     85048
+           3       0.71      0.78      0.74    112658
+           4       0.70      0.49      0.58     12555
+           5       0.11      0.64      0.19        47
+
+   micro avg       0.70      0.70      0.70    211318
+   macro avg       0.58      0.54      0.49    211318
+weighted avg       0.70      0.70      0.70    211318
+
+
+# Tuning hyper-parameters for recall_weighted
+
+Fitting 5 folds for each of 12 candidates, totalling 60 fits
+Best parameters set found on development set:
+
+{'clf__C': 64, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+
+Grid scores on development set:
+
+0.6874 (+/-0.0023) for {'clf__C': 64, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6976 (+/-0.0028) for {'clf__C': 64, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6984 (+/-0.0026) for {'clf__C': 64, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6984 (+/-0.0017) for {'clf__C': 64, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6898 (+/-0.0023) for {'clf__C': 128, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6977 (+/-0.0031) for {'clf__C': 128, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6982 (+/-0.0021) for {'clf__C': 128, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6983 (+/-0.0016) for {'clf__C': 128, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6920 (+/-0.0021) for {'clf__C': 256, 'clf__gamma': 0.125, 'clf__kernel': 'rbf'}
+0.6979 (+/-0.0030) for {'clf__C': 256, 'clf__gamma': 0.5, 'clf__kernel': 'rbf'}
+0.6981 (+/-0.0023) for {'clf__C': 256, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6980 (+/-0.0014) for {'clf__C': 256, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  156   676   176     2     0]
+ [   69 55171 29406   380    22]
+ [   11 22836 87428  2278   105]
+ [    0   671  5614  6164   106]
+ [    0     0     4    13    30]]
+              precision    recall  f1-score   support
+
+           1       0.66      0.15      0.25      1010
+           2       0.70      0.65      0.67     85048
+           3       0.71      0.78      0.74    112658
+           4       0.70      0.49      0.58     12555
+           5       0.11      0.64      0.19        47
+
+   micro avg       0.70      0.70      0.70    211318
+   macro avg       0.58      0.54      0.49    211318
+weighted avg       0.70      0.70      0.70    211318
