@@ -296,3 +296,76 @@ Matriz de Confusao
    micro avg       0.70      0.70      0.70    211318
    macro avg       0.58      0.54      0.49    211318
 weighted avg       0.70      0.70      0.70    211318
+
+
+# Tuning hyper-parameters for precision_weighted
+Best parameters set found on development set:
+
+{'clf__C': 128, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+
+Grid scores on development set:
+
+0.6983 (+/-0.0015) for {'clf__C': 128, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6984 (+/-0.0021) for {'clf__C': 128, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6975 (+/-0.0021) for {'clf__C': 128, 'clf__gamma': 16, 'clf__kernel': 'rbf'}
+0.6976 (+/-0.0024) for {'clf__C': 512, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6977 (+/-0.0021) for {'clf__C': 512, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6967 (+/-0.0021) for {'clf__C': 512, 'clf__gamma': 16, 'clf__kernel': 'rbf'}
+0.6963 (+/-0.0020) for {'clf__C': 4096, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6964 (+/-0.0024) for {'clf__C': 4096, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6959 (+/-0.0025) for {'clf__C': 4096, 'clf__gamma': 16, 'clf__kernel': 'rbf'}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusao
+[[  171   678   160     1     0]
+ [   79 55422 29173   345    29]
+ [   14 23508 86673  2341   122]
+ [    0   714  5495  6227   119]
+ [    0     2     3     6    36]]
+              precision    recall  f1-score   support
+
+           1       0.65      0.17      0.27      1010
+           2       0.69      0.65      0.67     85048
+           3       0.71      0.77      0.74    112658
+           4       0.70      0.50      0.58     12555
+           5       0.12      0.77      0.20        47
+
+   micro avg       0.70      0.70      0.70    211318
+   macro avg       0.57      0.57      0.49    211318
+weighted avg       0.70      0.70      0.70    211318
+
+# Tuning hyper-parameters for f1_weighted
+Best parameters set found on development set:
+{'clf__C': 128, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+Grid scores on development set:
+0.6963 (+/-0.0019) for {'clf__C': 128, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6956 (+/-0.0022) for {'clf__C': 128, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6933 (+/-0.0024) for {'clf__C': 128, 'clf__gamma': 16, 'clf__kernel': 'rbf'}
+0.6957 (+/-0.0024) for {'clf__C': 512, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6951 (+/-0.0022) for {'clf__C': 512, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6926 (+/-0.0024) for {'clf__C': 512, 'clf__gamma': 16, 'clf__kernel': 'rbf'}
+0.6946 (+/-0.0019) for {'clf__C': 4096, 'clf__gamma': 2, 'clf__kernel': 'rbf'}
+0.6940 (+/-0.0025) for {'clf__C': 4096, 'clf__gamma': 8, 'clf__kernel': 'rbf'}
+0.6919 (+/-0.0028) for {'clf__C': 4096, 'clf__gamma': 16, 'clf__kernel': 'rbf'}
+Detailed classification report:
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+Matriz de Confusao
+[[  172   705   133     0     0]
+ [  109 55733 28768   392    46]
+ [   37 23851 86204  2431   135]
+ [    0   722  5428  6286   119]
+ [    0     2     3     7    35]]
+              precision    recall  f1-score   support
+           1       0.54      0.17      0.26      1010
+           2       0.69      0.66      0.67     85048
+           3       0.72      0.77      0.74    112658
+           4       0.69      0.50      0.58     12555
+           5       0.10      0.74      0.18        47
+   micro avg       0.70      0.70      0.70    211318
+   macro avg       0.55      0.57      0.49    211318
+weighted avg       0.70      0.70      0.70    211318

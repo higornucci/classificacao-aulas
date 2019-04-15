@@ -171,6 +171,3 @@ Matriz de Confusão
    micro avg     0.7018    0.7018    0.7018   1056586
    macro avg     0.5707    0.5718    0.4920   1056586
 weighted avg     0.7013    0.7018    0.6993   1056586
-
-
-
