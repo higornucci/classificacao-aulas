@@ -19,13 +19,13 @@ def plot_confusion_matrix(cm, nome, classes,
     """
     plt.figure()
     if normalize:
-        cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
+        cm = ((cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]) * 100)
         np.set_printoptions(precision=2)
         nome_arquivo = 'matriz_confusao_normalizada_' + nome + '_enn_best.png'
     else:
         nome_arquivo = 'matriz_confusao_' + nome + '_enn_best.png'
 
-    plt.imshow(cm, interpolation='nearest', cmap=cmap)
+    plt.imshow(cm, interpolation='nearest', cmap=cmap, )
     plt.title(title)
     plt.colorbar()
     tick_marks = np.arange(len(classes))
