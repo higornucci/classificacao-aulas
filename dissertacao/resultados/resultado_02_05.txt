@@ -14,6 +14,8 @@ runfile('/home/ufms/projetos/classificacao-aulas/dissertacao/5_6_selecao_modelo.
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
             random_state=None, ratio=None, return_indices=False,
             sampling_strategy='auto')
+
+
 Accuracy (train) for MNB: 57.7243%
 Matriz de Confusão
 [[     0   2437   2611      0      0]
@@ -30,3 +32,65 @@ Matriz de Confusão
    micro avg     0.5772    0.5772    0.5772   1056586
    macro avg     0.2360    0.2297    0.2128   1056586
 weighted avg     0.5495    0.5772    0.5187   1056586
+
+
+Accuracy (train) for RFC: 70.4569%
+Matriz de Confusão
+[[   718   3593    728      8      1]
+ [   219 279594 143830   1559     36]
+ [    33 118438 434103  10452    264]
+ [     0   3409  29026  29840    498]
+ [     0      1     29     24    183]]
+              precision    recall  f1-score   support
+
+           1     0.7402    0.1422    0.2386      5048
+           2     0.6903    0.6575    0.6735    425238
+           3     0.7143    0.7707    0.7414    563290
+           4     0.7125    0.4754    0.5702     62773
+           5     0.1864    0.7722    0.3002       237
+
+   micro avg     0.7046    0.7046    0.7046   1056586
+   macro avg     0.6087    0.5636    0.5048   1056586
+weighted avg     0.7045    0.7046    0.7014   1056586
+
+
+Accuracy (train) for K-NN: 69.9083%
+Matriz de Confusão
+[[   815   3433    769     25      6]
+ [   346 276575 145636   2509    172]
+ [    68 119660 430178  12730    654]
+ [     2   3568  27653  30888    662]
+ [     0      3     26     23    185]]
+              precision    recall  f1-score   support
+
+           1     0.6621    0.1615    0.2596      5048
+           2     0.6859    0.6504    0.6677    425238
+           3     0.7119    0.7637    0.7369    563290
+           4     0.6689    0.4921    0.5670     62773
+           5     0.1102    0.7806    0.1931       237
+
+   micro avg     0.6991    0.6991    0.6991   1056586
+   macro avg     0.5678    0.5696    0.4849   1056586
+weighted avg     0.6985    0.6991    0.6965   1056586
+
+
+Accuracy (train) for SVM: 70.1119%
+Matriz de Confusão
+[[   806   3370    857     14      1]
+ [   353 280384 142321   1897    283]
+ [    61 121766 428168  12607    688]
+ [     1   3619  27184  31244    725]
+ [     0      1     25     21    190]]
+              precision    recall  f1-score   support
+
+           1     0.6601    0.1597    0.2571      5048
+           2     0.6853    0.6594    0.6721    425238
+           3     0.7153    0.7601    0.7370    563290
+           4     0.6824    0.4977    0.5756     62773
+           5     0.1007    0.8017    0.1789       237
+
+   micro avg     0.7011    0.7011    0.7011   1056586
+   macro avg     0.5688    0.5757    0.4842   1056586
+weighted avg     0.7009    0.7011    0.6989   1056586
+
+
