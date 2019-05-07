@@ -11,4 +11,5 @@ input/DadosCompleto.csv
 input/DadosCompletoTransformado.csv
 input/DadosAbate.csv
 input/DadosCompletoTransformadoML*
+dissertacao/notebook/.ipynb_checkpoints/
 *.arff
