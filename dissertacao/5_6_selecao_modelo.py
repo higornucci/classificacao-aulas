@@ -51,7 +51,7 @@ modelos_base = [
                                    max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
                                    n_jobs=n_jobs)),
     ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state))
+    ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
 ]
 
 
@@ -162,16 +162,16 @@ def rodar_algoritmos():
     pipeline = Pipeline([('bal', balanceador),
                          ('clf', modelo)])
     y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs, method='predict_proba')
-    accuracy = accuracy_score(Y_completo, y_pred)
-    print("Accuracy (train) for %s: %0.4f%% " % (nome, accuracy * 100))
-    matriz_confusao = confusion_matrix(Y_completo, y_pred)
-    classes = [1, 2, 3, 4, 5]
-    plot_confusion_matrix(matriz_confusao, nome, classes, False, title='Confusion matrix' + nome)
-    plot_confusion_matrix(matriz_confusao, nome, classes, True,
-                          title='Confusion matrix ' + nome + ', normalized')
-    print('Matriz de Confusão')
-    print(matriz_confusao)
-    print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
+    # accuracy = accuracy_score(Y_completo, y_pred)
+    # print("Accuracy (train) for %s: %0.4f%% " % (nome, accuracy * 100))
+    # matriz_confusao = confusion_matrix(Y_completo, y_pred)
+    # classes = [1, 2, 3, 4, 5]
+    # plot_confusion_matrix(matriz_confusao, nome, classes, False, title='Confusion matrix' + nome)
+    # plot_confusion_matrix(matriz_confusao, nome, classes, True,
+    #                       title='Confusion matrix ' + nome + ', normalized')
+    # print('Matriz de Confusão')
+    # print(matriz_confusao)
+    # print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
     # roc_auc_plot(Y_completo, y_pred, nome, classes)
     roc_auc_aux(Y_completo, y_pred, nome)
     print()
