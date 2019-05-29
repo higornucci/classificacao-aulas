@@ -8,11 +8,14 @@ from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.decomposition import PCA
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
 from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 
 warnings.filterwarnings('ignore')
@@ -20,21 +23,22 @@ pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
+dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+                     'lfi', 'fertigation'],  # , 'field_supplementation', 'clfi'],
+                    axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = 3
+n_jobs = 6
 
-classes_balancear = list([2, 3])
-print('Classes para balancear', classes_balancear)
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, kind_sel='all',
-#                                       sampling_strategy=classes_balancear, n_neighbors=3)
-balanceador = SMOTEENN()
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
+# balanceador = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5), smote=SMOTE(n_jobs=n_jobs))
 # balanceador = SMOTE(n_jobs=n_jobs)
 print(balanceador)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
-                     dados_completo['carcass_fatness_degree']
+                         dados_completo['carcass_fatness_degree']
 
 num_folds = 5
 scoring = 'accuracy'
@@ -42,11 +46,13 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
+    ('MLP', MLPClassifier(random_state=random_state)),
+    ('ADA', AdaBoostClassifier(random_state=random_state)),
     ('MNB', MultinomialNB()),
     ('RFC', RandomForestClassifier(random_state=random_state, oob_score=True,
-                                   n_estimators=100, class_weight='balanced')),
-    ('K-NN', KNeighborsClassifier()),  # n_jobs=-1 roda com o mesmo número de cores
-    ('SVM', SVC(gamma='scale', class_weight='balanced'))
+                                   n_estimators=100, class_weight='balanced', n_jobs=n_jobs)),
+    ('K-NN', KNeighborsClassifier(n_jobs=n_jobs)),  # n_jobs=-1 roda com o mesmo número de cores
+    ('SVM', SVC(gamma='scale', class_weight='balanced', random_state=random_state))
 ]
 
 
@@ -137,20 +143,29 @@ def rodar_algoritmos():
 def escolher_parametros():
     if nome == 'K-NN':
         return [{'clf__weights': ['uniform', 'distance'],
-                 'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}]
+                 'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
+                ]
     elif nome == 'SVM':
-        return [{'clf__C': [0.01, 0.1, 1, 10, 100, 1000],
-                 'clf__gamma': [0.001, 0.01, 0.1, 1, 10],
-                 'clf__kernel': ['rbf']}]
+        return [{'clf__C': [2 ** 6, 2 ** 7, 2 ** 8],
+                 'clf__gamma': [2 ** -3, 2 ** -1, 2 ** 1, 2 ** 3],
+                 'clf__kernel': ['rbf']}
+                ]
     elif nome == 'MNB':
-        return [{'clf__alpha': (1, 0.1, 0.01, 0.001, 0.0001, 0.00001)}]
+        return [{'clf__alpha': [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]}
+                ]
     elif nome == 'RFC':
         return [{'clf__n_estimators': [100, 250],
                  'clf__min_samples_leaf': [1, 5, 10],
                  'clf__min_samples_split': [2, 5, 10],
                  'clf__max_features': ['sqrt', 'log2', None],
-                 'clf__criterion': ['gini', 'entropy'],
                  'clf__max_depth': [50, 75]}
+                ]
+    elif nome == 'MLP':
+        return [{'clf__alpha': [2 ** -3, 2 ** -1, 2 ** 1, 2 ** 3],
+                 'clf__max_iter': [2 ** 6, 2 ** 7, 2 ** 8, 2 ** 10, 2 ** 12]}
+                ]
+    elif nome == 'ADA':
+        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 8, 2 ** 10]}
                 ]
     return None
 

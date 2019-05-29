@@ -31,7 +31,7 @@ dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_eros
 print(dados_completo.head())
 
 random_state = 42
-n_jobs = 3
+n_jobs = 6
 
 balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 # balanceador = SMOTEENN()
@@ -46,11 +46,11 @@ kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB(alpha=0.01)),
-    # ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-    #                                max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
-    #                                n_jobs=n_jobs)),
-    # ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('MNB', MultinomialNB(alpha=0.01)),
+    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
+                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
+                                   n_jobs=n_jobs)),
+    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
 ]
 
@@ -161,19 +161,20 @@ def roc_auc_aux(y_test, predicted_probas, nome):
 def rodar_algoritmos():
     pipeline = Pipeline([('bal', balanceador),
                          ('clf', modelo)])
-    y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs, method='predict_proba')
-    # accuracy = accuracy_score(Y_completo, y_pred)
-    # print("Accuracy (train) for %s: %0.4f%% " % (nome, accuracy * 100))
-    # matriz_confusao = confusion_matrix(Y_completo, y_pred)
-    # classes = [1, 2, 3, 4, 5]
-    # plot_confusion_matrix(matriz_confusao, nome, classes, False, title='Confusion matrix' + nome)
-    # plot_confusion_matrix(matriz_confusao, nome, classes, True,
-    #                       title='Confusion matrix ' + nome + ', normalized')
-    # print('Matriz de Confusão')
-    # print(matriz_confusao)
-    # print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
+    # y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs, method='predict_proba')
+    y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
+    accuracy = accuracy_score(Y_completo, y_pred)
+    print("Accuracy (train) for %s: %0.4f%% " % (nome, accuracy * 100))
+    matriz_confusao = confusion_matrix(Y_completo, y_pred)
+    classes = [1, 2, 3, 4, 5]
+    plot_confusion_matrix(matriz_confusao, nome, classes, False, title='Confusion matrix' + nome)
+    plot_confusion_matrix(matriz_confusao, nome, classes, True,
+                          title='Confusion matrix ' + nome + ', normalized')
+    print('Matriz de Confusão')
+    print(matriz_confusao)
+    print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
     # roc_auc_plot(Y_completo, y_pred, nome, classes)
-    roc_auc_aux(Y_completo, y_pred, nome)
+    # roc_auc_aux(Y_completo, y_pred, nome)
     print()
 
 
