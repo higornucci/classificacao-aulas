@@ -1,4 +1,15 @@
-Accuracy (train) for MNB: 58.0297% 
+dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+                    'lfi', 'fertigation']
+ENN
+modelos_base = [
+    ('MNB', MultinomialNB(alpha=0.01)),
+    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
+                                  max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
+                                  n_jobs=n_jobs)),
+    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
+
+Accuracy (train) for MNB: 58.0297%
 Matriz de Confusão
 [[     0   1575   1891      0      0]
  [     0  71725 249510      0      0]
@@ -14,7 +25,9 @@ Matriz de Confusão
     accuracy                         0.5803    817169
    macro avg     0.2391    0.2260    0.2062    817169
 weighted avg     0.5559    0.5803    0.5108    817169
-Accuracy (train) for RFC: 70.8752% 
+
+
+Accuracy (train) for RFC: 70.8752%
 Matriz de Confusão
 [[   264   2674    521      6      1]
  [    56 208059 111947   1155     18]
@@ -30,7 +43,9 @@ Matriz de Confusão
     accuracy                         0.7088    817169
    macro avg     0.6259    0.5688    0.4907    817169
 weighted avg     0.7088    0.7088    0.7052    817169
-Accuracy (train) for K-NN: 70.3982% 
+
+
+Accuracy (train) for K-NN: 70.3982%
 Matriz de Confusão
 [[   313   2580    541     20     12]
  [   133 206182 112981   1850     89]
@@ -46,3 +61,23 @@ Matriz de Confusão
     accuracy                         0.7040    817169
    macro avg     0.5797    0.5703    0.4774    817169
 weighted avg     0.7031    0.7040    0.7010    817169
+
+
+Accuracy (train) for SVM: 70.5443%
+Matriz de Confusão
+[[   311   2562    583      8      2]
+ [   139 209948 109505   1437    206]
+ [    18  92597 340456  10225    506]
+ [     0   2330  20032  25590    527]
+ [     0      1     16      9    161]]
+              precision    recall  f1-score   support
+
+           1     0.6645    0.0897    0.1581      3466
+           2     0.6829    0.6536    0.6679    321235
+           3     0.7235    0.7671    0.7447    443802
+           4     0.6866    0.5279    0.5969     48479
+           5     0.1148    0.8610    0.2026       187
+
+    accuracy                         0.7054    817169
+   macro avg     0.5745    0.5798    0.4740    817169
+weighted avg     0.7049    0.7054    0.7031    817169

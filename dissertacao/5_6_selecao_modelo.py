@@ -26,7 +26,7 @@ dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encodin
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
-                    'lfi', 'fertigation'],  # , 'field_supplementation', 'clfi'],
+                     'lfi', 'fertigation'],  # , 'field_supplementation', 'clfi'],
                     axis=1, inplace=True)
 print(dados_completo.head())
 
@@ -53,66 +53,6 @@ modelos_base = [
     ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
 ]
-
-
-def roc_auc_plot(y, y_pred, nome, classes):
-    n_classes = len(classes)
-    lw = 2
-    # Compute ROC curve and ROC area for each class
-    fpr = dict()
-    tpr = dict()
-    roc_auc = dict()
-    for i in range(n_classes):
-        fpr[i], tpr[i], _ = roc_curve(y[:, i], y_pred[:, i])
-        roc_auc[i] = auc(fpr[i], tpr[i])
-
-    # Compute micro-average ROC curve and ROC area
-    fpr["micro"], tpr["micro"], _ = roc_curve(y.ravel(), y_pred.ravel())
-    roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
-    # Compute macro-average ROC curve and ROC area
-
-    # First aggregate all false positive rates
-    all_fpr = np.unique(np.concatenate([fpr[i] for i in range(n_classes)]))
-
-    # Then interpolate all ROC curves at this points
-    mean_tpr = np.zeros_like(all_fpr)
-    for i in range(n_classes):
-        mean_tpr += interp(all_fpr, fpr[i], tpr[i])
-
-    # Finally average it and compute AUC
-    mean_tpr /= n_classes
-
-    fpr["macro"] = all_fpr
-    tpr["macro"] = mean_tpr
-    roc_auc["macro"] = auc(fpr["macro"], tpr["macro"])
-
-    # Plot all ROC curves
-    plt.figure()
-    plt.plot(fpr["micro"], tpr["micro"],
-             label='micro-average ROC curve (area = {0:0.2f})'
-                   ''.format(roc_auc["micro"]),
-             color='deeppink', linestyle=':', linewidth=4)
-
-    plt.plot(fpr["macro"], tpr["macro"],
-             label='macro-average ROC curve (area = {0:0.2f})'
-                   ''.format(roc_auc["macro"]),
-             color='navy', linestyle=':', linewidth=4)
-
-    colors = cycle(['aqua', 'darkorange', 'cornflowerblue', 'jade', 'darkmagenta'])
-    for i, color in zip(range(n_classes), colors):
-        plt.plot(fpr[i], tpr[i], color=color, lw=lw,
-                 label='ROC curve of class {0} (area = {1:0.2f})'
-                       ''.format(i + 1, roc_auc[i]))
-
-    plt.plot([0, 1], [0, 1], 'k--', lw=lw)
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Some extension of Receiver operating characteristic to multi-class')
-    plt.legend(loc="lower right")
-    nome_arquivo = 'roc_auc_' + nome + '.png'
-    plt.savefig('figuras/' + nome_arquivo)
 
 
 def plot_confusion_matrix(cm, nome, classes,
@@ -173,7 +113,6 @@ def rodar_algoritmos():
     print('Matriz de Confusão')
     print(matriz_confusao)
     print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
-    # roc_auc_plot(Y_completo, y_pred, nome, classes)
     # roc_auc_aux(Y_completo, y_pred, nome)
     print()
 

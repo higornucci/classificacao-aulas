@@ -93,7 +93,7 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-scores = ['recall_weighted', 'precision_weighted', 'f1_weighted']
+scores = ['f1_weighted']
 
 
 def rodar_algoritmos():
@@ -127,7 +127,7 @@ def rodar_algoritmos():
         print("The scores are computed on the full evaluation set.")
         print()
         pipeline = Pipeline([('bal', balanceador),
-                             ('clf', grid_search.best_params_)])
+                             ('clf', grid_search.best_estimator_)])
         y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
         matriz_confusao = confusion_matrix(Y_completo, y_pred)
         plot_confusion_matrix(matriz_confusao, nome + '_' + score, [1, 2, 3, 4, 5], False,
@@ -161,8 +161,8 @@ def escolher_parametros():
                  'clf__max_depth': [50, 75]}
                 ]
     elif nome == 'MLP':
-        return [{'clf__alpha': [2 ** -3, 2 ** -1, 2 ** 1, 2 ** 3],
-                 'clf__max_iter': [2 ** 6, 2 ** 7, 2 ** 8, 2 ** 10, 2 ** 12]}
+        return [{'clf__alpha': [2 ** -5, 2 ** -4, 2 ** -3, 2 ** -1, 2 ** 1, 2 ** 3],
+                 'clf__max_iter': [2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10]}
                 ]
     elif nome == 'ADA':
         return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 8, 2 ** 10]}

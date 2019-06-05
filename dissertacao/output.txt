@@ -1,10 +1,41 @@
    typification  maturity  carcass_weight  classification  makes_ration  area_80_vegetation_cover  individual_identification  sisbov  grazing_control  trace_list  involved_in_organization  confinement  semi_confinement  field_supplementation  fli  clfi  latitude  longitude  mes_abate  estacao_abate  microrregiao  mesoregiao  carcass_fatness_degree
-0           1.0      0.00        0.136667        1.000000           1.0                       1.0                        1.0     0.0              1.0         0.0                       1.0          1.0               0.0                    1.0  0.0   1.0  0.545360   0.305729   0.181818       0.000000           0.1    0.666667                       3
-1           1.0      0.00        0.255000        0.555556           1.0                       1.0                        1.0     0.0              1.0         0.0                       0.0          1.0               1.0                    1.0  0.0   0.0  0.694299   0.565425   0.000000       0.000000           0.0    0.000000                       3
-2           0.5      0.50        0.290000        0.000000           0.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          0.0               0.0                    0.0  0.0   1.0  0.045360   0.489239   0.909091       1.000000           0.7    1.000000                       2
-3           0.0      0.25        0.427333        0.000000           1.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          1.0               0.0                    1.0  1.0   0.0  1.000000   0.460270   0.636364       0.666667           0.0    0.000000                       3
-4           0.5      0.25        0.425000        0.000000           0.0                       1.0                        1.0     0.0              1.0         0.0                       0.0          1.0               0.0                    1.0  1.0   0.0  0.260515   0.599099   0.909091       1.000000           0.7    1.000000                       3
-EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-            random_state=None, ratio=None, return_indices=False,
-            sampling_strategy='auto')
+0           0.0      0.50        0.432667             0.0           1.0                       0.0                        1.0     1.0              0.0         1.0                       0.0          1.0               0.0                    1.0  0.0   0.0  0.424575   0.861048   0.727273       0.666667           1.0    0.333333                       2
+1           0.5      0.25        0.505333             1.0           0.0                       1.0                        1.0     0.0              1.0         0.0                       1.0          0.0               1.0                    1.0  1.0   0.0  0.475235   0.430278   0.727273       0.666667           0.4    0.000000                       3
+2           1.0      0.25        0.116000             0.0           0.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          0.0               1.0                    1.0  0.0   0.0  0.918099   0.490590   0.272727       0.333333           0.0    0.000000                       3
+3           0.5      0.25        0.476667             0.0           1.0                       0.0                        1.0     0.0              0.0         0.0                       0.0          1.0               0.0                    0.0  0.0   0.0  0.265076   0.547586   0.727273       0.666667           0.7    1.000000                       3
+4           0.0      0.00        0.353333             1.0           1.0                       1.0                        1.0     0.0              1.0         0.0                       1.0          1.0               0.0                    1.0  0.0   1.0  0.545360   0.305729   1.000000       1.000000           0.1    0.666667                       3
+EditedNearestNeighbours(kind_sel='all', n_jobs=6, n_neighbors=5,
+                        random_state=None, ratio=None, return_indices=False,
+                        sampling_strategy='auto')
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+Accuracy (train) for SVM: 70.5443% 
+Matriz de Confusão
+[[   311   2562    583      8      2]
+ [   139 209948 109505   1437    206]
+ [    18  92597 340456  10225    506]
+ [     0   2330  20032  25590    527]
+ [     0      1     16      9    161]]
+              precision    recall  f1-score   support
 
+           1     0.6645    0.0897    0.1581      3466
+           2     0.6829    0.6536    0.6679    321235
+           3     0.7235    0.7671    0.7447    443802
+           4     0.6866    0.5279    0.5969     48479
+           5     0.1148    0.8610    0.2026       187
+
+    accuracy                         0.7054    817169
+   macro avg     0.5745    0.5798    0.4740    817169
+weighted avg     0.7049    0.7054    0.7031    817169
+
+
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
