@@ -15,39 +15,18 @@ dados_completo['carcass_fatness_degree'].replace(['Gordura Mediana - acima de 3 
 dados_completo['carcass_fatness_degree'].replace(['Gordura Uniforme - acima de 6 e até 10 mm de espessura'], 4, inplace=True)
 dados_completo['carcass_fatness_degree'].replace(['Gordura Excessiva - acima de 10 mm de espessura'], 5, inplace=True)
 
-# Substituindo os valores da tipificação
-dados_completo['typification'].replace(['Macho INTEIRO'], 0, inplace=True)  # M
-dados_completo['typification'].replace(['Macho CASTRADO'], 1, inplace=True)  # C
-dados_completo['typification'].replace(['Fêmea'], 2, inplace=True)  # F
-
-# Substituindo os valores da maturidade
-dados_completo['maturity'].replace(['Dente de leite'], 0, inplace=True)
-dados_completo['maturity'].replace(['Dois dentes'], 2, inplace=True)
-dados_completo['maturity'].replace(['Quatro dentes'], 4, inplace=True)
-dados_completo['maturity'].replace(['Seis dentes'], 6, inplace=True)
-dados_completo['maturity'].replace(['Oito dentes'], 8, inplace=True)
-
-
-def eh_precoce(linha):
-    if linha['maturity'] == 0:
-        return 1
-    if linha['maturity'] == 2:
-        return 1
-    if linha['maturity'] == 4 and linha['typification'] != 0:
-        return 1
-    return 0
-
-
-colunas_categoricas = ['microrregiao', 'mesoregiao']
+colunas_categoricas = ['typification', 'maturity', 'microrregiao', 'mesoregiao', 'mes_abate', 'estacao_abate']
 dados_categoricos = dados_completo[colunas_categoricas]
-for cc in colunas_categoricas:
-    labelEncoder = LabelEncoder()
-    dados_categoricos[cc] = labelEncoder.fit_transform(dados_categoricos[cc])
-    print(cc, labelEncoder.classes_)
-
 dados_alvo = dados_completo['carcass_fatness_degree']
-dados_completo = dados_completo.drop(colunas_categoricas, axis=1).drop('carcass_fatness_degree', axis=1)
-dados_completo = dados_completo.join(dados_categoricos).join(dados_alvo)
+dados_numericos = dados_completo.drop(colunas_categoricas, axis=1).drop('carcass_fatness_degree', axis=1)  # remover atributos não numéricos
+
+for cc in colunas_categoricas:
+    prefix = '{}#'.format(cc)
+    dummies = pd.get_dummies(dados_categoricos[cc], prefix=prefix).astype(np.int8)
+    dados_categoricos.drop(cc, axis=1, inplace=True)
+    dados_categoricos = dados_categoricos.join(dummies)
+
+dados_completo = dados_categoricos.join(dados_numericos).join(dados_alvo)
 
 # Substituindo os valores 'Não' por 0
 dados_completo = dados_completo.applymap(lambda x: 0 if "Não" in str(x) else x)

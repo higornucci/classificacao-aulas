@@ -82,8 +82,8 @@ def gerar_arquivo_dados_pratica_recuperacao_pastagem(dados_processo_produtivo):
         subset=['EstabelecimentoIdentificador', 'QuestionarioPraticaRecuperacaoPastagem',
                 'PraticaRecuperacaoPastagemDescricao'])
     dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.pivot(
-         index='EstabelecimentoIdentificador', columns='PraticaRecuperacaoPastagemDescricao',
-         values='QuestionarioPraticaRecuperacaoPastagem')
+        index='EstabelecimentoIdentificador', columns='PraticaRecuperacaoPastagemDescricao',
+        values='QuestionarioPraticaRecuperacaoPastagem')
     # dados_pratica_recuperacao_pastagem_resumido = dados_pratica_recuperacao_pastagem_resumido.groupby(['EstabelecimentoIdentificador'])['PraticaRecuperacaoPastagemDescricao'].apply(lambda x: ','.join(x.astype('category'))).reset_index()
     # dados_pratica_recuperacao_pastagem_resumido.set_index('EstabelecimentoIdentificador', inplace=True)
     # dados_pratica_recuperacao_pastagem_resumido.index.name = 'property_id'
@@ -135,9 +135,10 @@ def gerar_arquivo_dados_cadastro_estabelecimento(dados_processo_produtivo):
 def gerar_arquivo_dados_abate():
     dados_abate = pd.read_csv('../input/ClassificacaoAnimal.csv', encoding='utf-8', delimiter=';')
     # drop de identificadores que não acrescentam nada ao modelo, ou seja, não ajudam na obtenção de uma carcaça melhor
-    dados_abate.drop(['excluir1', 'excluir2', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'IncentivoProdutorSituacao',
-                      'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
-                      'Classificador1', 'Classificador2', 'IdentificadorLoteSituacaoLote'], axis=1, inplace=True)
+    dados_abate.drop(
+        ['excluir1', 'excluir2', 'EstabelecimentoUF', 'IncentivoProdutorIdentificador', 'IncentivoProdutorSituacao',
+         'IdentificadorLote', 'IdentificadorLoteNumeroAnimal', 'EmpresaClassificadoraIdentificador',
+         'Classificador1', 'Classificador2', 'IdentificadorLoteSituacaoLote'], axis=1, inplace=True)
     # drop de colunas com o mesmo valor para todas as linhas
     dados_abate.drop(['MotivoDesclassificacao', 'EhNovilhoPrecoce', 'AprovacaoCarcacaSif'], axis=1, inplace=True)
     # Remover os ids vazios
@@ -206,7 +207,8 @@ def gerar_arquivo_dados_abate():
     #      7674, 7686, 7695, 7696, 7708, 7711, 7713, 7719,
     #      7722, 7727, 7729, 7739])]
 
-    dados_abate_resumido = dados_abate_resumido[dados_abate_resumido['carcass_weight'].between(150, 450, inclusive=True)]
+    dados_abate_resumido = dados_abate_resumido[
+        dados_abate_resumido['carcass_weight'].between(150, 450, inclusive=True)]
     dados_abate_resumido['property_id'] = dados_abate_resumido[
         'property_id'].astype(
         'int64')
@@ -239,11 +241,11 @@ def tratar_municipios(dados_completo):
 
 def get_season(now):
     Y = 2000  # dummy leap year to allow input X-02-29 (leap day)
-    seasons = [(0, (date(Y, 1, 1), date(Y, 3, 20))),
-               (1, (date(Y, 3, 21), date(Y, 6, 20))),
-               (2, (date(Y, 6, 21), date(Y, 9, 22))),
-               (3, (date(Y, 9, 23), date(Y, 12, 20))),
-               (0, (date(Y, 12, 21), date(Y, 12, 31)))]
+    seasons = [('Verao', (date(Y, 1, 1), date(Y, 3, 20))),
+               ('Outono', (date(Y, 3, 21), date(Y, 6, 20))),
+               ('Inverno', (date(Y, 6, 21), date(Y, 9, 22))),
+               ('Primavera', (date(Y, 9, 23), date(Y, 12, 20))),
+               ('Verao', (date(Y, 12, 21), date(Y, 12, 31)))]
     if isinstance(now, datetime):
         now = now.date()
     now = now.replace(year=Y)
@@ -252,8 +254,12 @@ def get_season(now):
 
 
 def tratar_data_abate(dados_completo):
+    meses = {1: 'Janeiro', 2: 'Fevereiro', 3: 'Marco', 4: 'Abril', 5: 'Maio',
+             6: 'Junho', 7: 'Julho', 8: 'Agosto', 9: 'Setembro', 10: 'Outubro',
+             11: 'Novembro', 12: 'Dezembro'}
     dados_completo['date_slaughter'] = dados_completo['date_slaughter'].astype('datetime64')
-    dados_completo['mes_abate'] = dados_completo['date_slaughter'].map(lambda d: d.month - 1)
+    dados_completo['mes_abate'] = dados_completo['date_slaughter'].map(lambda d: d.month)
+    dados_completo['mes_abate'] = dados_completo['mes_abate'].apply(lambda m: meses[m])
     dados_completo['estacao_abate'] = dados_completo['date_slaughter'].map(lambda d: get_season(d))
     dados_completo.drop('date_slaughter', axis=1, inplace=True)
     return dados_completo
