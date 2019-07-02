@@ -1,22 +1,23 @@
+import sys
 import itertools
 import warnings
+
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import scikitplot as skplt
 from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold
+from sklearn.feature_selection import RFECV
+from sklearn.metrics import confusion_matrix, classification_report
+from sklearn.model_selection import cross_val_predict, GridSearchCV, StratifiedKFold, train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
-from sklearn.feature_selection import RFECV
-import scikitplot as skplt
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
@@ -25,14 +26,25 @@ pd.set_option('display.width', 2000)  # display all columns
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
-print(dados_completo.head())
+dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+                     'lfi', 'fertigation', 'microrregiao#_BaixoPantanal'],
+                    axis=1, inplace=True)
+Y = dados_completo.pop('carcass_fatness_degree')
+X = dados_completo
 
 random_state = 42
 n_jobs = 2
 
-enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
-smote = SMOTE(n_jobs=n_jobs)
-smoteenn = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5), smote=SMOTE(n_jobs=n_jobs))
+dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test_size=0.60, stratify=Y,
+                                                                      random_state=random_state)
+dados_completo = dados_completo_x.join(dados_completo_y)
+print(dados_completo.head())
+
+
+enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5, random_state=random_state)
+smote = SMOTE(n_jobs=n_jobs, random_state=random_state)
+smoteenn = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=n_jobs), smote=SMOTE(n_jobs=n_jobs),
+                    random_state=random_state)
 X_completo, Y_completo = dados_completo.drop('carcass_fatness_degree', axis=1), \
                          dados_completo['carcass_fatness_degree']
 
@@ -47,7 +59,7 @@ class Mypipeline(Pipeline):
         return self._final_estimator.feature_importances_
 
 
-num_folds = 5
+num_folds = 10
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 rfc_coef = RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
@@ -70,8 +82,8 @@ def fazer_selecao_features_rfe():
     return rfe.transform(X_completo)
 
 
-print(fazer_selecao_features_rfe())
-exit()
+# print(fazer_selecao_features_rfe())
+# exit()
 
 balanceadores = [
     ('ENN', enn),
@@ -81,20 +93,21 @@ balanceadores = [
 
 # preparando alguns modelos
 modelos_base = [
-    ('MLP', MLPClassifier(random_state=random_state)),
-    ('ADA', AdaBoostClassifier(random_state=random_state)),
     ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
                                    max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
                                    n_jobs=n_jobs)),
+    ('MLP', MLPClassifier(random_state=random_state)),
+    ('ADA', AdaBoostClassifier(random_state=random_state)),
+
     ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
 ]
 
 
-def roc_auc_aux(y_test, y_pred_probas, nome, nome_balanceador):
+def roc_auc_aux(y_test, y_pred_probas, nome, nome_balanceador, score):
     skplt.metrics.plot_roc(y_test, y_pred_probas)
-    nome_arquivo = 'roc_auc_' + nome_balanceador + '_' + nome + '.png'
+    nome_arquivo = 'roc_auc_' + nome_balanceador + '_' + nome + '_' + score + '.png'
     plt.savefig('figuras/' + nome_arquivo)
 
 
@@ -135,7 +148,6 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-feature_selection = RFECV(rfc_coef, cv=kfold, scoring='f1_weighted', n_jobs=n_jobs)
 scores = ['f1_weighted']
 
 
@@ -144,13 +156,12 @@ def model_select():
         print(balanceador)
         for score in scores:
             pipeline = Pipeline([('bal', balanceador),
-                                 ('fse', feature_selection),
                                  ('clf', modelo)])
             print("# Tuning hyper-parameters for %s in %s" % (score, nome))
             print()
 
             np.set_printoptions(precision=4)
-            grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
+            grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=5,
                                        scoring=score, verbose=2)
             grid_search.fit(X_completo, Y_completo)
 
@@ -176,17 +187,19 @@ def model_select():
                                  ('clf', grid_search.best_estimator_)])
             y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs)
             matriz_confusao = confusion_matrix(Y_completo, y_pred)
-            plot_confusion_matrix(matriz_confusao, nome + '_' + nome_balanceador + '_' + score, [1, 2, 3, 4, 5], False,
-                                  title='Confusion matrix' + nome + '(best parameters)')
-            plot_confusion_matrix(matriz_confusao, nome + '_' + nome_balanceador + '_' + score, [1, 2, 3, 4, 5], True,
+            nome_arquivo = nome + '_' + nome_balanceador + '_' + score
+            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
+                                  title='Confusion matrix' + nome + ' (best parameters)')
+            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
                                   title='Confusion matrix ' + nome + ', normalized')
             print('Matriz de Confusão')
             print(matriz_confusao)
             print(classification_report(y_true=Y_completo, y_pred=y_pred, digits=4))
             y_pred = cross_val_predict(pipeline, X_completo, Y_completo, cv=kfold, n_jobs=n_jobs,
                                        method='predict_proba')
-            roc_auc_aux(Y_completo, y_pred, nome)
+            roc_auc_aux(Y_completo, y_pred, nome, nome_balanceador, score)
             print()
+            sys.stdout.flush()
 
 
 def escolher_parametros():

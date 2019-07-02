@@ -28,6 +28,8 @@ dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
                      'lfi', 'fertigation'],  # , 'field_supplementation', 'clfi'],
                     axis=1, inplace=True)
+# dados_completo.drop(['total_area_confinement', 'area_20_erosion', 'microrregiao#_BaixoPantanal'],
+#                     axis=1, inplace=True)
 print(dados_completo.head())
 
 random_state = 42
