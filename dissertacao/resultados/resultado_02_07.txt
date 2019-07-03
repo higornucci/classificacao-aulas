@@ -1,0 +1,65 @@
+(1056586, 55)
+
+        typification#_Fêmea  typification#_Macho CASTRADO  typification#_Macho INTEIRO  maturity#_Dente de leite  maturity#_Dois dentes  maturity#_Oito dentes  maturity#_Quatro dentes  maturity#_Seis dentes  microrregiao#_AltoTaquari  microrregiao#_Aquidauana  microrregiao#_Bodoquena  microrregiao#_CampoGrande  microrregiao#_Cassilandia  microrregiao#_Dourados  microrregiao#_Iguatemi  microrregiao#_NovaAndradina  microrregiao#_Paranaiba  microrregiao#_TresLagoas  mesoregiao#_CentroNorte  mesoregiao#_Leste  mesoregiao#_Pantanal  mesoregiao#_Sudoeste  mes_abate#_Abril  mes_abate#_Agosto  mes_abate#_Dezembro  mes_abate#_Fevereiro  mes_abate#_Janeiro  mes_abate#_Julho  mes_abate#_Junho  mes_abate#_Maio  mes_abate#_Marco  mes_abate#_Novembro  mes_abate#_Outubro  mes_abate#_Setembro  estacao_abate#_Inverno  estacao_abate#_Outono  estacao_abate#_Primavera  estacao_abate#_Verao  carcass_weight  classification  makes_ration  area_80_vegetation_cover  individual_identification  sisbov  grazing_control  trace_list  involved_in_organization  confinement  semi_confinement  field_supplementation  fli  clfi  latitude  longitude  carcass_fatness_degree
+74973                   0.0                           1.0                          0.0                       0.0                    0.0                    0.0                      1.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          1.0                      0.0                       0.0                      0.0                1.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               1.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.452000        1.000000           1.0                       1.0                        1.0     1.0              1.0         1.0                       1.0          1.0               0.0                    1.0  1.0   0.0  0.271681   0.668657                       4
+963221                  0.0                           1.0                          0.0                       0.0                    1.0                    0.0                      0.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 1.0                  0.0                     0.0                    0.0                       1.0                   0.0        0.344667        0.555556           0.0                       1.0                        0.0     0.0              1.0         0.0                       1.0          0.0               1.0                    1.0  1.0   0.0  0.694299   0.565425                       2
+450009                  0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        1.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               1.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.327333        0.000000           1.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          0.0               1.0                    1.0  0.0   0.0  0.633863   0.518289                       2
+967439                  0.0                           0.0                          1.0                       0.0                    0.0                    1.0                      0.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  1.0                 0.0                  0.0                     0.0                    0.0                       1.0                   0.0        0.359333        0.000000           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          1.0               0.0                    1.0  0.0   0.0  0.694299   0.565425                       2
+887311                  0.0                           0.0                          1.0                       1.0                    0.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        1.0                     0.0                     0.0                          0.0                      0.0                       0.0                      0.0                1.0                   0.0                   0.0               0.0                1.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     1.0                    0.0                       0.0                   0.0        0.603333        0.555556           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          0.0               1.0                    1.0  0.0   0.0  0.773437   0.717771                       3
+(422634, 55)
+
+EditedNearestNeighbours(kind_sel='all', n_jobs=2, n_neighbors=5,
+                        random_state=42, ratio=None, return_indices=False,
+                        sampling_strategy='auto')
+# Tuning hyper-parameters for f1_weighted in MNB
+Fitting 10 folds for each of 1 candidates, totalling 10 fits
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+[CV] clf__alpha=0.01 .................................................
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=24.9min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=25.6min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=24.5min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=25.2min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=24.3min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=24.9min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=25.0min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=25.2min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=24.9min
+[CV] .................................. clf__alpha=0.01, total=25.0min
+[Parallel(n_jobs=2)]: Done  10 out of  10 | elapsed: 126.0min finished
+
+Best parameters set found on development set:
+
+{'clf__alpha': 0.01}
+
+Grid scores on development set:
+
+0.5705 (+/-0.0039) for {'clf__alpha': 0.01}
+
+Detailed classification report:
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[   129    985    896      9      0]
+ [    62  82249  86199   1574     11]
+ [    18  59304 162848   3090     56]
+ [     1   4173  18446   2475     14]
+ [     0      0     92      1      2]]
+              precision    recall  f1-score   support
+           1     0.6143    0.0639    0.1157      2019
+           2     0.5606    0.4835    0.5192    170095
+           3     0.6066    0.7228    0.6596    225316
+           4     0.3462    0.0986    0.1535     25109
+           5     0.0241    0.0211    0.0225        95
+    accuracy                         0.5861    422634
+   macro avg     0.4304    0.2780    0.2941    422634
+weighted avg     0.5725    0.5861    0.5703    422634
