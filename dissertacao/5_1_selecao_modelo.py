@@ -193,7 +193,6 @@ def model_select():
             roc_auc_aux(test_y, y_pred, nome, nome_balanceador, score)
             print()
             sys.stdout.flush()
-            exit()
 
 
 def escolher_parametros():
