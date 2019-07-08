@@ -147,52 +147,59 @@ def plot_confusion_matrix(cm, nome, classes,
 scores = ['f1_weighted']
 
 
+def classificador_ja_executado(nome_classificador, nome_balanceador):
+    return nome_classificador == 'MNB' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE')
+
+
 def model_select():
     for nome_balanceador, balanceador in balanceadores:
-        print(balanceador)
-        for score in scores:
-            pipeline = Pipeline([('bal', balanceador),
-                                 ('clf', modelo)])
-            print("# Tuning hyper-parameters for %s in %s" % (score, nome))
-            print()
+        if classificador_ja_executado(nome, nome_balanceador):
+            continue
+        else:
+            print(balanceador)
+            for score in scores:
+                pipeline = Pipeline([('bal', balanceador),
+                                     ('clf', modelo)])
+                print("# Tuning hyper-parameters for %s in %s" % (score, nome))
+                print()
 
-            np.set_printoptions(precision=4)
-            grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
-                                       scoring=score, verbose=2)
-            grid_search.fit(dados_completo_x, dados_completo_y)
+                np.set_printoptions(precision=4)
+                grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
+                                           scoring=score, verbose=2)
+                grid_search.fit(dados_completo_x, dados_completo_y)
 
-            print("Best parameters set found on development set:")
-            print()
-            print(grid_search.best_params_)
-            print()
-            print("Grid scores on development set:")
-            print()
-            means = grid_search.cv_results_['mean_test_score']
-            stds = grid_search.cv_results_['std_test_score']
-            for mean, std, params in zip(means, stds, grid_search.cv_results_['params']):
-                print("%0.4f (+/-%0.04f) for %r"
-                      % (mean, std * 2, params))
-            print()
+                print("Best parameters set found on development set:")
+                print()
+                print(grid_search.best_params_)
+                print()
+                print("Grid scores on development set:")
+                print()
+                means = grid_search.cv_results_['mean_test_score']
+                stds = grid_search.cv_results_['std_test_score']
+                for mean, std, params in zip(means, stds, grid_search.cv_results_['params']):
+                    print("%0.4f (+/-%0.04f) for %r"
+                          % (mean, std * 2, params))
+                print()
 
-            print("Detailed classification report:")
-            print()
-            print("The model is trained on the full development set.")
-            print("The scores are computed on the full evaluation set.")
-            print()
-            y_pred = grid_search.predict(test_x)
-            matriz_confusao = confusion_matrix(test_y, y_pred)
-            nome_arquivo = nome + '_' + nome_balanceador + '_' + score
-            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
-                                  title='Confusion matrix' + nome + ' (best parameters)')
-            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
-                                  title='Confusion matrix ' + nome + ', normalized')
-            print('Matriz de Confusão')
-            print(matriz_confusao)
-            print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
-            y_pred = grid_search.predict_proba(test_x)
-            roc_auc_aux(test_y, y_pred, nome, nome_balanceador, score)
-            print()
-            sys.stdout.flush()
+                print("Detailed classification report:")
+                print()
+                print("The model is trained on the full development set.")
+                print("The scores are computed on the full evaluation set.")
+                print()
+                y_pred = grid_search.predict(test_x)
+                matriz_confusao = confusion_matrix(test_y, y_pred)
+                nome_arquivo = nome + '_' + nome_balanceador + '_' + score
+                plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
+                                      title='Confusion matrix' + nome + ' (best parameters)')
+                plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
+                                      title='Confusion matrix ' + nome + ', normalized')
+                print('Matriz de Confusão')
+                print(matriz_confusao)
+                print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
+                y_pred = grid_search.predict_proba(test_x)
+                roc_auc_aux(test_y, y_pred, nome, nome_balanceador, score)
+                print()
+                sys.stdout.flush()
 
 
 def escolher_parametros():

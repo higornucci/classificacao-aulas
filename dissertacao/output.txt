@@ -1,17 +1,195 @@
 (1056586, 55)
         typification#_Fêmea  typification#_Macho CASTRADO  typification#_Macho INTEIRO  maturity#_Dente de leite  maturity#_Dois dentes  maturity#_Oito dentes  maturity#_Quatro dentes  maturity#_Seis dentes  microrregiao#_AltoTaquari  microrregiao#_Aquidauana  microrregiao#_Bodoquena  microrregiao#_CampoGrande  microrregiao#_Cassilandia  microrregiao#_Dourados  microrregiao#_Iguatemi  microrregiao#_NovaAndradina  microrregiao#_Paranaiba  microrregiao#_TresLagoas  mesoregiao#_CentroNorte  mesoregiao#_Leste  mesoregiao#_Pantanal  mesoregiao#_Sudoeste  mes_abate#_Abril  mes_abate#_Agosto  mes_abate#_Dezembro  mes_abate#_Fevereiro  mes_abate#_Janeiro  mes_abate#_Julho  mes_abate#_Junho  mes_abate#_Maio  mes_abate#_Marco  mes_abate#_Novembro  mes_abate#_Outubro  mes_abate#_Setembro  estacao_abate#_Inverno  estacao_abate#_Outono  estacao_abate#_Primavera  estacao_abate#_Verao  carcass_weight  classification  makes_ration  area_80_vegetation_cover  individual_identification  sisbov  grazing_control  trace_list  involved_in_organization  confinement  semi_confinement  field_supplementation  fli  clfi  latitude  longitude  carcass_fatness_degree
-13949                   0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        1.0                     0.0                     0.0                          0.0                      0.0                       0.0                      0.0                1.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 1.0                  0.0                     0.0                    0.0                       1.0                   0.0        0.480000        0.555556           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          1.0               0.0                    1.0  1.0   0.0  0.773437   0.717771                       3
-311846                  1.0                           0.0                          0.0                       1.0                    0.0                    0.0                      0.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               1.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.286667        0.555556           0.0                       1.0                        0.0     0.0              1.0         0.0                       1.0          0.0               1.0                    1.0  1.0   0.0  0.694299   0.565425                       3
-852390                  0.0                           0.0                          1.0                       1.0                    0.0                    0.0                      0.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                1.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     1.0                    0.0                       0.0                   0.0        0.244000        0.000000           0.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          0.0               0.0                    1.0  0.0   0.0  0.694299   0.565425                       2
-332916                  1.0                           0.0                          0.0                       0.0                    1.0                    0.0                      0.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  1.0                     0.0                    0.0                       1.0                   0.0        0.228667        0.555556           1.0                       1.0                        1.0     0.0              1.0         0.0                       0.0          1.0               1.0                    1.0  0.0   0.0  0.715588   0.488461                       3
-289583                  0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     0.0                     1.0                          0.0                      0.0                       0.0                      0.0                0.0                   0.0                   1.0               0.0                0.0                  0.0                   1.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    0.0                       0.0                   1.0        0.408333        0.555556           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          1.0               1.0                    1.0  1.0   0.0  0.077556   0.544640                       2
+13724                   1.0                           0.0                          0.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     1.0                     0.0                          0.0                      0.0                       0.0                      0.0                0.0                   0.0                   1.0               1.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.106667        0.555556           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          1.0               0.0                    1.0  1.0   0.0  0.222715   0.402537                       3
+310881                  1.0                           0.0                          0.0                       1.0                    0.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        1.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  1.0                 0.0                  0.0                     0.0                    0.0                       1.0                   0.0        0.176000        1.000000           0.0                       0.0                        1.0     0.0              0.0         0.0                       1.0          1.0               0.0                    1.0  1.0   0.0  0.633863   0.518289                       3
+852858                  0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          1.0                      0.0                       0.0                      0.0                1.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               1.0                  0.0                 0.0                  0.0                     0.0                    0.0                       0.0                   1.0        0.520000        0.000000           1.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          0.0               0.0                    1.0  1.0   0.0  0.231882   0.667430                       2
+331558                  1.0                           0.0                          0.0                       1.0                    0.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       1.0                      0.0                1.0                   0.0                   0.0               0.0                1.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     1.0                    0.0                       0.0                   0.0        0.159333        0.000000           1.0                       0.0                        1.0     1.0              0.0         1.0                       0.0          1.0               0.0                    1.0  0.0   0.0  0.424575   0.861048                       3
+290228                  1.0                           0.0                          0.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        1.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               1.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.176000        0.555556           1.0                       1.0                        1.0     0.0              1.0         0.0                       1.0          1.0               1.0                    1.0  0.0   0.0  0.707117   0.426514                       2
 (845268, 55)
-EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
-                        sampling_strategy='auto')
+SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=3,
+      out_step='deprecated', random_state=42, ratio=None,
+      sampling_strategy='auto', svm_estimator='deprecated')
 # Tuning hyper-parameters for f1_weighted in MNB
 
 Fitting 10 folds for each of 6 candidates, totalling 60 fits
 /home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
   "(https://pypi.org/project/six/).", DeprecationWarning)
+[Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.9min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.7min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.6min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=20.3min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=21.4min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=21.0min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=20.4min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.7min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=20.8min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.6min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=21.5min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=21.9min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=21.7min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=20.9min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=21.7min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=22.4min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=21.3min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=20.9min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=20.7min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=20.6min
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=22.8min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.7min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=22.6min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=20.9min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=21.6min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=21.2min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=21.4min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.8min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.7min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.4min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=20.4min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=20.1min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=21.7min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=22.3min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=21.8min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=21.7min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=20.3min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=21.3min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=20.9min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=20.1min
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.9min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.7min
+[CV] clf__alpha=1 ....................................................
+[CV] ..................................... clf__alpha=1, total=21.9min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=22.2min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=22.1min
+[CV] clf__alpha=0.1 ..................................................
+[CV] ................................... clf__alpha=0.1, total=22.3min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=22.3min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=20.7min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.7min
+[CV] clf__alpha=0.01 .................................................
+[CV] .................................. clf__alpha=0.01, total=21.4min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=21.3min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=22.6min
+[CV] clf__alpha=0.001 ................................................
+[CV] ................................. clf__alpha=0.001, total=20.9min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=23.2min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=23.9min
+[CV] clf__alpha=0.0001 ...............................................
+[CV] ................................ clf__alpha=0.0001, total=21.1min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=23.1min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=23.9min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=21.3min
+[CV] clf__alpha=1e-05 ................................................
+[CV] ................................. clf__alpha=1e-05, total=16.3min
+/home/higornucci/.local/lib/python3.6/site-packages/sklearn/externals/six.py:31: DeprecationWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
+  "(https://pypi.org/project/six/).", DeprecationWarning)
+Best parameters set found on development set:
+
+{'clf__alpha': 1}
+
+Grid scores on development set:
+
+0.3585 (+/-0.0031) for {'clf__alpha': 1}
+0.3585 (+/-0.0031) for {'clf__alpha': 0.1}
+0.3585 (+/-0.0031) for {'clf__alpha': 0.01}
+0.3585 (+/-0.0031) for {'clf__alpha': 0.001}
+0.3585 (+/-0.0031) for {'clf__alpha': 0.0001}
+0.3585 (+/-0.0031) for {'clf__alpha': 1e-05}
+
+Detailed classification report:
+
+The model is trained on the full development set.
+The scores are computed on the full evaluation set.
+
+Matriz de Confusão
+[[  678   195    37    81    19]
+ [22922 38002  9168 11725  3231]
+ [23859 32795 20125 25074 10805]
+ [ 1121  1518  1232  6909  1775]
+ [    4     0     1     7    35]]
+              precision    recall  f1-score   support
+
+           1     0.0140    0.6713    0.0273      1010
+           2     0.5241    0.4468    0.4824     85048
+           3     0.6585    0.1786    0.2810    112658
+           4     0.1578    0.5503    0.2452     12555
+           5     0.0022    0.7447    0.0044        47
+
+    accuracy                         0.3111    211318
+   macro avg     0.2713    0.5183    0.2081    211318
+weighted avg     0.5714    0.3111    0.3587    211318
+
+
+SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
+                                     random_state=None, ratio=None,
+                                     return_indices=False,
+                                     sampling_strategy='auto'),
+         random_state=42, ratio=None, sampling_strategy='auto',
+         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
+                     n_jobs=3, out_step='deprecated', random_state=None,
+                     ratio=None, sampling_strategy='auto',
+                     svm_estimator='deprecated'))
+# Tuning hyper-parameters for f1_weighted in MNB
+
+Fitting 10 folds for each of 6 candidates, totalling 60 fits
+[Parallel(n_jobs=3)]: Done  35 tasks      | elapsed: 257.7min
+[Parallel(n_jobs=3)]: Done  60 out of  60 | elapsed: 435.8min finished
 [Parallel(n_jobs=3)]: Using backend LokyBackend with 3 concurrent workers.
