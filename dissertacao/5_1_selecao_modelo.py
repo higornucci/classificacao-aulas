@@ -148,7 +148,7 @@ scores = ['f1_weighted']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return nome_classificador == 'MNB' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE')
+    return nome_classificador == 'MNB'
 
 
 def model_select():
