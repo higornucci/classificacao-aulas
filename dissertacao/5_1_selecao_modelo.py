@@ -34,9 +34,12 @@ Y = dados_completo.pop('carcass_fatness_degree')
 X = dados_completo
 
 random_state = 42
-n_jobs = 3
+n_jobs = 2
 
-dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test_size=0.2, stratify=Y,
+dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
+                                                                          random_state=random_state)
+dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(dados_completo_xt, dados_completo_yt,
+                                                                      test_size=0.2, stratify=dados_completo_yt,
                                                                       random_state=random_state)
 dados_completo = dados_completo_x.join(dados_completo_y)
 print(dados_completo.head())
@@ -94,7 +97,7 @@ balanceadores = [
 modelos_base = [
     ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
+                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=10, n_estimators=250,
                                    n_jobs=n_jobs)),
     ('MLP', MLPClassifier(random_state=random_state)),
     ('ADA', AdaBoostClassifier(random_state=random_state)),
@@ -148,7 +151,7 @@ scores = ['f1_weighted']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return nome_classificador == 'MNB'
+    return nome_classificador == 'MNB' or (nome_classificador == 'RFC' and nome_balanceador == 'ENN')
 
 
 def model_select():
