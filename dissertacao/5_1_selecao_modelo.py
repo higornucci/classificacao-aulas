@@ -41,6 +41,8 @@ dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, 
 dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(dados_completo_xt, dados_completo_yt,
                                                                       test_size=0.2, stratify=dados_completo_yt,
                                                                       random_state=random_state)
+# dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test_size=0.2, stratify=Y,
+#                                                                       random_state=random_state)
 dados_completo = dados_completo_x.join(dados_completo_y)
 print(dados_completo.head())
 print(dados_completo.shape)
@@ -97,7 +99,7 @@ balanceadores = [
 modelos_base = [
     ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=10, n_estimators=250,
+                                   max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
                                    n_jobs=n_jobs)),
     ('MLP', MLPClassifier(random_state=random_state)),
     ('ADA', AdaBoostClassifier(random_state=random_state)),
@@ -151,7 +153,8 @@ scores = ['f1_weighted']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return nome_classificador == 'MNB' or (nome_classificador == 'RFC' and nome_balanceador == 'ENN')
+    return nome_classificador == 'MNB' or (nome_classificador == 'RFC' and
+                                           (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
 
 
 def model_select():
@@ -170,6 +173,7 @@ def model_select():
                 grid_search = GridSearchCV(pipeline, escolher_parametros(), cv=kfold, refit=True, n_jobs=n_jobs,
                                            scoring=score, verbose=2)
                 grid_search.fit(dados_completo_x, dados_completo_y)
+                # pipeline.fit(dados_completo_x, dados_completo_y)
 
                 print("Best parameters set found on development set:")
                 print()
@@ -190,6 +194,7 @@ def model_select():
                 print("The scores are computed on the full evaluation set.")
                 print()
                 y_pred = grid_search.predict(test_x)
+                # y_pred = pipeline.predict(test_x)
                 matriz_confusao = confusion_matrix(test_y, y_pred)
                 nome_arquivo = nome + '_' + nome_balanceador + '_' + score
                 plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
@@ -200,9 +205,11 @@ def model_select():
                 print(matriz_confusao)
                 print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
                 y_pred = grid_search.predict_proba(test_x)
+                # y_pred = pipeline.predict_proba(test_x)
                 roc_auc_aux(test_y, y_pred, nome, nome_balanceador, score)
                 print()
                 sys.stdout.flush()
+                # exit()
 
 
 def escolher_parametros():

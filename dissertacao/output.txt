@@ -2311,3 +2311,763 @@ weighted avg     0.6953    0.6669    0.6734     63395
 [CV] clf__max_depth=75, clf__max_features=None, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
 [CV]  clf__max_depth=75, clf__max_features=None, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=17.1min
 [CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=75, clf__max_features=None, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=17.1min
+[CV] clf__max_depth=75, clf__max_features=None, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=75, clf__max_features=None, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=16.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=39.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=40.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=42.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=41.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=38.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=34.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=38.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.5min
+
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=39.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=35.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=38.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=33.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=42.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=39.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=35.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 [CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=33.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=33.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=34.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=34.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=39.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=38.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=40.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=41.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=40.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=35.9min
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=38.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=34.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=35.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=40.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=38.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=41.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=39.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=41.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=42.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=42.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=40.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=43.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=39.2min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=41.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=38.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=33.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=33.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=42.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=39.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=35.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=38.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=38.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=35.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=33.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=34.9min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=sqrt, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=35.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=35.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=34.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=34.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=37.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=33.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=38.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=34.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=33.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=250, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=35.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=100, total=35.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=1, clf__min_samples_split=10, clf__n_estimators=250, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=35.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=100, total=35.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=33.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=34.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=34.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=38.2min
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=2, clf__n_estimators=250, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=35.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=5, clf__n_estimators=250, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=33.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=100, total=36.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=37.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=36.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=5, clf__min_samples_split=10, clf__n_estimators=250, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=33.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=100, total=35.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=34.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=37.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=36.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=34.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=36.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=42.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=36.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=38.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=39.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=35.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=42.4min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=47.8min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=47.0min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=45.5min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=47.6min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=41.5min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=49.0min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=48.9min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=48.9min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=2, clf__n_estimators=250, total=36.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=37.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=35.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=35.9min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=37.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=100, total=35.8min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=37.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=5, clf__n_estimators=250, total=36.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=37.4min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=39.7min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=40.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=39.2min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=100, total=38.0min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.6min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=37.5min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.1min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=38.3min
+[CV] clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=log2, clf__min_samples_leaf=10, clf__min_samples_split=10, clf__n_estimators=250, total=41.6min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=49.2min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=44.8min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=48.6min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=47.5min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=100, total=42.3min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=48.7min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=49.5min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=48.8min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=48.7min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250 
+[CV]  clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=2, clf__n_estimators=250, total=49.3min
+[CV] clf__max_depth=50, clf__max_features=None, clf__min_samples_leaf=1, clf__min_samples_split=5, clf__n_estimators=100 
