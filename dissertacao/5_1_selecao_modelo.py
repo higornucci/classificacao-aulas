@@ -46,6 +46,7 @@ dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(dados_comp
 dados_completo = dados_completo_x.join(dados_completo_y)
 print(dados_completo.head())
 print(dados_completo.shape)
+dados_completo = []
 
 enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5, random_state=random_state)
 smote = SMOTE(n_jobs=n_jobs, random_state=random_state)
@@ -153,8 +154,7 @@ scores = ['f1_weighted']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return nome_classificador == 'MNB' or (nome_classificador == 'RFC' and
-                                           (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
+    return nome_classificador == 'MNB' or (nome_classificador == 'RFC') or (nome_classificador == 'K-NN')
 
 
 def model_select():
@@ -233,8 +233,12 @@ def escolher_parametros():
                  'clf__max_depth': [50, 75]}
                 ]
     elif nome == 'MLP':
-        return [{'clf__alpha': [2 ** -5, 2 ** -4, 2 ** -3, 2 ** -1, 2 ** 1, 2 ** 3],
-                 'clf__max_iter': [2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10]}
+        return [{
+                'clf__activation': ['tanh', 'relu'],
+                'clf__solver': ['lbfgs', 'sgd', 'adam'],
+                'clf__alpha': 10.0 ** -np.arange(1, 5),
+                # 'clf__max_iter': [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000],
+                'clf__hidden_layer_sizes': np.arange(10, 15)}
                 ]
     elif nome == 'ADA':
         return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 8, 2 ** 10]}
