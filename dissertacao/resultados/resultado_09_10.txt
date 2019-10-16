@@ -1,4 +1,4 @@
-[CV] clf__n_estimators=2 .............................................
+Ôªø[CV] clf__n_estimators=2 .............................................
 [CV] .............................. clf__n_estimators=2, total=12.8min
 [CV] clf__n_estimators=2 .............................................
 [CV] .............................. clf__n_estimators=2, total=12.2min
@@ -119,7 +119,7 @@
 [CV] clf__n_estimators=1024 ..........................................
 [CV] ........................... clf__n_estimators=1024, total=11.5min
 (1056586, 55)
-        typification#_FÍmea  typification#_Macho CASTRADO  typification#_Macho INTEIRO  maturity#_Dente de leite  maturity#_Dois dentes  maturity#_Oito dentes  maturity#_Quatro dentes  maturity#_Seis dentes  microrregiao#_AltoTaquari  microrregiao#_Aquidauana  microrregiao#_Bodoquena  microrregiao#_CampoGrande  microrregiao#_Cassilandia  microrregiao#_Dourados  microrregiao#_Iguatemi  microrregiao#_NovaAndradina  microrregiao#_Paranaiba  microrregiao#_TresLagoas  mesoregiao#_CentroNorte  mesoregiao#_Leste  mesoregiao#_Pantanal  mesoregiao#_Sudoeste  mes_abate#_Abril  mes_abate#_Agosto  mes_abate#_Dezembro  mes_abate#_Fevereiro  mes_abate#_Janeiro  mes_abate#_Julho  mes_abate#_Junho  mes_abate#_Maio  mes_abate#_Marco  mes_abate#_Novembro  mes_abate#_Outubro  mes_abate#_Setembro  estacao_abate#_Inverno  estacao_abate#_Outono  estacao_abate#_Primavera  estacao_abate#_Verao  carcass_weight  classification  makes_ration  area_80_vegetation_cover  individual_identification  sisbov  grazing_control  trace_list  involved_in_organization  confinement  semi_confinement  field_supplementation  fli  clfi  latitude  longitude  carcass_fatness_degree
+        typification#_F√™mea  typification#_Macho CASTRADO  typification#_Macho INTEIRO  maturity#_Dente de leite  maturity#_Dois dentes  maturity#_Oito dentes  maturity#_Quatro dentes  maturity#_Seis dentes  microrregiao#_AltoTaquari  microrregiao#_Aquidauana  microrregiao#_Bodoquena  microrregiao#_CampoGrande  microrregiao#_Cassilandia  microrregiao#_Dourados  microrregiao#_Iguatemi  microrregiao#_NovaAndradina  microrregiao#_Paranaiba  microrregiao#_TresLagoas  mesoregiao#_CentroNorte  mesoregiao#_Leste  mesoregiao#_Pantanal  mesoregiao#_Sudoeste  mes_abate#_Abril  mes_abate#_Agosto  mes_abate#_Dezembro  mes_abate#_Fevereiro  mes_abate#_Janeiro  mes_abate#_Julho  mes_abate#_Junho  mes_abate#_Maio  mes_abate#_Marco  mes_abate#_Novembro  mes_abate#_Outubro  mes_abate#_Setembro  estacao_abate#_Inverno  estacao_abate#_Outono  estacao_abate#_Primavera  estacao_abate#_Verao  carcass_weight  classification  makes_ration  area_80_vegetation_cover  individual_identification  sisbov  grazing_control  trace_list  involved_in_organization  confinement  semi_confinement  field_supplementation  fli  clfi  latitude  longitude  carcass_fatness_degree
 827484                  0.0                           1.0                          0.0                       0.0                    0.0                    0.0                      1.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  1.0                 0.0                  0.0                     0.0                    0.0                       1.0                   0.0        0.788000        0.000000           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          0.0               1.0                    1.0  0.0   0.0  1.000000   0.460270                       2
 428301                  1.0                           0.0                          0.0                       0.0                    0.0                    0.0                      1.0                    0.0                        0.0                       0.0                      0.0                        1.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               1.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.332000        0.000000           1.0                       1.0                        0.0     0.0              1.0         0.0                       1.0          0.0               1.0                    1.0  0.0   0.0  0.551834   0.445171                       4
 725568                  0.0                           0.0                          1.0                       0.0                    0.0                    0.0                      1.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     1.0                     0.0                          0.0                      0.0                       0.0                      0.0                0.0                   0.0                   1.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  1.0                     1.0                    0.0                       0.0                   0.0        0.792000        0.555556           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          1.0               0.0                    1.0  1.0   0.0  0.222715   0.402537                       2
@@ -150,7 +150,7 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
+Matriz de Confus√£o
 [[    0   252    47     0     4]
  [    0 21785  3580     0   149]
  [    0 21912 11457     0   428]
@@ -273,7 +273,7 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
+Matriz de Confus√£o
 [[  128   120    36    17     2]
  [ 5377 13603  4407  2073    54]
  [ 3503 13972  7222  8732   368]
@@ -482,7 +482,7 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
+Matriz de Confus√£o
 [[  235    42     9    16     1]
  [12544  6097  3774  3067    32]
  [10838  5723  6516 10473   247]
@@ -3039,7 +3039,7 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
+Matriz de Confus√£o
 [[    3   212    82     6     0]
  [    2 15200 10066   246     0]
  [    0  7917 25097   783     0]
@@ -5596,7 +5596,7 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
+Matriz de Confus√£o
 [[  255    27    13     8     0]
  [ 3278 15388  4940  1896    12]
  [ 1969 12154 12985  6595    94]
@@ -5615,15 +5615,3 @@ Matriz de Confus„o
 weighted avg     0.6120    0.4957    0.5193     63395
 
 
-SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
-                                     random_state=None, ratio=None,
-                                     return_indices=False,
-                                     sampling_strategy='auto'),
-         n_jobs=1, random_state=42, ratio=None, sampling_strategy='auto',
-         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
-                     n_jobs=3, out_step='deprecated', random_state=None,
-                     ratio=None, sampling_strategy='auto',
-                     svm_estimator='deprecated'))
-# Tuning hyper-parameters for f1_weighted in MLP
-
-Fitting 10 folds for each of 120 candidates, totalling 1200 fits

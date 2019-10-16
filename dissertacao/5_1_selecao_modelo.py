@@ -34,7 +34,7 @@ Y = dados_completo.pop('carcass_fatness_degree')
 X = dados_completo
 
 random_state = 42
-n_jobs = 2
+n_jobs = 3
 
 dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
                                                                           random_state=random_state)
@@ -102,8 +102,9 @@ modelos_base = [
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
                                    max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
                                    n_jobs=n_jobs)),
-    ('MLP', MLPClassifier(random_state=random_state)),
+
     ('ADA', AdaBoostClassifier(random_state=random_state)),
+    ('MLP', MLPClassifier(random_state=random_state)),
 
     ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
@@ -154,7 +155,8 @@ scores = ['f1_weighted']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return nome_classificador == 'MNB' or (nome_classificador == 'RFC') or (nome_classificador == 'K-NN')
+    return nome_classificador == 'MNB' or (nome_classificador == 'RFC') or (nome_classificador == 'K-NN') \
+           or (nome_classificador == 'MLP' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
 
 
 def model_select():
