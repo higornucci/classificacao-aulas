@@ -159,7 +159,8 @@ def classificador_ja_executado(nome_classificador, nome_balanceador):
            (nome_classificador == 'RFC') or \
            (nome_classificador == 'K-NN') or \
            (nome_classificador == 'MLP') or \
-           (nome_classificador == 'ADA')
+           (nome_classificador == 'ADA') or \
+           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN'))
 
 
 def model_select():

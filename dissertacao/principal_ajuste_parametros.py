@@ -1,5 +1,5 @@
-import sys
 import itertools
+import sys
 import warnings
 
 import matplotlib.pyplot as plt
@@ -10,6 +10,11 @@ from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
+from keras import Sequential
+from keras.constraints import maxnorm
+from keras.layers import Dense, Dropout
+from keras.optimizers import RMSprop
+from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.feature_selection import RFECV
 from sklearn.metrics import confusion_matrix, classification_report
@@ -34,6 +39,7 @@ Y = dados_completo.pop('carcass_fatness_degree')
 X = dados_completo
 
 random_state = 42
+np.random.seed(random_state)
 n_jobs = 3
 
 dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
@@ -90,10 +96,41 @@ def fazer_selecao_features_rfe():
 # print(fazer_selecao_features_rfe())
 # exit()
 
+def create_model_rna():
+    activation = 'relu'
+    dropout_rate = 0.0
+    init_mode = 'uniform'
+    weight_constraint = 0
+    optmizer = RMSprop()
+    lr = 0.01
+    momentum = 0
+
+    model = Sequential()
+    model.add(Dense(64,
+                    input_dim=dados_completo_x.shape[1],
+                    activation=activation,
+                    kernel_constraint=maxnorm(weight_constraint)
+                    )
+              )
+    model.add(Dropout(dropout_rate))
+    model.add(Dense(64, kernel_initializer=init_mode, activation=activation))
+    model.add(Dense(10, kernel_initializer=init_mode, activation='softmax'))
+    model.compile(loss='binary_crossentropy',
+                  optimizer=optmizer,
+                  metrics=['accuracy'])
+
+    batch_size = 128
+    epochs = 10
+    return KerasClassifier(build_fn=model, epochs=epochs,
+                           batch_size=batch_size, verbose=1)
+
+
+create_model_rna()
+exit()
 balanceadores = [
     ('ENN', enn),
-    ('SMOTE', smote),
-    ('SMOTEENN', smoteenn)
+    # ('SMOTE', smote),
+    # ('SMOTEENN', smoteenn)
 ]
 
 # preparando alguns modelos
@@ -105,7 +142,7 @@ modelos_base = [
 
     ('ADA', AdaBoostClassifier(random_state=random_state)),
     ('MLP', MLPClassifier(random_state=random_state)),
-
+    ('RNA', create_model_rna()),
     ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
 ]
@@ -156,10 +193,10 @@ scores = ['f1_weighted']
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
     return (nome_classificador == 'MNB') or \
-           (nome_classificador == 'RFC') or \
            (nome_classificador == 'K-NN') or \
            (nome_classificador == 'MLP') or \
-           (nome_classificador == 'ADA')
+           (nome_classificador == 'ADA') or \
+           (nome_classificador == 'SVM')
 
 
 def model_select():
@@ -247,6 +284,16 @@ def escolher_parametros():
                 ]
     elif nome == 'ADA':
         return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 8, 2 ** 10]}
+                ]
+    elif nome == 'RNA':
+        return [{'clf__activation': ['relu', 'tanh', 'sigmoid', 'softmax'],
+                 'clf__momentum': [0.0, 0.2, 0.4, 0.8],
+                 'clf__learn_rate': [0.001, 0.01, 0.1],
+                 'clf__dropout_rate': [0.0, 0.1, 0.5],
+                 'clf__weight_constraint': [1, 2, 5],
+                 'clf__neurons': [1, 10, 30],
+                 'clf__epochs': [10, 30],
+                 'clf__batch_size': [1000, 5000]}
                 ]
     return None
 
