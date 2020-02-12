@@ -147,36 +147,48 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
+def classificador_ja_executado(nome_classificador, nome_balanceador):
+    return (nome_classificador == 'MNB') or \
+           (nome_classificador == 'RFC') or \
+           (nome_classificador == 'K-NN') or \
+           (nome_classificador == 'MLP') or \
+           (nome_classificador == 'ADA') or \
+           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN'))
+
+
 def model_select():
     for nome_balanceador, balanceador in balanceadores:
-        print(balanceador)
-        pipeline = Pipeline([('bal', balanceador),
-                             ('clf', modelo)])
-        print("# Rodando o algoritmo %s" % nome)
-        print()
+        if classificador_ja_executado(nome, nome_balanceador):
+            continue
+        else:
+            print(balanceador)
+            pipeline = Pipeline([('bal', balanceador),
+                                 ('clf', modelo)])
+            print("# Rodando o algoritmo %s" % nome)
+            print()
 
-        np.set_printoptions(precision=4)
-        pipeline.fit(dados_completo_x, dados_completo_y)
+            np.set_printoptions(precision=4)
+            pipeline.fit(dados_completo_x, dados_completo_y)
 
-        print("Detailed classification report:")
-        print()
-        print("The model is trained on the full development set.")
-        print("The scores are computed on the full evaluation set.")
-        print()
-        y_pred = pipeline.predict(test_x)
-        matriz_confusao = confusion_matrix(test_y, y_pred)
-        nome_arquivo = nome + '_' + nome_balanceador + '_best'
-        plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
-                              title='Confusion matrix' + nome + ' (best parameters)')
-        plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
-                              title='Confusion matrix ' + nome + ', normalized')
-        print('Matriz de Confusão')
-        print(matriz_confusao)
-        print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
-        y_pred = pipeline.predict_proba(test_x)
-        roc_auc_aux(test_y, y_pred, nome, nome_balanceador)
-        print()
-        sys.stdout.flush()
+            print("Detailed classification report:")
+            print()
+            print("The model is trained on the full development set.")
+            print("The scores are computed on the full evaluation set.")
+            print()
+            y_pred = pipeline.predict(test_x)
+            matriz_confusao = confusion_matrix(test_y, y_pred)
+            nome_arquivo = nome + '_' + nome_balanceador + '_best'
+            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
+                                  title='Confusion matrix' + nome + ' (best parameters)')
+            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
+                                  title='Confusion matrix ' + nome + ', normalized')
+            print('Matriz de Confusão')
+            print(matriz_confusao)
+            print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
+            y_pred = pipeline.predict_proba(test_x)
+            roc_auc_aux(test_y, y_pred, nome, nome_balanceador)
+            print()
+            sys.stdout.flush()
 
 
 for nome, modelo in modelos_base:
