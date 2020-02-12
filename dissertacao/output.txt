@@ -1,14 +1,6 @@
-(1056586, 55)
-        typification#_FÍmea  typification#_Macho CASTRADO  typification#_Macho INTEIRO  maturity#_Dente de leite  maturity#_Dois dentes  maturity#_Oito dentes  maturity#_Quatro dentes  maturity#_Seis dentes  microrregiao#_AltoTaquari  microrregiao#_Aquidauana  microrregiao#_Bodoquena  microrregiao#_CampoGrande  microrregiao#_Cassilandia  microrregiao#_Dourados  microrregiao#_Iguatemi  microrregiao#_NovaAndradina  microrregiao#_Paranaiba  microrregiao#_TresLagoas  mesoregiao#_CentroNorte  mesoregiao#_Leste  mesoregiao#_Pantanal  mesoregiao#_Sudoeste  mes_abate#_Abril  mes_abate#_Agosto  mes_abate#_Dezembro  mes_abate#_Fevereiro  mes_abate#_Janeiro  mes_abate#_Julho  mes_abate#_Junho  mes_abate#_Maio  mes_abate#_Marco  mes_abate#_Novembro  mes_abate#_Outubro  mes_abate#_Setembro  estacao_abate#_Inverno  estacao_abate#_Outono  estacao_abate#_Primavera  estacao_abate#_Verao  carcass_weight  classification  makes_ration  area_80_vegetation_cover  individual_identification  sisbov  grazing_control  trace_list  involved_in_organization  confinement  semi_confinement  field_supplementation  fli  clfi  latitude  longitude  carcass_fatness_degree
-13578                   0.0                           0.0                          1.0                       1.0                    0.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        1.0                     0.0                     0.0                          0.0                      0.0                       0.0                      0.0                1.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  1.0                     1.0                    0.0                       0.0                   0.0        0.531667        1.000000           0.0                       1.0                        1.0     1.0              1.0         1.0                       1.0          1.0               0.0                    1.0  1.0   0.0  0.809610   0.774754                       3
-311815                  0.0                           1.0                          0.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     0.0                     1.0                          0.0                      0.0                       0.0                      0.0                0.0                   0.0                   1.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               1.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.410000        0.000000           0.0                       1.0                        0.0     0.0              1.0         0.0                       0.0          0.0               0.0                    1.0  0.0   0.0  0.000000   0.419353                       3
-851848                  0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     1.0                     0.0                          0.0                      0.0                       0.0                      0.0                0.0                   0.0                   1.0               0.0                0.0                  1.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     0.0                    0.0                       0.0                   1.0        0.455333        0.555556           1.0                       1.0                        1.0     1.0              1.0         1.0                       0.0          1.0               0.0                    1.0  1.0   0.0  0.222715   0.402537                       2
-332751                  0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        1.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      0.0                       0.0                      1.0                0.0                   0.0                   0.0               0.0                1.0                  0.0                   0.0                 0.0               0.0               0.0              0.0               0.0                  0.0                 0.0                  0.0                     1.0                    0.0                       0.0                   0.0        0.408000        0.555556           1.0                       1.0                        0.0     0.0              1.0         0.0                       1.0          1.0               1.0                    1.0  1.0   0.0  0.694299   0.565425                       3
-289068                  0.0                           0.0                          1.0                       0.0                    1.0                    0.0                      0.0                    0.0                        0.0                       0.0                      0.0                        0.0                        0.0                     0.0                     0.0                          0.0                      1.0                       0.0                      0.0                1.0                   0.0                   0.0               0.0                0.0                  0.0                   0.0                 0.0               0.0               0.0              1.0               0.0                  0.0                 0.0                  0.0                     0.0                    1.0                       0.0                   0.0        0.313333        0.555556           0.0                       1.0                        1.0     1.0              1.0         1.0                       1.0          1.0               1.0                    1.0  0.0   0.0  0.563565   0.952086                       2
 (845268, 55)
 MultinomialNB(alpha=0.01, class_prior=None, fit_prior=True)
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
                         sampling_strategy='auto')
 # Rodando o algoritmo MNB
 
@@ -17,28 +9,26 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[   69   514   422     3     2]
- [   29 41986 42305   712    16]
- [   15 30767 80475  1350    51]
- [    0  2100  9340  1103    12]
- [    0     0    44     0     3]]
+Matriz de Confus√£o
+[[   82   500   424     3     1]
+ [   23 41672 42612   727    14]
+ [   11 30182 80962  1462    41]
+ [    0  2123  9269  1152    11]
+ [    0     0    38     3     6]]
               precision    recall  f1-score   support
 
-           1     0.6106    0.0683    0.1229      1010
-           2     0.5571    0.4937    0.5235     85048
-           3     0.6070    0.7143    0.6563    112658
-           4     0.3482    0.0879    0.1403     12555
-           5     0.0357    0.0638    0.0458        47
+           1     0.7069    0.0812    0.1456      1010
+           2     0.5595    0.4900    0.5225     85048
+           3     0.6073    0.7187    0.6583    112658
+           4     0.3442    0.0918    0.1449     12555
+           5     0.0822    0.1277    0.1000        47
 
-    accuracy                         0.5851    211318
-   macro avg     0.4317    0.2856    0.2977    211318
-weighted avg     0.5714    0.5851    0.5695    211318
+    accuracy                         0.5862    211318
+   macro avg     0.4600    0.3018    0.3143    211318
+weighted avg     0.5728    0.5862    0.5706    211318
 
 
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=3,
-      out_step='deprecated', random_state=42, ratio=None,
-      sampling_strategy='auto', svm_estimator='deprecated')
+SMOTE(k_neighbors=5, n_jobs=3, random_state=42, sampling_strategy='auto')
 # Rodando o algoritmo MNB
 
 Detailed classification report:
@@ -46,34 +36,30 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  623   218    44    91    34]
- [22858 37717  9489 11786  3198]
- [23944 32567 20378 24989 10780]
- [ 1110  1553  1257  6788  1847]
- [    6     0     3     2    36]]
+Matriz de Confus√£o
+[[  644   191    46   100    29]
+ [22534 38416  9155 11436  3507]
+ [23150 33281 19726 24701 11800]
+ [ 1068  1668  1116  6775  1928]
+ [    0     0     2     6    39]]
               precision    recall  f1-score   support
 
-           1     0.0128    0.6168    0.0251      1010
-           2     0.5234    0.4435    0.4802     85048
-           3     0.6537    0.1809    0.2834    112658
-           4     0.1555    0.5407    0.2415     12555
-           5     0.0023    0.7660    0.0045        47
+           1     0.0136    0.6376    0.0266      1010
+           2     0.5223    0.4517    0.4844     85048
+           3     0.6565    0.1751    0.2765    112658
+           4     0.1575    0.5396    0.2438     12555
+           5     0.0023    0.8298    0.0045        47
 
-    accuracy                         0.3102    211318
-   macro avg     0.2696    0.5096    0.2069    211318
-weighted avg     0.5685    0.3102    0.3588    211318
+    accuracy                         0.3104    211318
+   macro avg     0.2704    0.5268    0.2072    211318
+weighted avg     0.5696    0.3104    0.3570    211318
 
 
 SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
-                                     random_state=None, ratio=None,
-                                     return_indices=False,
                                      sampling_strategy='auto'),
-         n_jobs=1, random_state=42, ratio=None, sampling_strategy='auto',
-         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
-                     n_jobs=3, out_step='deprecated', random_state=None,
-                     ratio=None, sampling_strategy='auto',
-                     svm_estimator='deprecated'))
+         n_jobs=None, random_state=42, sampling_strategy='auto',
+         smote=SMOTE(k_neighbors=5, n_jobs=3, random_state=None,
+                     sampling_strategy='auto'))
 # Rodando o algoritmo MNB
 
 Detailed classification report:
@@ -81,34 +67,34 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  730   113    21   105    41]
- [32186 28988  4868 15427  3579]
- [34130 24585 10917 30908 12118]
- [ 1551  1085   436  7407  2076]
- [    6     0     0     3    38]]
+Matriz de Confus√£o
+[[  731   101    26   118    34]
+ [31795 29606  4501 15284  3862]
+ [33420 25084 10328 30814 13012]
+ [ 1506  1157   387  7380  2125]
+ [    0     0     0     7    40]]
               precision    recall  f1-score   support
 
-           1     0.0106    0.7228    0.0210      1010
-           2     0.5293    0.3408    0.4147     85048
-           3     0.6721    0.0969    0.1694    112658
-           4     0.1375    0.5900    0.2231     12555
-           5     0.0021    0.8085    0.0042        47
+           1     0.0108    0.7238    0.0214      1010
+           2     0.5292    0.3481    0.4200     85048
+           3     0.6776    0.0917    0.1615    112658
+           4     0.1377    0.5878    0.2231     12555
+           5     0.0021    0.8511    0.0042        47
 
     accuracy                         0.2275    211318
-   macro avg     0.2703    0.5118    0.1665    211318
-weighted avg     0.5796    0.2275    0.2705    211318
+   macro avg     0.2715    0.5205    0.1660    211318
+weighted avg     0.5824    0.2275    0.2685    211318
 
 
-RandomForestClassifier(bootstrap=True, class_weight='balanced',
+RandomForestClassifier(bootstrap=True, ccp_alpha=0.0, class_weight='balanced',
                        criterion='gini', max_depth=50, max_features='sqrt',
-                       max_leaf_nodes=None, min_impurity_decrease=0.0,
-                       min_impurity_split=None, min_samples_leaf=1,
-                       min_samples_split=6, min_weight_fraction_leaf=0.0,
-                       n_estimators=250, n_jobs=3, oob_score=False,
-                       random_state=42, verbose=0, warm_start=False)
+                       max_leaf_nodes=None, max_samples=None,
+                       min_impurity_decrease=0.0, min_impurity_split=None,
+                       min_samples_leaf=1, min_samples_split=6,
+                       min_weight_fraction_leaf=0.0, n_estimators=250, n_jobs=3,
+                       oob_score=False, random_state=42, verbose=0,
+                       warm_start=False)
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
                         sampling_strategy='auto')
 # Rodando o algoritmo RFC
 
@@ -117,28 +103,26 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  147   678   181     3     1]
- [   37 56065 28651   283    12]
- [    3 23759 86798  2041    57]
- [    0   668  5877  5915    95]
- [    0     0     9     2    36]]
+Matriz de Confus√£o
+[[  144   690   173     3     0]
+ [   39 56062 28612   330     5]
+ [    1 23998 86597  2005    57]
+ [    0   714  5855  5852   134]
+ [    0     0     3     3    41]]
               precision    recall  f1-score   support
 
-           1     0.7861    0.1455    0.2456      1010
-           2     0.6907    0.6592    0.6746     85048
-           3     0.7143    0.7705    0.7413    112658
-           4     0.7175    0.4711    0.5688     12555
-           5     0.1791    0.7660    0.2903        47
+           1     0.7826    0.1426    0.2412      1010
+           2     0.6882    0.6592    0.6734     85048
+           3     0.7143    0.7687    0.7405    112658
+           4     0.7143    0.4661    0.5641     12555
+           5     0.1730    0.8723    0.2887        47
 
-    accuracy                         0.7049    211318
-   macro avg     0.6175    0.5625    0.5041    211318
-weighted avg     0.7052    0.7049    0.7017    211318
+    accuracy                         0.7037    211318
+   macro avg     0.6145    0.5818    0.5016    211318
+weighted avg     0.7040    0.7037    0.7005    211318
 
 
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=3,
-      out_step='deprecated', random_state=42, ratio=None,
-      sampling_strategy='auto', svm_estimator='deprecated')
+SMOTE(k_neighbors=5, n_jobs=3, random_state=42, sampling_strategy='auto')
 # Rodando o algoritmo RFC
 
 Detailed classification report:
@@ -146,34 +130,30 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  587   325    83    15     0]
- [ 1688 54635 26644  2077     4]
- [  582 30031 72652  9373    20]
- [   20   564  2921  9003    47]
- [    0     0     9     8    30]]
+Matriz de Confus√£o
+[[  569   363    66    12     0]
+ [ 1714 54772 26605  1957     0]
+ [  551 30403 72186  9498    20]
+ [   30   582  2845  9037    61]
+ [    0     1     5    10    31]]
               precision    recall  f1-score   support
 
-           1     0.2040    0.5812    0.3020      1010
-           2     0.6386    0.6424    0.6405     85048
-           3     0.7101    0.6449    0.6759    112658
-           4     0.4397    0.7171    0.5451     12555
-           5     0.2970    0.6383    0.4054        47
+           1     0.1987    0.5634    0.2938      1010
+           2     0.6360    0.6440    0.6400     85048
+           3     0.7097    0.6408    0.6735    112658
+           4     0.4405    0.7198    0.5466     12555
+           5     0.2768    0.6596    0.3899        47
 
-    accuracy                         0.6479    211318
-   macro avg     0.4579    0.6448    0.5138    211318
-weighted avg     0.6628    0.6479    0.6521    211318
+    accuracy                         0.6464    211318
+   macro avg     0.4523    0.6455    0.5087    211318
+weighted avg     0.6615    0.6464    0.6506    211318
 
 
 SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
-                                     random_state=None, ratio=None,
-                                     return_indices=False,
                                      sampling_strategy='auto'),
-         n_jobs=1, random_state=42, ratio=None, sampling_strategy='auto',
-         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
-                     n_jobs=3, out_step='deprecated', random_state=None,
-                     ratio=None, sampling_strategy='auto',
-                     svm_estimator='deprecated'))
+         n_jobs=None, random_state=42, sampling_strategy='auto',
+         smote=SMOTE(k_neighbors=5, n_jobs=3, random_state=None,
+                     sampling_strategy='auto'))
 # Rodando o algoritmo RFC
 
 Detailed classification report:
@@ -181,29 +161,28 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  768   197    27    18     0]
- [ 3124 58393 20691  2833     7]
- [ 1250 29866 69397 12111    34]
- [   51   423  1624 10389    68]
- [    0     0     5    11    31]]
+Matriz de Confus√£o
+[[  739   228    27    16     0]
+ [ 3197 58475 20552  2823     1]
+ [ 1265 29557 69364 12441    31]
+ [   61   412  1529 10473    80]
+ [    0     0     4    11    32]]
               precision    recall  f1-score   support
 
-           1     0.1479    0.7604    0.2476      1010
-           2     0.6570    0.6866    0.6715     85048
-           3     0.7564    0.6160    0.6790    112658
-           4     0.4096    0.8275    0.5480     12555
-           5     0.2214    0.6596    0.3316        47
+           1     0.1404    0.7317    0.2357      1010
+           2     0.6595    0.6876    0.6732     85048
+           3     0.7583    0.6157    0.6796    112658
+           4     0.4065    0.8342    0.5466     12555
+           5     0.2222    0.6809    0.3351        47
 
-    accuracy                         0.6577    211318
-   macro avg     0.4385    0.7100    0.4955    211318
-weighted avg     0.6928    0.6577    0.6661    211318
+    accuracy                         0.6582    211318
+   macro avg     0.4374    0.7100    0.4940    211318
+weighted avg     0.6945    0.6582    0.6669    211318
 
 
 AdaBoostClassifier(algorithm='SAMME.R', base_estimator=None, learning_rate=1.0,
                    n_estimators=16, random_state=42)
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
                         sampling_strategy='auto')
 # Rodando o algoritmo ADA
 
@@ -212,28 +191,26 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[    0   560   450     0     0]
- [    1 42711 41953   383     0]
- [    0 31352 80304   998     4]
- [    0  1527 10200   828     0]
- [    0     1    44     1     1]]
+Matriz de Confus√£o
+[[    0   711   298     1     0]
+ [   33 49932 34775   308     0]
+ [    2 35588 76399   668     1]
+ [    0  1772 10168   613     2]
+ [    0     2    41     3     1]]
               precision    recall  f1-score   support
 
            1     0.0000    0.0000    0.0000      1010
-           2     0.5609    0.5022    0.5299     85048
-           3     0.6040    0.7128    0.6539    112658
-           4     0.3747    0.0659    0.1122     12555
-           5     0.2000    0.0213    0.0385        47
+           2     0.5674    0.5871    0.5771     85048
+           3     0.6279    0.6781    0.6520    112658
+           4     0.3848    0.0488    0.0867     12555
+           5     0.2500    0.0213    0.0392        47
 
-    accuracy                         0.5861    211318
-   macro avg     0.3479    0.2604    0.2669    211318
-weighted avg     0.5700    0.5861    0.5686    211318
+    accuracy                         0.6007    211318
+   macro avg     0.3660    0.2671    0.2710    211318
+weighted avg     0.5860    0.6007    0.5850    211318
 
 
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=3,
-      out_step='deprecated', random_state=42, ratio=None,
-      sampling_strategy='auto', svm_estimator='deprecated')
+SMOTE(k_neighbors=5, n_jobs=3, random_state=42, sampling_strategy='auto')
 # Rodando o algoritmo ADA
 
 Detailed classification report:
@@ -241,34 +218,30 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  575   230   166    30     9]
- [19312 33938 25513  5908   377]
- [15906 27509 41474 25953  1816]
- [  464  1281  2473  7762   575]
- [    0     0     1    15    31]]
+Matriz de Confus√£o
+[[  517   245   180    59     9]
+ [18588 39342 20780  5888   450]
+ [18240 36164 31408 23895  2951]
+ [  502  2250  1609  7399   795]
+ [    3     0     1     7    36]]
               precision    recall  f1-score   support
 
-           1     0.0159    0.5693    0.0309      1010
-           2     0.5391    0.3990    0.4586     85048
-           3     0.5957    0.3681    0.4550    112658
-           4     0.1957    0.6182    0.2973     12555
-           5     0.0110    0.6596    0.0217        47
+           1     0.0137    0.5119    0.0266      1010
+           2     0.5044    0.4626    0.4826     85048
+           3     0.5819    0.2788    0.3770    112658
+           4     0.1986    0.5893    0.2971     12555
+           5     0.0085    0.7660    0.0168        47
 
-    accuracy                         0.3965    211318
-   macro avg     0.2715    0.5229    0.2527    211318
-weighted avg     0.5462    0.3965    0.4450    211318
+    accuracy                         0.3724    211318
+   macro avg     0.2614    0.5217    0.2400    211318
+weighted avg     0.5251    0.3724    0.4130    211318
 
 
 SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
-                                     random_state=None, ratio=None,
-                                     return_indices=False,
                                      sampling_strategy='auto'),
-         n_jobs=1, random_state=42, ratio=None, sampling_strategy='auto',
-         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
-                     n_jobs=3, out_step='deprecated', random_state=None,
-                     ratio=None, sampling_strategy='auto',
-                     svm_estimator='deprecated'))
+         n_jobs=None, random_state=42, sampling_strategy='auto',
+         smote=SMOTE(k_neighbors=5, n_jobs=3, random_state=None,
+                     sampling_strategy='auto'))
 # Rodando o algoritmo ADA
 
 Detailed classification report:
@@ -276,34 +249,34 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  734   120    10   137     9]
- [39702 15847  3740 25366   393]
- [36213 12380  4722 57329  2014]
- [ 2067   204   206  9329   749]
- [    0     0     0    12    35]]
+Matriz de Confus√£o
+[[  814    75    18    99     4]
+ [46624 13048  1866 23228   282]
+ [50249  9704  3715 47100  1890]
+ [ 1720   687   185  9164   799]
+ [    3     0     1     3    40]]
               precision    recall  f1-score   support
 
-           1     0.0093    0.7267    0.0184      1010
-           2     0.5550    0.1863    0.2790     85048
-           3     0.5441    0.0419    0.0778    112658
-           4     0.1012    0.7431    0.1782     12555
-           5     0.0109    0.7447    0.0216        47
+           1     0.0082    0.8059    0.0162      1010
+           2     0.5549    0.1534    0.2404     85048
+           3     0.6422    0.0330    0.0627    112658
+           4     0.1151    0.7299    0.1989     12555
+           5     0.0133    0.8511    0.0261        47
 
-    accuracy                         0.1451    211318
-   macro avg     0.2441    0.4885    0.1150    211318
-weighted avg     0.5195    0.1451    0.1645    211318
+    accuracy                         0.1267    211318
+   macro avg     0.2667    0.5147    0.1089    211318
+weighted avg     0.5726    0.1267    0.1421    211318
 
 
 MLPClassifier(activation='tanh', alpha=0.01, batch_size='auto', beta_1=0.9,
               beta_2=0.999, early_stopping=False, epsilon=1e-08,
               hidden_layer_sizes=14, learning_rate='constant',
-              learning_rate_init=0.001, max_iter=200, momentum=0.9,
-              n_iter_no_change=10, nesterovs_momentum=True, power_t=0.5,
-              random_state=42, shuffle=True, solver='adam', tol=0.0001,
-              validation_fraction=0.1, verbose=False, warm_start=False)
+              learning_rate_init=0.001, max_fun=15000, max_iter=200,
+              momentum=0.9, n_iter_no_change=10, nesterovs_momentum=True,
+              power_t=0.5, random_state=42, shuffle=True, solver='adam',
+              tol=0.0001, validation_fraction=0.1, verbose=False,
+              warm_start=False)
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
                         sampling_strategy='auto')
 # Rodando o algoritmo MLP
 
@@ -312,28 +285,26 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[   12   735   263     0     0]
- [    5 53351 31373   319     0]
- [    1 27192 84111  1354     0]
- [    3  1219  7722  3611     0]
- [    0     0    39     8     0]]
+Matriz de Confus√£o
+[[   60   687   258     5     0]
+ [   19 53268 31180   581     0]
+ [    5 27846 82696  2111     0]
+ [    0  1337  6907  4311     0]
+ [    0     2    31    14     0]]
               precision    recall  f1-score   support
 
-           1     0.5714    0.0119    0.0233      1010
-           2     0.6467    0.6273    0.6369     85048
-           3     0.6810    0.7466    0.7123    112658
-           4     0.6824    0.2876    0.4047     12555
+           1     0.7143    0.0594    0.1097      1010
+           2     0.6407    0.6263    0.6334     85048
+           3     0.6830    0.7340    0.7076    112658
+           4     0.6139    0.3434    0.4404     12555
            5     0.0000    0.0000    0.0000        47
 
-    accuracy                         0.6676    211318
-   macro avg     0.5163    0.3347    0.3554    211318
-weighted avg     0.6666    0.6676    0.6602    211318
+    accuracy                         0.6641    211318
+   macro avg     0.5304    0.3526    0.3782    211318
+weighted avg     0.6619    0.6641    0.6589    211318
 
 
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=3,
-      out_step='deprecated', random_state=42, ratio=None,
-      sampling_strategy='auto', svm_estimator='deprecated')
+SMOTE(k_neighbors=5, n_jobs=3, random_state=42, sampling_strategy='auto')
 # Rodando o algoritmo MLP
 
 Detailed classification report:
@@ -341,34 +312,30 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  833   113    37    25     2]
- [10644 48167 20224  5856   157]
- [ 6484 35743 48088 21609   734]
- [  237   787  1712  9537   282]
- [    0     0     2     7    38]]
+Matriz de Confus√£o
+[[  825   112    47    25     1]
+ [10772 49024 18762  6309   181]
+ [ 6511 35866 46499 23025   757]
+ [  239   792  1795  9419   310]
+ [    0     0     2     1    44]]
               precision    recall  f1-score   support
 
-           1     0.0458    0.8248    0.0867      1010
-           2     0.5679    0.5664    0.5671     85048
-           3     0.6864    0.4268    0.5264    112658
-           4     0.2575    0.7596    0.3846     12555
-           5     0.0313    0.8085    0.0603        47
+           1     0.0450    0.8168    0.0852      1010
+           2     0.5714    0.5764    0.5739     85048
+           3     0.6929    0.4127    0.5173    112658
+           4     0.2429    0.7502    0.3670     12555
+           5     0.0340    0.9362    0.0657        47
 
-    accuracy                         0.5048    211318
-   macro avg     0.3178    0.6772    0.3250    211318
-weighted avg     0.6100    0.5048    0.5321    211318
+    accuracy                         0.5007    211318
+   macro avg     0.3172    0.6985    0.3218    211318
+weighted avg     0.6140    0.5007    0.5290    211318
 
 
 SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
-                                     random_state=None, ratio=None,
-                                     return_indices=False,
                                      sampling_strategy='auto'),
-         n_jobs=1, random_state=42, ratio=None, sampling_strategy='auto',
-         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
-                     n_jobs=3, out_step='deprecated', random_state=None,
-                     ratio=None, sampling_strategy='auto',
-                     svm_estimator='deprecated'))
+         n_jobs=None, random_state=42, sampling_strategy='auto',
+         smote=SMOTE(k_neighbors=5, n_jobs=3, random_state=None,
+                     sampling_strategy='auto'))
 # Rodando o algoritmo MLP
 
 Detailed classification report:
@@ -376,30 +343,29 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  910    63     9    26     2]
- [16032 42035 15834 10828   319]
- [11667 29057 40450 30440  1044]
- [  424   640  1046 10111   334]
- [    0     0     2     7    38]]
+Matriz de Confus√£o
+[[  899    65    22    23     1]
+ [16151 44190 15648  8839   220]
+ [11608 31843 40939 27179  1089]
+ [  392   691  1152  9963   357]
+ [    0     0     0     5    42]]
               precision    recall  f1-score   support
 
-           1     0.0313    0.9010    0.0606      1010
-           2     0.5855    0.4943    0.5360     85048
-           3     0.7054    0.3591    0.4759    112658
-           4     0.1967    0.8053    0.3161     12555
-           5     0.0219    0.8085    0.0426        47
+           1     0.0309    0.8901    0.0598      1010
+           2     0.5755    0.5196    0.5461     85048
+           3     0.7088    0.3634    0.4805    112658
+           4     0.2165    0.7935    0.3402     12555
+           5     0.0246    0.8936    0.0478        47
 
-    accuracy                         0.4427    211318
-   macro avg     0.3082    0.6736    0.2862    211318
-weighted avg     0.6236    0.4427    0.4885    211318
+    accuracy                         0.4544    211318
+   macro avg     0.3113    0.6920    0.2949    211318
+weighted avg     0.6225    0.4544    0.4964    211318
 
 
 KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
                      metric_params=None, n_jobs=None, n_neighbors=2, p=2,
                      weights='distance')
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
                         sampling_strategy='auto')
 # Rodando o algoritmo K-NN
 
@@ -408,28 +374,26 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  162   648   189     7     4]
- [   46 55435 29000   531    36]
- [   20 24370 85692  2460   116]
- [    0   831  5657  5945   122]
- [    0     0     7     4    36]]
+Matriz de Confus√£o
+[[  155   655   190     8     2]
+ [   88 55545 28836   541    38]
+ [   21 24606 85404  2471   156]
+ [    0   872  5511  6011   161]
+ [    0     0     1     6    40]]
               precision    recall  f1-score   support
 
-           1     0.7105    0.1604    0.2617      1010
-           2     0.6820    0.6518    0.6666     85048
-           3     0.7109    0.7606    0.7349    112658
-           4     0.6645    0.4735    0.5530     12555
-           5     0.1146    0.7660    0.1994        47
+           1     0.5871    0.1535    0.2433      1010
+           2     0.6800    0.6531    0.6663     85048
+           3     0.7120    0.7581    0.7343    112658
+           4     0.6652    0.4788    0.5568     12555
+           5     0.1008    0.8511    0.1802        47
 
-    accuracy                         0.6969    211318
-   macro avg     0.5765    0.5625    0.4831    211318
-weighted avg     0.6964    0.6969    0.6942    211318
+    accuracy                         0.6964    211318
+   macro avg     0.5490    0.5789    0.4762    211318
+weighted avg     0.6956    0.6964    0.6939    211318
 
 
-SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated', n_jobs=3,
-      out_step='deprecated', random_state=42, ratio=None,
-      sampling_strategy='auto', svm_estimator='deprecated')
+SMOTE(k_neighbors=5, n_jobs=3, random_state=42, sampling_strategy='auto')
 # Rodando o algoritmo K-NN
 
 Detailed classification report:
@@ -437,34 +401,30 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  639   287    75     9     0]
- [ 1508 56627 25107  1802     4]
- [  522 37741 66432  7940    23]
- [   18   867  3587  8036    47]
- [    0     0     8     7    32]]
+Matriz de Confus√£o
+[[  618   308    75     9     0]
+ [ 1576 56547 25201  1724     0]
+ [  511 37929 66073  8125    20]
+ [   22   859  3556  8059    59]
+ [    0     0     4     7    36]]
               precision    recall  f1-score   support
 
-           1     0.2378    0.6327    0.3457      1010
-           2     0.5928    0.6658    0.6272     85048
-           3     0.6977    0.5897    0.6392    112658
-           4     0.4516    0.6401    0.5296     12555
-           5     0.3019    0.6809    0.4183        47
+           1     0.2266    0.6119    0.3307      1010
+           2     0.5912    0.6649    0.6259     85048
+           3     0.6962    0.5865    0.6366    112658
+           4     0.4496    0.6419    0.5288     12555
+           5     0.3130    0.7660    0.4444        47
 
-    accuracy                         0.6235    211318
-   macro avg     0.4564    0.6418    0.5120    211318
-weighted avg     0.6386    0.6235    0.6264    211318
+    accuracy                         0.6215    211318
+   macro avg     0.4553    0.6542    0.5133    211318
+weighted avg     0.6370    0.6215    0.6244    211318
 
 
 SMOTEENN(enn=EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=3,
-                                     random_state=None, ratio=None,
-                                     return_indices=False,
                                      sampling_strategy='auto'),
-         n_jobs=1, random_state=42, ratio=None, sampling_strategy='auto',
-         smote=SMOTE(k_neighbors=5, kind='deprecated', m_neighbors='deprecated',
-                     n_jobs=3, out_step='deprecated', random_state=None,
-                     ratio=None, sampling_strategy='auto',
-                     svm_estimator='deprecated'))
+         n_jobs=None, random_state=42, sampling_strategy='auto',
+         smote=SMOTE(k_neighbors=5, n_jobs=3, random_state=None,
+                     sampling_strategy='auto'))
 # Rodando o algoritmo K-NN
 
 Detailed classification report:
@@ -472,31 +432,30 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  796   177    20    16     1]
- [ 3580 57817 20322  3313    16]
- [ 1601 30493 67443 13060    61]
- [   66   427  1533 10457    72]
- [    0     0     4    10    33]]
+Matriz de Confus√£o
+[[  781   190    23    16     0]
+ [ 3663 57532 20615  3227    11]
+ [ 1657 30100 67711 13134    56]
+ [   75   396  1505 10497    82]
+ [    0     0     1     9    37]]
               precision    recall  f1-score   support
 
-           1     0.1317    0.7881    0.2257      1010
-           2     0.6503    0.6798    0.6647     85048
-           3     0.7551    0.5987    0.6678    112658
-           4     0.3894    0.8329    0.5307     12555
-           5     0.1803    0.7021    0.2870        47
+           1     0.1265    0.7733    0.2174      1010
+           2     0.6522    0.6765    0.6641     85048
+           3     0.7536    0.6010    0.6687    112658
+           4     0.3905    0.8361    0.5323     12555
+           5     0.1989    0.7872    0.3176        47
 
     accuracy                         0.6462    211318
-   macro avg     0.4213    0.7203    0.4752    211318
-weighted avg     0.6880    0.6462    0.6562    211318
+   macro avg     0.4243    0.7348    0.4800    211318
+weighted avg     0.6881    0.6462    0.6565    211318
 
 
-SVC(C=128, cache_size=200, class_weight='balanced', coef0=0.0,
+SVC(C=128, break_ties=False, cache_size=200, class_weight='balanced', coef0=0.0,
     decision_function_shape='ovr', degree=3, gamma=8, kernel='rbf', max_iter=-1,
     probability=True, random_state=42, shrinking=True, tol=0.001,
     verbose=False)
 EditedNearestNeighbours(kind_sel='all', n_jobs=3, n_neighbors=5,
-                        random_state=42, ratio=None, return_indices=False,
                         sampling_strategy='auto')
 # Rodando o algoritmo SVM
 
@@ -505,22 +464,24 @@ Detailed classification report:
 The model is trained on the full development set.
 The scores are computed on the full evaluation set.
 
-Matriz de Confus„o
-[[  151   473   381     4     1]
- [   38 50326 34352   275    57]
- [    5 20422 90014  2101   116]
- [    0   386  6353  5684   132]
- [    0     0     9     2    36]]
+Matriz de Confus√£o
+[[  148   484   375     3     0]
+ [   46 50291 34442   233    36]
+ [    1 20504 89991  2035   127]
+ [    0   439  6235  5723   158]
+ [    0     0     5     4    38]]
               precision    recall  f1-score   support
 
-           1     0.7784    0.1495    0.2508      1010
-           2     0.7028    0.5917    0.6425     85048
-           3     0.6866    0.7990    0.7385    112658
-           4     0.7047    0.4527    0.5513     12555
-           5     0.1053    0.7660    0.1851        47
+           1     0.7590    0.1465    0.2456      1010
+           2     0.7012    0.5913    0.6416     85048
+           3     0.6867    0.7988    0.7385    112658
+           4     0.7156    0.4558    0.5569     12555
+           5     0.1058    0.8085    0.1872        47
 
-    accuracy                         0.6919    211318
-   macro avg     0.5955    0.5518    0.4736    211318
-weighted avg     0.6945    0.6919    0.6863    211318
+    accuracy                         0.6918    211318
+   macro avg     0.5937    0.5602    0.4740    211318
+weighted avg     0.6945    0.6918    0.6862    211318
 
 
+SMOTE(k_neighbors=5, n_jobs=3, random_state=42, sampling_strategy='auto')
+# Rodando o algoritmo SVM

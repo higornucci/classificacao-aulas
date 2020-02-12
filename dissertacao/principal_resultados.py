@@ -44,7 +44,7 @@ print(dados_completo.head())
 print(dados_completo.shape)
 dados_completo = []
 
-enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5, random_state=random_state)
+enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 smote = SMOTE(n_jobs=n_jobs, random_state=random_state)
 smoteenn = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=n_jobs), smote=SMOTE(n_jobs=n_jobs),
                     random_state=random_state)
