@@ -10,11 +10,6 @@ from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
-from keras import Sequential
-from keras.constraints import maxnorm
-from keras.layers import Dense, Dropout
-from keras.optimizers import RMSprop
-from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.feature_selection import RFECV
 from sklearn.metrics import confusion_matrix, classification_report
@@ -70,7 +65,7 @@ class Mypipeline(Pipeline):
         return self._final_estimator.feature_importances_
 
 
-num_folds = 10
+num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 rfc_coef = RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
@@ -96,37 +91,6 @@ def fazer_selecao_features_rfe():
 # print(fazer_selecao_features_rfe())
 # exit()
 
-def create_model_rna():
-    activation = 'relu'
-    dropout_rate = 0.0
-    init_mode = 'uniform'
-    weight_constraint = 0
-    optmizer = RMSprop()
-    lr = 0.01
-    momentum = 0
-
-    model = Sequential()
-    model.add(Dense(64,
-                    input_dim=dados_completo_x.shape[1],
-                    activation=activation,
-                    kernel_constraint=maxnorm(weight_constraint)
-                    )
-              )
-    model.add(Dropout(dropout_rate))
-    model.add(Dense(64, kernel_initializer=init_mode, activation=activation))
-    model.add(Dense(10, kernel_initializer=init_mode, activation='softmax'))
-    model.compile(loss='binary_crossentropy',
-                  optimizer=optmizer,
-                  metrics=['accuracy'])
-
-    batch_size = 128
-    epochs = 10
-    return KerasClassifier(build_fn=model, epochs=epochs,
-                           batch_size=batch_size, verbose=1)
-
-
-create_model_rna()
-exit()
 balanceadores = [
     ('ENN', enn),
     # ('SMOTE', smote),
@@ -135,16 +99,15 @@ balanceadores = [
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB(alpha=0.01)),
-    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
-                                   n_jobs=n_jobs)),
-
-    ('ADA', AdaBoostClassifier(random_state=random_state)),
-    ('MLP', MLPClassifier(random_state=random_state)),
-    ('RNA', create_model_rna()),
-    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
+    # ('MNB', MultinomialNB(alpha=0.01)),
+    # ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
+    #                                max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
+    #                                n_jobs=n_jobs)),
+    #
+    # ('ADA', AdaBoostClassifier(random_state=random_state)),
+    # ('MLP', MLPClassifier(random_state=random_state)),
+    # ('KNN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('SVM', SVC(random_state=random_state))
 ]
 
 
@@ -188,15 +151,15 @@ def plot_confusion_matrix(cm, nome, classes,
     plt.savefig('figuras/' + nome_arquivo)
 
 
-scores = ['f1_weighted']
+scores = ['accuracy']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
     return (nome_classificador == 'MNB') or \
-           (nome_classificador == 'K-NN') or \
+           (nome_classificador == 'KNN') or \
            (nome_classificador == 'MLP') or \
            (nome_classificador == 'ADA') or \
-           (nome_classificador == 'SVM')
+           (nome_classificador == 'RFC')
 
 
 def model_select():
@@ -255,13 +218,13 @@ def model_select():
 
 
 def escolher_parametros():
-    if nome == 'K-NN':
+    if nome == 'KNN':
         return [{'clf__weights': ['uniform', 'distance'],
                  'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
                 ]
     elif nome == 'SVM':
-        return [{'clf__C': [2 ** 6, 2 ** 7, 2 ** 8],
-                 'clf__gamma': [2 ** -3, 2 ** -1, 2 ** 1, 2 ** 3],
+        return [{'clf__C': [10**-6, 10**-5, 10**-4, 10**-3, 10**-2, 10**-1, 1, 10**1, 10**2, 10**3, 10**-4, 10**5, 10**6],
+                 'clf__gamma': [10**-6, 10**-5, 10**-4, 10**-3, 10**-2, 10**-1, 1, 10**1, 10**2, 10**3, 10**-4, 10**5, 10**6],
                  'clf__kernel': ['rbf']}
                 ]
     elif nome == 'MNB':

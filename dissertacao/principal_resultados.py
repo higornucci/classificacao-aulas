@@ -102,7 +102,7 @@ modelos_base = [
     ('ADA', AdaBoostClassifier(random_state=random_state, n_estimators=16)),
     ('MLP', MLPClassifier(random_state=random_state, activation='tanh', alpha=0.01, hidden_layer_sizes=14, solver='adam')),
 
-    ('K-NN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('KNN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
 ]
 
@@ -150,7 +150,7 @@ def plot_confusion_matrix(cm, nome, classes,
 def classificador_ja_executado(nome_classificador, nome_balanceador):
     return (nome_classificador == 'MNB') or \
            (nome_classificador == 'RFC') or \
-           (nome_classificador == 'K-NN') or \
+           (nome_classificador == 'KNN') or \
            (nome_classificador == 'MLP') or \
            (nome_classificador == 'ADA') or \
            (nome_classificador == 'SVM' and (nome_balanceador == 'ENN'))
