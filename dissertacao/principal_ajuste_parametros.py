@@ -10,41 +10,53 @@ from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+from sklearn.decomposition import PCA
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, ExtraTreesClassifier
 from sklearn.feature_selection import RFECV
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = pd.read_csv('../input/training.csv', encoding='utf-8', delimiter=',')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
-dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
-dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
-                     'lfi', 'fertigation', 'microrregiao#_BaixoPantanal'],
-                    axis=1, inplace=True)
+# dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
+# dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+#                      'lfi', 'fertigation', 'microrregiao#_BaixoPantanal'],
+#                     axis=1, inplace=True)
+dados_alvo = dados_completo['classe']
+dados_alvo = pd.DataFrame(data=dados_alvo, columns=['classe'])
+dados_numericos = dados_completo.drop('classe', axis=1)  # remover atributos não numéricos
+dados_numericos_labels = dados_numericos.columns.values.tolist()
+dados_numericos[dados_numericos_labels] = MinMaxScaler(feature_range=[0, 1]).fit_transform(dados_numericos[dados_numericos_labels].values)
+dados_numericos = pd.DataFrame(dados_numericos)
+dados_numericos.columns = dados_numericos_labels
+
+dados_completo = dados_numericos.join(dados_alvo)
+
 print(dados_completo.shape)
-Y = dados_completo.pop('carcass_fatness_degree')
+Y = dados_completo.pop('classe')
 X = dados_completo
 
 random_state = 42
 np.random.seed(random_state)
-n_jobs = 3
+n_jobs = 5
 
-dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
-                                                                          random_state=random_state)
-dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(dados_completo_xt, dados_completo_yt,
-                                                                      test_size=0.2, stratify=dados_completo_yt,
-                                                                      random_state=random_state)
-# dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test_size=0.2, stratify=Y,
+# dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
+#                                                                           random_state=random_state)
+# dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(dados_completo_xt, dados_completo_yt,
+#                                                                       test_size=0.2, stratify=dados_completo_yt,
 #                                                                       random_state=random_state)
-dados_completo = dados_completo_x.join(dados_completo_y)
+dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test_size=0.2, stratify=Y,
+                                                                      random_state=random_state)
+# dados_completo = dados_completo_x.join(dados_completo_y)
 print(dados_completo.head())
 print(dados_completo.shape)
 dados_completo = []
@@ -65,7 +77,7 @@ class Mypipeline(Pipeline):
         return self._final_estimator.feature_importances_
 
 
-num_folds = 5
+num_folds = 10
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 rfc_coef = RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
@@ -76,6 +88,7 @@ rfc_coef = RandomForestClassifier(random_state=random_state, class_weight='balan
 
 def fazer_selecao_features_rfe():
     pipeline = Mypipeline([('bal', enn),
+                           ('pca', PCA(.95)),
                            ('clf', rfc_coef)])
     features = dados_completo_x.columns
     rfe = RFECV(estimator=pipeline, cv=kfold, scoring='f1_weighted', n_jobs=5)
@@ -99,14 +112,14 @@ balanceadores = [
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB(alpha=0.01)),
-    # ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-    #                                max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
-    #                                n_jobs=n_jobs)),
-    #
-    # ('ADA', AdaBoostClassifier(random_state=random_state)),
-    # ('MLP', MLPClassifier(random_state=random_state)),
-    # ('KNN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
+    ('MNB', MultinomialNB(alpha=0.01)),
+    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
+                                   max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
+                                   n_jobs=n_jobs)),
+
+    ('ADA', AdaBoostClassifier(random_state=random_state)),
+    ('MLP', MLPClassifier(random_state=random_state)),
+    ('KNN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
     ('SVM', SVC(random_state=random_state))
 ]
 
@@ -155,11 +168,7 @@ scores = ['accuracy']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return (nome_classificador == 'MNB') or \
-           (nome_classificador == 'KNN') or \
-           (nome_classificador == 'MLP') or \
-           (nome_classificador == 'ADA') or \
-           (nome_classificador == 'RFC')
+    return False
 
 
 def model_select():
@@ -169,8 +178,8 @@ def model_select():
         else:
             print(balanceador)
             for score in scores:
-                pipeline = Pipeline([('bal', balanceador),
-                                     ('clf', modelo)])
+                pipeline = Pipeline(steps=[('balance', balanceador),
+                                           ('clf', modelo)])
                 print("# Tuning hyper-parameters for %s in %s" % (score, nome))
                 print()
 
