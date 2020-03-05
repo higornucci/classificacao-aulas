@@ -11,7 +11,7 @@ from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
 from sklearn.decomposition import PCA
-from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, ExtraTreesClassifier
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.feature_selection import RFECV
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, train_test_split
@@ -61,7 +61,7 @@ print(dados_completo.head())
 print(dados_completo.shape)
 dados_completo = []
 
-enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5, random_state=random_state)
+enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 smote = SMOTE(n_jobs=n_jobs, random_state=random_state)
 smoteenn = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=n_jobs), smote=SMOTE(n_jobs=n_jobs),
                     random_state=random_state)
