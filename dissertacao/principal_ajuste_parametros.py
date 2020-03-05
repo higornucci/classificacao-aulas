@@ -106,8 +106,8 @@ def fazer_selecao_features_rfe():
 
 balanceadores = [
     ('ENN', enn),
-    # ('SMOTE', smote),
-    # ('SMOTEENN', smoteenn)
+    ('SMOTE', smote),
+    ('SMOTEENN', smoteenn)
 ]
 
 # preparando alguns modelos
