@@ -10,6 +10,7 @@ from imblearn.combine import SMOTEENN
 from imblearn.over_sampling import SMOTE
 from imblearn.pipeline import Pipeline
 from imblearn.under_sampling import EditedNearestNeighbours
+from sklearn.decomposition import PCA
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.feature_selection import RFECV
 from sklearn.metrics import confusion_matrix, classification_report
@@ -25,12 +26,12 @@ pd.set_option('display.width', 2000)  # display all columns
 
 dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
-dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
-dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
-                     'lfi', 'fertigation', 'microrregiao#_BaixoPantanal'],
-                    axis=1, inplace=True)
+# dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
+# dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
+#                      'lfi', 'fertigation', 'microrregiao#_BaixoPantanal'],
+#                     axis=1, inplace=True)
 print(dados_completo.shape)
-Y = dados_completo.pop('carcass_fatness_degree')
+Y = dados_completo.pop('classe')
 X = dados_completo
 
 random_state = 42
@@ -42,7 +43,7 @@ dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test
 dados_completo = dados_completo_x.join(dados_completo_y)
 print(dados_completo.head())
 print(dados_completo.shape)
-dados_completo = []
+# dados_completo = []
 
 enn = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 smote = SMOTE(n_jobs=n_jobs, random_state=random_state)
@@ -60,7 +61,7 @@ class Mypipeline(Pipeline):
         return self._final_estimator.feature_importances_
 
 
-num_folds = 10
+num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 rfc_coef = RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
@@ -94,16 +95,15 @@ balanceadores = [
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB(alpha=0.01)),
-    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
-                                   max_features='sqrt', min_samples_leaf=1, min_samples_split=6, n_estimators=250,
+    ('MNB', MultinomialNB(alpha=0.1)), # 'dimension__n_components': 50
+    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=75, # 'dimension__n_components': 50
+                                   max_features='log2', min_samples_leaf=1, min_samples_split=10, n_estimators=100,
                                    n_jobs=n_jobs)),
-
-    ('ADA', AdaBoostClassifier(random_state=random_state, n_estimators=16)),
-    ('MLP', MLPClassifier(random_state=random_state, activation='tanh', alpha=0.01, hidden_layer_sizes=14, solver='adam')),
-
-    ('KNN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(class_weight='balanced', C=128, gamma=8, kernel='rbf', random_state=random_state, probability=True))
+    ('ADA', AdaBoostClassifier(random_state=random_state, n_estimators=4)), # 'dimension__n_components': 50
+    ('MLP', MLPClassifier(random_state=random_state, activation='relu', alpha=0.01, hidden_layer_sizes=11, # 'dimension__n_components': 250
+                          max_iter=100, solver='adam')),
+    ('KNN', KNeighborsClassifier(n_neighbors=4, weights='distance')), # 'dimension__n_components': 250
+    ('SVM', SVC(C=64, gamma=0.0625, kernel='rbf', random_state=random_state, probability=True)) # 'dimension__n_components': 50
 ]
 
 
@@ -148,12 +148,7 @@ def plot_confusion_matrix(cm, nome, classes,
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return (nome_classificador == 'MNB') or \
-           (nome_classificador == 'RFC') or \
-           (nome_classificador == 'KNN') or \
-           (nome_classificador == 'MLP') or \
-           (nome_classificador == 'ADA') or \
-           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN'))
+    return False
 
 
 def model_select():
@@ -162,7 +157,8 @@ def model_select():
             continue
         else:
             print(balanceador)
-            pipeline = Pipeline([('bal', balanceador),
+            pipeline = Pipeline([('dimension', PCA()),
+                                 ('balance', balanceador),
                                  ('clf', modelo)])
             print("# Rodando o algoritmo %s" % nome)
             print()
