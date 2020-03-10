@@ -77,7 +77,7 @@ class Mypipeline(Pipeline):
         return self._final_estimator.feature_importances_
 
 
-num_folds = 10
+num_folds = 5
 scoring = 'accuracy'
 kfold = StratifiedKFold(n_splits=num_folds, random_state=random_state)
 rfc_coef = RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
@@ -120,7 +120,7 @@ modelos_base = [
     ('ADA', AdaBoostClassifier(random_state=random_state)),
     ('MLP', MLPClassifier(random_state=random_state)),
     ('KNN', KNeighborsClassifier(n_neighbors=2, weights='distance')),
-    ('SVM', SVC(random_state=random_state))
+    ('SVM', SVC(random_state=random_state, probability=True))
 ]
 
 
@@ -168,7 +168,13 @@ scores = ['accuracy']
 
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
-    return False
+    # return False
+    return (nome_classificador == 'MNB') or \
+           (nome_classificador == 'KNN') or \
+           (nome_classificador == 'MLP') or \
+           (nome_classificador == 'ADA') or \
+           (nome_classificador == 'RFC') or \
+           (nome_classificador == 'SVM' and nome_balanceador == 'ENN')
 
 
 def model_select():
@@ -178,7 +184,8 @@ def model_select():
         else:
             print(balanceador)
             for score in scores:
-                pipeline = Pipeline(steps=[('balance', balanceador),
+                pipeline = Pipeline(steps=[('dimension', PCA(n_components=100)),
+                                           ('balance', balanceador),
                                            ('clf', modelo)])
                 print("# Tuning hyper-parameters for %s in %s" % (score, nome))
                 print()
@@ -211,11 +218,11 @@ def model_select():
                 # y_pred = pipeline.predict(test_x)
                 matriz_confusao = confusion_matrix(test_y, y_pred)
                 nome_arquivo = nome + '_' + nome_balanceador + '_' + score
-                plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
+                plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4], False,
                                       title='Confusion matrix' + nome + ' (best parameters)')
-                plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
+                plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4], True,
                                       title='Confusion matrix ' + nome + ', normalized')
-                print('Matriz de Confusão')
+                print('Matriz de Confusão ' + nome + ' com ' + nome_balanceador)
                 print(matriz_confusao)
                 print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
                 y_pred = grid_search.predict_proba(test_x)
@@ -229,44 +236,40 @@ def model_select():
 def escolher_parametros():
     if nome == 'KNN':
         return [{'clf__weights': ['uniform', 'distance'],
-                 'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20]}
-                ]
+                 'clf__n_neighbors': [1, 2, 3, 4, 5, 10, 15, 20],
+                 'dimension__n_components': [10, 50, 100, 250, 404]
+                 }]
     elif nome == 'SVM':
-        return [{'clf__C': [10**-6, 10**-5, 10**-4, 10**-3, 10**-2, 10**-1, 1, 10**1, 10**2, 10**3, 10**-4, 10**5, 10**6],
-                 'clf__gamma': [10**-6, 10**-5, 10**-4, 10**-3, 10**-2, 10**-1, 1, 10**1, 10**2, 10**3, 10**-4, 10**5, 10**6],
-                 'clf__kernel': ['rbf']}
-                ]
+        return [{'clf__C': [2 ** -4, 2 ** -2, 2 ** -1, 2 ** 0, 2 ** 1, 2 ** 2, 2 ** 4, 2 ** 6],
+                 'clf__gamma': [2 ** -4, 2 ** -2, 2 ** -1, 2 ** 0, 2 ** 1, 2 ** 2, 2 ** 4, 2 ** 6],
+                 'clf__kernel': ['linear', 'poly', 'rbf', 'sigmoid'],
+                 'dimension__n_components': [10, 50, 100, 250, 404]
+                 }]
     elif nome == 'MNB':
-        return [{'clf__alpha': [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]}
-                ]
+        return [{'clf__alpha': [1, 0.1, 0.01, 0.001, 0.0001, 0.00001],
+                 'dimension__n_components': [10, 50, 100, 250, 404]
+                 }]
     elif nome == 'RFC':
-        return [{'clf__n_estimators': [100, 250],
-                 'clf__min_samples_leaf': [1, 5, 10],
-                 'clf__min_samples_split': [2, 5, 10],
+        return [{'clf__n_estimators': [50, 75, 100, 250, 300],
+                 'clf__min_samples_leaf': [1, 5, 10, 15, 20],
+                 'clf__min_samples_split': [2, 5, 10, 15],
                  'clf__max_features': ['sqrt', 'log2', None],
-                 'clf__max_depth': [50, 75]}
-                ]
+                 'clf__max_depth': [25, 50, 75],
+                 'dimension__n_components': [10, 50, 100, 250, 404]
+                 }]
     elif nome == 'MLP':
         return [{
-                'clf__activation': ['tanh', 'relu'],
+                'clf__activation': ['tanh', 'relu', 'logistic'],
                 'clf__solver': ['lbfgs', 'sgd', 'adam'],
                 'clf__alpha': 10.0 ** -np.arange(1, 5),
-                # 'clf__max_iter': [1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000],
-                'clf__hidden_layer_sizes': np.arange(10, 15)}
-                ]
+                'clf__max_iter': [100, 500, 1000, 1500],
+                'clf__hidden_layer_sizes': np.arange(10, 15),
+                'dimension__n_components': [10, 50, 100, 250, 404]
+        }]
     elif nome == 'ADA':
-        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 8, 2 ** 10]}
-                ]
-    elif nome == 'RNA':
-        return [{'clf__activation': ['relu', 'tanh', 'sigmoid', 'softmax'],
-                 'clf__momentum': [0.0, 0.2, 0.4, 0.8],
-                 'clf__learn_rate': [0.001, 0.01, 0.1],
-                 'clf__dropout_rate': [0.0, 0.1, 0.5],
-                 'clf__weight_constraint': [1, 2, 5],
-                 'clf__neurons': [1, 10, 30],
-                 'clf__epochs': [10, 30],
-                 'clf__batch_size': [1000, 5000]}
-                ]
+        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10],
+                 'dimension__n_components': [10, 50, 100, 250, 404]
+                 }]
     return None
 
 
