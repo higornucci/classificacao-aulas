@@ -174,7 +174,7 @@ def classificador_ja_executado(nome_classificador, nome_balanceador):
            (nome_classificador == 'MLP') or \
            (nome_classificador == 'ADA') or \
            (nome_classificador == 'RFC') or \
-           (nome_classificador == 'SVM' and nome_balanceador == 'ENN')
+           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
 
 
 def model_select():
