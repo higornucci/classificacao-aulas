@@ -25,7 +25,7 @@ warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
-dados_completo = pd.read_csv('../input/training.csv', encoding='utf-8', delimiter=',')
+dados_completo = pd.read_csv('../input/trainingC.csv', encoding='utf-8', delimiter=',')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 # dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 # dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
@@ -35,7 +35,8 @@ dados_alvo = dados_completo['classe']
 dados_alvo = pd.DataFrame(data=dados_alvo, columns=['classe'])
 dados_numericos = dados_completo.drop('classe', axis=1)  # remover atributos não numéricos
 dados_numericos_labels = dados_numericos.columns.values.tolist()
-dados_numericos[dados_numericos_labels] = MinMaxScaler(feature_range=[0, 1]).fit_transform(dados_numericos[dados_numericos_labels].values)
+dados_numericos[dados_numericos_labels] = MinMaxScaler(feature_range=[0, 1]).fit_transform(
+    dados_numericos[dados_numericos_labels].values)
 dados_numericos = pd.DataFrame(dados_numericos)
 dados_numericos.columns = dados_numericos_labels
 
@@ -47,7 +48,7 @@ X = dados_completo
 
 random_state = 42
 np.random.seed(random_state)
-n_jobs = 5
+n_jobs = 3
 
 # dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
 #                                                                           random_state=random_state)
@@ -112,7 +113,7 @@ balanceadores = [
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB(alpha=0.01)),
+    # ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
                                    max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
                                    n_jobs=n_jobs)),
@@ -126,7 +127,7 @@ modelos_base = [
 
 def roc_auc_aux(y_test, y_pred_probas, nome, nome_balanceador, score):
     skplt.metrics.plot_roc(y_test, y_pred_probas)
-    nome_arquivo = 'roc_auc_' + nome_balanceador + '_' + nome + '_' + score + '.png'
+    nome_arquivo = 'roc_auc_' + nome_balanceador + '_' + nome + '_' + score + 'C.png'
     plt.savefig('figuras/' + nome_arquivo)
 
 
@@ -138,9 +139,9 @@ def plot_confusion_matrix(cm, nome, classes,
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         np.set_printoptions(precision=2)
-        nome_arquivo = 'matriz_confusao_normalizada_' + nome + '.png'
+        nome_arquivo = 'matriz_confusao_normalizada_' + nome + 'C.png'
     else:
-        nome_arquivo = 'matriz_confusao_' + nome + '.png'
+        nome_arquivo = 'matriz_confusao_' + nome + 'C.png'
 
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
@@ -169,12 +170,12 @@ scores = ['accuracy']
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
     # return False
-    return (nome_classificador == 'MNB') or \
-           (nome_classificador == 'KNN') or \
-           (nome_classificador == 'MLP') or \
-           (nome_classificador == 'ADA') or \
-           (nome_classificador == 'RFC') or \
-           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
+    # return (nome_classificador == 'MNB') or \
+    #        (nome_classificador == 'KNN') or \
+    #        (nome_classificador == 'MLP') or \
+    #        (nome_classificador == 'ADA') or \
+    return nome_classificador == 'RFC' and (nome_balanceador == 'ENN')  # or \
+#        (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
 
 
 def model_select():
@@ -259,12 +260,12 @@ def escolher_parametros():
                  }]
     elif nome == 'MLP':
         return [{
-                'clf__activation': ['tanh', 'relu', 'logistic'],
-                'clf__solver': ['lbfgs', 'sgd', 'adam'],
-                'clf__alpha': 10.0 ** -np.arange(1, 5),
-                'clf__max_iter': [100, 500, 1000, 1500],
-                'clf__hidden_layer_sizes': np.arange(10, 15),
-                'dimension__n_components': [10, 50, 100, 250, 404]
+            'clf__activation': ['tanh', 'relu', 'logistic'],
+            'clf__solver': ['lbfgs', 'sgd', 'adam'],
+            'clf__alpha': 10.0 ** -np.arange(1, 5),
+            'clf__max_iter': [100, 500, 1000, 1500],
+            'clf__hidden_layer_sizes': np.arange(10, 15),
+            'dimension__n_components': [10, 50, 100, 250, 404]
         }]
     elif nome == 'ADA':
         return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10],

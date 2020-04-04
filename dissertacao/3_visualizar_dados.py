@@ -27,7 +27,7 @@ def mostrar_quantidade_por_classe(df, classe):
     print(df.loc[df['classe'] == classe].info())
 
 
-dados_completo = pd.read_csv('../input/training.csv', encoding='utf-8', delimiter=',')
+dados_completo = pd.read_csv('../input/trainingM.csv', encoding='utf-8', delimiter=',')
 # dados_completo.drop('index', axis=1, inplace=True)
 
 mostrar_quantidade_por_classe(dados_completo, 'dirtiness')
