@@ -48,7 +48,7 @@ X = dados_completo
 
 random_state = 42
 np.random.seed(random_state)
-n_jobs = 3
+n_jobs = 6
 
 # dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
 #                                                                           random_state=random_state)
