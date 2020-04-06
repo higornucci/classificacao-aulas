@@ -174,7 +174,10 @@ def classificador_ja_executado(nome_classificador, nome_balanceador):
     #        (nome_classificador == 'KNN') or \
     #        (nome_classificador == 'MLP') or \
     #        (nome_classificador == 'ADA') or \
-    return nome_classificador == 'RFC' and (nome_balanceador == 'ENN')  # or \
+    return (nome_classificador == 'RFC') or \
+           (nome_classificador == 'ADA' and (nome_balanceador == 'ENN'))
+
+
 #        (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
 
 
