@@ -174,8 +174,8 @@ def classificador_ja_executado(nome_classificador, nome_balanceador):
     #        (nome_classificador == 'KNN') or \
     #        (nome_classificador == 'MLP') or \
     #        (nome_classificador == 'ADA') or \
-    return (nome_classificador == 'RFC') or \
-           (nome_classificador == 'ADA' and (nome_balanceador == 'ENN'))
+    return (nome_classificador == 'RFC') # or \
+           # (nome_classificador == 'ADA' and (nome_balanceador == 'ENN'))
 
 
 #        (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
@@ -229,9 +229,9 @@ def model_select():
                 print('Matriz de Confusão ' + nome + ' com ' + nome_balanceador)
                 print(matriz_confusao)
                 print(classification_report(y_true=test_y, y_pred=y_pred, digits=4))
-                y_pred = grid_search.predict_proba(test_x)
+                # y_pred = grid_search.predict_proba(test_x)
                 # y_pred = pipeline.predict_proba(test_x)
-                roc_auc_aux(test_y, y_pred, nome, nome_balanceador, score)
+                # roc_auc_aux(test_y, y_pred, nome, nome_balanceador, score)
                 print()
                 sys.stdout.flush()
                 # exit()
@@ -271,7 +271,7 @@ def escolher_parametros():
             'dimension__n_components': [10, 50, 100, 250, 404]
         }]
     elif nome == 'ADA':
-        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10],
+        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4],#, 2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10],
                  'dimension__n_components': [10, 50, 100, 250, 404]
                  }]
     return None
