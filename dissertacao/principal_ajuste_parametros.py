@@ -271,7 +271,7 @@ def escolher_parametros():
             'dimension__n_components': [10, 50, 100, 250, 404]
         }]
     elif nome == 'ADA':
-        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4],#, 2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10],
+        return [{'clf__n_estimators': [2, 2 ** 2, 2 ** 4, 2 ** 6, 2 ** 7, 2 ** 8, 2 ** 9, 2 ** 10],
                  'dimension__n_components': [10, 50, 100, 250, 404]
                  }]
     return None
