@@ -170,12 +170,12 @@ scores = ['accuracy']
 
 def classificador_ja_executado(nome_classificador, nome_balanceador):
     # return False
-    # return (nome_classificador == 'MNB') or \
-    #        (nome_classificador == 'KNN') or \
-    #        (nome_classificador == 'MLP') or \
-    #        (nome_classificador == 'ADA') or \
-    return (nome_classificador == 'RFC') # or \
-           # (nome_classificador == 'ADA' and (nome_balanceador == 'ENN'))
+    return (nome_classificador == 'MNB') or \
+           (nome_classificador == 'KNN') or \
+           (nome_classificador == 'MLP') or \
+           (nome_classificador == 'ADA') or \
+           (nome_classificador == 'RFC') or \
+           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN'))
 
 
 #        (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
