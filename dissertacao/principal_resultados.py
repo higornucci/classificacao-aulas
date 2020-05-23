@@ -18,24 +18,36 @@ from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.svm import SVC
 
 warnings.filterwarnings('ignore')
 pd.set_option('display.max_columns', None)  # display all columns
 pd.set_option('display.width', 2000)  # display all columns
 
-dados_completo = pd.read_csv('../input/DadosCompletoTransformadoML.csv', encoding='utf-8', delimiter='\t')
+dados_completo = pd.read_csv('../input/trainingM.csv', encoding='utf-8', delimiter=',')
 dados_completo = dados_completo.sample(frac=1).reset_index(drop=True)
 # dados_completo.drop(dados_completo.columns[0], axis=1, inplace=True)
 # dados_completo.drop(['other_incentives', 'total_area_confinement', 'area_20_erosion', 'quality_programs',
 #                      'lfi', 'fertigation', 'microrregiao#_BaixoPantanal'],
 #                     axis=1, inplace=True)
+dados_alvo = dados_completo['classe']
+dados_alvo = pd.DataFrame(data=dados_alvo, columns=['classe'])
+dados_numericos = dados_completo.drop('classe', axis=1)  # remover atributos não numéricos
+dados_numericos_labels = dados_numericos.columns.values.tolist()
+dados_numericos[dados_numericos_labels] = MinMaxScaler(feature_range=[0, 1]).fit_transform(
+    dados_numericos[dados_numericos_labels].values)
+dados_numericos = pd.DataFrame(dados_numericos)
+dados_numericos.columns = dados_numericos_labels
+
+dados_completo = dados_numericos.join(dados_alvo)
+
 print(dados_completo.shape)
 Y = dados_completo.pop('classe')
 X = dados_completo
 
 random_state = 42
-n_jobs = 3
+n_jobs = 4
 
 dados_completo_x, test_x, dados_completo_y, test_y = train_test_split(X, Y, test_size=0.2, stratify=Y,
                                                                       random_state=random_state)
@@ -88,28 +100,30 @@ def fazer_selecao_features_rfe():
 # exit()
 
 balanceadores = [
-    ('ENN', enn),
+    # ('ENN', enn),
     ('SMOTE', smote),
-    ('SMOTEENN', smoteenn)
+    # ('SMOTEENN', smoteenn)
 ]
 
 # preparando alguns modelos
 modelos_base = [
-    ('MNB', MultinomialNB(alpha=0.1)), # 'dimension__n_components': 50
-    ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=75, # 'dimension__n_components': 50
-                                   max_features='log2', min_samples_leaf=1, min_samples_split=10, n_estimators=100,
-                                   n_jobs=n_jobs)),
-    ('ADA', AdaBoostClassifier(random_state=random_state, n_estimators=4)), # 'dimension__n_components': 50
+    # ('MNB', MultinomialNB(alpha=0.1)), # 'dimension__n_components': 50
+    # ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=75, # 'dimension__n_components': 50
+    #                                max_features='log2', min_samples_leaf=1, min_samples_split=10, n_estimators=100,
+    #                                n_jobs=n_jobs)),
+    # ('ADA', AdaBoostClassifier(random_state=random_state, n_estimators=4)), # 'dimension__n_components': 50
     ('MLP', MLPClassifier(random_state=random_state, activation='relu', alpha=0.01, hidden_layer_sizes=11, # 'dimension__n_components': 250
-                          max_iter=100, solver='adam')),
-    ('KNN', KNeighborsClassifier(n_neighbors=4, weights='distance')), # 'dimension__n_components': 250
-    ('SVM', SVC(C=64, gamma=0.0625, kernel='rbf', random_state=random_state, probability=True)) # 'dimension__n_components': 50
+                          max_iter=100, solver='adam')),  # Mucilage
+    # ('MLP', MLPClassifier(random_state=random_state, activation='relu', alpha=0.001, hidden_layer_sizes=12, # 'dimension__n_components': 250
+    #                       max_iter=1000, solver='lbfgs')),  # Cal
+    # ('KNN', KNeighborsClassifier(n_neighbors=4, weights='distance')), # 'dimension__n_components': 250
+    # ('SVM', SVC(C=64, gamma=0.0625, kernel='rbf', random_state=random_state, probability=True)) # 'dimension__n_components': 50
 ]
 
 
 def roc_auc_aux(y_test, y_pred_probas, nome, nome_balanceador):
     skplt.metrics.plot_roc(y_test, y_pred_probas)
-    nome_arquivo = 'roc_auc_' + nome_balanceador + '_' + nome + '_best.png'
+    nome_arquivo = 'roc_auc_' + nome_balanceador + '_' + nome + '_best_mucilage.png'
     plt.savefig('figuras/' + nome_arquivo)
 
 
@@ -157,7 +171,7 @@ def model_select():
             continue
         else:
             print(balanceador)
-            pipeline = Pipeline([('dimension', PCA()),
+            pipeline = Pipeline([('dimension', PCA(n_components=250)),
                                  ('balance', balanceador),
                                  ('clf', modelo)])
             print("# Rodando o algoritmo %s" % nome)
@@ -173,10 +187,10 @@ def model_select():
             print()
             y_pred = pipeline.predict(test_x)
             matriz_confusao = confusion_matrix(test_y, y_pred)
-            nome_arquivo = nome + '_' + nome_balanceador + '_best'
-            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], False,
+            nome_arquivo = nome + '_' + nome_balanceador + '_best_mucilage'
+            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4], False,
                                   title='Confusion matrix' + nome + ' (best parameters)')
-            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4, 5], True,
+            plot_confusion_matrix(matriz_confusao, nome_arquivo, [1, 2, 3, 4], True,
                                   title='Confusion matrix ' + nome + ', normalized')
             print('Matriz de Confusão')
             print(matriz_confusao)
