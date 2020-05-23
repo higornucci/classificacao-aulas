@@ -41,10 +41,10 @@ print(dados_completo.describe(include=['number']))
 
 n_jobs = 5
 # classes_balancear = list([2, 3])
-# balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
+balanceador = EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=5)
 # balanceador = SMOTE(n_jobs=n_jobs, random_state=random_state)
-balanceador = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=n_jobs), smote=SMOTE(n_jobs=n_jobs),
-                       random_state=random_state)
+# balanceador = SMOTEENN(enn=EditedNearestNeighbours(n_jobs=n_jobs, n_neighbors=n_jobs), smote=SMOTE(n_jobs=n_jobs),
+#                        random_state=random_state)
 
 X_treino, Y_treino = balanceador.fit_resample(
     dados_completo.drop('classe', axis=1),
@@ -91,9 +91,9 @@ def mostrar_features_mais_importantes(melhor_modelo):
     print(feature_importances)
 
 
-def fazer_selecao_features_rfe():
+def fazer_selecao_features_rfe(modelo):
     features = dados_completo.columns
-    rfe = RFECV(KNeighborsClassifier(n_neighbors=2, weights='distance'),
+    rfe = RFECV(modelo,
                 cv=kfold, scoring=scoring)
 
     rfe.fit(dados_completo.drop(['classe'], axis=1), dados_completo['classe'].values)
@@ -105,10 +105,10 @@ def fazer_selecao_features_rfe():
     return rfe.transform(dados_completo.drop(['classe'], axis=1))
 
 
-modelo = RandomForestClassifier(oob_score=True, class_weight='balanced', max_depth=50,
-                                max_features='sqrt', min_samples_leaf=1, min_samples_split=5, n_estimators=250)
+modelo = RandomForestClassifier(class_weight='balanced', max_depth=75,
+                                max_features='log2', min_samples_leaf=1, min_samples_split=10, n_estimators=100)
 mostrar_features_mais_importantes(modelo)
-print(fazer_selecao_features_rfe())
+print(fazer_selecao_features_rfe(modelo))
 # ax = plt.axes()
 # sns.countplot(x='carcass_fatness_degree', data=dados_completo, ax=ax)
 # ax.set_title('Distribution of carcass fatness degree')

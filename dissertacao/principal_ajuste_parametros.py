@@ -48,7 +48,7 @@ X = dados_completo
 
 random_state = 42
 np.random.seed(random_state)
-n_jobs = 6
+n_jobs = 4
 
 # dados_completo_xt, test_xt, dados_completo_yt, test_yt = train_test_split(X, Y, test_size=0.7, stratify=Y,
 #                                                                           random_state=random_state)
@@ -113,7 +113,7 @@ balanceadores = [
 
 # preparando alguns modelos
 modelos_base = [
-    # ('MNB', MultinomialNB(alpha=0.01)),
+    ('MNB', MultinomialNB(alpha=0.01)),
     ('RFC', RandomForestClassifier(random_state=random_state, class_weight='balanced', max_depth=50,
                                    max_features='sqrt', min_samples_leaf=5, min_samples_split=2, n_estimators=250,
                                    n_jobs=n_jobs)),
@@ -175,7 +175,7 @@ def classificador_ja_executado(nome_classificador, nome_balanceador):
            (nome_classificador == 'MLP') or \
            (nome_classificador == 'ADA') or \
            (nome_classificador == 'RFC') or \
-           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN'))
+           (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
 
 
 #        (nome_classificador == 'SVM' and (nome_balanceador == 'ENN' or nome_balanceador == 'SMOTE'))
@@ -188,7 +188,7 @@ def model_select():
         else:
             print(balanceador)
             for score in scores:
-                pipeline = Pipeline(steps=[('dimension', PCA(n_components=100)),
+                pipeline = Pipeline(steps=[('dimension', PCA()),
                                            ('balance', balanceador),
                                            ('clf', modelo)])
                 print("# Tuning hyper-parameters for %s in %s" % (score, nome))
@@ -250,8 +250,7 @@ def escolher_parametros():
                  'dimension__n_components': [10, 50, 100, 250, 404]
                  }]
     elif nome == 'MNB':
-        return [{'clf__alpha': [1, 0.1, 0.01, 0.001, 0.0001, 0.00001],
-                 'dimension__n_components': [10, 50, 100, 250, 404]
+        return [{'clf__alpha': [1, 0.1, 0.01, 0.001, 0.0001, 0.00001]
                  }]
     elif nome == 'RFC':
         return [{'clf__n_estimators': [50, 75, 100, 250, 300],
